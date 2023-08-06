@@ -4,6 +4,7 @@
     <!-- Sing Up Area Start -->
     <section class="sign-up-page p-0">
         <div class="container-fluid p-0">
+
             <div class="row">
                 <div class="col-md-5">
                     <div class="sign-up-left-content">

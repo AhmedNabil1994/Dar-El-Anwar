@@ -22,7 +22,7 @@ class Admin extends  Authenticatable
 
 
     protected $table = 'admins';
-protected $guarded = [];
+    protected $guarded = [];
 
 //    protected $fillable = [
 //        'name',
@@ -37,6 +37,7 @@ protected $guarded = [];
     protected $hidden = [
         'password',
     ];
+
     protected $guard = 'admins';
 
 }

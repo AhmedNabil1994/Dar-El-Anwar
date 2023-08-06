@@ -53,7 +53,7 @@ class SettingController extends Controller
         return view('admin.application_settings.general.general-settings', $data);
     }
 
-    public function GeneralSettingUpdate(Request $request)
+        public function GeneralSettingUpdate(Request $request)
     {
         $inputs = Arr::except($request->all(), ['_token']);
         $keys = [];
