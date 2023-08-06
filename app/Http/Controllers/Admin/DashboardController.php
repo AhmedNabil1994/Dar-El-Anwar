@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Course;
 use App\Models\Course_lecture;
 use App\Models\Course_lesson;
+use App\Models\Employee;
 use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\User;
@@ -24,6 +25,7 @@ class DashboardController extends Controller
         $data['title'] = 'Dashboard';
         $data['total_admins'] = User::count();
         $data['total_instructors'] = User::whereRole(2)->count();
+        $data['total_employees'] = Employee::count();
         $data['total_students'] = User::whereNotIn('role', [1])->count();
         $data['total_enrolments'] = Order_item::where('course_id', '!=', null)->whereHas('order', function ($q) {
             $q->where('payment_status', 'paid')->orWhere('payment_status', 'free');

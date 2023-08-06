@@ -32,7 +32,7 @@
                         </div>
                         <div class="status__box__text">
                             <h2 class="color-purple">{{ $total_admins }}</h2>
-                            <h3>{{ __('Total Admin') }}</h3>
+                            <h3>{{ __('website.total_employee') }}</h3>
                         </div>
                     </div>
                 </div>
