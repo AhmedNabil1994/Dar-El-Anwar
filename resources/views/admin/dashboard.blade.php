@@ -361,8 +361,8 @@
             </div>
 
 
-            <!-- <div class="row">
-                <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
                     <div class="revenue__chart-v2__area bg-style">
                         <div class="revenue__chart-v2__top">
                             <div class="revenue__chart-v2__top__left">
@@ -402,7 +402,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <div class="sales-location__area bg-style">
                         <div class="sales-location__title">
                             <h2>{{ __('Top Seller') }}</h2>
@@ -411,8 +411,8 @@
                             <div id="topSellerChart" ></div>
                         </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
             <!-- <div class="row">
                 <div class="col-md-6">
                     <div class="top-products__area bg-style">
@@ -544,7 +544,8 @@
             },
             xaxis: {
                 type: 'year',
-                categories: @json($totalMonths)
+                // categories: @json($totalMonths)
+                categories: [1, 2, 3, 4, 5, 6]
             },
             tooltip: {
                 x: {
