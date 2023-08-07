@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Dashboard') }} </h2>
+                                <h2>{{trans('website.dashboard') }} </h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">{{ get_option('app_name') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Dashboard') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.dashboard') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -28,33 +28,41 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/principal.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students.png" alt="total students">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-purple">{{ $total_admins }}</h2>
-                            <h3>{{ __('Total Admin') }}</h3>
+
+                        <a href="">
+                            <h1 class="color-purple">{{ $total_admins }}</h1>
+                            <h2>{{ trans('website.total_students') }}</h2>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/instructors.png" alt="total instructors">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="">
+                                <h1 class="color-purple">{{ $total_instructors }}</h1>
+                                <h2>{{ trans('website.total_instructors') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/laptop.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/add-student.png" alt="students per month">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-purple">{{ $total_instructors }}</h2>
-                            <h3>{{ __('Total Instructors') }}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/study.png" alt="icon">
-                        </div>
-                        <div class="status__box__text">
-                            <h2 class="color-blue">{{ $total_students }}</h2>
-                            <h3>{{ __('Total Students') }}</h3>
+                            <a href="">
+                                <h1 class="color-blue">{{ $total_students }}</h1>
+                                <h2>{{ trans('website.new_students_month') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -62,11 +70,13 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/test.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/remove-student.png" alt="rejected students">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-green">{{ $total_courses }}</h2>
-                            <h3>{{ __('Total Courses') }}</h3>
+                            <a href="#">
+                                <h1 class="color-green">{{ $total_courses }}</h1>
+                                <h2>{{ trans('website.rejected') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -74,66 +84,78 @@
                     <div class="status__box status__box__v3 bg-style">
 
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/test-1.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/instructors.png" alt="instructors">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-blue">{{ $total_active_courses }}</h2>
-                            <h3>{{ __('Active Courses') }}</h3>
+                            <a href="#">
+                                <h1 class="color-blue">{{ $total_active_courses }}</h1>
+                                <h2>{{ trans('website.total_instructors') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/download.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/courses.png" alt="courses">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-purple">{{ $total_pending_courses }}</h2>
-                            <h3>{{ __('Pending Courses') }}</h3>
+                            <a href="#">
+                                <h1 class="color-purple">{{ $total_pending_courses }}</h1>
+                                <h2>{{ trans('website.courses') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/withdraw.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/best-courses.png" alt="best-courses">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-purple">{{ $total_free_courses }}</h2>
-                            <h3>{{ __('Free Courses') }}</h3>
+                            <a href="#">
+                                <h1 class="color-purple">{{ $total_free_courses }}</h1>
+                                <h2>{{ trans('website.best_courses') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/elearning.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students_trans.png" alt="students transactions">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-green">{{ $total_paid_courses }}</h2>
-                            <h3>{{ __('Paid Courses') }}</h3>
+                            <a href="#">
+                                <h1 class="color-green">{{ $total_paid_courses }}</h1>
+                                <h2>{{ trans('website.students_trans') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/checklist.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/bank.png" alt="banking">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-red">{{ $total_lessons }}</h2>
-                            <h3>{{ __('Total Lessons') }}</h3>
+                            <a href="#">
+                                <h1 class="color-red">{{ $total_lessons }}</h1>
+                                <h2>{{ trans('website.balance') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/website.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/book-money.png" alt="book-money">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-red">{{ $total_lectures }}</h2>
-                            <h3>{{ __('Total Lectures') }}</h3>
+                            <a href="#">
+                                <h1 class="color-red">{{ $total_lectures }}</h1>
+                                <h2>{{ trans('website.sales_books_things') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -141,15 +163,56 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/blogger.png" alt="icon">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/revenue.png" alt="total income">
                         </div>
                         <div class="status__box__text">
-                            <h2 class="color-yellow">{{ $total_blogs }}</h2>
-                            <h3>{{ __('Total Blogs') }}</h3>
+                            <a href="#">
+                                <h1 class="color-yellow">{{ $total_blogs }}</h1>
+                                <h2>{{ trans('website.total_income') }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/absent.png" alt="revenue">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="#">
+                                <h1 class="color-yellow">{{ $total_blogs }}</h1>
+                                <h2>{{ trans('website.absent_students') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/calendar.png" alt="icon">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="#">
+                                <h1 class="color-yellow">{{ $total_blogs }}</h1>
+                                <h2>{{ trans('website.calendar') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/analytics.png" alt="icon">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="#">
+                                <h1 class="color-yellow">{{ $total_blogs }}</h1>
+                                <h2>{{ trans('website.students_rate') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/save-money.png" alt="icon">
@@ -166,8 +229,8 @@
                             <h3>{{ __('Total Paid Sales') }}</h3>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                </div> -->
+                <!-- <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/paying.png" alt="icon">
@@ -294,11 +357,11 @@
                             <h3>{{ __('Total Complete Withdraw') }}</h3>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-8">
                     <div class="revenue__chart-v2__area bg-style">
                         <div class="revenue__chart-v2__top">
@@ -349,8 +412,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="col-md-6">
                     <div class="top-products__area bg-style">
                         <div class="d-flex align-items-center justify-content-between mb-2">
@@ -451,7 +514,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
