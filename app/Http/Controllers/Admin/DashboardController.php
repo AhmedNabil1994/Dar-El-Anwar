@@ -30,7 +30,8 @@ class DashboardController extends Controller
         $data['total_students'] = Student::count();
         $data['new_students'] = Student::where('created_at','>','2020' )->count();
         $data['excluded_students'] = Student::where('status','3')->count();
-        $data['converted_students'] = Absence::count();
+        $data['converted_students'] = Student::where('status','4')->count();
+        $data['absence_students'] = Absence::count();
         $data['total_employees'] = Employee::where('status',1)->count();
         $data['total_courses'] = Course::where('status',1)->count();
         $data['total_admins'] = Users::where('status',1)->count();

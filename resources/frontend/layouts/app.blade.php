@@ -13,7 +13,6 @@
         <meta name="keywords" content="{{ $metaData['meta_keyword'] }}">
     @endif
 
-    <meta name="author" content="zainiktheme">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <meta property="og:type" content="Learning">

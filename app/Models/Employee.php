@@ -31,6 +31,7 @@ class Employee extends Model
         'attendance_time',
         'image',
         'type',
+        'status',
 
     ];
 
@@ -44,6 +45,16 @@ class Employee extends Model
     public function getImg()
     {
         return $this->upload->file_name;
+    }
+
+    public function salary()
+    {
+        return $this->hasOne(Salary::class);
+    }
+
+    public function attendance_leave()
+    {
+        return $this->hasMany(AttendanceLeave::class);
     }
 
 }

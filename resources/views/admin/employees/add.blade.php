@@ -368,6 +368,7 @@
 
             </div>
         </div>
+    </div>
         <!-- Page content area end -->
         @endsection
 

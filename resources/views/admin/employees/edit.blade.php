@@ -205,17 +205,7 @@
                                                                                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="salary" class="col-md-4 col-form-label text-md-right">{{ __('Salary') }} <span class="required-star">*</span></label>
-                                    <div class="col-md-6">
-                                        <input id="salary" type="number" class="form-control @error('salary') is-invalid @enderror" name="salary" value="{{ old('salary', $employee->salary) }}" required autocomplete="salary">
-                                        @error('salary')
-                                        <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                        @enderror
-                                    </div>
-                                </div>
+
                                 <div class="form-group row">
                                     <label for="salary_cycle" class="col-md-4 col-form-label text-md-right">{{ __('Salary Cycle') }} <span class="required-star">*</span></label>
                                     <div class="col-md-6">
@@ -243,6 +233,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }} <span class="required-star">*</span></label>
+                                    <div class="col-md-6">
+                                        <select required id="status" type="date" class="form-control @error('status') is-invalid @enderror" name="status" autocomplete="status">
+                                            <option value="">Select Status</option>
+                                            <option value="1" {{ $employee->status == 1? 'selected' : '' }}>Active</option>
+                                            <option value="2" {{ $employee->status == 2? 'selected' : '' }}>Archive</option>
+                                        </select>
+                                        @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="departure_time" class="col-md-4 col-form-label text-md-right">
                                         {{ __('Departure Time') }}
                                         <span class="required-star">*</span>
@@ -262,7 +267,7 @@
 
                                 <div class="form-group row">
                                     <label for="attendance_time" class="col-md-4 col-form-label text-md-right">
-                                        {{ __('Attendance Time') }}
+                                        {{ __('AttendanceLeave Time') }}
                                         <span class="required-star">*</span>
                                     </label>
                                     <div class="col-md-6">

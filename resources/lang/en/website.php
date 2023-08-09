@@ -1,6 +1,6 @@
 <?php
 return [
-"total_students"=> "عدد التلاميذ", 
+"total_students"=> "عدد التلاميذ",
 "total_instructors"=> "عدد الموظفين",
 "new_students_month"=> "طلاب جدد خلال الشهر",
 "rejected"=> "طلاب مستبعدين",
@@ -39,7 +39,7 @@ return [
 "search"=> "إبحث",
 "archived"=> "الأرشفة",
 "current"=> "الحالي",
-"attendance"=> "الحضور و الأنصراف",
+"attendance_leave"=> "الحضور و الأنصراف",
 "salaries"=> "الرواتب",
 "editEmployee" => "تعديلات معلومات الموظف",
 "addEmployee" => "إضافة معلومات الموظف",
