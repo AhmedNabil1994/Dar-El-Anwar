@@ -1,0 +1,19 @@
+.employees .employee__filter .filter-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-inline-end: 1rem;
+}
+.employees .employee__filter .filter-item img {
+  width: 50px;
+  height: 50px;
+  margin-inline: auto;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.employees .employee__filter .filter-item a{
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+
+}
