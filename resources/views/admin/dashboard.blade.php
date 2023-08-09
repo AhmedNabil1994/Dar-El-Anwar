@@ -16,7 +16,6 @@
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">{{ get_option('app_name') }}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ trans('website.dashboard') }}</li>
                                 </ul>
                             </nav>
@@ -33,8 +32,8 @@
                         </div>
                         <div class="status__box__text">
 
-                        <a href="">
-                            <h1 class="color-purple"></h1>
+                        <a href="{{route('student.index')}}">
+                            <h1 class="color-purple">{{$total_students}}</h1>
                             <h2>{{ trans('website.total_students') }}</h2>
                         </a>
                         </div>
@@ -47,8 +46,8 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/instructors.png" alt="total instructors">
                         </div>
                         <div class="status__box__text">
-                            <a href="">
-                                <h1 class="color-purple"></h1>
+                            <a href="{{route('employees.index')}}">
+                                <h1 class="color-purple">{{$total_employees}}</h1>
                                 <h2>{{ trans('website.total_instructors') }}</h2>
                             </a>
                         </div>
@@ -60,8 +59,8 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/add-student.png" alt="students per month">
                         </div>
                         <div class="status__box__text">
-                            <a href="">
-                                <h1 class="color-blue"></h1>
+                            <a href="{{route('student.index')}}">
+                                <h1 class="color-blue">{{$new_students}}</h1>
                                 <h2>{{ trans('website.new_students_month') }}</h2>
                             </a>
                         </div>
@@ -74,35 +73,35 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/remove-student.png" alt="rejected students">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-green"></h1>
+                            <a href="{{route('student.index')}}">
+                                <h1 class="color-green">{{$excluded_students}}</h1>
                                 <h2>{{ trans('website.rejected') }}</h2>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
+{{--                <div class="col-lg-3 col-md-6 col-sm-6">--}}
+{{--                    <div class="status__box status__box__v3 bg-style">--}}
 
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/instructors.png" alt="instructors">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-blue"></h1>
-                                <h2>{{ trans('website.total_instructors') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+{{--                        <div class="status__box__img">--}}
+{{--                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/instructors.png" alt="instructors">--}}
+{{--                        </div>--}}
+{{--                        <div class="status__box__text">--}}
+{{--                            <a href="{{route('instructor.index')}}">--}}
+{{--                                <h1 class="color-blue">{{$excluded_students}}</h1>--}}
+{{--                                <h2>{{ trans('website.total_instructors') }}</h2>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/courses.png" alt="courses">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-purple"></h1>
+                            <a href="{{route('admin.course.index')}}">
+                                <h1 class="color-purple">{{$total_courses}}</h1>
                                 <h2>{{ trans('website.courses') }}</h2>
                             </a>
                         </div>
@@ -114,8 +113,8 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/best-courses.png" alt="best-courses">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-purple"></h1>
+                            <a href="{{route('admin.course.index')}}">
+                                <h1 class="color-purple">{{$total_best_courses}}</h1>
                                 <h2>{{ trans('website.best_courses') }}</h2>
                             </a>
                         </div>
@@ -127,8 +126,8 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students_trans.png" alt="students transactions">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-green"></h1>
+                            <a href="{{route('student.index')}}">
+                                <h1 class="color-green">{{$converted_students}}</h1>
                                 <h2>{{ trans('website.students_trans') }}</h2>
                             </a>
                         </div>
@@ -180,8 +179,8 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/absent.png" alt="revenue">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-yellow"></h1>
+                            <a href="{{route('student.index')}}">
+                                <h1 class="color-yellow">{{$absence_students}}</h1>
                                 <h2>{{ trans('website.absent_students') }}</h2>
                             </a>
                         </div>
@@ -214,8 +213,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="revenue__chart-v2__area bg-style">

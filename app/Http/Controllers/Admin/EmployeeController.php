@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Instructor;
+use App\Models\Salary;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use App\Tools\Repositories\Crud;
@@ -146,6 +147,34 @@ class EmployeeController extends Controller
         $employee->instructor->where('email',$employee->email)->first()->delete();
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully');
+    }
+
+    public function createSalary()
+    {
+        $employees = Employee::where('status',1)->get();
+        return view('admin.employees.salaries.create', compact('employees'));
+    }
+
+    public function storeSalary(Request $request)
+    {
+        $request->validate([
+            'employee_id' => 'required',
+            'salary' => 'required|numeric',
+            // Add more validation rules as needed
+        ]);
+        $salary = Salary::where('employee_id',$request->employee_id)->first();
+        if(!$salary)
+            Salary::create([
+                'employee_id' => $request->input('employee_id'),
+                'salary' => $request->input('salary'),
+                'date' => now(), // You can adjust this based on your requirements
+            ]);
+        else
+            $salary->update([
+                'salary' => $request->input('salary'),
+            ]);
+        return redirect()->route('employees.index');
+
     }
 
     public function updatePassword(Request $request)

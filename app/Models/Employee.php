@@ -46,4 +46,9 @@ class Employee extends Model
         return $this->upload->file_name;
     }
 
+    public function salary()
+    {
+        return $this->hasOne(Salary::class);
+    }
+
 }

@@ -149,6 +149,7 @@ Route::prefix('course')->group(function () {
 });
 
     Route::prefix('exam')->group(function () {
+
         Route::get('/', [ExamController::class, 'index'])->name('admin.exam.index');
         Route::get('view/{uuid}', [ExamController::class, 'view'])->name('admin.exam.view');
         Route::get('create', [ExamController::class, 'create'])->name('admin.exam.create');
@@ -244,7 +245,8 @@ Route::prefix('student')->group(function () {
         Route::post('update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
         Route::delete('delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
         Route::post('/{id}/update-password',[EmployeeController::class, 'updatePassword'])->name('employees.update-password');
-
+        Route::get('salaries/create', [EmployeeController::class, 'createSalary'])->name('salaries.create');
+        Route::post('salaries/store', [EmployeeController::class, 'storeSalary'])->name('salaries.store');
     });
 
 

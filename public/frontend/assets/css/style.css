@@ -1,68 +1,3 @@
-/*
--------------------------------------------------
-  Theme Name: LMSZAI- LMS Online Courses and Education HTML5 Responsive Template
-  Theme URL:
-  Author: zainiktheme
-  Author URL: https://themeforest.net/user/zainiktheme
-  Creation Date: 04-10-2021
-  Description:A default stylesheet for LMSZAI- LMS Online Courses and Education HTML5 Responsive Template
-  Version: 1.00
-  Primary use: lms, eEducation, learning, learn, education, course, online courses, eLearning, responsive, bootstrap, html5, clean, modern, creative etc.
-
-  ---------------------------------------------------
-  Developed By: zainiktheme
-  Developer URL: https://themeforest.net/user/zainiktheme
-  Developer: Suraiya Aysha
-
-  ---------------------------------------------------
-
-  --------------------------------------------------
-  Table of Contents
-  --------------------------------------------------
-  1. General CSS
-  2. Typography CSS
-  3. Button CSS
-  4. Navbar CSS
-  5.Scroll To Top Area
-  6.Preloader Area Start
-  7. Header Area
-  8. Special Feature Area
-  9. Course Slider Area
-  10. Video Area Start
-  11. Top Categories Area
-  12. Top Instructors Area Start
-  13. Testimonial Area Start
-  14. Achievement Area
-  15. Course Instructor and Support Area
-  16. FAQ Area
-  17. Footer Area
-  18. Course Single Area
-  19. Course Watch Page Area
-  20. Inner Page Banner/Header Area
-  21. About Page Area
-  22. Courses Page Area
-  23. Become an instructor Page
-  24. FAQ Page Area Page
-  25. Contact Page Area Page
-  26. Error Page Area Page
-  27. Instructor Details / Instructor Single Page
-  28. Blog Page Area
-  29. Blog Details Page Area
-  30. Cart Page Area
-  31. Wishlist Page Area Page
-  32. My Courses Page Area Page
-  33. Student Profile Page Area Page
-  34. Instructor Profile Page
-  35. Message Page Area
-  36. Instructor Dashboard Page
-  37. Instructor Course Upload/ Form Multistep Page
-  38. Instructor Analysis Page
-  39. Checkout Page
-  40. Sign Up Page
-  41. Home All Instructor
-  42. Responsive CSS
-
------------------------------------------------- */
 
 
 /*-----------------------------------------------
@@ -256,7 +191,7 @@ figure {
     background-color: var(--orange-color);
 }
 .bg-light {
-    background-image: url('/frontend/assets/247.jpg');   
+    background-image: url('/frontend/assets/247.jpg');
 }
 .bg-page {
     background-color: #fdfdfd;
@@ -1533,7 +1468,7 @@ button:focus {
     box-shadow: 0 6px 21px rgba(21, 3, 89, 0.08);
     border-radius: 3px;
     padding: 42px 30px;
-    
+
     color: white !important;
 
 }
@@ -2233,7 +2168,7 @@ color: white !important;
     font-weight: normal;
     font-size: 16px;
     line-height: 25px;
-    
+
 }
 /*Footer social */
 .footer-social ul li a {

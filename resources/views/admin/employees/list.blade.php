@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="filter-item">
                                         <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/salary.png" alt="now">
-                                        <a href="">
+                                        <a href="{{route('salaries.create')}}">
                                             {{trans('website.salaries')}}
                                         </a>
                                     </div>
@@ -111,8 +111,8 @@
                                                 </a>
                                             </td>
                                             <td class="text-center">{{ $employee->job_title }}</td>
-                                            <td class="text-center">{{ $employee->salary }}</td>
-                                            <td class="text-center"></td>
+                                            <td class="text-center">{{ $employee->salary?->salary }}</td>
+                                            <td class="text-center">{{ $employee->level }}</td>
                                             <td class="text-center">{{ $employee->branch }}</td>
                                             <td class="text-center">{{ $employee->hiring_date }}</td>
                                             <td class="text-center">{{ $employee->national_id }}</td>
@@ -120,7 +120,7 @@
                                             <td class="text-center">
                                                 <a href="mailto:{{ $employee->email }}">
                                                     {{ $employee->email }}
-                                                </a>    
+                                                </a>
                                             </td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
