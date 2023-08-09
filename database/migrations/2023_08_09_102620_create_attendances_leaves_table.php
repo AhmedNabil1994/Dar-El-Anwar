@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('salaries', function (Blueprint $table) {
+        Schema::create('attendances_leaves', function (Blueprint $table) {
             $table->id();
             $table->string('employee_id')->nullable();
-            $table->string('salary')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
             $table->string('date')->nullable();
-            $table->string('description')->nullable();
+            $table->string('status')->nullable();
+            $table->string('reason')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salaries');
+        Schema::dropIfExists('attendances_leaves');
     }
 };

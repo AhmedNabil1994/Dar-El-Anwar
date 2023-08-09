@@ -22,11 +22,34 @@ class EmployeeController extends Controller
         $this->employeeRepo = new Crud($employee);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $employees = $this->employeeRepo->getOrderById('DESC', 25);
+        $employees = Employee::query();
+        $query_search = $request->query_search;
+        if($query_search)
+            $employees->where('name','LIKE','%'.$query_search.'%');
+        $employees = $employees->paginate(25);
+        return view('admin.employees.list', compact('employees','query_search'));
+    }
 
-        return view('admin.employees.list', compact('employees'));
+    public function active(Request $request)
+    {
+        $employees = Employee::query()->where('status',1);
+        $query_search = $request->query_search;
+        if($query_search)
+            $employees->where('name','LIKE','%'.$query_search.'%');
+        $employees = $employees->paginate(25);
+        return view('admin.employees.list', compact('employees','query_search'));
+    }
+
+    public function archive(Request $request)
+    {
+        $employees = Employee::query()->where('status',2);
+        $query_search = $request->query_search;
+        if($query_search)
+            $employees->where('name','LIKE','%'.$query_search.'%');
+        $employees = $employees->paginate(25);
+        return view('admin.employees.list', compact('employees','query_search'));
     }
 
     public function create()
@@ -87,10 +110,11 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee'));
     }
 
-    public function update(EmployeeRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
-        $validatedData = $request->validated();
+
+        $validatedData = $request->all();
         $validatedData['password'] = Hash::make($validatedData['password']);
         $employee = $this->employeeRepo->find($id);
         if($request->hasFile('image'))
@@ -152,6 +176,7 @@ class EmployeeController extends Controller
     public function createSalary()
     {
         $employees = Employee::where('status',1)->get();
+
         return view('admin.employees.salaries.create', compact('employees'));
     }
 

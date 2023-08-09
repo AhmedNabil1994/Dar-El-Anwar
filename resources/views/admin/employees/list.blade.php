@@ -35,7 +35,9 @@
                                 <div class="col-md-6 d-flex align-items-center">
                                     <form>
                                         <div class="input-group w-100">
-                                            <input type="text" class="form-control" placeholder="{{trans('website.search')}}">
+                                            <input type="text" class="form-control" name='query_search'
+                                                   value="{{isset($query_search)? $query_search : null}}"
+                                                   placeholder="{{trans('website.search')}}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="submit">
                                                     <i class="fas fa-search"></i>
@@ -47,20 +49,20 @@
                                 <div class="col-md-6 d-flex justify-content-end employee__filter">
                                     <div class="filter-item">
                                         <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/archived.png" alt="archived">
-                                        <a href="">
+                                        <a href="{{route('employees.archive')}}">
                                             {{trans('website.archived')}}
                                         </a>
                                     </div>
                                     <div class="filter-item">
                                         <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/current.png" alt="now">
-                                        <a href="">
+                                        <a href="{{route('employees.active')}}">
                                             {{trans('website.current')}}
                                         </a>
                                     </div>
                                     <div class="filter-item">
                                         <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/attendance.png" alt="now">
-                                        <a href="">
-                                            {{trans('website.attendance')}}
+                                        <a href="{{route('attendance_leave.index')}}">
+                                            {{trans('website.attendance_leave')}}
                                         </a>
                                     </div>
                                     <div class="filter-item">

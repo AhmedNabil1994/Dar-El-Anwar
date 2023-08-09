@@ -238,6 +238,8 @@ Route::prefix('student')->group(function () {
 
     Route::prefix('employees')->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
+        Route::get('/active', [EmployeeController::class, 'active'])->name('employees.active');
+        Route::get('/archive', [EmployeeController::class, 'archive'])->name('employees.archive');
         Route::get('create', [EmployeeController::class, 'create'])->name('employees.create');
         Route::post('store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::get('view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
@@ -247,6 +249,13 @@ Route::prefix('student')->group(function () {
         Route::post('/{id}/update-password',[EmployeeController::class, 'updatePassword'])->name('employees.update-password');
         Route::get('salaries/create', [EmployeeController::class, 'createSalary'])->name('salaries.create');
         Route::post('salaries/store', [EmployeeController::class, 'storeSalary'])->name('salaries.store');
+        // Display attendance_leave and leave-related views
+        Route::get('employees/attendance_leave', [\App\Http\Controllers\AttendanceLeaveController::class,'index'])->name('attendance_leave.index');
+        Route::get('employees/attendance_leave/create', [\App\Http\Controllers\AttendanceLeaveController::class,'create'])->name('attendance_leave.create');
+        // Handle attendance_leave and leave actions
+        Route::post('attendance_leave/store', [\App\Http\Controllers\AttendanceLeaveController::class,'store'])->name('attendance_leave.store');
+
+
     });
 
 

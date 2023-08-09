@@ -217,17 +217,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="salary" class="col-md-4 col-form-label text-md-right">{{ __('Salary') }} <span class="required-star">*</span></label>
-                                    <div class="col-md-6">
-                                        <input required id="salary" type="number" class="form-control @error('salary') is-invalid @enderror" name="salary" value="{{ old('salary', $employee?->salary) }}"  autocomplete="salary">
-                                        @error('salary')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="salary_cycle" class="col-md-4 col-form-label text-md-right">{{ __('Salary Cycle') }} <span class="required-star">*</span></label>
                                     <div class="col-md-6">
                                         <select id="salary_cycle" class="form-control @error('salary_cycle') is-invalid @enderror"
@@ -255,7 +244,17 @@
                                         @enderror
                                     </div>
                                 </div>
-
+                                <div class="form-group row">
+                                    <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }} <span class="required-star">*</span></label>
+                                    <div class="col-md-6">
+                                        <input required id="status" type="date" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status', $employee?->status) }}"  autocomplete="status">
+                                        @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="departure_time" class="col-md-4 col-form-label text-md-right">
                                         {{ __('Departure Time') }}
@@ -276,7 +275,7 @@
 
                                 <div class="form-group row">
                                     <label for="attendance_time" class="col-md-4 col-form-label text-md-right">
-                                        {{ __('Attendance Time') }}
+                                        {{ __('AttendanceLeave Time') }}
                                         <span class="required-star">*</span>
                                     </label>
                                     <div class="col-md-6">
