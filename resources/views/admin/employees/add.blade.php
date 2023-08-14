@@ -68,7 +68,7 @@
                                         <div class="file-preview box sm">
                                         </div>
                                         @error('image')
-                                        <span class="invalid-feedback" role?="alert">                                         
+                                        <span class="invalid-feedback" role?="alert">
                                             <strong>{{ trans("website.requiredField") }}</strong>
                                         </span>
                                         @enderror
@@ -160,6 +160,19 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="form-group row mb-4">
+                                    <label for="level" class="col-md-4 col-form-label text-md-right">{{ trans('website.standard') }} <span class="required-star">*</span></label>
+                                    <div class="col-md-6">
+                                        <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level', $employee?->level) }}"  autocomplete="level" required>
+                                        @error('level')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ trans("website.requiredField") }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="form-group row mb-4">
                                     <label for="phone" class="col-md-4 col-form-label text-md-right">{{ trans("website.phone_number") }} <span class="required-star">*</span></label>
                                     <div class="col-md-6">
@@ -262,7 +275,7 @@
                                         <span class="required-star">*</span>
                                     </label>
                                     <div class="col-md-6">
-                                        <input id="hiring_date" type="date" class="form-control @error('departure_time')
+                                        <input id="hiring_date" type="datetime-local" class="form-control @error('departure_time')
                                          is-invalid @enderror" name="departure_time"
                                                value="{{ old('departure_time', $employee?->departure_time) }}"
                                                autocomplete="departure_time" required>
@@ -280,7 +293,7 @@
                                         <span class="required-star">*</span>
                                     </label>
                                     <div class="col-md-6">
-                                        <input required id="attendance_time" type="date" class="form-control @error('attendance_time')
+                                        <input required id="attendance_time" type="datetime-local" class="form-control @error('attendance_time')
                                          is-invalid @enderror" name="attendance_time"
                                                value="{{ old('attendance_time', $employee?->attendance_time) }}"
                                                autocomplete="departure_time">

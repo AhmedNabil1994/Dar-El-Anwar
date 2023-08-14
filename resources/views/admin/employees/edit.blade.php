@@ -139,6 +139,19 @@
                                                                                                             @enderror
                                     </div>
                                 </div>
+
+                                <div class="form-group row mb-4">
+                                    <label for="level" class="col-md-4 col-form-label text-md-right">{{ trans('website.standard') }} <span class="required-star">*</span></label>
+                                    <div class="col-md-6">
+                                        <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level', $employee?->level) }}"  autocomplete="level" required>
+                                        @error('level')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ trans("website.requiredField") }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="form-group row">
                                     <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }} <span class="required-star">*</span></label>
                                     <div class="col-md-6">
@@ -235,7 +248,7 @@
                                 <div class="form-group row">
                                     <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }} <span class="required-star">*</span></label>
                                     <div class="col-md-6">
-                                        <select required id="status" type="date" class="form-control @error('status') is-invalid @enderror" name="status" autocomplete="status">
+                                        <select required id="status" type="datetime-local" class="form-control @error('status') is-invalid @enderror" name="status" autocomplete="status">
                                             <option value="">Select Status</option>
                                             <option value="1" {{ $employee->status == 1? 'selected' : '' }}>Active</option>
                                             <option value="2" {{ $employee->status == 2? 'selected' : '' }}>Archive</option>
@@ -253,7 +266,7 @@
                                         <span class="required-star">*</span>
                                     </label>
                                     <div class="col-md-6">
-                                        <input id="hiring_date" type="date" class="form-control @error('departure_time')
+                                        <input id="hiring_date" type="datetime-local" class="form-control @error('departure_time')
                                          is-invalid @enderror" name="departure_time"
                                                value="{{ old('departure_time', $employee?->departure_time) }}"
                                                autocomplete="departure_time">
@@ -271,7 +284,7 @@
                                         <span class="required-star">*</span>
                                     </label>
                                     <div class="col-md-6">
-                                        <input id="attendance_time" type="date" class="form-control @error('attendance_time')
+                                        <input id="attendance_time" type="datetime-local" class="form-control @error('attendance_time')
                                          is-invalid @enderror" name="attendance_time"
                                                value="{{ old('attendance_time', $employee?->attendance_time) }}"
                                                autocomplete="departure_time">

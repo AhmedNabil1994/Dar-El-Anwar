@@ -75,12 +75,10 @@
                                     <th>{{ __('Phone Number') }}</th>
                                     <th>{{ __('Address') }}</th>
                                     <th>{{ __('Gender') }}</th>
-                                    <th>{{ __('City') }}</th>
-                                    <th>{{ __('Branch ID') }}</th>
+                                    <th>{{ __('Level') }}</th>
+                                    <th>{{ __('Absenteeism') }}</th>
+                                    <th>{{ __('Branch') }}</th>
                                     <th>{{ __('Period') }}</th>
-                                    <th>{{ __('Created At') }}</th>
-                                    <th>{{ __('Updated At') }}</th>
-                                    <th>{{ __('Status') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
                                 </thead>
@@ -95,7 +93,8 @@
                                         <td>{{ $student->phone_number }}</td>
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->gender === 1 ? __('Male') : __('Female') }}</td>
-                                        <td>{{ $student->getCity()->first()->city_name_en }}</td>
+                                        <td>{{ $student->level }}</td>
+                                        <td></td>
                                         <td>{{ $student->branch_id }}</td>
                                         <td>
                                             @if($student->period === 1)
@@ -106,18 +105,6 @@
                                                 {{ __('Both') }}
                                             @endif
                                         </td>
-
-                                        <td>{{ $student->created_at }}</td>
-                                        <td>{{ $student->updated_at }}</td>
-
-                                        <td>
-                                            <span id="hidden_id" style="display: none">{{ $student->id }}</span>
-                                            <select name="status" class="status label-inline font-weight-bolder mb-1 badge badge-info">
-                                                <option value="1" @if($student->status == 1) selected @endif>{{ __('Approved') }}</option>
-                                                <option value="2" @if($student->status == 2) selected @endif>{{ __('Blocked') }}</option>
-                                            </select>
-                                        </td>
-
                                         <td>
                                             <div class="action__buttons">
 {{--                                                <a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}

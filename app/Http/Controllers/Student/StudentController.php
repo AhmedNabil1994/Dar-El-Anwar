@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Tools\Repositories\Crud;
 use App\Traits\General;
 use App\Traits\ImageSaveTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,7 +45,7 @@ class StudentController extends Controller
     public function index()
     {
         $data['title'] = 'All Student';
-        $students = $this->studentModel->getOrderById('DESC', 25);
+        $students = $this->studentModel->getOrderById('DESC', 50);
         return view('admin.student.list', $data, compact('students'));
     }
 
@@ -59,7 +60,9 @@ class StudentController extends Controller
 
     public function store(StudentStoreRequest $request)
     {
-
+       // Carbon::now()
+       // $request->branch_id
+        //count
         $data = $request->all();
         $student_data = [
             'user_id' => $user->id??null,
