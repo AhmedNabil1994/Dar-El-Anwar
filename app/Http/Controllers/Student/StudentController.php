@@ -7,6 +7,7 @@ use App\Http\Requests\Student\StudentEditRequest;
 use App\Http\Requests\Student\StudentStoreRequest;
 use App\Models\Branch;
 use App\Models\City;
+use App\Models\ClassRoom;
 use App\Models\Governorate;
 use App\Models\Instructor;
 use App\Models\Order;
@@ -42,10 +43,28 @@ class StudentController extends Controller
         return redirect('/login');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $data['title'] = 'All Student';
-        $students = $this->studentModel->getOrderById('DESC', 50);
+        $students = Student::query()->orderBy('id','DESC');
+        if($request->filterByBranch)
+            $students->where('branch_id',$request->filterByBranch);
+        if($request->filterByLevel)
+            $students->where('level',$request->filterByLevel);
+        if($request->filterByClass)
+            $students->where('classroom',$request->filterByClass);
+        if($request->filterByPeriod)
+            $students->where('period',$request->filterByPeriod);
+        if($request->filterByGender)
+            $students->where('gender',$request->filterByGender);
+        if($request->filterByJoining)
+            $students->where('status',$request->filterByJoining);
+
+        $data['branches'] = Branch::whereStatus(1)->get();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['count'] = Student::count();
+
+        $students = $students->paginate(50);
         return view('admin.student.list', $data, compact('students'));
     }
 

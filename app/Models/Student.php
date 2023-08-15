@@ -68,5 +68,8 @@ class Student extends Authenticatable
     {
         return $this->upload->file_name;
     }
-
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

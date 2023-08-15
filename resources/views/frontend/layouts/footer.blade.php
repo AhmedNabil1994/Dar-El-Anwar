@@ -22,9 +22,9 @@
                         <h6 class="footer-widget-title">{{__('Company')}}</h6>
                         <div class="footer-links d-flex">
                             <ul>
-                                <li><a href="{{ route('about') }}">{{ __('About')  }}</a></li>
-                                <li><a href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
-                                <li><a href="{{ route('blogs') }}">{{ __('Blogs') }}</a></li>
+{{--                                <li><a href="{{ route('about') }}">{{ __('About')  }}</a></li>--}}
+{{--                                <li><a href="{{ route('faq') }}">{{__('FAQ')}}</a></li>--}}
+{{--                                <li><a href="{{ route('blogs') }}">{{ __('Blogs') }}</a></li>--}}
                             </ul>
                         </div>
                     </div>
@@ -34,9 +34,9 @@
                         <h6 class="footer-widget-title">{{__('Support')}}</h6>
                         <div class="footer-links d-flex">
                             <ul>
-                                <li><a href="{{ route('contact') }}">{{  __('Contact')  }}</a></li>
-                                <li><a href="{{ route('support-ticket-faq') }}">{{  __('Support')  }}</a></li>
-                                <li><a href="{{ route('courses') }}">{{ __('Courses')  }}</a></li>
+{{--                                <li><a href="{{ route('contact') }}">{{  __('Contact')  }}</a></li>--}}
+{{--                                <li><a href="{{ route('support-ticket-faq') }}">{{  __('Support')  }}</a></li>--}}
+{{--                                <li><a href="{{ route('courses') }}">{{ __('Courses')  }}</a></li>--}}
                             </ul>
                         </div>
                     </div>
@@ -71,9 +71,9 @@
                 <div class="col-12 col-md-4">
                     <div class="footer-bottom-nav">
                         <ul class="d-flex justify-content-end">
-                            <li><a href="{{ route('student.become-an-instructor') }}">{{__('Become Instructor')}}</a></li>
-                            <li><a href="{{ route('privacy-policy') }}">{{__('Privacy Policy')}}</a></li>
-                            <li><a href="{{ route('cookie-policy') }}">{{__('Cookie Policy')}}</a></li>
+{{--                            <li><a href="{{ route('student.become-an-instructor') }}">{{__('Become Instructor')}}</a></li>--}}
+{{--                            <li><a href="{{ route('privacy-policy') }}">{{__('Privacy Policy')}}</a></li>--}}
+{{--                            <li><a href="{{ route('cookie-policy') }}">{{__('Cookie Policy')}}</a></li>--}}
                         </ul>
                     </div>
                 </div>

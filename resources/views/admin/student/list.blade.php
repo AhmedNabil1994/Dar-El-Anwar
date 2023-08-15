@@ -23,38 +23,72 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="filter_department">Department:</label>
-                    <select class="form-control" id="filter_department">
+            <form method="get" action="{{route('student.index')}}" class="row">
+                <div class="row">
+                    <h1>Filters</h1>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByLevel">Level:</label>
+                    <select class="form-control" name="filterByLevel">
                         <option value="">All</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Business Administration">Business Administration</option>
+
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label for="filter_level">Level:</label>
-                    <select class="form-control" id="filter_level">
+                <div class="col-md-3 m-3">
+                    <label for="filterByJoining">Status:</label>
+                    <select class="form-control" name="filterByJoining">
                         <option value="">All</option>
-                        <option value="Freshman">Freshman</option>
-                        <option value="Sophomore">Sophomore</option>
-                        <option value="Junior">Junior</option>
-                        <option value="Senior">Senior</option>
+                        <option value="2" {{request('filterByJoining') == 2? 'selected' : ''}}>Active</option>
+                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>Suspend</option>
+                        <option value="3" {{request('filterByJoining') == 3? 'selected' : ''}}>Excluded</option>
+                        <option value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>Converted</option>
+                        <option value="5" {{request('filterByJoining') == 5? 'selected' : ''}}>Joining</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label for="filter_status">Status:</label>
-                    <select class="form-control" id="filter_status">
-                        <option value="">All</option>
-                        <option value="Enrolled">Enrolled</option>
-                        <option value="Suspended">Suspended</option>
-                        <option value="Graduated">Graduated</option>
+                <div class="col-md-3 m-3">
+                    <label for="filterByGender">Gender:</label>
+                    <select class="form-control" name="filterByGender">
+                        <option value="">Both</option>
+                        <option value="1" {{request('filterByGender') == 1? 'selected' : ''}}>Male</option>
+                        <option value="2" {{request('filterByGender') == 2? 'selected' : ''}}>Female</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-1 m-3">
+                    <label for="filterByGender">Count : </label>
+                    <input class="form-control" value="{{$count}}" disabled>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByPeriod">Period:</label>
+                    <select class="form-control" name="filterByPeriod">
+                        <option value="">Both</option>
+                        <option value="1" {{request('filterByPeriod') == 1? 'selected' : ''}}>Morning</option>
+                        <option value="2" {{request('filterByPeriod') == 2? 'selected' : ''}}>Evening</option>
+                    </select>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByClass">Class:</label>
+                    <select class="form-control" name="filterByClass">
+                        <option value="">All</option>
+                        @foreach($class_rooms as $class_room)
+                            <option value="{{$class_rooms->id}}" {{$class_rooms->id == request('filterByClass')? 'selected' : ''}}>{{$class_rooms->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByBranch">Branch:</label>
+                    <select class="form-control" name="filterByBranch">
+                        <option value="">All</option>
+                        @foreach($branches as $branch)
+                            <option value="{{$branch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mx-3 mb-3">
                     <button id="btn_filter" class="btn btn-primary mt-4">Filter</button>
                 </div>
+            </form>
+            <div>
+                <button class="btn btn-secondary" id="printButton">Print</button>
             </div>
 
             <div class="row">
@@ -76,7 +110,6 @@
                                     <th>{{ __('Address') }}</th>
                                     <th>{{ __('Gender') }}</th>
                                     <th>{{ __('Level') }}</th>
-                                    <th>{{ __('Absenteeism') }}</th>
                                     <th>{{ __('Branch') }}</th>
                                     <th>{{ __('Period') }}</th>
                                     <th>{{ __('Action') }}</th>
@@ -94,8 +127,7 @@
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->gender === 1 ? __('Male') : __('Female') }}</td>
                                         <td>{{ $student->level }}</td>
-                                        <td></td>
-                                        <td>{{ $student->branch_id }}</td>
+                                        <td>{{ $student->branch->name }}</td>
                                         <td>
                                             @if($student->period === 1)
                                                 {{ __('Morning') }}
@@ -202,5 +234,10 @@
             });
         });
 
+    </script>
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+                window.print();
+        });
     </script>
 @endpush

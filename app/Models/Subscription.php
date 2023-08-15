@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class Subscription extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function department()
+    public function student()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Student::class);
     }
 
-    public function instructor()
+    public function course()
     {
-        return $this->belongsTo(Instructor::class);
+        return $this->belongsTo(Course::class);
     }
 
 }

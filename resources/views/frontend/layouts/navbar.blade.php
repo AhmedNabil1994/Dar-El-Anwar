@@ -18,8 +18,8 @@
                             <ul class="dropdown-menu {{selectedLanguage()->rtl == 1 ? 'dropdown-menu-end' : ''}}">
                                 @foreach($categories as $category)
                                     <li>
-                                        <a href="{{ route('category-courses', $category->slug) }}"
-                                           class="dropdown-item ">{{ $category->name }}</a>
+                                        {{--<a href="{{ rout/**/e('category-courses', $category->slug) }}"
+                                           class="dropdown-item ">{{ $category->name }}</a>--}}
 {{--                                        @if(count($category->subcategories) > 0)--}}
 {{--                                            <ul class="submenu dropdown-menu">--}}
 {{--                                                @foreach($category->subcategories as $subcategory)--}}
@@ -30,7 +30,7 @@
                                     </li>
                                 @endforeach
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a href="{{ route('courses') }}">{{ __('All Courses') }}</a></li>
+                             {{--   <li><a href="{{ route('courses') }}">{{ __('All Courses') }}</a></li>--}}
                             </ul>
                         </li>
                     </ul>
@@ -55,7 +55,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" data-bs-toggle="dropdown">{{__('Pages')}}</a>
-                            <ul class="dropdown-menu {{selectedLanguage()->rtl == 1 ? 'dropdown-menu-end' : ''}}">
+                      {{--      <ul class="dropdown-menu {{selectedLanguage()->rtl == 1 ? 'dropdown-menu-end' : ''}}">
                                 @foreach($staticMenus ?? [] as $staticMenu)
                                     <li><a class="dropdown-item" href="{{ route( $staticMenu->slug ) }}">{{ __($staticMenu->name)  }}</a></li>
                                 @endforeach
@@ -63,7 +63,7 @@
                                 @foreach($dynamicMenus ?? [] as $dynamicMenu)
                                     <li><a class="dropdown-item" href="{{ route('page', @$dynamicMenu->page->slug) }}">{{ __($dynamicMenu->name)  }}</a></li>
                                 @endforeach
-                            </ul>
+                            </ul>--}}
                         </li>
                         @if(@auth::user()->role == 2 || @auth::user()->role == 3)
                             <li class="nav-item">
@@ -102,7 +102,7 @@
                                 @endif
                             @endif
                         @else
-                            <!-- <li class="nav-item">
+                            {{--<!-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('forum.index') }}">{{__('Forum')}}</a>
                             </li>
                             <li class="nav-item">
@@ -110,7 +110,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="{{ route('contact') }}">{{__('Contact')}}</a>
-                            </li> -->
+                            </li> -->--}}
                         @endif
                         <li class="nav-item dropdown menu-round-btn menu-language-btn dropdown-top-space">
                             <a class="nav-link" href="#">
@@ -207,14 +207,14 @@
                             @endif
 
                         <!-- Menu Cart Option Start -->
-                            <li class="nav-item menu-round-btn menu-cart-btn">
+                         {{--   <li class="nav-item menu-round-btn menu-cart-btn">
                                 <a class="nav-link menu-cart-btn" aria-current="page" href="{{ route('student.cartList') }}">
                                     <i data-feather="shopping-bag"></i>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cartQuantity">
                                 {{ @$cartQuantity }}
                               </span>
                                 </a>
-                            </li>
+                            </li>--}}
                             <!-- Menu Cart Option End -->
                         @endif
                         @if (Route::has('login'))

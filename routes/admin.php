@@ -170,8 +170,8 @@ Route::prefix('course')->group(function () {
         Route::get('/', [SubjectController::class, 'index'])->name('admin.subject.index');
         Route::get('view/{uuid}', [SubjectController::class, 'view'])->name('admin.subject.view');
         Route::get('create', [SubjectController::class, 'create'])->name('admin.subject.create');
-        Route::get('edit', [SubjectController::class, 'edit'])->name('admin.subject.edit');
-        Route::get('update', [SubjectController::class, 'update'])->name('admin.subject.update');
+        Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('admin.subject.edit');
+        Route::post('update/{id}', [SubjectController::class, 'update'])->name('admin.subject.update');
         Route::get('delete/{uuid}', [SubjectController::class, 'delete'])->name('admin.subject.delete');
         Route::post('store', [SubjectController::class, 'store'])->name('admin.subject.store');
     });

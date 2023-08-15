@@ -1,136 +1,74 @@
-@extends('frontend.layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dar Al-Anwar</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('{{asset('images.jpg')}}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        *
+        {
+            color: aliceblue;
+            text-shadow: #0c0c0c 4px 4px;
+        }
+        .container{
 
-@section('content')
-<div class="bg-page">
-<!-- Page Header Start -->
-<header class="page-banner-header gradient-bg position-relative">
-    <div class="section-overlky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div class="page-banner-content text-center">
-                        <h3 class="page-banner-heading text-white pb-15">{{ __('Contact Us') }}</h3>
+            box-shadow: black 9px 7px 36px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Contact Us</h1>
 
-                        <!-- Breadcrumb Start-->
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item font-14"><a href="{{ url('/') }}">{{__('Home')}}</a></li>
-                                <li class="breadcrumb-item font-14 active" aria-current="page">{{ __('Contact Us') }}</li>
-                            </ol>
-                        </nav>
-                        <!-- Breadcrumb End-->
-                    </div>
-                </div>
-            </div>
+    <p>Thank you for your interest in contacting us. You can reach out to us using the form below or through the provided contact methods.</p>
+
+    <h2>Contact Form</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
-    </div>
-</header>
-<!-- Page Header End -->
-
-<!-- Contact Page Area Start -->
-<section class="contact-page-area section-t-space">
-    <div class="container">
-        <div class="row">
-            <!-- Contact page left side start-->
-            <div class="col-md-6 col-lg-5 bg-white contact-page-left-side">
-
-                <div class="contact-page-left-side-wrap">
-                    <h5 class="contact-form-title font-24 font-semi-bold">{{ __(get_option('get_in_touch_title')) }}</h5>
-
-                    <!-- Contact Info Item Start-->
-                    <div class="contact-info-item d-flex align-items-center">
-                        <div class="flex-shrink-0 contact-icon-img-wrap">
-                            <img src="{{ asset('frontend/assets/img/icons-svg/contact-icon-1.png') }}" alt="feature">
-                        </div>
-                        <div class="flex-grow-1 ms-3 contact-info-content">
-                            <p>{{ __(get_option('contact_us_location')) }}</p>
-                        </div>
-                    </div>
-                    <!-- Contact Info Item End-->
-
-                    <!-- Contact Info Item Start-->
-                    <div class="contact-info-item d-flex align-items-center">
-                        <div class="flex-shrink-0 contact-icon-img-wrap">
-                            <img src="{{ asset('frontend/assets/img/icons-svg/contact-icon-2.png') }}" alt="feature">
-                        </div>
-                        <div class="flex-grow-1 ms-3 contact-info-content">
-                            <p>{{ __(get_option('contact_us_email_one')) }}</p>
-                            <p>{{ __(get_option('contact_us_email_two')) }}</p>
-                        </div>
-                    </div>
-                    <!-- Contact Info Item End-->
-
-                    <!-- Contact Info Item Start-->
-                    <div class="contact-info-item d-flex align-items-center">
-                        <div class="flex-shrink-0 contact-icon-img-wrap">
-                            <img src="{{ asset('frontend/assets/img/icons-svg/contact-icon-3.png') }}" alt="feature">
-                        </div>
-                        <div class="flex-grow-1 ms-3 contact-info-content">
-                            <p>{{ __(get_option('contact_us_phone_one')) }}</p>
-                            <p>{{ __(get_option('contact_us_phone_two')) }}</p>
-                        </div>
-                    </div>
-                    <!-- Contact Info Item End-->
-
-                    <div class="contact-bottom-content">
-                        <p class="color-gray mt-3">{{ __(get_option('contact_us_description')) }}</p>
-                    </div>
-                </div>
-
-            </div>
-            <!-- Contact page left side End-->
-
-            <!-- Contact page right side start-->
-            <div class="col-md-6 col-lg-7 bg-white contact-page-right">
-                <div class="contact-form-area">
-                    <h5 class="contact-form-title font-24 font-semi-bold">{{ __(get_option('send_us_msg_title')) }}</h5>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-30">
-                                <input type="text" class="form-control" id="inputName" placeholder="{{ __('Your name') }}*">
-                            </div>
-                            <div class="col-md-6 mb-30">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="{{ __('Your Email') }}*">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mb-30">
-                                <select id="inputState" class="form-select contact_us_issue_id">
-                                    <option value="">{{__('Select an Issue')}}</option>
-                                    @foreach($contactUsIssues as $issue)
-                                    <option value="{{ $issue->id }}">{{ __($issue->name) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mb-30">
-                                <textarea class="form-control message" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button type="button" class="theme-btn theme-button1 theme-button3 w-100 font-15 fw-bold submitContactUs">{{__('Submit')}}</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- Contact page right side End-->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
-
-        <!-- Google Map Part Start-->
-        <div class="row google-map-area section-t-space">
-            <div class="col-12">
-                <iframe src="{{ get_option('contact_us_map_link') }}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
         </div>
-        <!-- Google Map Part End-->
-    </div>
-</section>
-<!-- Contact Page Area End -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+    <h2>Other Contact Methods</h2>
+    <ul>
+        <li>Email: <a href="mailto:info@example.com">info@example.com</a></li>
+        <li>Phone: +123456789</li>
+        <li>Twitter: <a href="https://twitter.com/ExampleTwitter" target="_blank">@ExampleTwitter</a></li>
+        <li>Instagram: <a href="https://www.instagram.com/ExampleInstagram" target="_blank">@ExampleInstagram</a></li>
+        <li>Facebook: <a href="https://www.facebook.com/ExampleFacebook" target="_blank">ExampleFacebook</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/yourlinkedin" target="_blank">Your LinkedIn</a></li>
+    </ul>
+
+    <h2>Address</h2>
+    <p>123 Example Street, Sample Town, Perfect Country</p>
+
+
+    <p><strong>Under Development</strong></p>
+    <p>We are currently working on improving our website to provide a better user experience. We apologize for any inconvenience this may cause. Feel free to reach out to us using the provided contact methods while we continue to make enhancements.</p>
 </div>
-<input type="hidden" value="{{ route('contact.store') }}" class="contactStoreRoute">
-@endsection
 
-@push('script')
-    <script src="{{ asset('frontend/assets/js/custom/contact-us-store.js') }}"></script>
-@endpush
+<!-- Include Bootstrap JS (optional) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -36,6 +36,7 @@
                                 <tr>
                                     <th>{{ __('SL') }}</th>
                                     <th>{{ __('subject Name') }}</th>
+                                    <th>{{ __('Department') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
                                 </thead>
@@ -44,6 +45,7 @@
                                     <tr class="removable-item">
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$subject->name}}</td>
+                                        <td>{{$subject->department?->name}}</td>
                                         <td>
                                             <div class="action__buttons">
                                                 <a href="{{route('admin.subject.edit', [$subject->id])}}" class="btn-action" title="Edit">

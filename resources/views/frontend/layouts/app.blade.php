@@ -100,7 +100,7 @@
     <![endif]-->
 
     @stack('style')
-    @toastr_css
+
     @include('frontend.layouts.dynamic-style')
 
 </head>
@@ -116,7 +116,7 @@
 @endif--}}
 
 <!--Main Menu/Navbar Area Start -->
-@include('frontend.layouts.navbar')
+{{--@include('frontend.layouts.navbar')--}}
 <!--Main Menu/Navbar Area Start -->
 
 <!-- Main Content Start-->
@@ -124,7 +124,7 @@
 <!-- Main Content End-->
 
 <!-- Footer Start -->
-@include('frontend.layouts.footer')
+{{--@include('frontend.layouts.footer')--}}
 <!-- Footer End -->
 
 <!--=======================================
@@ -170,7 +170,7 @@
 <script src="{{asset('admin/sweetalert2/sweetalert2.all.js')}}"></script>
 <input type="hidden" id="base_url" value="{{url('/')}}">
 <!-- Start:: Navbar Search  -->
-<input type="hidden" class="search_route" value="{{ route('search-course.list') }}">
+{{--<input type="hidden" class="search_route" value="{{ route('search-course.list') }}">--}}
 <script src="{{ asset('frontend/assets/js/custom/search-course.js') }}"></script>
 <!-- End:: Navbar Search  -->
 <script>
@@ -216,8 +216,6 @@
 
 @stack('script')
 
-@toastr_js
-@toastr_render
 
 @if (@$errors->any())
     <script>

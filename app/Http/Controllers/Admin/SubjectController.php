@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Course_lecture;
 use App\Models\Course_lesson;
+use App\Models\Department;
+use App\Models\Instructor;
 use App\Models\Subject;
 use App\Tools\Repositories\Crud;
 use App\Traits\General;
@@ -48,7 +50,9 @@ class SubjectController extends Controller
     public function create()
     {
         //
-        return view('admin.subject.create');
+        $data['departments'] = Department::all();
+        $data['instructors'] = Instructor::where('status',1)->get();
+        return view('admin.subject.create',$data);
     }
 
     /**
@@ -60,7 +64,11 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         //
-        Subject::create(["name" => $request->subject_name]);
+        Subject::create([
+            "name" => $request->subject_name,
+            "department_id" => $request->department_id,
+            "instructor_id" => $request->instructor_id,
+        ]);
         return redirect()->route('admin.subject.index');
     }
 
@@ -84,8 +92,10 @@ class SubjectController extends Controller
     public function edit($id)
     {
         //
+        $data['departments'] = Department::all();
         $subject = Subject::find($id);
-        return view('admin.subject.edit',compact('subject'));
+        $data['instructors'] = Instructor::where('status',1)->get();
+        return view('admin.subject.edit',$data,compact('subject'));
     }
 
     /**
@@ -98,6 +108,13 @@ class SubjectController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $subject = Subject::find($id);
+        $subject->update([
+            "name" => $request->subject_name,
+            "department_id" => $request->department_id,
+            "instructor_id" => $request->instructor_id,
+            ]);
+        return redirect()->route('admin.subject.index');
     }
 
     /**
