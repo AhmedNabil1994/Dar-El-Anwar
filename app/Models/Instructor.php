@@ -53,6 +53,11 @@ class Instructor extends Authenticatable
         return $this->belongsTo(State::class, 'state_id');
     }
 
+    public function subject()
+    {
+        return $this->hasMany(Subject::class);
+    }
+
     public function certificates()
     {
         return $this->hasMany(Instructor_certificate::class, 'instructor_id');

@@ -23,39 +23,71 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="filter_department">{{trans("website.department")}}:</label>
-                    <select class="form-control" id="filter_department">
+            <form method="get" action="{{route('student.index')}}" class="row">
+                <div class="row">
+                    <h1>{{trans("website.filters")}}</h1>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByLevel">{{trans("website.level")}}:</label>
+                    <select class="form-control" name="filterByLevel">
                         <option value="">{{trans("website.all")}}</option>
-                        <option value="Computer Science">{{trans("website.computer_science")}}</option>
-                        <option value="Engineering">{{trans("website.engineering")}}</option>
-                        <option value="Business Administration">{{trans("website.business_adminstration")}}</option>
+
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label for="filter_level">{{trans("website.level")}}:</label>
-                    <select class="form-control" id="filter_level">
+                <div class="col-md-3 m-3">
+                    <label for="filterByJoining">{{trans("website.status")}}:</label>
+                    <select class="form-control" name="filterByJoining">
                         <option value="">{{trans("website.all")}}</option>
-                        <option value="Freshman">{{trans("website.freshman")}}</option>
-                        <option value="Sophomore">{{trans("website.sophomore")}}</option>
-                        <option value="Junior">{{trans("website.junior")}}</option>
-                        <option value="Senior">{{trans("website.senior")}}</option>
+                        <option value="2" {{request('filterByJoining') == 2? 'selected' : ''}}>{{trans("website.active")}}</option>
+                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>{{trans("website.suspend")}}</option>
+                        <option value="3" {{request('filterByJoining') == 3? 'selected' : ''}}>{{trans("website.excluded")}}</option>
+                        <option value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>{{trans("website.converted")}}</option>
+                        <option value="5" {{request('filterByJoining') == 5? 'selected' : ''}}>{{trans("website.joining")}}</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label for="filter_status">{{trans("website.status")}}:</label>
-                    <select class="form-control" id="filter_status">
-                        <option value="">{{trans("website.all")}}</option>
-                        <option value="Enrolled">{{trans("website.enrolled")}}</option>
-                        <option value="Suspended">{{trans("website.suspended")}}</option>
-                        <option value="Graduated">{{trans("website.graduated")}}</option>
+                <div class="col-md-3 m-3">
+                    <label for="filterByGender">{{trans("website.gender")}}:</label>
+                    <select class="form-control" name="filterByGender">
+                        <option value="">{{trans("website.both")}}</option>
+                        <option value="1" {{request('filterByGender') == 1? 'selected' : ''}}>{{trans("website.male")}}</option>
+                        <option value="2" {{request('filterByGender') == 2? 'selected' : ''}}>{{trans("website.female")}}</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <button id="btn_filter" class="btn btn-primary mt-4">{{trans("website.filter")}}</button>
+                <div class="col-md-1 m-3">
+                    <label for="filterByGender">{{trans("website.count")}} : </label>
+                    <input class="form-control" value="{{$count}}" disabled>
                 </div>
-            </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByPeriod">{{trans("website.period")}}:</label>
+                    <select class="form-control" name="filterByPeriod">
+                        <option value="">{{trans("website.both")}}</option>
+                        <option value="1" {{request('filterByPeriod') == 1? 'selected' : ''}}>{{trans('website.morning')}}</option>
+                        <option value="2" {{request('filterByPeriod') == 2? 'selected' : ''}}>{{trans('website.evining')}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByClass">{{trans("website.class")}}:</label>
+                    <select class="form-control" name="filterByClass">
+                        <option value="">{{trans("website.all")}}</option>
+                        @foreach($class_rooms as $class_room)
+                            <option value="{{$class_rooms->id}}" {{$class_rooms->id == request('filterByClass')? 'selected' : ''}}>{{$class_rooms->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 m-3">
+                    <label for="filterByBranch">{{trans("website.branch")}}:</label>
+                    <select class="form-control" name="filterByBranch">
+                        <option value="">{{trans("website.all")}}</option>
+                        @foreach($branches as $branch)
+                            <option value="{{$branch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="text-end mb-3 d-flex justify-content-end">
+                    <button type="submit" id="btn_filter" class="btn btn-primary btn-sm">{{trans("website.filter")}}</button>
+                    <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
+                </div>
+            </form>
 
             <div class="row">
                 <div class="col-md-12">
@@ -85,7 +117,7 @@
                                     <tr class="removable-item">
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
-                                        <td>{{ $student->branch_id }}</td>
+                                        <td>{{ $student->branch->name }}</td>
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->birthdate }}</td>
                                         <td>{{ $student->level }}</td>
@@ -199,5 +231,10 @@
             });
         });
 
+    </script>
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+                window.print();
+        });
     </script>
 @endpush

@@ -95,4 +95,6 @@ Route::match(array('GET','POST'),'/payment-notify/{id}', [PaymentApiController::
 
 Route::get('payment-cancel/{id}', [PaymentApiController::class, 'paymentCancel'])->name('paymentCancel');
 
-Route::get('/', [MainIndexController::class, 'index'])->name('main.index');
+Route::get('/', function (){
+    return view('frontend.contact');
+})->name('main.index');

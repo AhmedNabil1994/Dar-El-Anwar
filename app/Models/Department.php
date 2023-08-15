@@ -69,6 +69,11 @@ class Department extends Model
 
     public function getImg()
     {
-        return $this->upload->file_name;
+        return $this->upload?->file_name;
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
     }
 }
