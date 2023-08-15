@@ -90,5 +90,8 @@ return [
 "class_name"=>"أسم الفصل",
 "approved"=>"معتمد",
 "blocked"=>"محظور",
-"students"=>"الطلاب"
+"students"=>"الطلاب",
+"male"=>"ذكر",
+'female'=>"أنثى",
+
 ];

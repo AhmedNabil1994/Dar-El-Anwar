@@ -124,10 +124,10 @@
                                                     {{ $employee->email }}
                                                 </a>
                                             </td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
+                                            <td class="text-center">{{ $employee->attendance_time }}</td>
+                                            <td class="text-center">{{ $employee->departure_time }}</td>
                                             <td class="text-center">{{ $employee->work_days }}</td>
-                                            <td class="text-center"></td>
+                                            <td class="text-center">{{ $employee->management }}</td>
                                         <td>
                                             <div class="d-flex justify-content-between">
                                                 <a href="{{ route('employees.edit', $employee->id)}}" class="btn btn-primary" title="{{ __('Edit Details') }}">

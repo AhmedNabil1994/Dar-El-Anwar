@@ -15,8 +15,8 @@
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-{{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>--}}
-{{--                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All student') }}</li>--}}
+{{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>--}}
+{{--                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.students') }}</li>--}}
                                 </ul>
                             </nav>
                         </div>
@@ -70,17 +70,13 @@
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>
                                     <th>{{ trans('website.branch') }}</th>
-                                    <th>{{ trans('website.class_name') }}</th>
-                                    <th>{{ trans('website.joining_date') }}</th>
-                                    <th>{{ trans('website.birth_date') }}</th>
-                                    <th>{{ trans('website.phone_number') }}</th>
                                     <th>{{ trans('website.address') }}</th>
-                                    <th>{{ trans('website.gender') }}</th>
-                                    <th>{{ trans('website.city') }}</th>
+                                    <th>{{ trans('website.birth_date') }}</th>
+                                    <th>{{ trans('website.level') }}</th>
+                                    <th>{{ trans('website.class_name') }}</th>
                                     <th>{{ trans('website.period') }}</th>
-                                    <th>{{ trans('website.created_at') }}</th>
-                                    <th>{{ trans('website.updated_at') }}</th>
-                                    <th>{{ trans('website.status') }}</th>
+                                    <th>{{ trans('website.phone_number') }}</th>
+                                    <th>{{ trans('website.gender') }}</th>
                                     <th>{{ trans('website.actions') }}</th>
                                 </tr>
                                 </thead>
@@ -90,13 +86,10 @@
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->branch_id }}</td>
-                                        <td>{{ $student->classroom }}</td>
-                                        <td>{{ $student->joining_date }}</td>
-                                        <td>{{ $student->birthdate }}</td>
-                                        <td>{{ $student->phone_number }}</td>
                                         <td>{{ $student->address }}</td>
-                                        <td>{{ $student->gender === 1 ? __('Male') : __('Female') }}</td>
-                                        <td>{{ $student->getCity()->first()->city_name_en }}</td>
+                                        <td>{{ $student->birthdate }}</td>
+                                        <td>{{ $student->level }}</td>
+                                        <td>{{ $student->classroom }}</td>
                                         <td>
                                             @if($student->period === 1)
                                                 {{ __('Morning') }}
@@ -106,17 +99,8 @@
                                                 {{ __('Both') }}
                                             @endif
                                         </td>
-
-                                        <td>{{ $student->created_at }}</td>
-                                        <td>{{ $student->updated_at }}</td>
-
-                                        <td>
-                                            <span id="hidden_id" style="display: none">{{ $student->id }}</span>
-                                            <select name="status" class="status label-inline font-weight-bolder mb-1 badge badge-info">
-                                                <option value="1" @if($student->status == 1) selected @endif>{{ trans('website.approved') }}</option>
-                                                <option value="2" @if($student->status == 2) selected @endif>{{ trans('website.blocked') }}</option>
-                                            </select>
-                                        </td>
+                                        <td>{{ $student->phone_number }}</td>
+                                        <td>{{ $student->gender === 1 ? trans('website.male') : trans('website.female') }}</td>
 
                                         <td>
                                             <div class="action__buttons">

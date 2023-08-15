@@ -32,6 +32,7 @@ class Employee extends Model
         'image',
         'type',
         'status',
+        'level',
 
     ];
 
