@@ -9,7 +9,7 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-{{--                                <h2>{{ __('Students') }}</h2>--}}
+{{--                                <h2>{{ trans('website.students') }}</h2>--}}
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -25,63 +25,63 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label for="filter_department">Department:</label>
+                    <label for="filter_department">{{trans("website.department")}}:</label>
                     <select class="form-control" id="filter_department">
-                        <option value="">All</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Business Administration">Business Administration</option>
+                        <option value="">{{trans("website.all")}}</option>
+                        <option value="Computer Science">{{trans("website.computer_science")}}</option>
+                        <option value="Engineering">{{trans("website.engineering")}}</option>
+                        <option value="Business Administration">{{trans("website.business_adminstration")}}</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="filter_level">Level:</label>
+                    <label for="filter_level">{{trans("website.level")}}:</label>
                     <select class="form-control" id="filter_level">
-                        <option value="">All</option>
-                        <option value="Freshman">Freshman</option>
-                        <option value="Sophomore">Sophomore</option>
-                        <option value="Junior">Junior</option>
-                        <option value="Senior">Senior</option>
+                        <option value="">{{trans("website.all")}}</option>
+                        <option value="Freshman">{{trans("website.freshman")}}</option>
+                        <option value="Sophomore">{{trans("website.sophomore")}}</option>
+                        <option value="Junior">{{trans("website.junior")}}</option>
+                        <option value="Senior">{{trans("website.senior")}}</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label for="filter_status">Status:</label>
+                    <label for="filter_status">{{trans("website.status")}}:</label>
                     <select class="form-control" id="filter_status">
-                        <option value="">All</option>
-                        <option value="Enrolled">Enrolled</option>
-                        <option value="Suspended">Suspended</option>
-                        <option value="Graduated">Graduated</option>
+                        <option value="">{{trans("website.all")}}</option>
+                        <option value="Enrolled">{{trans("website.enrolled")}}</option>
+                        <option value="Suspended">{{trans("website.suspended")}}</option>
+                        <option value="Graduated">{{trans("website.graduated")}}</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button id="btn_filter" class="btn btn-primary mt-4">Filter</button>
+                    <button id="btn_filter" class="btn btn-primary mt-4">{{trans("website.filter")}}</button>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('All Students') }}</h2>
+                    <div class="bg-style mb-30 " style="overflow-x:auto;">
+                        <div class="item-title d-flex justify-content-between ms-3 my-2">
+                            <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                        <div class="customers__table " >
+                            <table id="" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('Code') }}</th>
-                                    <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Class Room') }}</th>
-                                    <th>{{ __('Joining Date') }}</th>
-                                    <th>{{ __('Birth Date') }}</th>
-                                    <th>{{ __('Phone Number') }}</th>
-                                    <th>{{ __('Address') }}</th>
-                                    <th>{{ __('Gender') }}</th>
-                                    <th>{{ __('City') }}</th>
-                                    <th>{{ __('Branch ID') }}</th>
-                                    <th>{{ __('Period') }}</th>
-                                    <th>{{ __('Created At') }}</th>
-                                    <th>{{ __('Updated At') }}</th>
-                                    <th>{{ __('Status') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ trans('website.code') }}</th>
+                                    <th>{{ trans('website.name') }}</th>
+                                    <th>{{ trans('website.branch') }}</th>
+                                    <th>{{ trans('website.class_name') }}</th>
+                                    <th>{{ trans('website.joining_date') }}</th>
+                                    <th>{{ trans('website.birth_date') }}</th>
+                                    <th>{{ trans('website.phone_number') }}</th>
+                                    <th>{{ trans('website.address') }}</th>
+                                    <th>{{ trans('website.gender') }}</th>
+                                    <th>{{ trans('website.city') }}</th>
+                                    <th>{{ trans('website.period') }}</th>
+                                    <th>{{ trans('website.created_at') }}</th>
+                                    <th>{{ trans('website.updated_at') }}</th>
+                                    <th>{{ trans('website.status') }}</th>
+                                    <th>{{ trans('website.actions') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +89,7 @@
                                     <tr class="removable-item">
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
+                                        <td>{{ $student->branch_id }}</td>
                                         <td>{{ $student->classroom }}</td>
                                         <td>{{ $student->joining_date }}</td>
                                         <td>{{ $student->birthdate }}</td>
@@ -96,7 +97,6 @@
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->gender === 1 ? __('Male') : __('Female') }}</td>
                                         <td>{{ $student->getCity()->first()->city_name_en }}</td>
-                                        <td>{{ $student->branch_id }}</td>
                                         <td>
                                             @if($student->period === 1)
                                                 {{ __('Morning') }}
@@ -113,8 +113,8 @@
                                         <td>
                                             <span id="hidden_id" style="display: none">{{ $student->id }}</span>
                                             <select name="status" class="status label-inline font-weight-bolder mb-1 badge badge-info">
-                                                <option value="1" @if($student->status == 1) selected @endif>{{ __('Approved') }}</option>
-                                                <option value="2" @if($student->status == 2) selected @endif>{{ __('Blocked') }}</option>
+                                                <option value="1" @if($student->status == 1) selected @endif>{{ trans('website.approved') }}</option>
+                                                <option value="2" @if($student->status == 2) selected @endif>{{ trans('website.blocked') }}</option>
                                             </select>
                                         </td>
 
@@ -123,11 +123,11 @@
 {{--                                                <a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}
 {{--                                                    <i class="fa fa-eye"></i> View--}}
 {{--                                                </a>--}}
-                                                <a href="{{route('student.edit', [$student->id])}}" class="btn btn-primary" title="Edit Details">
-                                                    <i class="fa fa-edit"></i> Edit
+                                                <a  href="{{route('student.edit', [$student->id])}}" class="btn btn-primary me-2" title="Edit Details">
+                                                    <i class="fa fa-edit"></i> 
                                                 </a>
                                                 <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_{{$student->id}}" title="Delete">
-                                                    <i class="fa fa-trash"></i> Delete
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                                 <form action="{{route('student.delete', [$student->id])}}" method="post" id="delete_row_form_{{ $student->id }}">
                                                     {{ method_field('DELETE') }}
