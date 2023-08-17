@@ -34,6 +34,26 @@ class ContactUsController extends Controller
         return view('admin.contact.index', $data);
     }
 
+    public function contactUsInbox()
+    {
+        return view('admin.contact.inbox');
+    }
+    public function contactUsSent()
+    {
+        return view('admin.contact.sent');
+    }
+
+    public function contactUsConversations()
+    {
+        return view('admin.contact.conversations');
+    }
+
+    public function contactUsMessages()
+    {
+        return view('admin.contact.messages');
+    }
+
+
     public function contactUsDelete($id)
     {
         if (!Auth::user()->can('manage_contact')) {

@@ -24,7 +24,6 @@
             </a>
         </li>
 
-
         @can('manage-admins')
             <li class="{{ @$navUserParentActiveClass }}">
                 <a class="has-arrow" href="#">
@@ -179,8 +178,6 @@
             </li>
         @endcan
 
-
-
         @canany(['manage_course', 'pending_course', 'hold_course', 'approved_course', 'all_course'])
             <li>
                 <a class="has-arrow" href="#">
@@ -277,7 +274,6 @@
             </li>
         @endcanany
 
-
         @canany(['manage_course_reference', 'manage_course_category', 'manage_course_subcategory', 'manage_course_tag', 'manage_course_language', 'manage_course_difficulty_level'])
             <li class="{{ @$navCourseActiveClass }}">
                 <a class="has-arrow" href="#">
@@ -342,8 +338,7 @@
             </li>
         @endcanany
 
-
-    @canany(['manage_course', 'all_course'])
+        @canany(['manage_course', 'all_course'])
             <li>
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
@@ -375,6 +370,43 @@
                 </ul>
             </li>
         @endcanany
+
+
+            <li>
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-bus"></i>
+                    <span>{{__('Contact Us')}}</span>
+                </a>
+                <ul>
+                    <li class="{{ active_if_full_match('contact_us/inbox') }}">
+                        <a href="{{route('admin.contact_us.contactUsInbox')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('Inbox')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_if_full_match('contact_us/sent') }}">
+                        <a href="{{route('admin.contact_us.contactUsSent')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Sent') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_if_full_match('contact_us/conversations') }}">
+                        <a href="{{route('admin.contact_us.contactUsConversations')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Conversations') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_if_full_match('contact_us/messages') }}">
+                        <a href="{{route('admin.contact_us.contactUsMessages')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Messages') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
                         {{--                    @can('manage_course_subcategory')--}}
                         {{--                        <li class="{{ active_if_match('admins/subcategory') }}">--}}

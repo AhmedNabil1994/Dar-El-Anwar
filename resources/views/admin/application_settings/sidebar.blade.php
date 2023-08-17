@@ -1,5 +1,5 @@
 <div class="email__sidebar bg-style">
-    <div class="sidebar__item">
+    <div class="sidebar__item"  >
         <ul class="sidebar__mail__nav">
             <h2>{{__('Global Settings')}}</h2>
 
@@ -382,4 +382,5 @@
 
         </ul>
     </div>
+
 </div>
