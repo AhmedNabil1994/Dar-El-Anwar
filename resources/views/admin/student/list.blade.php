@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-{{--                                <h2>{{ __('Students') }}</h2>--}}
+{{--                                <h2>{{ trans('website.students') }}</h2>--}}
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-{{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>--}}
-{{--                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All student') }}</li>--}}
+{{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>--}}
+{{--                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.students') }}</li>--}}
                                 </ul>
                             </nav>
                         </div>
@@ -25,94 +25,91 @@
             </div>
             <form method="get" action="{{route('student.index')}}" class="row">
                 <div class="row">
-                    <h1>Filters</h1>
+                    <h1>{{trans("website.filters")}}</h1>
                 </div>
                 <div class="col-md-3 m-3">
-                    <label for="filterByLevel">Level:</label>
+                    <label for="filterByLevel">{{trans("website.level")}}:</label>
                     <select class="form-control" name="filterByLevel">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
 
                     </select>
                 </div>
                 <div class="col-md-3 m-3">
-                    <label for="filterByJoining">Status:</label>
+                    <label for="filterByJoining">{{trans("website.status")}}:</label>
                     <select class="form-control" name="filterByJoining">
-                        <option value="">All</option>
-                        <option value="2" {{request('filterByJoining') == 2? 'selected' : ''}}>Active</option>
-                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>Suspend</option>
-                        <option value="3" {{request('filterByJoining') == 3? 'selected' : ''}}>Excluded</option>
-                        <option value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>Converted</option>
-                        <option value="5" {{request('filterByJoining') == 5? 'selected' : ''}}>Joining</option>
+                        <option value="">{{trans("website.all")}}</option>
+                        <option value="2" {{request('filterByJoining') == 2? 'selected' : ''}}>{{trans("website.active")}}</option>
+                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>{{trans("website.suspend")}}</option>
+                        <option value="3" {{request('filterByJoining') == 3? 'selected' : ''}}>{{trans("website.excluded")}}</option>
+                        <option value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>{{trans("website.converted")}}</option>
+                        <option value="5" {{request('filterByJoining') == 5? 'selected' : ''}}>{{trans("website.joining")}}</option>
                     </select>
                 </div>
                 <div class="col-md-3 m-3">
-                    <label for="filterByGender">Gender:</label>
+                    <label for="filterByGender">{{trans("website.gender")}}:</label>
                     <select class="form-control" name="filterByGender">
-                        <option value="">Both</option>
-                        <option value="1" {{request('filterByGender') == 1? 'selected' : ''}}>Male</option>
-                        <option value="2" {{request('filterByGender') == 2? 'selected' : ''}}>Female</option>
+                        <option value="">{{trans("website.both")}}</option>
+                        <option value="1" {{request('filterByGender') == 1? 'selected' : ''}}>{{trans("website.male")}}</option>
+                        <option value="2" {{request('filterByGender') == 2? 'selected' : ''}}>{{trans("website.female")}}</option>
                     </select>
                 </div>
                 <div class="col-md-1 m-3">
-                    <label for="filterByGender">Count : </label>
+                    <label for="filterByGender">{{trans("website.count")}} : </label>
                     <input class="form-control" value="{{$count}}" disabled>
                 </div>
                 <div class="col-md-3 m-3">
-                    <label for="filterByPeriod">Period:</label>
+                    <label for="filterByPeriod">{{trans("website.period")}}:</label>
                     <select class="form-control" name="filterByPeriod">
-                        <option value="">Both</option>
-                        <option value="1" {{request('filterByPeriod') == 1? 'selected' : ''}}>Morning</option>
-                        <option value="2" {{request('filterByPeriod') == 2? 'selected' : ''}}>Evening</option>
+                        <option value="">{{trans("website.both")}}</option>
+                        <option value="1" {{request('filterByPeriod') == 1? 'selected' : ''}}>{{trans('website.morning')}}</option>
+                        <option value="2" {{request('filterByPeriod') == 2? 'selected' : ''}}>{{trans('website.evining')}}</option>
                     </select>
                 </div>
                 <div class="col-md-3 m-3">
-                    <label for="filterByClass">Class:</label>
+                    <label for="filterByClass">{{trans("website.class")}}:</label>
                     <select class="form-control" name="filterByClass">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($class_rooms as $class_room)
                             <option value="{{$class_rooms->id}}" {{$class_rooms->id == request('filterByClass')? 'selected' : ''}}>{{$class_rooms->name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-3 m-3">
-                    <label for="filterByBranch">Branch:</label>
+                    <label for="filterByBranch">{{trans("website.branch")}}:</label>
                     <select class="form-control" name="filterByBranch">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($branches as $branch)
                             <option value="{{$branch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 mx-3 mb-3">
-                    <button id="btn_filter" class="btn btn-primary mt-4">Filter</button>
+                <div class="text-end mb-3 d-flex justify-content-end">
+                    <button type="submit" id="btn_filter" class="btn btn-primary btn-sm">{{trans("website.filter")}}</button>
+                    <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>
             </form>
-            <div>
-                <button class="btn btn-secondary" id="printButton">Print</button>
-            </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('All Students') }}</h2>
+                    <div class="bg-style mb-30 " style="overflow-x:auto;">
+                        <div class="item-title d-flex justify-content-between ms-3 my-2">
+                            <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                        <div class="customers__table " >
+                            <table id="" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('Code') }}</th>
-                                    <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Class Room') }}</th>
-                                    <th>{{ __('Joining Date') }}</th>
-                                    <th>{{ __('Birth Date') }}</th>
-                                    <th>{{ __('Phone Number') }}</th>
-                                    <th>{{ __('Address') }}</th>
-                                    <th>{{ __('Gender') }}</th>
-                                    <th>{{ __('Level') }}</th>
-                                    <th>{{ __('Branch') }}</th>
-                                    <th>{{ __('Period') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ trans('website.code') }}</th>
+                                    <th>{{ trans('website.name') }}</th>
+                                    <th>{{ trans('website.branch') }}</th>
+                                    <th>{{ trans('website.address') }}</th>
+                                    <th>{{ trans('website.birth_date') }}</th>
+                                    <th>{{ trans('website.level') }}</th>
+                                    <th>{{ trans('website.class_name') }}</th>
+                                    <th>{{ trans('website.period') }}</th>
+                                    <th>{{ trans('website.phone_number') }}</th>
+                                    <th>{{ trans('website.gender') }}</th>
+                                    <th>{{ trans('website.actions') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -120,14 +117,11 @@
                                     <tr class="removable-item">
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
-                                        <td>{{ $student->classroom }}</td>
-                                        <td>{{ $student->joining_date }}</td>
-                                        <td>{{ $student->birthdate }}</td>
-                                        <td>{{ $student->phone_number }}</td>
-                                        <td>{{ $student->address }}</td>
-                                        <td>{{ $student->gender === 1 ? __('Male') : __('Female') }}</td>
-                                        <td>{{ $student->level }}</td>
                                         <td>{{ $student->branch->name }}</td>
+                                        <td>{{ $student->address }}</td>
+                                        <td>{{ $student->birthdate }}</td>
+                                        <td>{{ $student->level }}</td>
+                                        <td>{{ $student->classroom }}</td>
                                         <td>
                                             @if($student->period === 1)
                                                 {{ __('Morning') }}
@@ -137,16 +131,19 @@
                                                 {{ __('Both') }}
                                             @endif
                                         </td>
+                                        <td>{{ $student->phone_number }}</td>
+                                        <td>{{ $student->gender === 1 ? trans('website.male') : trans('website.female') }}</td>
+
                                         <td>
                                             <div class="action__buttons">
 {{--                                                <a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}
 {{--                                                    <i class="fa fa-eye"></i> View--}}
 {{--                                                </a>--}}
-                                                <a href="{{route('student.edit', [$student->id])}}" class="btn btn-primary" title="Edit Details">
-                                                    <i class="fa fa-edit"></i> Edit
+                                                <a  href="{{route('student.edit', [$student->id])}}" class="btn btn-primary me-2" title="Edit Details">
+                                                    <i class="fa fa-edit"></i> 
                                                 </a>
                                                 <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_{{$student->id}}" title="Delete">
-                                                    <i class="fa fa-trash"></i> Delete
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                                 <form action="{{route('student.delete', [$student->id])}}" method="post" id="delete_row_form_{{ $student->id }}">
                                                     {{ method_field('DELETE') }}

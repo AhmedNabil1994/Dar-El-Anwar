@@ -59,8 +59,8 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center" >{{trans("website.instructor_name")}}</th>
-                                            <th class="text-center" >{{trans("website.start_date")}}</th>
-                                            <th class="text-center" >{{trans("website.end_date")}}</th>
+                                            <th class="text-center" >{{trans("website.starting_date")}}</th>
+                                            <th class="text-center" >{{trans("website.ending_date")}}</th>
                                             <th class="text-center" >{{trans("website.status")}}</th>
                                             <th class="text-center" >{{trans("website.reason")}}</th>
                                         </tr>
@@ -72,8 +72,8 @@
                                             <td class="text-center">{{ $attendance_leave->start_date }}</td>
                                             <td class="text-center">{{ $attendance_leave->end_date }}</td>
                                             <td class="text-center">{{ $attendance_leave->status }}</td>
-                                            <td class="text-center">{{ $attendance_leave->reason }}</td>
-                                        </tr>
+
+
                                 @endforeach
                                 </tbody>
                             </table>
