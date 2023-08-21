@@ -1,0 +1,113 @@
+.chat .chat__sidebar
+{
+  background: #eee;
+  border-radius: 0.5rem;
+  padding: 1rem 0.5rem;
+  height: 98%;
+
+}
+.chat .chat__header h2
+{
+  font-size: 2.25rem;
+  margin-block: 1.5rem;
+}
+
+.chat .chat__sidebar h6 
+{
+  font-size: 2rem !important;
+  font-weight: bold;
+  color: #242323;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #cacaca;
+  padding-bottom: 0.5rem;
+}
+
+.chat .chat__sidebar a
+{
+  display: block;
+  margin-bottom: 1rem;
+  color: #2d2d2d;
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: flex;
+}
+
+.chat .chat__sidebar a img
+{
+  margin-inline-end: 1rem;
+  height: 25px;
+  width: 25px;
+  object-fit: cover;
+}
+.chat__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  
+}
+
+
+.chat__content .chat__filters .show-filter{
+  display: flex;
+  justify-content: end;
+
+}
+
+.chat__content .chat__filters .show-filter a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline-start: 1rem;
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+}
+.chat__content .chat__filters .show-filter img{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+.chat__content .chat__filters .show-filter button{
+  margin-inline-start: 1rem;
+}
+
+.chat__content .chat__filters{
+  padding-block: 1rem;
+}
+
+.chat__content .chat__box{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+
+.chat .chat__txt{
+  border: 1px solid #c1c1c1;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  flex: 1;
+  overflow-y: scroll;
+  min-height: 400px;
+  background: white;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.chat .chat__footer{
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+}

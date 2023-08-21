@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('admin/styles/main.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/admin-extra.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/modules/employee.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/css/modules/chat.css')}}">
     <link href="{{asset('common/css/select2.css')}}" rel="stylesheet">
     @toastr_css
 
