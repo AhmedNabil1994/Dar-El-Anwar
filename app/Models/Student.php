@@ -19,9 +19,19 @@ class Student extends Authenticatable
         return $this->hasOne(ParentInfo::class,'student_id');
     }
 
+    public function class_room()
+    {
+        return $this->belongsTo(ClassRoom::class,'classroom');
+    }
+
     public function is_absence()
     {
         return $this->hasMany(Absence::class,'student');
+    }
+
+    public function dept()
+    {
+        return $this->belongsTo(Department::class,'department_id');
     }
 
     public function branch()
@@ -71,5 +81,10 @@ class Student extends Authenticatable
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class,'subject_id');
     }
 }
