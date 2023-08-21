@@ -58,13 +58,37 @@ class AbsenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        $students = Student::query();
-        $instructors = Instructor::all();
-        $students = $students->paginate(10);
-        return view('admin.absence.list',compact('students','instructors'));
+        $absences = Absence::query()->with('students')->orderBy('created_at','DESC');
+
+        if($request->dateFrom || $request->dateTo)
+            $absences->whereBetween('created_at', [$request->dateFrom, $request->dateTo])->get();
+        if($request->filterByDept)
+            $absences->where('department',$request->filterByDept);
+        if($request->filterByClass)
+            $absences->where('class',$request->filterByClass);
+        if($request->filterBySubject)
+            $absences->where('subject_id',$request->filterBySubject);
+        if($request->filterByInst)
+            $absences->where('teacher',$request->filterByInst);
+        if($request->filterByCode)
+            $absences->whereHas('students', function ($query) use ($request) {
+                $query->where('code', $request->filterByCode);
+            });
+        if($request->filterByStudent)
+            $absences->where('student',$request->filterByStudent);
+
+        $instructors = Instructor::whereStatus(1)->get();
+        $data['departments'] = Department::all();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['subjects'] = Subject::all();
+        $data['filter_students'] = Student::whereStatus(1)->get();
+        $data['codes'] = Student::whereStatus(1)->pluck('code');
+        $absences = $absences->paginate(25);
+
+        return view('admin.absence.list',$data,compact('absences','instructors'));
     }
 
     /**

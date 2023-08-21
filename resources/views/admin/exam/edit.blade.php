@@ -49,8 +49,8 @@
                                                 id="course_id"
                                                 name="course_id" >
                                             <option value="">Select Course Name</option>
-                                            @foreach($courses as $course)
-                                                <option value="{{$course->id}}" {{$exam->course_id == $course->id ? "selected":""}}>{{$course->title}}</option>
+                                            @foreach($subjects as $subject)
+                                                <option value="{{$subject->id}}" {{$exam->course_id == $subject->id ? "selected":""}}>{{$subject->name}}</option>
                                             @endforeach
                                         </select>
 

@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AffiliateController;
+use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CertificateController;
@@ -192,8 +194,22 @@ Route::prefix('course')->group(function () {
         Route::get('/messages', [ContactUsController::class, 'contactUsMessages'])->name('admin.contact_us.contactUsMessages');
     });
 
-Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');
-Route::post('course-upload-rules/store', [CourseController::class, 'courseUploadRuleStore'])->name('course-rules.store');
+    Route::prefix('goals')->group(function () {
+        Route::get('/', [GoalController::class, 'index'])->name('admin.goals.index');
+        Route::get('create', [GoalController::class, 'create'])->name('admin.goals.create');
+        Route::post('store', [GoalController::class, 'store'])->name('admin.goals.store');
+        Route::get('edit/{id}', [GoalController::class, 'edit'])->name('admin.goals.edit');
+        Route::post('update/{id}', [GoalController::class, 'update'])->name('admin.goals.update');
+        Route::get('delete/{id}', [GoalController::class, 'destroy'])->name('admin.goals.delete');
+    });
+
+    Route::get('/', [AssignmentController::class, 'index']);
+    Route::get('/assignments/{department}', [AssignmentController::class, 'showClasses']);
+    Route::get('/assignments/{department}/{class}', [AssignmentController::class, 'showTeachers']);
+
+
+    Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');
+    Route::post('course-upload-rules/store', [CourseController::class, 'courseUploadRuleStore'])->name('course-rules.store');
 
 
 Route::prefix('instructor')->group(function () {

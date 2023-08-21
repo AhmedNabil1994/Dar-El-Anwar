@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Question_option;
+use App\Models\Subject;
 use App\Tools\Repositories\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class ExamController extends Controller
     {
         $data['title'] = 'Create New Quiz';
         $data['navCourseActiveClass'] = 'active';
-        $data['courses'] = $this->courseModel->getAll();
+        $data['subjects'] = Subject::all();
         return view('admin.exam.create', $data);
 
     }
@@ -45,13 +46,11 @@ class ExamController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->all());
         $data_exam = [
             'course_id' => $request->course_id,
             'name' => $request->exam_name,
             'status' => 1,
         ];
-
 
         $exam = $this->model->create($data_exam);
 
@@ -71,7 +70,7 @@ class ExamController extends Controller
         $data['exam'] = Exam::find($uuid);
         $data['title'] = 'Create New Quiz';
         $data['navCourseActiveClass'] = 'active';
-        $data['courses'] = $this->courseModel->getAll();
+        $data['subjects'] = Subject::all();
         return view('admin.exam.edit', $data);
     }
 
