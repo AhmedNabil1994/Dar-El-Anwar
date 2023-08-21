@@ -23,26 +23,26 @@
                     </div>
                 </div>
             </div> -->
-            <div class="chat" style="min-height: 95vh;height: auto;">
+            <div class="chat chat__wrapper" style="min-height: 95vh;height: auto;">
               <header class="chat__header">
                 <h2 class="text-center">
                   Contact Us / Conversation
                 </h2>
               </header>
 
-              <div class="row" style="min-height: 95%;height: auto;">
-                <div class="col-md-3 ">
+              <div class="row">
+                <div class="col-md-3">
               <!-- Start chat sidebar -->
-              <div class="chat__sidebar border px-4 mt-4">
+              <div class="chat__sidebar border px-4">
                 <h6>
                  Conversation 
                 </h6>
                 <ul class="chat__list">
                   <li>
                     <a href="#">
-                            <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/teacher.png" alt="archived">
-                      
-                    my Teachers</a>
+                    <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/teacher.png" alt="archived">
+                    my Teachers
+                  </a>
                   </li>
                   <li>
                     <a href="#">
@@ -56,17 +56,31 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                  <a href="#">
                     <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/chat.png" alt="archived">
-                    Chats</a>
+                    Chats
+                  </a>
                   </li>
                 </ul>
               </div>
               <!-- end chat sidebar -->
             </div>
-            <div class="col-9 border" style="height: 100%;">
-              <div class="border ">
-              Conversation
+            <div class="col-9">
+              <div class="chat__main-content" >
+                <div class="messages-field">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, eveniet!
+                </div>
+                <form action="" class="send-message">
+                  <input type="text" vlaue="" placeholder="Insert your message">
+                  <div class="send-message__controller">
+                    <div class="icon">
+                      <img class="img-responsive" src="{{ asset('admin') }}/images/messages/docs.png" alt="upload files">
+                    </div>
+                    <div class="icon">
+                      <img class="img-responsive" src="{{ asset('admin') }}/images/messages/send-msg.png" alt="send">
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
               </div>
