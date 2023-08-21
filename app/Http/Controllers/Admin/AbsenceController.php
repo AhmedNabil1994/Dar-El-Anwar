@@ -24,7 +24,7 @@ class AbsenceController extends Controller
     public function index(Request $request)
     {
 //
-        $absences = Absence::query()->with('student')->orderBy('id','DESC');
+        $absences = Absence::query()->with('students')->orderBy('created_at','DESC');
 
         if($request->dateFrom || $request->dateTo)
             $absences->whereBetween('created_at', [$request->dateFrom, $request->dateTo])->get();
@@ -36,8 +36,10 @@ class AbsenceController extends Controller
             $absences->where('subject_id',$request->filterBySubject);
         if($request->filterByInst)
             $absences->where('teacher',$request->filterByInst);
-//        if($request->filterByCode)
-//            $absences->where('code',$request->filterByCode);
+        if($request->filterByCode)
+            $absences->whereHas('students', function ($query) use ($request) {
+                $query->where('code', $request->filterByCode);
+            });
         if($request->filterByStudent)
             $absences->where('student',$request->filterByStudent);
 
@@ -47,20 +49,10 @@ class AbsenceController extends Controller
         $data['subjects'] = Subject::all();
         $data['filter_students'] = Student::whereStatus(1)->get();
         $data['codes'] = Student::whereStatus(1)->pluck('code');
-        $students = $absences->pluck('student');
-        // Create a new paginator instance manually
-        $currentPage = Paginator::resolveCurrentPage('page'); // Get the current page from the request
-        $students = new Paginator(
-            $students->forPage($currentPage, 25), // Paginate the student data
-            $students->count(), // Total number of items
-            25, // Items per page
-            $currentPage // Current page
-        );
+        $absences = $absences->paginate(25);
 
-
-        return view('admin.absence.view',$data,compact('students','instructors'));
+        return view('admin.absence.view',$data,compact('absences','instructors'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

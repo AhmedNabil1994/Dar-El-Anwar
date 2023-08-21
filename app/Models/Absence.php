@@ -14,9 +14,21 @@ class Absence extends Model
     {
         return $this->belongsTo(Instructor::class,'teacher');
     }
-    public function student()
+    public function students()
     {
         return $this->belongsTo(Student::class,'student');
     }
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class,'subject_id');
+    }
+    public function dept()
+    {
+        return $this->belongsTo(Department::class,'department');
+    }
 
+    public function class_room()
+    {
+        return $this->belongsTo(ClassRoom::class,'class');
+    }
 }

@@ -124,24 +124,33 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach($students as $student)
+                                @foreach($absences as $absence)
                                     <tr class="removable-item">
-                                        <td>{{\Carbon\Carbon::today()->format('d/m/Y')}}</td>
-                                        <td>{{$student->code}}</td>
-                                        <td>{{$student->name}}</td>
-                                        <td>{{$student->department}}</td>
-                                        <td>{{$student->classroom}}</td>
-                                        <td>ss</td>
+                                        <td>{{\Carbon\Carbon::parse($absence->created_at)->format('d/m/Y')}}</td>
+                                        <td>{{$absence->students->code}}</td>
+                                        <td>{{$absence->students->name}}</td>
+                                        <td>{{$absence->dept?->name}}</td>
+                                        <td>{{$absence->class_room?->name}}</td>
+                                        <td>{{$absence->subject?->name}}</td>
                                         <td>
 
-                                            {{is_null($student->is_absence->first()) ? " ": $student->is_absence->first()->instructor->employee->name}}
+                                            {{ $absence->instructor->employee->name}}
                                         </td>
-                                        <td>{{is_null($student->is_absence->first()) ? "Not Bone" : "Done"}}</td>
-                                        <td>{{is_null($student->is_absence->first()) ? "" : $student->is_absence->first()->created_at->format('d/m/y')}}</td>
+                                        <td>
+{{--                                            {{is_null($absence->student->is_absence->first()) ? "Not Bone" : "Done"}}--}}
+                                        </td>
+                                        <td>
+{{--                                            {{is_null($absence->student->is_absence->first()) ? "" : $student->is_absence->first()->created_at->format('d/m/y')}}--}}
+                                        </td>
                                         <td>
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                                     style="width: {{$student->is_absence->count()*100/10 }};" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span>{{$student->is_absence->count()*100/10 }}%</span></div>
+                                                     style="width:
+                                                     {{$absence->students->is_absence->count()*100/10 }};
+                                                     "
+                                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span>
+                                                        {{$absence->students->is_absence->count()*100/10 }}%
+                                                    </span></div>
 
                                             </div>
 
@@ -151,7 +160,7 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{$students->appends(request()->input())->links()}}
+                                {{$absences->appends(request()->input())->links()}}
                             </div>
                         </div>
                     </div>
