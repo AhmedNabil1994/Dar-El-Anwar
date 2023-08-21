@@ -110,6 +110,12 @@
                                     <th>{{ trans('website.phone_number') }}</th>
                                     <th>{{ trans('website.gender') }}</th>
                                     <th>{{ trans('website.actions') }}</th>
+                                    <th>{{ trans('website.archived') }}</th>
+                                    <th>{{ trans('website.under_enrollment') }}</th>
+                                    <th>{{ trans('website.subscriptions') }}</th>
+                                    <th>{{ trans('website.notes') }}</th>
+                                    <th>{{ trans('website.meals') }}</th>
+                                    <th>{{ trans('website.bills') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -136,9 +142,9 @@
 
                                         <td>
                                             <div class="action__buttons">
-{{--                                                <a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}
-{{--                                                    <i class="fa fa-eye"></i> View--}}
-{{--                                                </a>--}}
+                                                {{--<a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}
+                                                {{--<i class="fa fa-eye"></i> View--}}
+                                                {{--</a>--}}
                                                 <a  href="{{route('student.edit', [$student->id])}}" class="btn btn-primary me-2" title="Edit Details">
                                                     <i class="fa fa-edit"></i> 
                                                 </a>
@@ -150,6 +156,36 @@
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 </form>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img style="width:50px" src="{{asset('admin/images/students/archived.png')}}" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img style="width:50px" src="{{asset('admin/images/students/under-enrollment.png')}}" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img style="width:50px" src="{{asset('admin/images/students/subscription.png')}}" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img style="width:50px" src="{{asset('admin/images/students/notes.png')}}" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img style="width:50px" src="{{asset('admin/images/students/meals.png')}}" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img style="width:50px" src="{{asset('admin/images/students/bills.png')}}" alt="edit">
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

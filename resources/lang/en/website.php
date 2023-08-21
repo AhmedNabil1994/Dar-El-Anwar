@@ -128,13 +128,24 @@ return [
 "father"=> "الأب",
 "mother"=> "الأم",
 "guardian_name"=> "أسم ولي الأمر",
+"guardian_email"=> "أيميل ولي الأمر",
 "guardian_whatsapp_number"=> "رقم واتسأب ولي الأمر",
 "profession"=> "المهنة",
 "parents_social_status"=> "الحالة الأجتماعية للأباء",
 "birth_certificate"=> "شهادة الميلاد",
 "another"=> "أخرى",
 "save"=> "حفظ",
-"parents_information"=> "معلومات الأباء", 
-"image"=> "الصورة"
+"parents_information"=> "معلومات عن الأباء", 
+"image"=> "الصورة",
+"under_enrollment"=> "قيد الإلتحاق",
+"subscriptions"=> "إشتراكات",
+"notes"=> "ملاحظات",
+"meals"=> "وجبات",
+"bills"=> "فواتير",
+"id_number"=> "الكود",
+"receiving_officer"=> "موظف الإستقبال",
+"how_know_about_us"=> "كيف تعرفت علينا؟",
+"followup_officer"=> "موظف المتابعة",
+"another_information"=> "معلومات أخرى"
 ];
 

@@ -35,7 +35,6 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="upload-img-box mb-25">
-                                            <img src="">
                                             <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this)">
                                             <div class="upload-img-box-icon">
                                                 <i class="fa fa-camera"></i>
@@ -51,7 +50,7 @@
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.name")}} <span class="text-danger">*</span></label>
-                                        <input type="text" name="name" value=" " placeholder="Enter full name" class="form-control" />
+                                        <input type="text" name="name" value=" " placeholder='{{trans("website.name")}}' class="form-control" />
                                         @if ($errors->has('name'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
                                         @endif
@@ -74,7 +73,7 @@
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.class_room")}} <span class="text-danger">*</span></label>
-                                        <input type="text" name="classroom" value=" " placeholder="Class Room" class="form-control" />
+                                        <input type="text" name="classroom" value=" " placeholder='{{trans("website.class_room")}}' class="form-control" />
                                         @if ($errors->has('classroom'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('classroom') }}</span>
                                         @endif
@@ -83,7 +82,7 @@
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.medical_history")}}<span class="text-danger">*</span></label>
-                                        <input type="date" name="medical_history" value="" placeholder="Enter Medical History" class="form-control" />
+                                        <input type="date" name="medical_history" value="" class="form-control" />
                                         @if ($errors->has('medical_history'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('medical_history') }}</span>
                                         @endif
@@ -101,7 +100,7 @@
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.department")}} <span class="text-danger">*</span></label>
-                                        <input type="text" name="department" value=" " placeholder="Department" class="form-control" />
+                                        <input type="text" name="department" value=" " class="form-control" />
                                         @if ($errors->has('department'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('department') }}</span>
                                         @endif
@@ -144,7 +143,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="blood_type">{{trans("website.blood_type")}}</label>
-                                        <input type="text" name="blood_type" value="" placeholder="Blood Type" class="form-control">
+                                        <input type="text" name="blood_type" value="" placeholder='{{trans("website.blood_type")}}' class="form-control">
                                         @if ($errors->has('blood_type'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('blood_type') }}</span>
                                         @endif
@@ -249,8 +248,8 @@
                                         @endif
                                     </div>
                                 </div>
-                                <h2>{{trans("website.parents_information")}}h</h2>
-                                <br><br>
+                                <h2>{{trans("website.parents_information")}}</h2>
+                                <br>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-25">
@@ -281,8 +280,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-25">
-                                            <label for="id_number">{{trans("id_number")}}</label>
-                                            <input type="number" name="id_number" value="" placeholder="{{trans('id_number')}}" class="form-control"/>
+                                            <label for="id_number">{{trans("website.id_number")}}</label>
+                                            <input type="number" name="id_number" value="" placeholder="{{trans('website.id_number')}}" class="form-control"/>
                                             @if ($errors->has('id_number'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('id_number') }}</span>
                                             @endif
@@ -299,31 +298,31 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">
-                                            <label>{{__('Guardian Email')}} <span class="text-danger">*</span></label>
-                                            <input type="email" name="guardian_email" value="{{old('guardian_email')}}" placeholder="{{ __('Guardian Email') }}" class="form-control" />
+                                            <label>{{trans('website.guardian_email')}} <span class="text-danger">*</span></label>
+                                            <input type="email" name="guardian_email" value="{{old('guardian_email')}}" placeholder="{{ trans('website.guardian_email') }}" class="form-control" />
                                             @if ($errors->has('guardian_email'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_email') }}</span>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                            <label>{{__('Receiving Officer')}} <span class="text-danger">* </span></label>
-                                            <input type="checkbox" name="receiving_officer" placeholder="{{ __('Receiving Officer') }}" class="input__checkbox" />
+                                            <label>{{trans('website.receiving_officer')}} <span class="text-danger">* </span></label>
+                                            <input type="checkbox" name="receiving_officer" placeholder="{{ trans('website.receiving_officer') }}" class="input__checkbox" />
                                             @if ($errors->has('receiving_officer'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('receiving_officer') }}</span>
                                             @endif
                                     </div>
                                     <div class="col-md-6">
-                                            <label>{{__('Followup Officer')}} <span class="text-danger">* </span></label>
-                                            <input type="checkbox" name="followup_officer"  placeholder="{{ __('Followup Officer') }}" class="input__checkbox" />
+                                            <label>{{trans('website.followup_officer')}} <span class="text-danger">* </span></label>
+                                            <input type="checkbox" name="followup_officer"  placeholder="{{ trans('website.followup_officer') }}" class="input__checkbox" />
                                             @if ($errors->has('followup_officer'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('followup_officer') }}</span>
                                             @endif
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mt-25 mb-25">
-                                            <label for="how_did_you_hear_about_us">How Did You Hear About Us?</label>
-                                            <textarea name="how_did_you_hear_about_us" placeholder="How Did You Hear About Us?" class="form-control">
+                                            <label for="how_did_you_hear_about_us">{{trans("website.how_know_about_us")}}</label>
+                                            <textarea name="how_did_you_hear_about_us" placeholder='{{trans("website.how_know_about_us")}}' class="form-control">
                                                 </textarea>
                                             @if ($errors->has('how_did_you_hear_about_us'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('how_did_you_hear_about_us') }}</span>
@@ -340,14 +339,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h2>Another Information</h2>
+                                <h2>{{trans('website.another_information')}}</h2>
                                 <br><br>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-25">
 
                                             <label for="birth_certificate">{{trans("website.birth_certificate")}} <i class="fa fa-file"></i></label>
-                                            <input type="file" name="birth_certificate" value="" placeholder="Birth Certificate" class="form-control">
+                                            <input type="file" name="birth_certificate" value="" placeholder='{{trans("website.birth_certificate")}}' class="form-control">
                                             @if ($errors->has('birth_certificate'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_name') }}</span>
                                             @endif

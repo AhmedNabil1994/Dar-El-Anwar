@@ -185,6 +185,13 @@ Route::prefix('course')->group(function () {
         Route::get('delete/{id}', [BusController::class, 'destroy'])->name('admin.bus.delete');
     });
 
+    Route::prefix('contact_us')->group(function () {
+        Route::get('/inbox', [ContactUsController::class, 'contactUsInbox'])->name('admin.contact_us.contactUsInbox');
+        Route::get('/sent', [ContactUsController::class, 'contactUsSent'])->name('admin.contact_us.contactUsSent');
+        Route::get('/conversations', [ContactUsController::class, 'contactUsConversations'])->name('admin.contact_us.contactUsConversations');
+        Route::get('/messages', [ContactUsController::class, 'contactUsMessages'])->name('admin.contact_us.contactUsMessages');
+    });
+
 Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');
 Route::post('course-upload-rules/store', [CourseController::class, 'courseUploadRuleStore'])->name('course-rules.store');
 

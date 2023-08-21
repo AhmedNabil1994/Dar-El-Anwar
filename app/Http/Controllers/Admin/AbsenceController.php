@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Absence;
 use App\Models\Admin;
+use App\Models\ClassRoom;
+use App\Models\Department;
 use App\Models\Instructor;
 use App\Models\Student;
+use App\Models\Subject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class AbsenceController extends Controller
 {
@@ -17,13 +21,44 @@ class AbsenceController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
 //
-        $students = Student::query();
-        $instructors = Instructor::all();
-        $students = $students->paginate(10);
-        return view('admin.absence.view',compact('students','instructors'));
+        $absences = Absence::query()->with('student')->orderBy('id','DESC');
+
+        if($request->dateFrom || $request->dateTo)
+            $absences->whereBetween('created_at', [$request->dateFrom, $request->dateTo])->get();
+        if($request->filterByDept)
+            $absences->where('department',$request->filterByDept);
+        if($request->filterByClass)
+            $absences->where('class',$request->filterByClass);
+        if($request->filterBySubject)
+            $absences->where('subject_id',$request->filterBySubject);
+        if($request->filterByInst)
+            $absences->where('teacher',$request->filterByInst);
+//        if($request->filterByCode)
+//            $absences->where('code',$request->filterByCode);
+        if($request->filterByStudent)
+            $absences->where('student',$request->filterByStudent);
+
+        $instructors = Instructor::whereStatus(1)->get();
+        $data['departments'] = Department::all();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['subjects'] = Subject::all();
+        $data['filter_students'] = Student::whereStatus(1)->get();
+        $data['codes'] = Student::whereStatus(1)->pluck('code');
+        $students = $absences->pluck('student');
+        // Create a new paginator instance manually
+        $currentPage = Paginator::resolveCurrentPage('page'); // Get the current page from the request
+        $students = new Paginator(
+            $students->forPage($currentPage, 25), // Paginate the student data
+            $students->count(), // Total number of items
+            25, // Items per page
+            $currentPage // Current page
+        );
+
+
+        return view('admin.absence.view',$data,compact('students','instructors'));
     }
 
     /**
