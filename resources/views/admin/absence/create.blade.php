@@ -34,6 +34,7 @@
                         <div class="ibox-title">
                             <h5>{{__('Create Admin')}}</h5>
                         </div>
+
                         <div class="ibox-content mt-15">
 
                             <form method="post" action="{{route('admins.store')}}">

@@ -26,8 +26,6 @@
             </div>
 
 
-            {{--            @can('create-admins', 'admins')--}}
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
@@ -48,9 +46,9 @@
                                                class="form-control"
                                                id="course_id"
                                                name="course_id" >
-                                            <option value="">Select Course Name</option>
-                                            @foreach($courses as $course)
-                                                <option value="{{$course->id}}">{{$course->title}}</option>
+                                            <option value="">Select Subject Name</option>
+                                            @foreach($subjects as $subject)
+                                                <option value="{{$subject->id}}">{{$subject->name}}</option>
                                             @endforeach
                                         </select>
 
@@ -129,8 +127,8 @@
                         <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
                     </button>
                 </td>`;
-                if(!($("#customers-table tbody tr").length > 0)){
-                    var submitbtn = $(`<div class="form-group">
+                if(!($("#actions").length > 0)){
+                    var submitbtn = $(`<div class="form-group" id="actions">
                                     <button type="submit" class="btn btn-success">{{__('Save')}}</button>
                                     <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
                                 </div>`)

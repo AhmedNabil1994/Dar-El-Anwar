@@ -136,9 +136,9 @@
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
                                                     @if($exam->status == 1)
-                                                        <li><a class="dropdown-item" href="{{route('exam.status-change', [$exam->uuid, 0])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Unpublish') }}</a></li>
+                                                        <li><a class="dropdown-item" href="{{route('admin.exam.status-change', [$exam->uuid, 0])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Unpublish') }}</a></li>
                                                     @else
-                                                        <li><a class="dropdown-item" href="{{route('exam.status-change', [$exam->uuid, 1])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Publish') }}</a></li>
+                                                        <li><a class="dropdown-item" href="{{route('admin.exam.status-change', [$exam->uuid, 1])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Publish') }}</a></li>
                                                     @endif
                                                     <li><a class="dropdown-item" href="{{route('admin.exam.view', [$exam->id])}}"><span class="iconify" data-icon="carbon:view"></span>{{ __('View') }}</a></li>
                                                     <li><a class="dropdown-item" href="{{route('admin.exam.edit', $exam->id)}}"><span class="iconify" data-icon="clarity:note-edit-line"></span>{{ __('Edit') }}</a></li>
