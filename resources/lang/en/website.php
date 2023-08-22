@@ -146,6 +146,18 @@ return [
 "receiving_officer"=> "موظف الإستقبال",
 "how_know_about_us"=> "كيف تعرفت علينا؟",
 "followup_officer"=> "موظف المتابعة",
-"another_information"=> "معلومات أخرى"
+"another_information"=> "معلومات أخرى",
+"all_students"=> "كل الطلاب",
+"absence"=> "الغياب",
+"date_from"=> "تاريخ البداية",
+"date_to"=> "تاريخ النهاية",
+"subject"=> "المادة العلمية",
+"student"=> "الطالب",
+"date"=> "التاريخ",
+"student_code" =>"كود الطالب",
+"student_name"=> "أسم الطالب",
+"registered" => "مسجل",
+"registering_time"=> "وقت التسجيل",
+"absence_range"=> "معدل الغياب",
 ];
 
