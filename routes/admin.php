@@ -83,12 +83,7 @@ Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {
         Route::get('search', [AdminController::class, 'search'])->name('admins.search');
         Route::post('delete', [AdminController::class, 'delete'])->name('admins.delete');
     });
-// End:: Admins
 
-
-
-
-// email template
 
 Route::group(['prefix' => 'email-template', 'as' => 'email-template.'], function () {
     Route::get('/', [EmailTemplateController::class, 'index'])->name('index');
