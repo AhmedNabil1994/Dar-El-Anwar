@@ -152,7 +152,7 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{$absenceس->appends(request()->input())->links()}}
+                                {{$absences->appends(request()->input())->links()}}
                             </div>
 
                         </div>
