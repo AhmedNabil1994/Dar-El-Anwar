@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use PhpParser\Node\Expr\Assign;
 
 class Student extends Authenticatable
 {
@@ -86,5 +87,10 @@ class Student extends Authenticatable
     public function subject()
     {
         return $this->belongsTo(Subject::class,'subject_id');
+    }
+
+    public function assignment()
+    {
+        return $this->hasOne(Assignment::class);
     }
 }
