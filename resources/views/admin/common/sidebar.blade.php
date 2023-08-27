@@ -434,29 +434,6 @@
         <li>
             <a class="has-arrow" href="#">
                 <i class="fa fa-bus"></i>
-                <span>{{__('Goals')}}</span>
-            </a>
-            <ul>
-                <li class="{{ active_if_full_match('goals/inbox') }}">
-                    <a href="{{route('admin.contact_us.contactUsInbox')}}">
-                        <i class="fa fa-circle"></i>
-                        <span>{{__('All Goals')}}</span>
-                    </a>
-                </li>
-
-                <li class="{{ active_if_full_match('goals/sent') }}">
-                    <a href="{{route('admin.contact_us.contactUsSent')}}">
-                        <i class="fa fa-circle"></i>
-                        <span>{{ __('Create Goals') }}</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-
-        <li>
-            <a class="has-arrow" href="#">
-                <i class="fa fa-bus"></i>
                 <span>{{__('Assignments')}}</span>
             </a>
             <ul>
@@ -471,6 +448,30 @@
                     <a href="{{route('admin.assignments.create')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Create Assignment') }}</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>{{__('Follow Ups')}}</span>
+            </a>
+            <ul>
+                <li class="{{ active_if_full_match('followup/index') }}">
+                    <a href="{{route('admin.followup.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{__('All Follow Ups')}}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_full_match('followup/create') }}">
+                    <a href="{{route('admin.followup.create')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Create Follow Up') }}</span>
                     </a>
                 </li>
 

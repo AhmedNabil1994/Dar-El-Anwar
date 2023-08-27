@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ContactUsIssueController;
@@ -206,6 +207,15 @@ Route::prefix('course')->group(function () {
         Route::get('edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
         Route::post('update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
         Route::get('delete/{id}', [AssignmentController::class, 'destroy'])->name('admin.assignments.delete');
+    });
+
+    Route::prefix('followup')->group(function () {
+        Route::get('/', [FollowupController::class, 'index'])->name('admin.followup.index');
+        Route::get('create', [FollowupController::class, 'create'])->name('admin.followup.create');
+        Route::post('store', [FollowupController::class, 'store'])->name('admin.followup.store');
+        Route::get('edit/{followup}', [FollowupController::class, 'edit'])->name('admin.followup.edit');
+        Route::post('update/{followup}', [FollowupController::class, 'update'])->name('admin.followup.update');
+        Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('admin.followup.delete');
     });
 
     Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');

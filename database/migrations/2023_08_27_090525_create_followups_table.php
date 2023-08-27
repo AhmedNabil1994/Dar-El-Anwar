@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('goals', function (Blueprint $table) {
+        Schema::create('followups', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('instructor_id')->nullable();
+            $table->bigInteger('class_id')->nullable();
+            $table->bigInteger('subject_id')->nullable();
+            $table->tinyInteger('status')->comment('0-inactive 1-active')->nullable();
+            $table->tinyInteger('type')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('followups');
     }
 };

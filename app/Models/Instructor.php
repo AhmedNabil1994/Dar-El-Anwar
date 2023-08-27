@@ -19,7 +19,8 @@ class Instructor extends Authenticatable
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function employee(){
+    public function employee()
+    {
         return $this->belongsTo(Employee::class,'employee_id');
     }
 
