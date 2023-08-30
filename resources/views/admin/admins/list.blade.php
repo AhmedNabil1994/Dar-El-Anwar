@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Admins') }}</h2>
+                                <h2>{{ trans('website.admins') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All Admins') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.all_admins') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -49,9 +49,9 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('Admin List') }}</h2>
+                            <h2>{{ trans('website.admin_list') }}</h2>
                             <a href="{{ route('admins.create') }}" class="btn btn-success btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('Add Admin') }}
+                                <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
                             </a>
                         </div>
 
@@ -59,12 +59,12 @@
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Email') }}</th>
-                                    <th>{{ __('Username') }}</th>
-                                    <th>{{ __('Phone') }}</th>
-                                    <th>{{ __('Status') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ trans('website.name') }}</th>
+                                    <th>{{ trans('website.email') }}</th>
+                                    <th>{{ trans('website.name') }}</th>
+                                    <th>{{ trans('website.phone_number') }}</th>
+                                    <th>{{ trans('website.status') }}</th>
+                                    <th>{{ trans('website.action') }}</th>
                                 </tr>
                                 </thead>
 

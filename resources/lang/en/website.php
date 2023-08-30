@@ -159,5 +159,12 @@ return [
 "registered" => "مسجل",
 "registering_time"=> "وقت التسجيل",
 "absence_range"=> "معدل الغياب",
+"admin_list"=> "قائمة الأدمن",
+"add_admin"=> "إضافة أدمن",
+"edit_admin"=> "تعديل معلومات الأدمن",
+"admin_name"=> "أسم الأدمن",
+"role"=>"الصلاحيات",
+"cancel"=> "إلغاء",
+"update"=> "تعديل",
 ];
 

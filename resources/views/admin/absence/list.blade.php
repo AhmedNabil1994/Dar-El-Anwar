@@ -110,16 +110,16 @@
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('Date') }}</th>
-                                    <th>{{ __('Student Code') }}</th>
-                                    <th>{{ __('Student Name') }}</th>
-                                    <th>{{ __('Department') }}</th>
-                                    <th>{{ __('Class') }}</th>
-                                    <th>{{ __('Subject') }}</th>
-                                    <th>{{ __('Teacher') }}</th>
-                                    <th>{{ __('Registered') }}</th>
-                                    <th>{{ __('Registering Time') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ trans('website.date') }}</th>
+                                    <th>{{ trans('website.student_code') }}</th>
+                                    <th>{{ trans('website.student_name') }}</th>
+                                    <th>{{ trans('website.department') }}</th>
+                                    <th>{{ trans('website.class') }}</th>
+                                    <th>{{ trans('website.subject') }}</th>
+                                    <th>{{ trans('website.teacher') }}</th>
+                                    <th>{{ trans('website.registered') }}</th>
+                                    <th>{{ trans('website.registering_time') }}</th>
+                                    <th>{{ trans('website.actions') }}</th>
                                 </tr>
                                 </thead>
 
