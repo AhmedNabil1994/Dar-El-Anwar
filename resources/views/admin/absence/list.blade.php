@@ -139,8 +139,8 @@
                                                 @endforeach
                                             </select>
                                         </td>
-{{--                                        <td>{{is_null($student->is_absence->first()) ? "Not Bone" : "Done"}}</td>--}}
-{{--                                        <td>{{is_null($student->is_absence->first()) ? "" : $student->is_absence->first()->created_at->format('d/m/y')}}</td>--}}
+                                        <td></td>
+                                        <td></td>
                                         <td>
                                             <div class="action__buttons">
                                                <input type="checkbox" class="input__checkbox" data-value="{{$student->id}}" onchange="is_absence(this)" name="is_absence" {{is_null($student->is_absence->first())?"":"checked"}}/>

@@ -347,7 +347,7 @@
                 <ul>
                     @can('all_course')
                         <li class="{{ active_if_full_match('admins/bus') }}">
-                            <a href="{{route('admin.bus.index')}}">
+                                <a href="{{route('admin.bus.index')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{__('Bus')}}</span>
                             </a>
@@ -372,7 +372,7 @@
         @endcanany
 
 
-            <li>
+        <li>
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
                     <span>{{__('Contact Us')}}</span>
@@ -434,41 +434,18 @@
         <li>
             <a class="has-arrow" href="#">
                 <i class="fa fa-bus"></i>
-                <span>{{__('Goals')}}</span>
-            </a>
-            <ul>
-                <li class="{{ active_if_full_match('goals/inbox') }}">
-                    <a href="{{route('admin.contact_us.contactUsInbox')}}">
-                        <i class="fa fa-circle"></i>
-                        <span>{{__('All Goals')}}</span>
-                    </a>
-                </li>
-
-                <li class="{{ active_if_full_match('goals/sent') }}">
-                    <a href="{{route('admin.contact_us.contactUsSent')}}">
-                        <i class="fa fa-circle"></i>
-                        <span>{{ __('Create Goals') }}</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-
-        <li>
-            <a class="has-arrow" href="#">
-                <i class="fa fa-bus"></i>
                 <span>{{__('Assignments')}}</span>
             </a>
             <ul>
-                <li class="{{ active_if_full_match('assignment/inbox') }}">
-                    <a href="{{route('admin.contact_us.contactUsInbox')}}">
+                <li class="{{ active_if_full_match('assignments/index') }}">
+                    <a href="{{route('admin.assignments.index')}}">
                         <i class="fa fa-circle"></i>
-                        <span>{{__('All Assignments')}}</span>
+                            <span>{{__('All Assignments')}}</span>
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('assignment/sent') }}">
-                    <a href="{{route('admin.contact_us.contactUsSent')}}">
+                <li class="{{ active_if_full_match('assignments/create') }}">
+                    <a href="{{route('admin.assignments.create')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Create Assignment') }}</span>
                     </a>
@@ -476,6 +453,32 @@
 
             </ul>
         </li>
+
+
+        <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>{{__('Follow Ups')}}</span>
+            </a>
+            <ul>
+                <li class="{{ active_if_full_match('followup/index') }}">
+                    <a href="{{route('admin.followup.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{__('All Follow Ups')}}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_full_match('followup/create') }}">
+                    <a href="{{route('admin.followup.create')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Create Follow Up') }}</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
                         {{--                    @can('manage_course_subcategory')--}}
                         {{--                        <li class="{{ active_if_match('admins/subcategory') }}">--}}
                         {{--                            <a href="{{route('subcategory.index')}}">--}}

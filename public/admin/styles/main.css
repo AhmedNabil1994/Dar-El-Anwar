@@ -806,7 +806,7 @@ img {
 
 .sidebar__menu {
   width: 100%;
-  height: calc(100vh - 86px);
+  height: calc(100vh - 150px);
   overflow-y: auto;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */

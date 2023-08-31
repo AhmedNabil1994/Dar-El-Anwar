@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Assignment extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -19,13 +19,18 @@ class Assignment extends Model
     {
         return $this->hasMany(AssignmentFile::class);
     }
-
-    protected static function boot()
+    public function student()
     {
-        parent::boot();
-        self::creating(function($model){
-            $model->uuid =  Str::uuid()->toString();
-            $model->user_id =  auth()->id();
-        });
+        return $this->belongsTo(Student::class);
     }
+
+
+//    protected static function boot()
+//    {
+//        parent::boot();
+//        self::creating(function($model){
+//            $model->uuid =  Str::uuid()->toString();
+//            $model->user_id =  auth()->id();
+//        });
+//    }
 }

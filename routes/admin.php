@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ContactUsIssueController;
@@ -198,10 +199,24 @@ Route::prefix('course')->group(function () {
         Route::get('delete/{id}', [GoalController::class, 'destroy'])->name('admin.goals.delete');
     });
 
-    Route::get('/', [AssignmentController::class, 'index']);
-    Route::get('/assignments/{department}', [AssignmentController::class, 'showClasses']);
-    Route::get('/assignments/{department}/{class}', [AssignmentController::class, 'showTeachers']);
 
+    Route::prefix('assignments')->group(function () {
+        Route::get('/', [AssignmentController::class, 'index'])->name('admin.assignments.index');
+        Route::get('create', [AssignmentController::class, 'create'])->name('admin.assignments.create');
+        Route::post('store', [AssignmentController::class, 'store'])->name('admin.assignments.store');
+        Route::get('edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
+        Route::post('update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
+        Route::get('delete/{id}', [AssignmentController::class, 'destroy'])->name('admin.assignments.delete');
+    });
+
+    Route::prefix('followup')->group(function () {
+        Route::get('/', [FollowupController::class, 'index'])->name('admin.followup.index');
+        Route::get('create', [FollowupController::class, 'create'])->name('admin.followup.create');
+        Route::post('store', [FollowupController::class, 'store'])->name('admin.followup.store');
+        Route::get('edit/{followup}', [FollowupController::class, 'edit'])->name('admin.followup.edit');
+        Route::post('update/{followup}', [FollowupController::class, 'update'])->name('admin.followup.update');
+        Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('admin.followup.delete');
+    });
 
     Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');
     Route::post('course-upload-rules/store', [CourseController::class, 'courseUploadRuleStore'])->name('course-rules.store');

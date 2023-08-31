@@ -9,15 +9,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Edit Exam') }}</h2>
+                                <h2>{{ trans('website.editExam') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('All Exam') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Exam') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ trans('website.all_exams') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.editExam') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -32,8 +32,8 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title row row-cols-6 justify-content-between m-5">
-                            <h5>{{__('Edit Exam')}}</h5>
-                            <button class="btn btn-success btn-sm" id="addRowBtn">Add Row</button>
+                            <h5>{{trans('website.editExam')}}</h5>
+                            <button class="btn btn-success btn-sm" id="addRowBtn">{{trans('website.add_row')}}</button>
 
                         </div>
                         <div class="ibox-content mt-15">
@@ -42,13 +42,13 @@
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="form-group col-md-6">
-                                        <label for="course_id">{{__('Course Name')}}</label>
+                                        <label for="course_id">{{trans('website.courseName')}}</label>
 
                                         <select type="text"
                                                 class="form-control"
                                                 id="course_id"
                                                 name="course_id" >
-                                            <option value="">Select Course Name</option>
+                                            <option value="">{{trans("website.selectCourseName")}}</option>
                                             @foreach($subjects as $subject)
                                                 <option value="{{$subject->id}}" {{$exam->course_id == $subject->id ? "selected":""}}>{{$subject->name}}</option>
                                             @endforeach
@@ -60,13 +60,13 @@
                                     </div>
                                     <div class="form-group col-md-6">
 
-                                        <label for="exam_name">{{__('Exam Name')}}</label>
+                                        <label for="exam_name">{{trans('website.examName')}}</label>
                                         <input type="exam_name"
                                                class="form-control"
                                                id="exam_name"
                                                name="exam_name" value="{{$exam->name}}"/>
                                         @error('exam_name')
-                                        {{--                                        <span class="text-danger">{{ $message}}</span>--}}
+                                            {{-- <span class="text-danger">{{ $message}}</span>--}}
                                         @enderror
                                     </div>
                                 </div>
@@ -76,9 +76,9 @@
                                         <table id="customers-table" class="row-border data-table-filter table-style">
                                             <thead>
                                             <tr>
-                                                <th>{{ __('Question Name') }}</th>
-                                                <th>{{ __('Review Type') }}</th>
-                                                <th>{{ __('Action') }}</th>
+                                                <th>{{ trans('website.questionName') }}</th>
+                                                <th>{{ trans('website.reviewType') }}</th>
+                                                <th>{{ trans('website.actions') }}</th>
                                             </tr>
                                             </thead>
                                                 @foreach($exam->questions as $question)
@@ -86,14 +86,15 @@
                                                     <td><input class="form-control" name="question_name[]" value="{{$question->name}}"/></td>
                                                     <td>
                                                         <select class="form-select" name="review_type[]">
-                                                            <option value="1" {{$question->type == 1 ? "selected":""}}>yes / No</option>
-                                                            <option value="2" {{$question->type == 2 ? "selected":""}}>Excellent - Good - Average - Poor</option>
-                                                            <option value="3" {{$question->type == 3 ? "selected":""}}>Degree From 0000 to 0000</option>
+                                                            <option value="1" {{$question->type == 1 ? "selected":""}}>{{trans('website.yesNo')}}</option>
+                                                            <option value="2" {{$question->type == 2 ? "selected":""}}>{{trans("website.excelentGoodAveragePoor")}}</option>
+                                                            <option value="3" {{$question->type == 3 ? "selected":""}}>{{trans("website.degreeFrom")}} 0000 {{trans("website.to")}} 0000</option>
                                                         </select>
                                                     </td>
-                                                    <td>
-                                                        <button type="button" class="btn-action delete deleteBtn" title="{{ __('Delete') }}">
+                                                    <td >
+                                                        <button type="button" class="btn btn-danger text-center" title="{{ __('Delete') }}">
                                                             <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
+
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -129,8 +130,8 @@
         $(document).ready(function() {
             if(($("#customers-table tbody tr").length > 0)){
                 var submitbtn = $(`<div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{__('Save')}}</button>
-                                    <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                    <button type="submit" class="btn btn-success">{{trans('website.save')}}</button>
+                                    <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                 </div>`)
                 $('#exam_form').append(submitbtn)
             }
@@ -149,8 +150,8 @@
                                 </select>
                             </td>`;
                 columns += `<td>
-                    <button type="button" class="btn-action delete deleteBtn" title="{{ __('Delete') }}">
-                        <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
+                    <button type="button" class="btn-action delete deleteBtn" title="{{ trans('website.delete') }}">
+                        <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ trans('website.delete') }}">
                     </button>
                 </td>`;
 
@@ -162,8 +163,8 @@
             });
             if(!($("#customers-table tbody tr").length > 0)){
                 var submitbtn = $(`<div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{__('Save')}}</button>
-                                    <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                    <button type="submit" class="btn btn-success">{{trans('website.save')}}</button>
+                                    <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                 </div>`)
                 $('#exam_form').append(submitbtn)
             }
