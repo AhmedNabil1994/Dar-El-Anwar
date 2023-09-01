@@ -468,10 +468,24 @@
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('followup/create') }}">
+                <li class="{{ active_if_full_match('followup/create_class') }}">
                     <a href="{{route('admin.followup.create')}}">
                         <i class="fa fa-circle"></i>
-                        <span>{{ __('Create Follow Up') }}</span>
+                        <span>{{ __('Create Follow Up for Class Room') }}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_full_match('followup/reading') }}">
+                    <a href="{{route('admin.followup.reading')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Create Follow Up for Reading') }}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_full_match('followup/quran') }}">
+                    <a href="{{route('admin.followup.quran')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Create Follow Up for Quran') }}</span>
                     </a>
                 </li>
 

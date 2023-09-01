@@ -211,10 +211,18 @@ Route::prefix('course')->group(function () {
 
     Route::prefix('followup')->group(function () {
         Route::get('/', [FollowupController::class, 'index'])->name('admin.followup.index');
-        Route::get('create', [FollowupController::class, 'create'])->name('admin.followup.create');
-        Route::post('store', [FollowupController::class, 'store'])->name('admin.followup.store');
-        Route::get('edit/{followup}', [FollowupController::class, 'edit'])->name('admin.followup.edit');
-        Route::post('update/{followup}', [FollowupController::class, 'update'])->name('admin.followup.update');
+        Route::get('create_class', [FollowupController::class, 'createClass'])->name('admin.followup.create');
+        Route::get('reading', [FollowupController::class, 'createReading'])->name('admin.followup.reading');
+        Route::get('quran', [FollowupController::class, 'createQuran'])->name('admin.followup.quran');
+        Route::post('store_class', [FollowupController::class, 'storeClass'])->name('admin.followup.storeClass');
+        Route::post('store_reading', [FollowupController::class, 'storeReading'])->name('admin.followup.storeReading');
+        Route::post('store_quran', [FollowupController::class, 'storeQuran'])->name('admin.followup.storeQuran');
+        Route::get('edit_class/{followup}', [FollowupController::class, 'editClass'])->name('admin.followup.editClass');
+        Route::get('edit_quran/{followup}', [FollowupController::class, 'editQuran'])->name('admin.followup.editQuran');
+        Route::get('edit_reading/{followup}', [FollowupController::class, 'editReading'])->name('admin.followup.editReading');
+        Route::post('update_class/{followup}', [FollowupController::class, 'updateClass'])->name('admin.followup.updateClass');
+        Route::post('update_quran/{followup}', [FollowupController::class, 'updateQuran'])->name('admin.followup.updateQuran');
+        Route::post('update_reading/{followup}', [FollowupController::class, 'updateReading'])->name('admin.followup.updateReading');
         Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('admin.followup.delete');
     });
 

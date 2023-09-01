@@ -8,6 +8,7 @@ use App\Http\Requests\Student\StudentStoreRequest;
 use App\Models\Branch;
 use App\Models\City;
 use App\Models\ClassRoom;
+use App\Models\Department;
 use App\Models\Governorate;
 use App\Models\Instructor;
 use App\Models\Order;
@@ -72,9 +73,10 @@ class StudentController extends Controller
     {
 
         $data['title'] = 'Add Student';
+        $data['depts'] = Department::where('status',1)->get();
         $branches = Branch::all();
         $cities = City::all();
-        return view('admin.student.add', compact(['cities','branches']));
+        return view('admin.student.add', $data,compact(['cities','branches']));
     }
 
     public function store(StudentStoreRequest $request)
