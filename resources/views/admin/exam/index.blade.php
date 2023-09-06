@@ -8,14 +8,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Exams') }}</h2>
+                                <h2>{{ trans('website.exam') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All Exams ') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('trans.all_exams ') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -42,11 +42,11 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">{{ __('Quiz Name') }}</th>
-                                <th scope="col">{{ __('Quiz Types') }}</th>
-                                <th scope="col">{{ __('Total Question') }}</th>
-                                <th scope="col">{{ __('Status') }}</th>
-                                <th scope="col">{{ __('Action') }}</th>
+                                <th scope="col">{{ trans('website.quizName') }}</th>
+                                <th scope="col">{{ trans('website.quizType') }}</th>
+                                <th scope="col">{{ trans('website.unPublish') }}</th>
+                                <th scope="col">{{ trans('website.status') }}</th>
+                                <th scope="col">{{ trans('website.action') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -102,9 +102,9 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('Admin List') }}</h2>
+                            <h2>{{ trans('website.adminList') }}</h2>
                             <a href="{{ route('admin.exam.create') }}" class="btn btn-success btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('Add Exam') }}
+                                <i class="fa fa-plus"></i> {{ trans('website.add_exam') }}
                             </a>
                         </div>
 
@@ -112,11 +112,11 @@
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th scope="col">{{ __('Quiz Name') }}</th>
-                                    <th scope="col">{{ __('Quiz Types') }}</th>
-                                    <th scope="col">{{ __('Total Question') }}</th>
-                                    <th scope="col">{{ __('Status') }}</th>
-                                    <th scope="col">{{ __('Action') }}</th>
+                                    <th scope="col">{{ trans('website.quizName') }}</th>
+                                    <th scope="col">{{ trans('website.quizType') }}</th>
+                                    <th scope="col">{{ trans('website.totalQuestion') }}</th>
+                                    <th scope="col">{{ trans('website.status') }}</th>
+                                    <th scope="col">{{trans('website.action') }}</th>
                                 </tr>
                                 </thead>
 
@@ -136,13 +136,13 @@
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
                                                     @if($exam->status == 1)
-                                                        <li><a class="dropdown-item" href="{{route('admin.exam.status-change', [$exam->uuid, 0])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Unpublish') }}</a></li>
+                                                        <li class="mb-1"><a class="dropdown-item" href="{{route('admin.exam.status-change', [$exam->uuid, 0])}}"><span class="me-2 iconify" data-icon="ic:outline-publish"></span>{{ trans('website.unPublish') }}</a></li>
                                                     @else
-                                                        <li><a class="dropdown-item" href="{{route('admin.exam.status-change', [$exam->uuid, 1])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Publish') }}</a></li>
+                                                        <li class="mb-1"><a class="dropdown-item" href="{{route('admin.exam.status-change', [$exam->uuid, 1])}}"><span class="me-2 iconify" data-icon="ic:outline-publish"></span>{{ trans('website.publish') }}</a></li>
                                                     @endif
-                                                    <li><a class="dropdown-item" href="{{route('admin.exam.view', [$exam->id])}}"><span class="iconify" data-icon="carbon:view"></span>{{ __('View') }}</a></li>
-                                                    <li><a class="dropdown-item" href="{{route('admin.exam.edit', $exam->id)}}"><span class="iconify" data-icon="clarity:note-edit-line"></span>{{ __('Edit') }}</a></li>
-                                                    <li><a href="{{route('admin.exam.delete', [$exam->id])}}"  class="dropdown-item"  ><span class="iconify" data-icon="gg:trash"></span>{{ __('Delete') }}</a></li>
+                                                    <li class="mb-1"><a class="dropdown-item" href="{{route('admin.exam.view', [$exam->id])}}"><span class="me-2 iconify" data-icon="carbon:view"></span>{{ trans('website.view') }}</a></li>
+                                                    <li class="mb-1" ><a class="dropdown-item" href="{{route('admin.exam.edit', $exam->id)}}"><span class="me-2 iconify" data-icon="clarity:note-edit-line"></span>{{ trans('website.edit') }}</a></li>
+                                                    <li class="mb-1"><a href="{{route('admin.exam.delete', [$exam->id])}}"  class="dropdown-item"  ><span class="me-2 iconify" data-icon="gg:trash"></span>{{ trans('website.delete') }}</a></li>
                                                 </ul>
                                             </div>
                                         </td>

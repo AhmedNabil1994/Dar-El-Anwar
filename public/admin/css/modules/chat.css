@@ -6,6 +6,21 @@
   height: 98%;
 
 }
+.chat.chat__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.chat.chat__wrapper .row{
+  flex: 1;
+}
+
+.chat.chat__wrapper .chat__main-content{
+  height: 98%;
+  border-radius: .5rem;
+  border: 1px solid #c1c1c1;
+  padding: 1rem;
+}
+
 .chat .chat__header h2
 {
   font-size: 2.25rem;
@@ -110,4 +125,46 @@
   font-size: 1rem;
   font-weight: 500;
   border-radius: 0.5rem;
+}
+
+
+.chat .chat__main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat .chat__main-content .messages-field {
+  flex: 1;
+  border: 1px solid #c1c1c1;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.chat .chat__main-content .send-message  {
+  position: relative;
+}
+.chat .chat__main-content .send-message input {
+  width: 100%;
+  font-size: 0.75rem;
+  color: #c1c1c1;
+  padding: 1rem;
+  
+}
+
+.chat .chat__main-content .send-message .send-message__controller {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0.5rem;
+  display: flex;
+  transform: translateY(-50%);
+}
+.chat .chat__main-content .send-message .send-message__controller div.icon {
+  margin-inline-end:0.5rem;
+}
+
+.chat .chat__main-content .send-message .send-message__controller div.icon  img{
+  width: 24px;
+  height: 24px;
 }

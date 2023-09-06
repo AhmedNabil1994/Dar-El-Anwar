@@ -15,8 +15,8 @@
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{__('Subjects')}}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('website.subject')}}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -27,17 +27,17 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('Subject List') }}</h2>
-                            <a href="{{route('admin.subject.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{ __('Add Subject') }} </a>
+                            <h2>{{ __('website.subjectList') }}</h2>
+                            <a href="{{route('admin.subject.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{ trans('website.addSubject') }} </a>
                         </div>
                         <div class="customers__table">
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ __('SL') }}</th>
-                                    <th>{{ __('subject Name') }}</th>
-                                    <th>{{ __('Department') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ trans('website.sl') }}</th>
+                                    <th>{{ trans('website.subjectName') }}</th>
+                                    <th>{{ trans('website.department') }}</th>
+                                    <th>{{ trans('website.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

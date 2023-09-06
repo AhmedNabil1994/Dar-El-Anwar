@@ -9,15 +9,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add Exam') }}</h2>
+                                <h2>{{ trans('website.addExam') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('All Exam') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Add Exam') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ trans('website.all_exams') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.editExam') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -30,8 +30,8 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title row row-cols-6 justify-content-between m-5">
-                            <h5>{{__('Create Exam')}}</h5>
-                            <button class="btn btn-success btn-sm" id="addRowBtn">Add Row</button>
+                            <h5>{{trans('website.createExam')}}</h5>
+                            <button class="btn btn-success btn-sm" id="addRowBtn">{{trans("website.add_row")}}</button>
 
                         </div>
                         <div class="ibox-content mt-15">
@@ -40,13 +40,12 @@
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="form-group col-md-6">
-                                        <label for="course_id">{{__('Course Name')}}</label>
-
+                                        <label for="course_id">{{trans('website.courseName')}}</label>
                                         <select type="text"
                                                class="form-control"
                                                id="course_id"
                                                name="course_id" >
-                                            <option value="">Select Subject Name</option>
+                                            <option value="">{{trans("website.select_subject_name")}}</option>
                                             @foreach($subjects as $subject)
                                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
                                             @endforeach
@@ -58,7 +57,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
 
-                                        <label for="exam_name">{{__('Exam Name')}}</label>
+                                        <label for="exam_name">{{trans('website.examName')}}</label>
                                         <input type="exam_name"
                                                class="form-control"
                                                id="exam_name"
@@ -74,9 +73,9 @@
                                         <table id="customers-table" class="row-border data-table-filter table-style">
                                             <thead>
                                             <tr>
-                                                <th>{{ __('Question Name') }}</th>
-                                                <th>{{ __('Review Type') }}</th>
-                                                <th>{{ __('Action') }}</th>
+                                                <th>{{ trans('website.questionName') }}</th>
+                                                <th>{{ trans('website.reviewType') }}</th>
+                                                <th>{{ trans('website.action') }}</th>
                                             </tr>
                                             </thead>
 

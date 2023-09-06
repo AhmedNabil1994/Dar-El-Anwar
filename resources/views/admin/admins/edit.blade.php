@@ -10,15 +10,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Edit Admin') }}</h2>
+                                <h2>{{ trans('website.edit_admin') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('All Admins') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Admin') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ trans('website.all_admins') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.edit_admin') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -32,7 +32,7 @@
                             @csrf
                             <div class="row mb-4">
                                 <div class="form-group col-md-6">
-                                    <label for="name">@lang('Admin Name')</label>
+                                    <label for="name">{{trans("website.admin_name")}}</label>
                                     <input type="text"
                                            name="name"
                                            class="form-control"
@@ -43,7 +43,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="email">@lang('Email Address')</label>
+                                    <label for="email">{{trans("website.email")}}</label>
                                     <input type="email"
                                            name="email"
                                            class="form-control"
@@ -56,7 +56,7 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="form-group col-md-6">
-                                    <label for="username">@lang('Username')</label>
+                                    <label for="username">{{trans("website.name")}}</label>
                                     <input type="text"
                                            name="username"
                                            class="form-control"
@@ -67,7 +67,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="phone">@lang('Phone Number')</label>
+                                    <label for="phone">{{trans("website.phone_number")}}</label>
                                     <input type="text"
                                            name="phone"
                                            class="form-control"
@@ -78,7 +78,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6 mt-5">
-                                    <label for="role">{{__('Role')}}</label>
+                                    <label for="role">{{trans('website.role')}}</label>
                                     <select type="text"
                                             class="form-control"
                                             id="role"
@@ -96,19 +96,19 @@
 
 
 
-                            <button type="submit" class="btn btn-primary">@lang('Update')</button>
-                            <a href="{{ route('admins.index') }}" class="btn btn-secondary">@lang('Cancel')</a>
+                            <button type="submit" class="btn btn-primary">{{trans("website.update")}}</button>
+                            <a href="{{ route('admins.index') }}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
                         </form>
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row mt-2 mb-3">
                     <div class="col-md-12">
                         <div class="form-wrapper">
                             <form method="POST" action="{{ route('admins.update.password', $admin->id) }}">
                     <div class="row mb-4">
                         <div class="form-group col-md-6">
-                            <label for="password">@lang('Password')</label>
+                            <label for="password">{{trans("website.password")}}</label>
                             <input type="password"
                                    name="password"
                                    class="form-control"
@@ -116,7 +116,7 @@
                         </div>
                         <!--  password confirm -->
                         <div class="form-group col-md-6">
-                            <label for="password_confirmation">@lang('Confirm Password')</label>
+                            <label for="password_confirmation">{{trans("website.password")}}</label>
                             <input type="password"
                                    class="form-control"
                                    id="password_confirmation"
@@ -126,8 +126,8 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">@lang('Update')</button>
-                    <a href="{{ route('admins.index') }}" class="btn btn-secondary">@lang('Cancel')</a>
+                    <button type="submit" class="btn btn-primary">{{trans("website.update")}}</button>
+                    <a href="{{ route('admins.index') }}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
 
 
             </form>

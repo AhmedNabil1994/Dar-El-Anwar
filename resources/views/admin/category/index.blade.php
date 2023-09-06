@@ -27,18 +27,18 @@
                     <div class="col-md-12">
                         <div class="customers__area bg-style mb-30">
                             <div class="item-title d-flex justify-content-between">
-                                <h2>{{__('Category List')}}</h2>
-                                <a href="{{route('category.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('Add Category')}} </a>
+                                <h2>{{trans('website.categoryList')}}</h2>
+                                <a href="{{route('category.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{trans('website.add_category')}} </a>
                             </div>
                             <div class="customers__table">
                                 <table id="customers-table" class="row-border data-table-filter table-style">
                                     <thead>
                                     <tr>
-                                        <th>{{__('Image')}}</th>
-                                        <th>{{__('Name')}}</th>
-                                        <th>{{__('Feature')}}</th>
-                                        <th>{{ __('Total Course') }}</th>
-                                        <th>{{__('Action')}}</th>
+                                        <th>{{trans('website.image')}}</th>
+                                        <th>{{trans('website.name')}}</th>
+                                        <th>{{trans('website.feature')}}</th>
+                                        <th>{{trans('website.total_Course') }}</th>
+                                        <th>{{trans('website.action')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -56,9 +56,9 @@
                                         </td>
                                         <td>
                                             @if($category->is_feature == 'yes')
-                                                <span class="status active">{{ __('Yes') }}</span>
+                                                <span class="status active">{{ trans('website.yes') }}</span>
                                             @else
-                                                <span class="status blocked">{{ __('No') }}</span>
+                                                <span class="status blocked">{{ trans('website.no') }}</span>
                                             @endif
                                         </td>
                                         <td>

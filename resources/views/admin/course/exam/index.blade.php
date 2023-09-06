@@ -112,11 +112,11 @@
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th scope="col">{{ __('Quiz Name') }}</th>
-                                    <th scope="col">{{ __('Quiz Types') }}</th>
-                                    <th scope="col">{{ __('Total Question') }}</th>
-                                    <th scope="col">{{ __('Status') }}</th>
-                                    <th scope="col">{{ __('Action') }}</th>
+                                    <th scope="col">{{ trans('website.quizName') }}</th>
+                                    <th scope="col">{{ trans('website.quizTypes') }}</th>
+                                    <th scope="col">{{ trans('website.totalQuestion') }}</th>
+                                    <th scope="col">{{ trans('webiste.status') }}</th>
+                                    <th scope="col">{{ trans('website.actions') }}</th>
                                 </tr>
                                 </thead>
 
