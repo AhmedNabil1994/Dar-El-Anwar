@@ -408,28 +408,28 @@
                 </ul>
             </li>
 
-        <li>
-            <a class="has-arrow" href="#">
-                <i class="fa fa-bus"></i>
-                <span>{{__('Goals')}}</span>
-            </a>
-            <ul>
-                <li class="{{ active_if_full_match('goals/inbox') }}">
-                    <a href="{{route('admin.contact_us.contactUsInbox')}}">
-                        <i class="fa fa-circle"></i>
-                        <span>{{__('All Goals')}}</span>
-                    </a>
-                </li>
+{{--        <li>--}}
+{{--            <a class="has-arrow" href="#">--}}
+{{--                <i class="fa fa-bus"></i>--}}
+{{--                <span>{{__('Goals')}}</span>--}}
+{{--            </a>--}}
+{{--            <ul>--}}
+{{--                <li class="{{ active_if_full_match('goals/inbox') }}">--}}
+{{--                    <a href="{{route('admin.contact_us.contactUsInbox')}}">--}}
+{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        <span>{{__('All Goals')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
-                <li class="{{ active_if_full_match('goals/sent') }}">
-                    <a href="{{route('admin.contact_us.contactUsSent')}}">
-                        <i class="fa fa-circle"></i>
-                        <span>{{ __('Create Goals') }}</span>
-                    </a>
-                </li>
+{{--                <li class="{{ active_if_full_match('goals/sent') }}">--}}
+{{--                    <a href="{{route('admin.contact_us.contactUsSent')}}">--}}
+{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        <span>{{ __('Create Goals') }}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
-            </ul>
-        </li>
+{{--            </ul>--}}
+{{--        </li>--}}
 
         <li>
             <a class="has-arrow" href="#">
@@ -491,6 +491,29 @@
 
             </ul>
         </li>
+
+        <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>{{__('Accounts')}}</span>
+            </a>
+            <ul>
+                <li class="{{ active_if_full_match('accounts/treasury') }}">
+                    <a href="{{route('accounts.treasury')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('Treasury')}}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_full_match('admin/subscriptions') }}">
+                    <a href="{{route('subscriptions.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Subscribtions') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
 
 
                         {{--                    @can('manage_course_subcategory')--}}

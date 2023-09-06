@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscription', function (Blueprint $table) {
+        Schema::create('balances', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('course_id');
-            $table->date('start_date'); // Subscription start date
-            $table->date('end_date');   // Subscription end date
+            $table->date('date');
+            $table->decimal('opening_balance', 10, 2);
+            $table->decimal('closing_balance', 10, 2);
             $table->timestamps();
-
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscription');
+        Schema::dropIfExists('balances');
     }
 };

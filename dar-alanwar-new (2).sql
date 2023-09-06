@@ -3774,7 +3774,7 @@ INSERT INTO `subjects` (`id`, `name`, `department_id`, `created_at`, `Updated_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscriptions`
+-- Table structure for table `subscription`
 --
 
 CREATE TABLE `subscriptions` (
@@ -4816,7 +4816,7 @@ ALTER TABLE `subjects`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `subscriptions`
+-- Indexes for table `subscription`
 --
 ALTER TABLE `subscriptions`
   ADD PRIMARY KEY (`id`);
@@ -5542,7 +5542,7 @@ ALTER TABLE `subjects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `subscriptions`
+-- AUTO_INCREMENT for table `subscription`
 --
 ALTER TABLE `subscriptions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

@@ -79,16 +79,26 @@ class StudentController extends Controller
         return view('admin.student.add', $data,compact(['cities','branches']));
     }
 
-    public function store(StudentStoreRequest $request)
+    public function store(Request $request)
     {
        // Carbon::now()
        // $request->branch_id
         //count
         $data = $request->all();
+        $year = Carbon::now()->year;
+        $branch = $request->branch_id;
+
+        $lastSequential = Student::orderBy('id','DESC')->first()->id;
+
+        $sequential = $lastSequential + 1;
+
+        $sequentialCode = sprintf("%04d", $sequential);
+
+        $code =  $year . $branch . $sequentialCode;
         $student_data = [
             'user_id' => $user->id??null,
             'name' => $request->name, // updated from $request->first_name
-            'code' =>  mt_rand(1000, 9999), // updated from $request->first_name
+            'code' =>  $code, // updated from $request->first_name
             'email' => $request->email, // updated from $request->first_name
             'address' => $request->address,
             'phone_number' => $request->phone_number,

@@ -1499,7 +1499,7 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `uuid`, `user_id`, `category_id`, `subcategory_id`, `course_language_id`, `difficulty_level_id`, `title`, `subtitle`, `description`, `feature_details`, `price`, `learner_accessibility`, `image`, `intro_video_check`, `video`, `youtube_video_id`, `slug`, `status`, `average_rating`, `created_at`, `updated_at`, `code`, `subject`, `content`, `time`, `date_from`, `date_to`, `students_count`, `instructor_id`) VALUES
+INSERT INTO `courses` (`id`, `uuid`, `user_id`, `category_id`, `subcategory_id`, `course_language_id`, `difficulty_level_id`, `title`, `subtitle`, `description`, `feature_details`, `price`, `learner_accessibility`, `image`, `intro_video_check`, `video`, `youtube_video_id`, `slug`, `status`, `average_rating`, `created_at`, `updated_at`, `code`, subject_id, `content`, `time`, `date_from`, `date_to`, `students_count`, `instructor_id`) VALUES
 (9, '63b7d279-5bad-4466-90fb-06492b7e0b73', 1, 1, NULL, NULL, NULL, 'In tempor quis bland', NULL, NULL, NULL, '331.00', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0.00', '2023-05-25 15:22:04', '2023-05-25 15:22:04', 'Maiores maxime nulla', NULL, 'Quis libero qui sint', '1990-10-04', '2010-10-06', '2002-07-22', NULL, 6),
 (10, '5e35db80-bd6f-4024-9b6c-57205d4fb35e', 1, 1, NULL, NULL, NULL, 'Velit ut atque cons', NULL, NULL, NULL, '517.00', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0.00', '2023-05-25 15:22:12', '2023-05-25 15:22:12', 'Dolorum et reiciendi', NULL, 'Nulla itaque sit en', '2009-06-04', '2017-05-08', '1975-08-14', NULL, 6),
 (11, '854ea133-c392-4e54-ac53-4eee971cab2a', 6, NULL, NULL, NULL, NULL, 'Id qui maiores est', 'Nesciunt expedita m', 'Repellendus Aut duc', NULL, '0.00', NULL, NULL, NULL, NULL, NULL, 'id-qui-maiores-est', 4, '0.00', '2023-07-09 12:45:02', '2023-07-09 12:45:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
@@ -3761,7 +3761,7 @@ INSERT INTO `subjects` (`id`, `name`, `department_id`, `created_at`, `Updated_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscriptions`
+-- Table structure for table `subscription`
 --
 
 CREATE TABLE `subscriptions` (
@@ -4803,7 +4803,7 @@ ALTER TABLE `subjects`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `subscriptions`
+-- Indexes for table `subscription`
 --
 ALTER TABLE `subscriptions`
   ADD PRIMARY KEY (`id`);
@@ -5529,7 +5529,7 @@ ALTER TABLE `subjects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `subscriptions`
+-- AUTO_INCREMENT for table `subscription`
 --
 ALTER TABLE `subscriptions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

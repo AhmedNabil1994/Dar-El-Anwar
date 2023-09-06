@@ -28,11 +28,17 @@ class Course extends Model
         return $this->belongsTo(Instructor::class, 'instructor_id');
     }
 
-    public function category()
+
+
+    public function department()
     {
-        return $this->belongsTo(Department::class, 'category_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
 
     public function language()
     {
@@ -82,6 +88,11 @@ class Course extends Model
     public function studentCertificate()
     {
         return $this->hasOne(Student_certificate::class, 'course_id');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class,'student_courses');
     }
 
     public function resources()

@@ -21,7 +21,7 @@ class FollowupController extends Controller
     public function index(Request $request)
     {
         //.
-        $data['followups'] = Followup::query();
+        $data['followups'] = Followup::query()->orderBy('created_at',"DESC");
         $data['classes'] = ClassRoom::all();
         $data['instructors'] = Instructor::where('status',1)->get();
         $data['subjects'] = Subject::all();
@@ -221,9 +221,13 @@ class FollowupController extends Controller
             "observer" => $request->observer,
             "followup_date" => $request->followup_date,
         ]);
-        dd($followup->responses);
+        foreach($followup->followup_responses as $resp){
+            $resp->delete();
+        }
         foreach($questions as $key => $question)
-            $followup->responses->first()->update([
+            FollowupResponses::create([
+                "folowup_id" => $followup->id,
+                "question_id" =>$key+1,
                 "response" =>$question,
             ]);
         return redirect()->route('admin.followup.index');
@@ -244,10 +248,15 @@ class FollowupController extends Controller
             "observer" => $request->observer,
             "followup_date" => $request->followup_date,
         ]);
+
+        foreach($followup->followup_responses as $resp){
+            $resp->delete();
+        }
+
         foreach($questions as $key => $question)
             FollowupResponses::create([
                 "folowup_id" => $followup->id,
-                "question_id" =>$key+1,
+                "question_id" =>$key+25,
                 "response" =>$question,
             ]);
         return redirect()->route('admin.followup.index');
@@ -269,10 +278,13 @@ class FollowupController extends Controller
             "observer" => $request->observer,
             "followup_date" => $request->followup_date,
         ]);
+        foreach($followup->followup_responses as $resp){
+            $resp->delete();
+        }
         foreach($questions as $key => $question)
             FollowupResponses::create([
                 "folowup_id" => $followup->id,
-                "question_id" =>$key+1,
+                "question_id" =>$key+14,
                 "response" =>$question,
             ]);
         return redirect()->route('admin.followup.index');
