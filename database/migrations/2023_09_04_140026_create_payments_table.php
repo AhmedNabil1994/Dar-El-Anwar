@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
             $table->unsignedBigInteger('subscription_id');
-            $table->foreign('subscription_id')->references('id')->on('subscription')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Subject;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,9 @@ class SubscriptionController extends Controller
     public function index()
     {
         $data['subscriptions'] = Subscription::query()->orderBy('id','DESC')->paginate(25);
+        $data['subjects'] = Subject::all();
+        $data['departs'] = Department::where('status',1)->get();
+
         return view('admin.subscription.list', $data);
     }
 
@@ -39,15 +44,7 @@ class SubscriptionController extends Controller
     public function store(Request $request)
     {
         //
-
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'value' => 'required|numeric',
-            'section' => 'required|string|max:255',
-            'child_names' => 'required|string',
-            'status' => 'required|string',
-        ]);
-
+        $data = $request->all();
         Subscription::create($data);
 
         return redirect()->route('subscriptions.index')->with('success', 'Subscription created successfully');
@@ -70,9 +67,10 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subscription $subscription)
     {
         //
+        return $subscription;
     }
 
     /**
@@ -82,9 +80,14 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Subscription $subscription)
     {
         //
+        $data = $request->all();
+        $subscription->update($data);
+
+        return redirect()->route('subscriptions.index')->with('success', 'Subscription created successfully');
+
     }
 
     /**
@@ -93,8 +96,12 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subscription $subscription)
     {
         //
+
+        $subscription->delete();
+        return redirect()->route('subscriptions.index')->with('success', 'Subscription created successfully');
+
     }
 }

@@ -154,7 +154,7 @@
                                                 <button type="submit" class="btn-action delete"  title="{{ __('Delete') }}">
                                                     <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
                                                 </button>
-                                            </form
+                                            </form>
 {{--                                                @endcan--}}
 
                                             </div>

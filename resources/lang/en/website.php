@@ -210,5 +210,4 @@ return [
 "arranging_the_seating_of_students_and_their_bags"=> "ترتيب جلوس الطلاب وحقائبهم",
 "justice_in_the_distribution_of_posts"=> "العدالة في توزيع المشاركات",
 ];
-];
 

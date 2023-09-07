@@ -284,8 +284,10 @@ Route::prefix('student')->group(function () {
 
     Route::prefix('subscriptions')->group(function () {
         Route::get('', 'SubscriptionController@index')->name('subscriptions.index');
-        Route::get('create', 'SubscriptionController@create')->name('subscriptions.create');
+        Route::get('edit/{subscription}', 'SubscriptionController@edit')->name('subscriptions.edit');
         Route::post('store', 'SubscriptionController@store')->name('subscriptions.store');
+        Route::delete('delete/{subscription}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
+        Route::post('update//{subscription}', 'SubscriptionController@update')->name('subscriptions.update');
     });
 
     Route::prefix('payments')->group(function () {
