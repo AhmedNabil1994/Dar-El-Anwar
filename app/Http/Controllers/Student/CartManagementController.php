@@ -1241,7 +1241,7 @@ class CartManagementController extends Controller
        $paymentDetails = Paystack::getPaymentData();
 
        // Now you have the payment details,
-       // you can store the authorization_code in your db to allow for recurrent subscriptions
+       // you can store the authorization_code in your db to allow for recurrent subscription
        // you can then redirect or do whatever you want
 
        if ($paymentDetails) {

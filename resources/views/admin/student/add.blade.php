@@ -100,7 +100,13 @@
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.department")}} <span class="text-danger">*</span></label>
-                                        <input type="text" name="department" value=" " class="form-control" />
+                                        <select type="text" name="department" value=" " class="form-control" >
+                                            <option value="" >اختار القسم</option>
+                                            @foreach($depts as $dept)
+                                                <option value="{{$dept->id}}" >{{$dept->name}}</option>
+                                            @endforeach
+                                        <select>
+                                    </div>
                                         @if ($errors->has('department'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('department') }}</span>
                                         @endif

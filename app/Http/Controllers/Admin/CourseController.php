@@ -41,14 +41,87 @@ class CourseController extends Controller
         $this->lessonModel = new Crud($course_lesson);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         if (!Auth::user()->can('all_course')) {
             abort('403');
         } // end permission checking
 
         $data['title'] = 'All Courses';
-        $data['courses'] = $this->model->getOrderById('DESC', 25);
+        $data['courses'] = Course::query()->orderBy('id','DESC');
+
+        // Filter by code if filterByCode is provided in the request
+        if ($request->filterByCode) {
+            $data['courses']->where('code', $request->input('filterByCode'));
+        }
+
+        // Filter by name if filterByName is provided in the request
+        if ($request->filterByName) {
+            $data['courses']->where('title', $request->input('filterByName'));
+        }
+
+        // Filter by instructor if filterByInstructor is provided in the request
+        if ($request->filterByInstructor) {
+            $data['courses']->where('instructor_id', $request->input('filterByInstructor'));
+        }
+
+        // Filter by subject if filterBySubject is provided in the request
+        if ($request->filterBySubject) {
+            $data['courses']->where('subject_id', $request->input('filterBySubject'));
+        }
+
+        // Filter by department if filterBydept is provided in the request
+        if ($request->filterBydept) {
+            $data['courses']->where('department_id', $request->input('filterBydept'));
+        }
+
+        // Filter by content if filterByContent is provided in the request
+        if ($request->filterByContent) {
+            $data['courses']->where('content','LIKE','%'. $request->input('filterByContent') .'%');
+        }
+
+        // Filter by time if filterByTime is provided in the request
+        if ($request->filterByTime) {
+            $data['courses']->where('time', $request->input('filterByTime'));
+        }
+
+        // Filter by price if filterByPrice is provided in the request
+        if ($request->filterByPrice) {
+            $data['courses']->where('price', $request->input('filterByPrice'));
+        }
+
+        // Filter by start date if filterByStartDate is provided in the request
+        if ($request->filterByStartDate) {
+            $data['courses']->where('date_from', $request->input('filterByStartDate'));
+        }
+
+        // Filter by end date if filterByEndDate is provided in the request
+        if ($request->filterByEndDate) {
+            $data['courses']->where('date_to', $request->input('filterByEndDate'));
+        }
+
+        // Filter by count if filterByCount is provided in the request
+        if ($request->filterByCount) {
+            $data['courses']->where('students_count', $request->input('filterByCount'));
+        }
+        $courses = Course::all();
+        $data['codes'] = $courses->whereNotNull('code')->pluck('code');
+        $data['titles'] = $courses->whereNotNull('title')->pluck('title');
+        $data['instructors'] = Instructor::with('employee')->whereHas('employee', function ($query) {
+            $query->where('status', 1);
+        })->get();
+        $data['subjects'] = Subject::all();
+        $data['departments'] = Department::where('status',1)->get();
+        $data['contents'] = $courses->whereNotNull('content')->pluck('content');
+        $data['prices'] = $courses->whereNotNull('price')->pluck('price');
+        $data['times'] = $courses->whereNotNull('time')->pluck('time');
+        $data['start_dates'] = $courses->whereNotNull('date_from')->pluck('date_from');
+        $data['end_dates'] = $courses->whereNotNull('date_to')->pluck('date_to');
+        $data['student_counts'] = $courses->whereNotNull('student_count')->pluck('student_count');
+
+        // Retrieve the filtered courses
+        $data['courses'] = $data['courses']->paginate(10); // You can adjust the pagination as needed
+
         return view('admin.course.index', $data);
     }
 
@@ -214,11 +287,11 @@ class CourseController extends Controller
             'code' => $request->code,
             'title' => $request->title,
             'instructor_id' => $request->instructor_id,
-            'subject' => $request->subject_id,
-            'category_id' => $request->department_id,
+            'subject_id' => $request->subject_id,
+            'department_id' => $request->department_id,
             'content' => $request->content,
             'price' => $request->price,
-            'time' => $request->appointment,
+            'time' => $request->time,
             'date_to' => $request->date_to,
             'date_from' => $request->date_from,
             'status' => $request->status ? 1 : 0,

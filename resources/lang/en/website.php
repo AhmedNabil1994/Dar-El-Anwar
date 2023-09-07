@@ -135,10 +135,10 @@ return [
 "birth_certificate"=> "شهادة الميلاد",
 "another"=> "أخرى",
 "save"=> "حفظ",
-"parents_information"=> "معلومات عن الأباء", 
+"parents_information"=> "معلومات عن الأباء",
 "image"=> "الصورة",
 "under_enrollment"=> "قيد الإلتحاق",
-"subscriptions"=> "إشتراكات",
+"subscription"=> "إشتراكات",
 "notes"=> "ملاحظات",
 "meals"=> "وجبات",
 "bills"=> "فواتير",
@@ -202,4 +202,13 @@ return [
 "subjectList"=> "قائمة المواد",
 "addSubject"=> "أضف مادة",
 "editSubject"=> "تعديل المادة العلمية",
+"followup_date"=> "تاريخ المتابعة",
+"time_working"=> "وقت العمل المخطط",
+"observer"=> "المتابع",
+"subject"=> "المادة",
+"class_number"=> "رقم الحصة",
+"arranging_the_seating_of_students_and_their_bags"=> "ترتيب جلوس الطلاب وحقائبهم",
+"justice_in_the_distribution_of_posts"=> "العدالة في توزيع المشاركات",
 ];
+];
+

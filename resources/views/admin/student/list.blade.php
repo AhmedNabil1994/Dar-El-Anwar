@@ -112,7 +112,7 @@
                                     <th>{{ trans('website.actions') }}</th>
                                     <th>{{ trans('website.archived') }}</th>
                                     <th>{{ trans('website.under_enrollment') }}</th>
-                                    <th>{{ trans('website.subscriptions') }}</th>
+                                    <th>{{ trans('website.subscription') }}</th>
                                     <th>{{ trans('website.notes') }}</th>
                                     <th>{{ trans('website.meals') }}</th>
                                     <th>{{ trans('website.bills') }}</th>
@@ -146,7 +146,7 @@
                                                 {{--<i class="fa fa-eye"></i> View--}}
                                                 {{--</a>--}}
                                                 <a  href="{{route('student.edit', [$student->id])}}" class="btn btn-primary me-2" title="Edit Details">
-                                                    <i class="fa fa-edit"></i> 
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
                                                 <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_{{$student->id}}" title="Delete">
                                                     <i class="fa fa-trash"></i>

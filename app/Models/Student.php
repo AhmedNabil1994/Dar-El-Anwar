@@ -20,6 +20,11 @@ class Student extends Authenticatable
         return $this->hasOne(ParentInfo::class,'student_id');
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class,'student_courses');
+    }
+
     public function class_room()
     {
         return $this->belongsTo(ClassRoom::class,'classroom');

@@ -23,15 +23,21 @@
                     </div>
                 </div>
             </div>
+            <div class="item-title d-flex justify-content-center mx-4">
+                <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعه المعلمين</i></a>
+                <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعه القراءن</i></a>
+                <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعه حصة دراسية</i></a>
+                <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعه القراءة</i></a>
+            </div>
             <form method="get" action="{{route('admin.followup.index')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filters")}}</h1>
                 </div>
-                <div class="col-md-3 m-3">
+                <div class="col-md-2 m-3">
                     <label for="followup_date">{{trans("website.followup_date")}}:</label>
-                    <input type="date" class="form-control" name="followup_date">
+                    <input type="date" class="form-control" name="followup_date" value="{{request('followup_date')}}">
                 </div>
-                <div class="col-md-3 m-3">
+                <div class="col-md-2 m-3">
                     <label for="filterByInstructor">{{trans("website.teacher")}}:</label>
                     <select class="form-control" name="filterByInstructor">
                         <option value="">{{trans("website.all")}}</option>
@@ -40,7 +46,7 @@
                         @endforeach
                      </select>
                 </div>
-                <div class="col-md-3 m-3">
+                <div class="col-md-2 m-3">
                     <label for="filterBySubject">{{trans("website.subject")}}:</label>
                     <select class="form-control" name="filterBySubject">
                         <option value="">{{trans("website.all")}}</option>
@@ -49,7 +55,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 m-3">
+                <div class="col-md-2 m-3">
                     <label for="filterByClass">{{trans("website.class")}}:</label>
                     <select class="form-control" name="filterByClass">
                         <option value="">{{trans("website.all")}}</option>
@@ -58,10 +64,18 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="col-md-2 m-3">
+                </div>
+                <div class="col-sm-2 m-3">
+                    <label for="dateFrom">Date From:</label>
+                    <input type="date" class="form-control" name="dateFrom" value="{{request('dateFrom')}}">
+                </div>
+                <div class="col-sm-2 m-3">
+                    <label for="dateTo">Date To:</label>
+                    <input type="date" class="form-control" name="dateTo" value="{{request('dateTo')}}">
+                </div>
                 <div class="text-end mb-3 d-flex justify-content-end">
                     <button type="submit" id="btn_filter" class="btn btn-primary btn-sm">{{trans("website.filter")}}</button>
-                    <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>
             </form>
 
@@ -92,11 +106,27 @@
                                         <td>{{ $followup->classroom?->name }}</td>
                                         <td>{{ $followup->subject?->name }}</td>
                                         <td>{{ $followup->getStatus() }}</td>
+                                        @if($followup->followup_responses->first()?->questions->first()->followup_id == "follow_up_teacher")
                                         <td>
-                                            <a href="{{route('admin.followup.edit', [$followup])}}" class="btn-action" title="Edit">
+                                            <a href="{{route('admin.followup.editClass', [$followup])}}" class="btn-action" title="Edit">
                                                 <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                             </a>
                                         </td>
+                                        @elseif($followup->followup_responses?->first()?->questions->first()->followup_id == "follow_up_quran")
+                                            <td>
+                                                <a href="{{route('admin.followup.editQuran', [$followup])}}" class="btn-action" title="Edit">
+                                                    <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
+                                                </a>
+                                            </td>
+                                        @elseif($followup->followup_responses?->first()?->questions->first()->followup_id == "follow_up_reading")
+                                            <td>
+                                                <a href="{{route('admin.followup.editReading', [$followup])}}" class="btn-action" title="Edit">
+                                                    <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
+                                                </a>
+                                            </td>
+                                        @endif
+
+
                                         <td>
                                             <a href="javascript:void(0);" data-url="{{route('admin.followup.delete', [$followup])}}" class="btn-action delete" title="Delete">
                                                 <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">

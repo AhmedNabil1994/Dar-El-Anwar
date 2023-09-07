@@ -27,7 +27,6 @@ class StudentStoreRequest extends FormRequest
             'name' => '|string|max:255',
             'email' => '|email|unique:students',
             'password' => '|string|min:8',
-            'code' => '|string|max:30|unique:students',
             'gender' => '|in:1,2',
             'birthdate' => '|date',
             'joining_date' => '|date',

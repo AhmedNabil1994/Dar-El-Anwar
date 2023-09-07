@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AffiliateController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\FinancialAccountController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BalanceController;
 use App\Http\Controllers\Admin\difficultyLevelController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -84,6 +86,8 @@ Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {
         Route::get('search', [AdminController::class, 'search'])->name('admins.search');
         Route::post('delete', [AdminController::class, 'delete'])->name('admins.delete');
     });
+
+
 
 
 Route::group(['prefix' => 'email-template', 'as' => 'email-template.'], function () {
@@ -211,10 +215,18 @@ Route::prefix('course')->group(function () {
 
     Route::prefix('followup')->group(function () {
         Route::get('/', [FollowupController::class, 'index'])->name('admin.followup.index');
-        Route::get('create', [FollowupController::class, 'create'])->name('admin.followup.create');
-        Route::post('store', [FollowupController::class, 'store'])->name('admin.followup.store');
-        Route::get('edit/{followup}', [FollowupController::class, 'edit'])->name('admin.followup.edit');
-        Route::post('update/{followup}', [FollowupController::class, 'update'])->name('admin.followup.update');
+        Route::get('create_class', [FollowupController::class, 'createClass'])->name('admin.followup.create');
+        Route::get('reading', [FollowupController::class, 'createReading'])->name('admin.followup.reading');
+        Route::get('quran', [FollowupController::class, 'createQuran'])->name('admin.followup.quran');
+        Route::post('store_class', [FollowupController::class, 'storeClass'])->name('admin.followup.storeClass');
+        Route::post('store_reading', [FollowupController::class, 'storeReading'])->name('admin.followup.storeReading');
+        Route::post('store_quran', [FollowupController::class, 'storeQuran'])->name('admin.followup.storeQuran');
+        Route::get('edit_class/{followup}', [FollowupController::class, 'editClass'])->name('admin.followup.editClass');
+        Route::get('edit_quran/{followup}', [FollowupController::class, 'editQuran'])->name('admin.followup.editQuran');
+        Route::get('edit_reading/{followup}', [FollowupController::class, 'editReading'])->name('admin.followup.editReading');
+        Route::post('update_class/{followup}', [FollowupController::class, 'updateClass'])->name('admin.followup.updateClass');
+        Route::post('update_quran/{followup}', [FollowupController::class, 'updateQuran'])->name('admin.followup.updateQuran');
+        Route::post('update_reading/{followup}', [FollowupController::class, 'updateReading'])->name('admin.followup.updateReading');
         Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('admin.followup.delete');
     });
 
@@ -252,14 +264,50 @@ Route::prefix('student')->group(function () {
     Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
 });
 
+    Route::prefix('accounts')->group(function () {
+        Route::get('treasury', [FinancialAccountController::class, 'treasury'])->name('accounts.treasury');
+        Route::get('/treasury/income/create', [FinancialAccountController::class,'createIncomeTransaction'])->name('accounts.createIncomeTransaction');
+        Route::get('/treasury/income/edit/{financialAccount}', [FinancialAccountController::class,'editIncomeTransaction'])->name('accounts.editIncomeTransaction');
+        Route::get('/treasury/expense/create', [FinancialAccountController::class,'createExpenseTransaction'])->name('accounts.createExpenseTransaction');
+        Route::get('/treasury/expense/edit/{financialAccount}', [FinancialAccountController::class,'editExpenseTransaction'])->name('accounts.editExpenseTransaction');
+        Route::post('/treasury/store', [FinancialAccountController::class,'storeTransaction'])->name('accounts.storeTransaction');
+        Route::post('/treasury/update/{financialAccount}', [FinancialAccountController::class,'updateTransaction'])->name('accounts.updateTransaction');
+        Route::get('create', [FinancialAccountController::class, 'create'])->name('student.create');
+        Route::post('store', [FinancialAccountController::class, 'store'])->name('student.store');
+        Route::get('view/{id}', [FinancialAccountController::class, 'view'])->name('student.view');
+        Route::get('edit/{id}', [FinancialAccountController::class, 'edit'])->name('student.edit');
+        Route::post('update/{id}', [FinancialAccountController::class, 'update'])->name('student.update');
+        Route::delete('delete/{financialAccount}', [FinancialAccountController::class, 'deleteTransaction'])->name('accounts.delete');
+        Route::post('change-student-status', [FinancialAccountController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
+    });
+
+
+    Route::prefix('subscriptions')->group(function () {
+        Route::get('', 'SubscriptionController@index')->name('subscriptions.index');
+        Route::get('create', 'SubscriptionController@create')->name('subscriptions.create');
+        Route::post('store', 'SubscriptionController@store')->name('subscriptions.store');
+    });
+
+    Route::prefix('payments')->group(function () {
+        Route::get('', 'PaymentController@index')->name('payments.index');
+        Route::post('process/{subscription}', 'PaymentController@process')->name('payments.process');
+    });
+    Route::prefix('balance')->as('balances.')->group(function () {
+        Route::resource('balances', BalanceController::class);
+        Route::get('openingBalanceForm', [BalanceController::class,'openingBalanceForm'])->name('openingBalanceForm');
+        Route::get('createOpeningBalance', [BalanceController::class,'createOpeningBalance'])->name('createOpeningBalance');
+        Route::post('storeOpeningBalance', [BalanceController::class,'storeOpeningBalance'])->name('storeOpeningBalance');
+        Route::get('editOpeningBalance/{balance}', [BalanceController::class,'editOpeningBalance'])->name('editOpeningBalance');
+        Route::post('updateOpeningBalance/{balance}', [BalanceController::class,'updateOpeningBalance'])->name('updateOpeningBalance');
+        Route::delete('deleteOpeningBalance/{balance}', [BalanceController::class,'deleteOpeningBalance'])->name('deleteOpeningBalance');
+    });
+
     Route::prefix('absence')->group(function () {
         Route::get('/', [AbsenceController::class, 'index'])->name('absence.index');
         Route::get('create', [AbsenceController::class, 'create'])->name('absence.create');
         Route::get('store', [AbsenceController::class, 'store'])->name('absence.store');
         Route::post('update/{id}', [AbsenceController::class, 'update'])->name('absence.update');
     });
-
-
 
     Route::get('/parent_infos', [ParentInfoController::class, 'index'])->name('parent_infos.index');
     Route::get('/parent_infos/add', [ParentInfoController::class, 'add'])->name('parent_infos.create');

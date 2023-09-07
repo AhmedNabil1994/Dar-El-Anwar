@@ -37,4 +37,9 @@ class Followup extends Model
         }
     }
 
+    public function followup_responses()
+    {
+        return $this->hasMany(FollowupResponses::class, 'folowup_id');
+    }
+
 }
