@@ -123,7 +123,7 @@
                                 </select>
                             </td>`;
                 columns += `<td>
-                    <button type="button" class="btn-action delete deleteBtn" title="{{ __('Delete') }}">
+                    <button type="button" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
                         <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
                     </button>
                 </td>`;
