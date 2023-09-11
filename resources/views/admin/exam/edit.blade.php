@@ -72,7 +72,7 @@
                                 </div>
                                 <hr>
                                 <div class="row mb-4">
-                                    <div class="customers__table">
+                                    <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                                         <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
                                             <thead style="background-color: #50bfa5;">
                                             <tr>
