@@ -31,7 +31,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title row row-cols-6 justify-content-between m-5">
                             <h5>{{trans('website.createExam')}}</h5>
-                            <button class="btn btn-success btn-sm" id="addRowBtn">{{trans("website.add_row")}}</button>
+                            <button class="btn btn-sm buttons-style" id="addRowBtn">{{trans("website.add_row")}}</button>
 
                         </div>
                         <div class="ibox-content mt-15">
@@ -70,11 +70,12 @@
                                 <hr>
                                 <div class="row mb-4">
                                     <div class="customers__table">
-                                        <table id="customers-table" class="row-border data-table-filter table-style">
-                                            <thead>
+                                        <!-- <table id="customers-table" class="row-border data-table-filter table-style"> -->
+                                        <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
+                                            <thead style="background-color: #50bfa5;">
                                             <tr>
                                                 <th>{{ trans('website.questionName') }}</th>
-                                                <th>{{ trans('website.reviewType') }}</th>
+                                                <th>{{ trans('website.evaluationType') }}</th>
                                                 <th>{{ trans('website.action') }}</th>
                                             </tr>
                                             </thead>
@@ -128,8 +129,8 @@
                 </td>`;
                 if(!($("#actions").length > 0)){
                     var submitbtn = $(`<div class="form-group" id="actions">
-                                    <button type="submit" class="btn btn-success">{{__('Save')}}</button>
-                                    <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                    <button type="submit" class="btn buttons-style" style="background-color: #50bfa5;">{{trans('website.save')}}</button>
+                                    <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                 </div>`)
                     $('#exam_form').append(submitbtn)
                 }
