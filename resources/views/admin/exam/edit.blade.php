@@ -91,7 +91,7 @@
                                                         </select>
                                                     </td>
                                                     <td >
-                                                        <button type="button" class="btn btn-danger text-center" title="{{ __('Delete') }}">
+                                                        <button type="button" id = "deleteRowBtn" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
                                                             <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
                                                         </button>
                                                     </td>
@@ -142,13 +142,13 @@
                 columns += `<td><input class="form-control" name="question_name[]" /></td>`;
                 columns += `<td>
                                 <select class="form-select" name="review_type[]">
-                                    <option value="1">yes / No</option>
-                                    <option value="2">Excellent - Good - Average - Poor</option>
-                                    <option value="3">Degree From 0000 to 0000</option>
+                                    <option value="1">{{trans('website.yesNo')}}</option>
+                                    <option value="2">{{trans('website.excelentGoodAveragePoor')}}</option>
+                                    <option value="3">{{trans('website.degreeFrom')}}0000 {{trans("website.to")}} 0000</option>
                                 </select>
                             </td>`;
                 columns += `<td>
-                    <button type="button" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
+                    <button type="button" id = "deleteRowBtn" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
                         <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ trans('website.delete') }}">
                     </button>
                 </td>`;
@@ -168,9 +168,13 @@
             }
 
             // Delete row when the delete button is clicked
+
+
             $(document).on("click", ".deleteBtn", function() {
                 $(this).closest("tr").remove();
             });
+
+            
         });
 
     </script>

@@ -150,10 +150,13 @@ button {
 .buttons-style {
   background-color: #50bfa5
 }
-.buttons-style:hover {
-  background-color: #50bfa5
-  /* color: white; */
+.buttons-style:hover,
+.buttons-style:focus,
+.buttons-style:active {
+  background-color: #50bfa5 !important;
 }
+
+
 ul {
   list-style: none;
   margin: 0;
