@@ -42,9 +42,9 @@
                                     <div class="form-group col-md-6">
                                         <label for="course_id">{{trans('website.courseName')}}</label>
                                         <select type="text"
-                                               class="form-control"
-                                               id="course_id"
-                                               name="course_id" >
+                                                class="form-control"
+                                                id="course_id"
+                                                name="course_id" >
                                             <option value="">{{trans("website.select_subject_name")}}</option>
                                             @foreach($subjects as $subject)
                                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
