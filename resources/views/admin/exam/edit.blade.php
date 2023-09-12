@@ -34,7 +34,6 @@
                         <div class="ibox-title row row-cols-6 justify-content-between m-5">
                             <h5>{{trans('website.editExam')}}</h5>
                             <button class="btn buttons-style btn-sm" id="addRowBtn">{{trans('website.add_row')}}</button>
-
                         </div>
                         <div class="ibox-content mt-15">
 
@@ -94,7 +93,6 @@
                                                     <td >
                                                         <button type="button" class="btn btn-danger text-center" title="{{ __('Delete') }}">
                                                             <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
-
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -150,7 +148,7 @@
                                 </select>
                             </td>`;
                 columns += `<td>
-                    <button type="button" class="btn-action delete deleteBtn" title="{{ trans('website.delete') }}">
+                    <button type="button" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
                         <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ trans('website.delete') }}">
                     </button>
                 </td>`;
