@@ -125,7 +125,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{__('Save')}}</button>
+                                    <button type="submit" class="btn buttons-style">{{__('Save')}}</button>
                                     <a href="{{route('admins.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
                                 </div>
                             </form>

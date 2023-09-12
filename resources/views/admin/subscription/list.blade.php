@@ -28,7 +28,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('Page List') }}</h2>
-                            <a href="{{ route('page.create') }}" class="btn btn-success btn-sm">
+                            <a href="{{ route('page.create') }}" class="btn buttons-style btn-sm">
                                 <i class="fa fa-plus"></i> {{ __('Add Page') }}
                             </a>
                         </div>
