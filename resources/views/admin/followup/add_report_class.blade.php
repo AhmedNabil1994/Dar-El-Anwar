@@ -121,10 +121,15 @@
 
                                 <hr>
 
+                                
                                 @foreach($questions as $question)
+                              
                                     <div class="col-md-6">
+                                        <!-- ('website.'.$question->questions) -->
+                                        <!-- trans('website.Q1') -->
                                         <div class="input__group mb-25">
-                                            <label>{{trans('website.'.$question->questions)}} <span class="text-danger">*</span></label>
+                                            <label>@lang("website.$question->questions")
+                                            <span class="text-danger">*</span></label>
                                             <textarea class="form-text" name="questions[]"></textarea>
                                         </div>
                                     </div>
