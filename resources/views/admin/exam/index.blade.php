@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title d-flex justify-content-between align-items-end">
                             <h2>{{ trans('website.adminList') }}</h2>
                             <a href="{{ route('admin.exam.create') }}" class="btn btn-sm buttons-style" style="background-color: #50bfa5;">
                                 <i class="fa fa-plus"></i> {{ trans('website.add_exam') }}
