@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
-use App\Models\FinancialAccount;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,15 +19,15 @@ class FinancialAccountController extends Controller
     public function treasury(Request $request)
     {
         //
-        $data['transactions'] = FinancialAccount::query()->orderBy('id','DESC');
-        $data['totalCredit'] =  FinancialAccount::where('transaction_type', 'income')->sum('amount');
-        $data['totalDebit'] = FinancialAccount::where('transaction_type', 'expense')->sum('amount');
-        $data['closingBalance'] = FinancialAccount::where('date', Carbon::today()->format('Y-m-d'))
+        $data['transactions'] = Transaction::query()->orderBy('id','DESC');
+        $data['totalCredit'] =  Transaction::where('transaction_type', 'income')->sum('amount');
+        $data['totalDebit'] = Transaction::where('transaction_type', 'expense')->sum('amount');
+        $data['closingBalance'] = Transaction::where('date', Carbon::today()->format('Y-m-d'))
                                 ->orderBy('id','DESC')->first()?->last_amount;
         $data['openingBalance'] = Balance::where('date',Carbon::today()->format('Y-m-d'))
                                 ->first()?->opening_balance;
 
-        $transactions = FinancialAccount::orderBy('date','DESC')->get();
+        $transactions = Transaction::orderBy('date','DESC')->get();
         $data['totalBalanceSoFar'] = 0;
 
         foreach ($transactions as $transaction) {
@@ -65,7 +65,7 @@ class FinancialAccountController extends Controller
     public function storeTransaction(Request $request)
     {
         //
-        $last_amount = FinancialAccount::query()
+        $last_amount = Transaction::query()
                         ->where('date',Carbon::today()->format('Y-m-d'))
                         ->orderBy('id','DESC')->first()?->amount;
        if($request->transaction_type == 'income')
@@ -76,6 +76,7 @@ class FinancialAccountController extends Controller
             'trans_no'=>rand(0000,9999),
             'date' => $request->date ?? Carbon::now()->format('Y-m-d'),
             'name' => $request->name,
+            'branch_id' => $request->user->branch_id,
             'amount' => $request->amount,
             'description' => $request->description,
             'user_id' => Auth::user()->id,
@@ -83,7 +84,7 @@ class FinancialAccountController extends Controller
             'last_amount' => $last_amount,
         ];
 
-        FinancialAccount::create($data);
+        Transaction::create($data);
 
         return redirect()->route('accounts.treasury');
     }
@@ -104,10 +105,10 @@ class FinancialAccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FinancialAccount  $financialAccount
+     * @param  \App\Models\Transaction  $financialAccount
      * @return \Illuminate\Http\Response
      */
-    public function show(FinancialAccount $financialAccount)
+    public function show(Transaction $financialAccount)
     {
         //
     }
@@ -115,10 +116,10 @@ class FinancialAccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FinancialAccount  $financialAccount
+     * @param  \App\Models\Transaction  $financialAccount
      * @return \Illuminate\Http\Response
      */
-    public function editIncomeTransaction(FinancialAccount $financialAccount)
+    public function editIncomeTransaction(Transaction $financialAccount)
     {
         //
         return view('admin.finance_accounts.edit_income_transaction',compact('financialAccount'));
@@ -129,10 +130,10 @@ class FinancialAccountController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FinancialAccount  $financialAccount
+     * @param  \App\Models\Transaction  $financialAccount
      * @return \Illuminate\Http\Response
      */
-    public function updateTransaction(Request $request, FinancialAccount $financialAccount)
+    public function updateTransaction(Request $request, Transaction $financialAccount)
     {
         //
         $last_amount = 0;
@@ -145,6 +146,7 @@ class FinancialAccountController extends Controller
             'date' => $request->date ?? Carbon::now()->format('Y-m-d'),
             'name' => $request->name,
             'amount' => $request->amount,
+            'branch_id' => $request->user->branch_id,
             'description' => $request->description,
             'user_id' => Auth::user()->id,
             'last_amount' => $last_amount,
@@ -158,10 +160,10 @@ class FinancialAccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FinancialAccount  $financialAccount
+     * @param  \App\Models\Transaction  $financialAccount
      * @return \Illuminate\Http\Response
      */
-    public function deleteTransaction(FinancialAccount $financialAccount)
+    public function deleteTransaction(Transaction $financialAccount)
     {
         //
         $financialAccount->delete();

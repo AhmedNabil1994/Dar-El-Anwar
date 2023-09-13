@@ -193,7 +193,7 @@
                                     <td>{{$course->code}}</td>
                                     <td>{{$course->title}}</td>
                                     <td>{{$course->instructor?->employee?->name}}</td>
-                                    <td>{{$course->subject?->name}}</td>
+                                    <td>{{$course->subject}}</td>
                                     <td>{{$course->department?->name}}</td>
                                     <td>{{$course->content}}</td>
                                     <td>{{$course->time}}</td>

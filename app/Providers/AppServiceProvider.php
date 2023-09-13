@@ -78,17 +78,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with($data);
         });
 
-        View::composer('admin.common.header', function ($view) {
-            $data['adminNotifications'] = Notification::where('user_type', 1)->where('is_seen', 'no')->orderBy('created_at', 'DESC')->get();
-            $count = 0;
-            foreach ($data['adminNotifications'] as $notification) {
-                if ($notification->sender){
-                    $count++;
-                }
-            }
-            $data['totalAdminNotifications'] = $count;
-            $view->with($data);
-        });
+
 
         try {
             $connection = DB::connection()->getPdo();

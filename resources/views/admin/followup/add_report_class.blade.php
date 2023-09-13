@@ -120,7 +120,6 @@
                                 </div>
 
                                 <hr>
-
                                 @foreach($questions as $question)
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">

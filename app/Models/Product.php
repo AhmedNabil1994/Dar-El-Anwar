@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -12,41 +14,34 @@ class Product extends Model
 
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'name',
-        'details',
-        'book_summery',
-        'price',
-        'image',
-        'summery_file',
-        'main_file',
-        'type',
-        'slug',
-    ];
+    protected $guarded = [];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getImagePathAttribute()
+    public function meda(): BelongsTo
     {
-        if ($this->image) {
-            return $this->image;
-        } else {
-            return 'uploads/default/book.jpg';
-        }
+        return $this->belongsTo(Upload::class, 'image');
     }
 
-
-    protected static function boot()
+    public function getImagePathAttribute()
     {
-        parent::boot();
-        self::creating(function($model){
-            $model->uuid =  Str::uuid()->toString();
-            $model->user_id =  auth()->id();
-            $model->status =  auth()->user()->is_admin() ? 1 : 0;
-        });
+        return $this->media?->file_name;
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(StoreTransaction::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class,'department_id');
     }
 
 

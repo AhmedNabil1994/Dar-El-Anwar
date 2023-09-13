@@ -10,14 +10,16 @@ class Subscription extends Model
     use HasFactory;
 
     protected $guarded = [];
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
+
 
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
     }
 
     public function payments()

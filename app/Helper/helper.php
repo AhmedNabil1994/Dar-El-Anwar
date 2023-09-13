@@ -52,7 +52,7 @@ function active_if_full_match($path)
     if (class_basename(auth::user()) == 'Admin'){
         return Request::is($path) ? 'mm-active' : '';
     } else {
-        return Request::is($path) ? 'active' : '';
+        return str_contains(Request::getBasePath(),$path) ? 'active' : '';
     }
 
 }
@@ -647,3 +647,12 @@ if (!function_exists('getSlug')) {
         return '';
     }
 }
+
+if (!function_exists('get_setting')) {
+    function get_setting($key)
+    {
+        $value = \App\Models\Setting::where('option_key',$key)->first()->option_value;
+        return $value;
+    }
+}
+

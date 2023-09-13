@@ -179,4 +179,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(ForumPostComment::class, 'user_id', 'id');
     }
+
+
 }

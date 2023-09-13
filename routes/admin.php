@@ -6,10 +6,12 @@ use App\Http\Controllers\Admin\AffiliateController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\FinancialAccountController;
 use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactUsController;
@@ -45,6 +47,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\AbsenceController;
+use App\Http\Controllers\Admin\ProfitController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Instructor\InstructorController;
 use App\Http\Controllers\Student\StudentController;
@@ -284,12 +287,22 @@ Route::prefix('student')->group(function () {
 
     Route::prefix('subscriptions')->group(function () {
         Route::get('', 'SubscriptionController@index')->name('subscriptions.index');
+        Route::get('students_subscription', 'SubscriptionController@students_subscription')->name('subscriptions.students_subscription');
         Route::get('edit/{subscription}', 'SubscriptionController@edit')->name('subscriptions.edit');
+        Route::get('show/{subscription}', 'SubscriptionController@show')->name('subscriptions.show');
+        Route::get('/payment/{subscription}', 'SubscriptionController@processPayment')->name('payment.process');
+        Route::get('/payment/wallet/{subscription}', 'SubscriptionController@processPaymentWallet')->name('payment.process.wallet');
         Route::post('store', 'SubscriptionController@store')->name('subscriptions.store');
         Route::delete('delete/{subscription}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
-        Route::post('update//{subscription}', 'SubscriptionController@update')->name('subscriptions.update');
+        Route::post('update/{subscription}', 'SubscriptionController@update')->name('subscriptions.update');
     });
-
+    Route::prefix('invoices')->group(function () {
+        Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index');
+        Route::post('/', [InvoiceController::class, 'store'])->name('invoices.store');
+        Route::post('/{invoice}/mark-as-paid', [InvoiceController::class, 'markAsPaid'])->name('invoices.markAsPaid');
+        Route::get('/{paidInvoice}/print', [InvoiceController::class, 'printInvoice'])->name('invoices.print');
+        Route::get('/{paidInvoice}/download', [InvoiceController::class, 'downloadInvoice'])->name('invoices.download');
+    });
     Route::prefix('payments')->group(function () {
         Route::get('', 'PaymentController@index')->name('payments.index');
         Route::post('process/{subscription}', 'PaymentController@process')->name('payments.process');
@@ -309,6 +322,37 @@ Route::prefix('student')->group(function () {
         Route::get('create', [AbsenceController::class, 'create'])->name('absence.create');
         Route::get('store', [AbsenceController::class, 'store'])->name('absence.store');
         Route::post('update/{id}', [AbsenceController::class, 'update'])->name('absence.update');
+    });
+
+    Route::prefix('profit')->group(function () {
+        Route::get('/', [ProfitController::class, 'index'])->name('profit.index');
+        Route::get('/income', [ProfitController::class, 'income'])->name('profit.income');
+        Route::get('create', [ProfitController::class, 'create'])->name('profit.create');
+        Route::get('store', [ProfitController::class, 'store'])->name('profit.store');
+        Route::post('update/{id}', [ProfitController::class, 'update'])->name('profit.update');
+    });
+
+    Route::prefix('stores')->group(function () {
+        Route::get('/', [StoreController::class, 'index'])->name('stores.index');
+        Route::get('/income', [StoreController::class, 'income'])->name('stores.income');
+        Route::get('create', [StoreController::class, 'create'])->name('stores.create');
+        Route::post('store', [StoreController::class, 'store'])->name('stores.store');
+        Route::prefix('movement')->group(function () {
+            Route::get('/', [StoreController::class, 'indexMovement'])->name('stores.movement.index');
+            Route::post('delete/{movement}', [StoreController::class, 'deleteMovement'])->name('stores.movement.delete');
+            Route::get('create/', [StoreController::class, 'createMovement'])->name('stores.movement.create');
+            Route::post('store/', [StoreController::class, 'storeMovement'])->name('stores.movement.store');
+        });
+        Route::prefix('product')->group(function () {
+            Route::get('/', [StoreController::class, 'indexProducts'])->name('stores.product.index');
+            Route::prefix('invoice')->group(function () {
+                Route::get('purcahse', [StoreController::class, 'invoicePurchasedProduct'])->name('stores.product.invoice.purchases');
+                Route::get('sales', [StoreController::class, 'invoiceSalesProduct'])->name('stores.product.invoice.sales');
+                Route::post('store', [StoreController::class, 'storeInvoicePurchasedProduct'])->name('admin.product.invoices.store');
+                Route::post('sales/store', [StoreController::class, 'storeInvoiceSalesProduct'])->name('admin.product.invoices.sales.store');
+            });
+            });
+         Route::post('update/{id}', [StoreController::class, 'update'])->name('stores.update');
     });
 
     Route::get('/parent_infos', [ParentInfoController::class, 'index'])->name('parent_infos.index');

@@ -17,7 +17,7 @@
 
     <ul id="sidebar-menu" class="sidebar__menu">
 
-        <li class=" {{ active_if_full_match('admins/dashboard') }} ">
+        <li class=" {{ active_if_match('admins/dashboard') }} ">
             <a href="{{route('admin.dashboard')}}">
                 <span class="iconify" data-icon="bxs:dashboard"></span>
                 <span>{{__('Dashboard')}}</span>
@@ -74,7 +74,7 @@
         @endcan
 
         @can('manage_student')
-            <li class=" {{ active_if_full_match('admins/student') }} ">
+            <li class=" {{ active_if_match('admins/student') }} ">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="ph:student"></span>
                     <span>{{__('Manage Student')}}</span>
@@ -142,7 +142,7 @@
                     @can('all_instructor')
 
                         <li class="
-                        {{ active_if_full_match('admins/instructor') }}
+                        {{ active_if_match('admins/instructor') }}
                         {{ active_if_match('admins/instructor/view/*') }}
                     ">
                             <a href="{{route('instructor.index')}}">
@@ -156,7 +156,7 @@
         @endcanany
 
         @can('manage_absence')
-            <li class=" {{ active_if_full_match('admins/absence') }} ">
+            <li class=" {{ active_if_match('admins/absence') }} ">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="ph:student"></span>
                     <span>{{__('Manage absence')}}</span>
@@ -212,7 +212,7 @@
                     @endcan
 --}}
                     @can('all_course')
-                        <li class="{{ active_if_full_match('admins/course') }}">
+                        <li class="{{ active_if_match('admins/course') }}">
                             <a href="{{route('admin.course.index')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{__('All Courses')}}</span>
@@ -220,14 +220,14 @@
                         </li>
                     @endcan
 
-                    {{--<li class="{{ active_if_full_match('admins/course/enroll') }}">
+                    {{--<li class="{{ active_if_match('admins/course/enroll') }}">
                         <a href="{{route('admin.course.enroll')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Enroll In Course') }}</span>
                         </a>
                     </li>--}}
 
-                    <li class="{{ active_if_full_match('admins/course/create') }}">
+                    <li class="{{ active_if_match('admins/course/create') }}">
                         <a href="{{route('admin.course.create')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Create Course') }}</span>
@@ -248,7 +248,7 @@
                 <ul>
 
                     @can('all_course')
-                        <li class="{{ active_if_full_match('admins/subject') }}">
+                        <li class="{{ active_if_match('admins/subject') }}">
                         <a href="{{route('admin.subject.index')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{__('All Subjects')}}</span>
@@ -256,14 +256,14 @@
                         </li>
                     @endcan
 
-                        <li class="{{ active_if_full_match('admins/subject/create') }}">
+                        <li class="{{ active_if_match('admins/subject/create') }}">
                             <a href="{{route('admin.subject.create')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{ __('Create Subject') }}</span>
                             </a>
                         </li>
 
-                        <li class="{{ active_if_full_match('admins/subject/create') }}">
+                        <li class="{{ active_if_match('admins/subject/create') }}">
                         {{--<a href="{{route('admin.subject.enroll')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Assign Subject') }}</span>
@@ -312,7 +312,7 @@
                 <ul>
 
                     @can('all_course')
-                        <li class="{{ active_if_full_match('admins/exam') }}">
+                        <li class="{{ active_if_match('admins/exam') }}">
                             <a href="{{route('admin.exam.index')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{__('All Exams')}}</span>
@@ -320,14 +320,14 @@
                         </li>
                     @endcan
 
-                    <li class="{{ active_if_full_match('admins/exam/create') }}">
+                    <li class="{{ active_if_match('admins/exam/create') }}">
                         <a href="{{route('admin.exam.create')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Create Exam') }}</span>
                         </a>
                     </li>
 
-                    <li class="{{ active_if_full_match('admins/subject/create') }}">
+                    <li class="{{ active_if_match('admins/subject/create') }}">
                         {{--<a href="{{route('admin.subject.enroll')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Assign Subject') }}</span>
@@ -346,7 +346,7 @@
                 </a>
                 <ul>
                     @can('all_course')
-                        <li class="{{ active_if_full_match('admins/bus') }}">
+                        <li class="{{ active_if_match('admins/bus') }}">
                                 <a href="{{route('admin.bus.index')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{__('Bus')}}</span>
@@ -354,14 +354,14 @@
                         </li>
                     @endcan
 
-                    <li class="{{ active_if_full_match('admins/bus/assign') }}">
+                    <li class="{{ active_if_match('admins/bus/assign') }}">
                         <a href="{{route('admin.bus.create')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Assign Bus') }}</span>
                         </a>
                     </li>
 
-                    {{--                    <li class="{{ active_if_full_match('admins/course/create') }}">--}}
+                    {{--                    <li class="{{ active_if_match('admins/course/create') }}">--}}
                     {{--                        <a href="{{route('admin.course.create')}}">--}}
                     {{--                            <i class="fa fa-circle"></i>--}}
                     {{--                                <span>{{ __('Create Course') }}</span>--}}
@@ -378,28 +378,28 @@
                     <span>{{__('Contact Us')}}</span>
                 </a>
                 <ul>
-                    <li class="{{ active_if_full_match('contact_us/inbox') }}">
+                    <li class="{{ active_if_match('contact_us/inbox') }}">
                         <a href="{{route('admin.contact_us.contactUsInbox')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{__('Inbox')}}</span>
                         </a>
                     </li>
 
-                    <li class="{{ active_if_full_match('contact_us/sent') }}">
+                    <li class="{{ active_if_match('contact_us/sent') }}">
                         <a href="{{route('admin.contact_us.contactUsSent')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Sent') }}</span>
                         </a>
                     </li>
 
-                    <li class="{{ active_if_full_match('contact_us/conversations') }}">
+                    <li class="{{ active_if_match('contact_us/conversations') }}">
                         <a href="{{route('admin.contact_us.contactUsConversations')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Conversations') }}</span>
                         </a>
                     </li>
 
-                    <li class="{{ active_if_full_match('contact_us/messages') }}">
+                    <li class="{{ active_if_match('contact_us/messages') }}">
                         <a href="{{route('admin.contact_us.contactUsMessages')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{ __('Messages') }}</span>
@@ -414,14 +414,14 @@
 {{--                <span>{{__('Goals')}}</span>--}}
 {{--            </a>--}}
 {{--            <ul>--}}
-{{--                <li class="{{ active_if_full_match('goals/inbox') }}">--}}
+{{--                <li class="{{ active_if_match('goals/inbox') }}">--}}
 {{--                    <a href="{{route('admin.contact_us.contactUsInbox')}}">--}}
 {{--                        <i class="fa fa-circle"></i>--}}
 {{--                        <span>{{__('All Goals')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 
-{{--                <li class="{{ active_if_full_match('goals/sent') }}">--}}
+{{--                <li class="{{ active_if_match('goals/sent') }}">--}}
 {{--                    <a href="{{route('admin.contact_us.contactUsSent')}}">--}}
 {{--                        <i class="fa fa-circle"></i>--}}
 {{--                        <span>{{ __('Create Goals') }}</span>--}}
@@ -437,14 +437,14 @@
                 <span>{{__('Assignments')}}</span>
             </a>
             <ul>
-                <li class="{{ active_if_full_match('assignments/index') }}">
+                <li class="{{ active_if_match('assignments/index') }}">
                     <a href="{{route('admin.assignments.index')}}">
                         <i class="fa fa-circle"></i>
                             <span>{{__('All Assignments')}}</span>
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('assignments/create') }}">
+                <li class="{{ active_if_match('assignments/create') }}">
                     <a href="{{route('admin.assignments.create')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Create Assignment') }}</span>
@@ -461,28 +461,28 @@
                 <span>{{__('Follow Ups')}}</span>
             </a>
             <ul>
-                <li class="{{ active_if_full_match('followup/index') }}">
+                <li class="{{ active_if_match('followup/index') }}">
                     <a href="{{route('admin.followup.index')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{__('All Follow Ups')}}</span>
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('followup/create_class') }}">
+                <li class="{{ active_if_match('followup/create_class') }}">
                     <a href="{{route('admin.followup.create')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Create Follow Up for Class Room') }}</span>
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('followup/reading') }}">
+                <li class="{{ active_if_match('followup/reading') }}">
                     <a href="{{route('admin.followup.reading')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Create Follow Up for Reading') }}</span>
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('followup/quran') }}">
+                <li class="{{ active_if_match('followup/quran') }}">
                     <a href="{{route('admin.followup.quran')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Create Follow Up for Quran') }}</span>
@@ -498,19 +498,67 @@
                 <span>{{__('Accounts')}}</span>
             </a>
             <ul>
-                <li class="{{ active_if_full_match('accounts/treasury') }}">
+                <li class="{{ active_if_match('accounts/treasury') }}">
                     <a href="{{route('accounts.treasury')}}">
                         <i class="fa fa-money"></i>
                         <span>{{__('Treasury')}}</span>
                     </a>
                 </li>
 
-                <li class="{{ active_if_full_match('admin/subscriptions') }}">
+                <li class="{{ active_if_match('admin/subscriptions') }}">
                     <a href="{{route('subscriptions.index')}}">
                         <i class="fa fa-circle"></i>
                         <span>{{ __('Subscribtions') }}</span>
                     </a>
                 </li>
+
+
+                <li class="{{ active_if_match('admin/students_subscription') }}">
+                    <a href="{{route('subscriptions.students_subscription')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Subscription Payment') }}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_match('admin/invoices') }}">
+                    <a href="{{route('invoices.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('invoices') }}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_match('admin/profit') }}">
+                    <a href="{{route('profit.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Profit') }}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_match('admin/stores/movement') }}">
+                    <a href="{{route('stores.movement.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Stores') }}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('admin/product/movement') }}">
+                    <a href="{{route('stores.product.index')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Product Report') }}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('admin/product/invoice') }}">
+                    <a href="{{route('stores.product.invoice.purchases')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Purchases') }}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('admin/product/invoice') }}">
+                    <a href="{{route('stores.product.invoice.sales')}}">
+                        <i class="fa fa-circle"></i>
+                        <span>{{ __('Sales') }}</span>
+                    </a>
+                </li>
+
             </ul>
         </li>
 
@@ -561,7 +609,7 @@
 {{--            </li>--}}
 
 
-{{--        <li class=" {{ active_if_full_match('admins/parent_infos/') }} ">--}}
+{{--        <li class=" {{ active_if_match('admins/parent_infos/') }} ">--}}
 {{--            <a class="has-arrow" href="#">--}}
 {{--                <span class="fa fa-address-card" ></span>--}}
 {{--                <span>{{__('Manage ParentInfo')}}</span>--}}
@@ -660,68 +708,64 @@
 {{--        @endcan--}}
 
 
-{{--        @can('finance')--}}
-{{--            <li class="">--}}
-{{--                <a class="has-arrow" href="#">--}}
-{{--                    <span class="iconify" data-icon="map:finance"></span>--}}
-{{--                    <span>{{ __('Financial Report') }}</span>--}}
-{{--                </a>--}}
-{{--                <ul>--}}
-{{--                    <li class="{{ active_if_full_match('admins/report/course-revenue-report') }}{{ active_if_full_match('admins/report/bundle-revenue-report') }}{{ active_if_full_match('admins/report/consultation-revenue-report') }}">--}}
-{{--                        <a href="{{route('course-report.revenue-report')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{ __('Revenue Report') }}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="{{ active_if_full_match('admins/report/order-report') }}">--}}
-{{--                        <a href="{{route('report.order-report')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{ __('Order Report') }}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="{{ active_if_full_match('admins/report/order-pending') }}">--}}
-{{--                        <a href="{{route('report.order-pending')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{ __('Order Pending') }}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="{{ active_if_full_match('admins/report/order-cancelled') }}">--}}
-{{--                        <a href="{{route('report.order-cancelled')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{ __('Order Cancelled') }}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="{{ active_if_full_match('admins/report/cancel-consultation-list') }}">--}}
-{{--                        <a href="{{route('report.cancel-consultation-list')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{ __('Consultation Cancel') }}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </li>--}}
-{{--        @endcan--}}
-{{--        @can('manage_certificate')--}}
-{{--            <li class="{{ @$navCertificateActiveClass }}">--}}
-{{--                <a class="has-arrow" href="#">--}}
-{{--                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>--}}
-{{--                    <span>{{__('Certificate')}}</span>--}}
-{{--                </a>--}}
-{{--                <ul>--}}
-{{--                    <li class="{{ @$subNavAllCertificateActiveClass }}">--}}
-{{--                        <a href="{{route('certificate.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{__('All Certificates')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="{{ @$subNavAddCertificateActiveClass }}">--}}
-{{--                        <a href="{{route('certificate.create')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{__('Add Certificate')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </li>--}}
-{{--        @endcan--}}
+            <li class="">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="map:finance"></span>
+                    <span>{{ __('Financial Report') }}</span>
+                </a>
+                <ul>
+                    <li class="{{ active_if_match('admins/report/course-revenue-report') }}{{ active_if_match('admins/report/bundle-revenue-report') }}{{ active_if_match('admins/report/consultation-revenue-report') }}">
+                        <a href="{{route('course-report.revenue-report')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Revenue Report') }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('admins/report/order-report') }}">
+                        <a href="{{route('report.order-report')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Order Report') }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('admins/report/order-pending') }}">
+                        <a href="{{route('report.order-pending')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Order Pending') }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('admins/report/order-cancelled') }}">
+                        <a href="{{route('report.order-cancelled')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Order Cancelled') }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('admins/report/cancel-consultation-list') }}">
+                        <a href="{{route('report.cancel-consultation-list')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{ __('Consultation Cancel') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{{ @$navCertificateActiveClass }}">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                    <span>{{__('Certificate')}}</span>
+                </a>
+                <ul>
+                    <li class="{{ @$subNavAllCertificateActiveClass }}">
+                        <a href="{{route('certificate.index')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('All Certificates')}}</span>
+                        </a>
+                    </li>
+                    <li class="{{ @$subNavAddCertificateActiveClass }}">
+                        <a href="{{route('certificate.create')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('Add Certificate')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 {{--        @can('ranking_level')--}}
 {{--            <li class="{{ @$navRankingActiveClass }}">--}}
@@ -1062,13 +1106,13 @@
 {{--                    <span>{{__('Manage Blog')}} </span>--}}
 {{--                </a>--}}
 {{--                <ul>--}}
-{{--                    <li class="{{ active_if_full_match('admins/blog/create') }}">--}}
+{{--                    <li class="{{ active_if_match('admins/blog/create') }}">--}}
 {{--                        <a href="{{route('blog.create')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
 {{--                            <span>{{__('Add Blog')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
-{{--                    <li class="{{ active_if_full_match('admins/blog') }} {{ active_if_full_match('admins/blog/edit/*') }}">--}}
+{{--                    <li class="{{ active_if_match('admins/blog') }} {{ active_if_match('admins/blog/edit/*') }}">--}}
 {{--                        <a href="{{route('blog.index')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
 {{--                            <span>{{__('All Blog')}}</span>--}}
@@ -1112,13 +1156,13 @@
 {{--                    <span>{{__('Account Settings')}}</span>--}}
 {{--                </a>--}}
 {{--                <ul class="{{ @$navUserParentShowClass }}">--}}
-{{--                    <li class="{{ active_if_full_match('admins/profile') }}">--}}
+{{--                    <li class="{{ active_if_match('admins/profile') }}">--}}
 {{--                        <a href="{{route('admin.profile')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
 {{--                            <span> {{__('Profile')}} </span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
-{{--                    <li class="{{ active_if_full_match('admins/profile/change-password') }}">--}}
+{{--                    <li class="{{ active_if_match('admins/profile/change-password') }}">--}}
 {{--                        <a href="{{ route('admin.change-password') }}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
 {{--                            <span>{{__('Change Password')}}</span>--}}
@@ -1141,7 +1185,7 @@
 {{--                        <span> {{__('Affiliate Request List')}} </span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
-{{--                <li class="{{ active_if_full_match('admins/affiliate/affiliation-settings') }}">--}}
+{{--                <li class="{{ active_if_match('admins/affiliate/affiliation-settings') }}">--}}
 {{--                    <a href="{{ route('affiliate.affiliation-settings') }}">--}}
 {{--                        <i class="fa fa-circle"></i>--}}
 {{--                        <span>{{__('Affiliate Settings')}}</span>--}}

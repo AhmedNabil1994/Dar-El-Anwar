@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
-use App\Models\FinancialAccount;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,7 +79,7 @@ class BalanceController extends Controller
             'last_amount' => 0,
         ];
 
-        FinancialAccount::create($data);
+        Transaction::create($data);
         // Redirect back to the form with a success message
         return redirect()->route('balances.openingBalanceForm')->with('success', 'Opening balance has been saved successfully.');
     }
@@ -143,7 +143,7 @@ class BalanceController extends Controller
             'last_amount' => 0,
         ];
 
-        FinancialAccount::create($data);
+        Transaction::create($data);
 
         // Redirect back to the form with a success message
         return redirect()->route('balances.openingBalanceForm')->with('success', 'Opening balance has been updated successfully.');

@@ -86,7 +86,7 @@ class Student extends Authenticatable
     }
     public function subscriptions()
     {
-        return $this->hasMany(Subscription::class);
+        return $this->belongsToMany(Subscription::class);
     }
 
     public function subject()

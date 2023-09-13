@@ -20,30 +20,30 @@
                                 </a>
                                 <!-- Notification Dropdown Start -->
                                 <ul class="dropdown-menu custom-scrollbar" aria-labelledby="dropdownNotification">
-                                    @forelse(@$adminNotifications as $notification)
-                                        @if($notification->sender)
-                                            <li>
-                                                <a href="{{route('notification.url', [$notification->uuid])}}" class="message-user-item dropdown-item">
-                                                    <div class="message-user-item-left">
-                                                        <div class="single-notification-item d-flex align-items-center">
-                                                            <div class="flex-shrink-0">
-                                                                <div class="user-img-wrap position-relative radius-50">
-                                                                    <img src="{{ asset($notification->sender->image_path) }}" alt="img" class="radius-50">
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-2">
-                                                                <h6 class="color-heading font-14">{{$notification->sender->name}}</h6>
-                                                                <p class="font-13 mb-0">{{ __($notification->text) }}</p>
-                                                                <div class="font-11 color-gray mt-1">{{$notification->created_at->diffForHumans()}}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @empty
-                                        <p class="text-center">{{__('No Data Found')}}</p>
-                                    @endforelse
+{{--                                    @forelse(@$adminNotifications as $notification)--}}
+{{--                                        @if($notification->sender)--}}
+{{--                                            <li>--}}
+{{--                                                <a href="{{route('notification.url', [$notification->uuid])}}" class="message-user-item dropdown-item">--}}
+{{--                                                    <div class="message-user-item-left">--}}
+{{--                                                        <div class="single-notification-item d-flex align-items-center">--}}
+{{--                                                            <div class="flex-shrink-0">--}}
+{{--                                                                <div class="user-img-wrap position-relative radius-50">--}}
+{{--                                                                    <img src="{{ asset($notification->sender->image_path) }}" alt="img" class="radius-50">--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="flex-grow-1 ms-2">--}}
+{{--                                                                <h6 class="color-heading font-14">{{$notification->sender->name}}</h6>--}}
+{{--                                                                <p class="font-13 mb-0">{{ __($notification->text) }}</p>--}}
+{{--                                                                <div class="font-11 color-gray mt-1">{{$notification->created_at->diffForHumans()}}</div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </a>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
+{{--                                    @empty--}}
+{{--                                        <p class="text-center">{{__('No Data Found')}}</p>--}}
+{{--                                    @endforelse--}}
                                 </ul>
                                 <!-- Notification Dropdown End -->
                             </li>

@@ -13,6 +13,17 @@
             align-items: center;
         }
 
+        .modal2 {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
         .modal-content {
             background-color: white;
             padding: 20px;
@@ -21,7 +32,6 @@
         }
     </style>
 @endpush
-
 @section('content')
     <!-- Page content area start -->
     <div class="page-content">
@@ -49,13 +59,39 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('Page List') }}</h2>
+                            <h2>{{ __('الاشتراك') }}</h2>
                             <a id="openModalBtn" class="btn btn-success btn-sm">
                                 <i class="fa fa-plus"></i> {{ __('Add Page') }}
                             </a>
                         </div>
+                        <div>
+                          <form method="get" action="{{ route('subscriptions.index') }}" class="row justify-content-start mb-3">
+                              <div class="col-md-3">
+                                  <label class="form-label">اسم الطفل</label>
+                                      <select multiple class="form-select" name="child_name[]">
+                                          <option value="">select child</option>
+                                          @foreach($students as $student)
+                                                <option value="{{$student->name}}">{{$student->name}}</option>
+                                          @endforeach
+                                      </select>
+                              </div>
+                              <div class="col-md-3">
+                                  <label class="form-label">اسم الاشتراك</label>
+                                  <select multiple class="form-select" name="subscription_name[]">
+                                      <option value="">select subscription name</option>
+                                      @foreach($subscription_names as $subscription_name)
+                                            <option value="{{$subscription_name->name}}">{{$subscription_name->name}}</option>
+                                      @endforeach
+                                  </select>
+
+                              </div>
+                            <div class="col-md-3">
+                                  <button class="btn btn-green" type="submit">Done</button>
+                            </div>
+                          </form>
+                        </div>
                         <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                            <table class="row-border">
                                 <thead>
                                 <tr>
                                     <th>كود الاشتراك</th>
@@ -72,15 +108,23 @@
                                         <td>{{$subscription->id}}</td>
                                         <td>{{$subscription->name}}</td>
                                         <td>{{$subscription->value}}</td>
-                                        <td>{{$subscription->count}}</td>
                                         <td>
                                             <!-- Add subscription-related actions/buttons here -->
+                                            {{$subscription?->students->count()}}
+                                        </td>
+                                        <td>
+                                            <div class="action__buttons">
+                                                <a id="openModalBtn2" class="btn-action mr-1 "
+                                                    data-subscription="{{ $subscription }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="action__buttons">
                                                 {{--                                                @can('edit-admins', 'admins')--}}
 
-                                                <a class="btn-action mr-1 edit" data-toggle="tooltip" title="Edit" data-subscription-id="{{ $subscription }}">
+                                                <a class="btn-action mr-1 edit" data-toggle="tooltip" title="Edit" data-subscription="{{ $subscription }}">
                                                     <img src="{{ asset('admin/images/icons/edit-2.svg') }}" alt="edit">
                                                 </a>
                                                 {{--                                                @endcan--}}
@@ -99,7 +143,8 @@
                                         </td>
                                     </tr>
                                     <!-- Modal to display registered student names -->
-                                    <div class="modal fade" id="studentNamesModal{{$subscription->id}}" tabindex="-1" role="dialog" aria-labelledby="studentNamesModalLabel{{$subscription->id}}" aria-hidden="true">
+                                    <div class="modal fade" id="studentNamesModal{{$subscription->id}}" tabindex="-1" role="dialog"
+                                         aria-labelledby="studentNamesModalLabel{{$subscription->id}}" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -108,13 +153,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">
-{{--                                                    <ul>--}}
-{{--                                                        @foreach($subscription->students as $student)--}}
-{{--                                                            <li>{{$student->name}}</li>--}}
-{{--                                                        @endforeach--}}
-{{--                                                    </ul>--}}
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -129,9 +168,24 @@
                 </div>
             </div>
 
-            <div id="modal" class="modal">
+
+
+            <div id="modal2" class="modal2">
                 <div class="modal-content">
                     <!-- Content of the modal goes here -->
+                    <div class="container">
+                        <h2 class="mb-3">الطلبة المسجلين</h2>
+                        <div class="row justify-content-content" id="data1">
+
+                        </div>
+
+                            <a id="closeModalBtn2" class="btn btn-primary">الغاء</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
                     <div class="container">
                         <h2 class="mb-3">اضافة اشتراك</h2>
                         <form method="POST" id="editForm" action="{{route('subscriptions.store')}}">
@@ -155,9 +209,9 @@
                             <div class="form-group mb-3">
                                 <label for="subject_id">المادة</label>
                                 <select name="subject_id" id="subject_id" class="form-select" required>
-                                @foreach($subjects as $subject)
+                                    @foreach($subjects as $subject)
                                         <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                @endforeach
+                                    @endforeach
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">اضافة</button>
@@ -166,7 +220,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- Page content area end -->
@@ -180,6 +233,7 @@
 @push('script')
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
+
     <script>
         // Get references to the button and modal
         const openModalBtn = document.getElementById('openModalBtn');
@@ -209,18 +263,50 @@
             }
         });
     </script>
+
+    <script>
+        // Get references to the button and modal
+        const openModalStudents = document.getElementById('openModalStudents');
+        const modal2 = document.getElementById('modal2');
+        const closeModalBtn2 = document.getElementById('closeModalBtn2');
+
+        // Function to open the modal
+        function closeModal2() {
+            modal2.style.display = 'none';
+        }
+        // Event listeners for the button and close button
+        $('#openModalBtn2').on('click',function (){
+            $('#data1').empty()
+            var subscription = $(this).data('subscription');
+            console.log(subscription.students)
+            subscription.students.forEach(function (student) {
+                $('#data1').append(`<label class="form-label mx-3">${student.name}</label>`)
+            });
+            modal2.style.display = 'block';
+
+        })
+        closeModalBtn2.addEventListener('click', closeModal2);
+
+        // Close the modal if the user clicks outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal2();
+            }
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             $('.edit').click(function (e) {
                 e.preventDefault(); // Prevent the default behavior of the link
 
                 // Get the subscription ID from the data attribute
-                var subscriptionId = $(this).data('subscription');
-
+                var subscription = $(this).data('subscription');
+                console.log(subscription.id)
                 // Send an AJAX request to the edit route
                 $.ajax({
                     type: 'GET',
-                    url: '{{ route('subscriptions.edit', $subscription) }}', // Use the href attribute as the URL
+                    url: 'subscriptions/edit/' + subscription.id, // Use the href attribute as the URL
                     success: function (data) {
                         $('#name').val(data.name);
                         $('#value').val(data.value);
@@ -228,7 +314,7 @@
                         $('#subject_id').val(data.subject_id);
 
                         // Update the form's action attribute
-                        $('#editForm').attr('action', '{{ route('subscriptions.update',$subscription) }}');
+                            $('#editForm').attr('action', 'subscriptions/update/' + subscription.id );
 
                         // Show the modal
                         $('#modal').show();
@@ -241,4 +327,6 @@
             });
         });
     </script>
+
+
 @endpush

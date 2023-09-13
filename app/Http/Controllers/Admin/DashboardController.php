@@ -35,6 +35,7 @@ class DashboardController extends Controller
         $data['total_employees'] = Employee::where('status',1)->count();
         $data['total_courses'] = Course::where('status',1)->count();
         $data['total_admins'] = Users::where('status',1)->count();
+
         $data['total_best_courses'] = Course::with(['reviews' => function ($query) {
         $query->orderBy('rating', '>' ,'3');
             }])->count();
