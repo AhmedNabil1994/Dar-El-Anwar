@@ -33,8 +33,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title row row-cols-6 justify-content-between m-5">
                             <h5>{{trans('website.editExam')}}</h5>
-                            <button class="btn btn-success btn-sm" id="addRowBtn">{{trans('website.add_row')}}</button>
-
+                            <button class="btn buttons-style btn-sm" id="addRowBtn">{{trans('website.add_row')}}</button>
                         </div>
                         <div class="ibox-content mt-15">
 
@@ -72,12 +71,12 @@
                                 </div>
                                 <hr>
                                 <div class="row mb-4">
-                                    <div class="customers__table">
-                                        <table id="customers-table" class="row-border data-table-filter table-style">
-                                            <thead>
+                                    <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                                        <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
+                                            <thead style="background-color: #50bfa5;">
                                             <tr>
                                                 <th>{{ trans('website.questionName') }}</th>
-                                                <th>{{ trans('website.reviewType') }}</th>
+                                                <th>{{ trans('website.evaluationType') }}</th>
                                                 <th>{{ trans('website.actions') }}</th>
                                             </tr>
                                             </thead>
@@ -92,9 +91,8 @@
                                                         </select>
                                                     </td>
                                                     <td >
-                                                        <button type="button" class="btn btn-danger text-center" title="{{ __('Delete') }}">
+                                                        <button type="button" id = "deleteRowBtn" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
                                                             <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
-
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -130,7 +128,7 @@
         $(document).ready(function() {
             if(($("#customers-table tbody tr").length > 0)){
                 var submitbtn = $(`<div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{trans('website.save')}}</button>
+                                    <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>
                                     <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                 </div>`)
                 $('#exam_form').append(submitbtn)
@@ -144,13 +142,13 @@
                 columns += `<td><input class="form-control" name="question_name[]" /></td>`;
                 columns += `<td>
                                 <select class="form-select" name="review_type[]">
-                                    <option value="1">yes / No</option>
-                                    <option value="2">Excellent - Good - Average - Poor</option>
-                                    <option value="3">Degree From 0000 to 0000</option>
+                                    <option value="1">{{trans('website.yesNo')}}</option>
+                                    <option value="2">{{trans('website.excelentGoodAveragePoor')}}</option>
+                                    <option value="3">{{trans('website.degreeFrom')}}0000 {{trans("website.to")}} 0000</option>
                                 </select>
                             </td>`;
                 columns += `<td>
-                    <button type="button" class="btn-action delete deleteBtn" title="{{ trans('website.delete') }}">
+                    <button type="button" id = "deleteRowBtn" class="btn btn-action btn-danger delete deleteBtn" title="{{ __('Delete') }}">
                         <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ trans('website.delete') }}">
                     </button>
                 </td>`;
@@ -163,16 +161,20 @@
             });
             if(!($("#customers-table tbody tr").length > 0)){
                 var submitbtn = $(`<div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{trans('website.save')}}</button>
+                                    <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>
                                     <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                 </div>`)
                 $('#exam_form').append(submitbtn)
             }
 
             // Delete row when the delete button is clicked
+
+
             $(document).on("click", ".deleteBtn", function() {
                 $(this).closest("tr").remove();
             });
+
+            
         });
 
     </script>

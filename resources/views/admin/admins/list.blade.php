@@ -50,7 +50,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.admin_list') }}</h2>
-                            <a href="{{ route('admins.create') }}" class="btn btn-success btn-sm">
+                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
                                 <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
                             </a>
                         </div>

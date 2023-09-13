@@ -24,10 +24,10 @@
                 </div>
             </div>
             <div class="item-title d-flex justify-content-center mx-4">
-                <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعه المعلمين</i></a>
-                <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعه القراءن</i></a>
-                <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعه حصة دراسية</i></a>
-                <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعه القراءة</i></a>
+                <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعة المعلمين</i></a>
+                <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القرآن</i></a>
+                <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة حصة دراسية</i></a>
+                <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القراءة</i></a>
             </div>
             <form method="get" action="{{route('admin.followup.index')}}" class="row">
                 <div class="row">

@@ -368,7 +368,7 @@
 
 
                                <div class="button-group">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn buttons-style">
                                         {{ trans('website.submit') }}
                                     </button>
                                 </div>

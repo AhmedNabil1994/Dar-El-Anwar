@@ -147,6 +147,15 @@ button {
   border: 0;
   border-radius: 0;
 }
+.buttons-style {
+  background-color: #50bfa5
+}
+.buttons-style:hover,
+.buttons-style:focus,
+.buttons-style:active {
+  background-color: #50bfa5 !important;
+}
+
 
 ul {
   list-style: none;
@@ -490,7 +499,7 @@ img {
 
 .table-style thead th {
   padding: 14px 20px;
-  background: #F5F7FA;
+  /* background: #F5F7FA; */
   text-transform: capitalize;
   font-weight: 500;
   font-size: 14px;
@@ -499,11 +508,11 @@ img {
 }
 
 .table-style thead th:first-child {
-  border-radius: 10px 0 0 10px;
+  /* border-radius: 10px 0 0 10px; */
 }
 
 .table-style thead th:last-child {
-  border-radius: 0 10px 10px 0;
+  /* border-radius: 0 10px 10px 0; */
 }
 
 .table-style tbody td {
@@ -8957,6 +8966,7 @@ img {
 
 .customers__table {
   width: 100%;
+  text-align: center;
 }
 
 .customers__table table {
@@ -8965,7 +8975,7 @@ img {
 
 .customers__table table thead th {
   padding: 14px 20px;
-  background: #F5F7FA;
+  /* background: #F5F7FA; */
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -17208,14 +17218,14 @@ blockquote.right span::before {
 }
 
 .btn.btn-blue {
-  background-color: #33a81f;
+  background-color: #50bfa5;
   color: #ffffff;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
 .btn.btn-blue:hover {
-  background-color: #47ad36a3;
+  /* background-color: #47ad36a3; */
   color: #ffffff;
 }
 
@@ -17354,7 +17364,7 @@ blockquote.right span::before {
 }
 
 .btn.btn-success {
-  background-color: #4CBF4C;
+  /* background-color: #4CBF4C; */
   color: #ffffff;
 }
 

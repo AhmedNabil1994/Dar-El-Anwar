@@ -275,7 +275,6 @@ Route::prefix('student')->group(function () {
         Route::get('/treasury/expense/edit/{financialAccount}', [FinancialAccountController::class,'editExpenseTransaction'])->name('accounts.editExpenseTransaction');
         Route::post('/treasury/store', [FinancialAccountController::class,'storeTransaction'])->name('accounts.storeTransaction');
         Route::post('/treasury/update/{financialAccount}', [FinancialAccountController::class,'updateTransaction'])->name('accounts.updateTransaction');
-        Route::get('create', [FinancialAccountController::class, 'create'])->name('student.create');
         Route::post('store', [FinancialAccountController::class, 'store'])->name('student.store');
         Route::get('view/{id}', [FinancialAccountController::class, 'view'])->name('student.view');
         Route::get('edit/{id}', [FinancialAccountController::class, 'edit'])->name('student.edit');

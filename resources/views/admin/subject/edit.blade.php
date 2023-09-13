@@ -17,7 +17,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.subject.index')}}">{{ trnas('subjectList') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.subject.index')}}">{{ trans('website.subjectList') }}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ trans('website.editSubject') }}</li>
                                 </ul>
                             </nav>

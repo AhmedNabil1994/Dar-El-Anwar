@@ -26,6 +26,8 @@
             <h1> </h1>
 
 
+
+            
     {{--<div class="instructor-profile-right-part">
         <div class="instructor-quiz-list-page">
             <div class="row m-0 quiz-list-page-top mb-4">
@@ -38,16 +40,16 @@
             <div class="row">
                 <div class="col-12">
                     @if($exams->count() > 0)
-                        <div class="table-responsive">
+                    <div class="table-responsive">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th scope="col">{{ trans('website.quizName') }}</th>
-                                <th scope="col">{{ trans('website.quizType') }}</th>
-                                <th scope="col">{{ trans('website.unPublish') }}</th>
-                                <th scope="col">{{ trans('website.status') }}</th>
-                                <th scope="col">{{ trans('website.action') }}</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">{{ trans('website.quizName') }}</th>
+                                    <th scope="col">{{ trans('website.quizType') }}</th>
+                                    <th scope="col">{{ trans('website.unPublish') }}</th>
+                                    <th scope="col">{{ trans('website.status') }}</th>
+                                    <th scope="col">{{ trans('website.action') }}</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($exams as $exam)
@@ -55,27 +57,26 @@
                                     <td>{{$exam->name}}</td>
                                     <td>{{ucfirst(str_replace("_", " ", $exam->type))}}</td>
                                     <td>{{$exam->questions->count()}}</td>
+                                    <td> @if($exam->status == 1) <div class="quiz-status">{{ trans('website.publish') }}</div> @else  <div class="quiz-status unpublish">{{ trans('website.unPublish') }}</div> @endif </td>
+                                    <td><a href="{{route('exam.question', [$exam->uuid])}}" class="add-question-btn theme-btn theme-button1 default-hover-btn">{{ __('Add Question') }}</a></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="iconify" data-icon="charm:menu-meatball"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
-                                <td> @if($exam->status == 1) <div class="quiz-status">{{ __('Publish') }}</div> @else  <div class="quiz-status unpublish">{{ __('Unpublish') }}</div> @endif </td>
-                                <td><a href="{{route('exam.question', [$exam->uuid])}}" class="add-question-btn theme-btn theme-button1 default-hover-btn">{{ __('Add Question') }}</a></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="iconify" data-icon="charm:menu-meatball"></span>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-
-                                            @if($exam->status == 1)
-                                                <li><a class="dropdown-item" href="{{route('exam.status-change', [$exam->uuid, 0])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Unpublish') }}</a></li>
-                                            @else
-                                                <li><a class="dropdown-item" href="{{route('exam.status-change', [$exam->uuid, 1])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ __('Publish') }}</a></li>
-                                            @endif
-                                            <li><a class="dropdown-item" href="{{route('exam.view', [$exam->uuid])}}"><span class="iconify" data-icon="carbon:view"></span>{{ __('View') }}</a></li>
-                                            <li><a class="dropdown-item" href="{{route('exam.edit', [$exam->uuid])}}"><span class="iconify" data-icon="clarity:note-edit-line"></span>{{ __('Edit') }}</a></li>
-                                            <li><a href="{{route('exam.delete', [$exam->uuid])}}"  class="dropdown-item"  ><span class="iconify" data-icon="gg:trash"></span>{{ __('Delete') }}</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
+                                                @if($exam->status == 1)
+                                                    <li><a class="dropdown-item" href="{{route('exam.status-change', [$exam->uuid, 0])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ trans('website.unPublish') }}</a></li> 
+                                                @else
+                                                    <li><a class="dropdown-item" href="{{route('exam.status-change', [$exam->uuid, 1])}}"><span class="iconify" data-icon="ic:outline-publish"></span>{{ trans('website.publish') }}</a></li>
+                                                @endif
+                                                <li><a class="dropdown-item" href="{{route('exam.view', [$exam->uuid])}}"><span class="iconify" data-icon="carbon:view"></span>{{ __('View') }}</a></li>
+                                                <li><a class="dropdown-item" href="{{route('exam.edit', [$exam->uuid])}}"><span class="iconify" data-icon="clarity:note-edit-line"></span>{{ __('Edit') }}</a></li>
+                                                <li><a href="{{route('exam.delete', [$exam->uuid])}}"  class="dropdown-item"  ><span class="iconify" data-icon="gg:trash"></span>{{ __('Delete') }}</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
                             </tr>
                             @endforeach
 
@@ -98,19 +99,22 @@
         </div>
     </div>--}}
 
+
+    
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title d-flex justify-content-between align-items-end">
                             <h2>{{ trans('website.adminList') }}</h2>
-                            <a href="{{ route('admin.exam.create') }}" class="btn btn-success btn-sm">
+                            <a href="{{ route('admin.exam.create') }}" class="btn btn-sm buttons-style" style="background-color: #50bfa5;">
                                 <i class="fa fa-plus"></i> {{ trans('website.add_exam') }}
                             </a>
                         </div>
 
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
-                                <thead>
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead style="background-color: #50bfa5;">
                                 <tr>
                                     <th scope="col">{{ trans('website.quizName') }}</th>
                                     <th scope="col">{{ trans('website.quizType') }}</th>
@@ -126,8 +130,8 @@
                                         <td>{{$exam->name}}</td>
                                         <td>{{ucfirst(str_replace("_", " ", $exam->type))}}</td>
                                         <td>{{$exam->questions->count()}}</td>
-
-                                        <td> @if($exam->status == 1) <div class="quiz-status">{{ __('Publish') }}</div> @else  <div class="quiz-status unpublish">{{ __('Unpublish') }}</div> @endif </td>
+                                            <!--  __('Unpublish') ==> to write Unpublish -->
+                                        <td> @if($exam->status == 1) <div class="quiz-status">{{trans('website.publish') }}</div> @else  <div class="quiz-status unpublish">{{ trans('website.unPublish') }}</div> @endif </td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

@@ -28,7 +28,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{__('Roles')}}</h2>
-                            <a href="{{route('role.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('Add Role')}} </a>
+                            <a href="{{route('role.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{__('Add Role')}} </a>
                         </div>
                         <div class="customers__table">
                             <table id="customers-table" class="row-border data-table-filter table-style">

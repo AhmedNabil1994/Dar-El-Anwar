@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class FinancialAccountController extends Controller
 {
+
+    public function create()
+    {
+
+    }
     /**
      * Display a listing of the resource.
      *
