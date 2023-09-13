@@ -105,7 +105,6 @@ return [
 "print" => "طباعة",
 "morning" => "صباحية",
 "evining" => "مسائية",
-"filters"=> "فلتر",
 "add_student"=>"إضاقة تلميذ",
 "select_city"=>"اختر المدينة",
 "accepted_size"=> "مسافات الصورة المقبولة",

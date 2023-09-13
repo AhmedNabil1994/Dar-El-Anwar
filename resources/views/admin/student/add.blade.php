@@ -379,7 +379,7 @@
                                 </div>
                             <div class="row mb-3">
                                 <div class="col-md-12 text-right">
-                                    <button class="btn btn-primary" type="submit">{{ trans('website.save') }}</button>
+                                    <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
                                 </div>
                             </div>
                             </div>
