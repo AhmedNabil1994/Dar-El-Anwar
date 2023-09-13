@@ -7,7 +7,7 @@
                         <button class="sidebar-toggler">
                             <img src="{{asset('admin/images/icons/header/bars.svg')}}" alt="">
                         </button>
-                        <a href="{{ route('main.index') }}" class="btn btn-blue">{{ __('Visit Site') }}</a>
+                        <a href="{{ route('main.index') }}" class="btn btn-blue">{{ trans('website.visitSite') }}</a>
                     </div>
 
                     <div class="header__navbar__right">

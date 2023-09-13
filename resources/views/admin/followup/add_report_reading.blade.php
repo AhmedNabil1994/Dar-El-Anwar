@@ -125,7 +125,8 @@
                                 @foreach($questions as $question)
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">
-                                            <label>{{trans('website.'.$question->questions)}} <span class="text-danger">*</span></label>
+                                            <!-- <label>{{trans('website.'.$question->questions)}} <span class="text-danger">*</span></label> -->
+                                            <label>متابعة القراءة <span class="text-danger">*</span></label>
                                             <textarea class="form-text" name="questions[]"></textarea>
                                         </div>
                                     </div>
@@ -160,7 +161,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-12 text-right">
-                                    <button class="btn btn-primary" type="submit">{{ trans('website.save') }}</button>
+                                    <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
                                 </div>
                             </div>
                             </div>

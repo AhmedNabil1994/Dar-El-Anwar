@@ -32,7 +32,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>{{__('Create Admin')}}</h5>
+                            <h5>{{trans('website.createAdmin')}}</h5>
                         </div>
                         <div class="ibox-content mt-15">
 

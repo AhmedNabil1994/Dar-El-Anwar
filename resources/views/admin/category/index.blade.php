@@ -28,7 +28,7 @@
                         <div class="customers__area bg-style mb-30">
                             <div class="item-title d-flex justify-content-between">
                                 <h2>{{trans('website.categoryList')}}</h2>
-                                <a href="{{route('category.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{trans('website.add_category')}} </a>
+                                <a href="{{route('category.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('website.add_category')}} </a>
                             </div>
                             <div class="customers__table">
                                 <table id="customers-table" class="row-border data-table-filter table-style">

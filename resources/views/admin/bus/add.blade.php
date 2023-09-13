@@ -9,7 +9,7 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Assign Bus') }}</h2>
+                                <h2>{{ trans('website.assignBus') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                     <div class="item-title d-flex justify-content-between">
-                        <h2>{{ __('Assign Bus') }}</h2>
+                        <h2>{{ trans('website.assignBus') }}</h2>
                     </div>
                     <form action="{{route('admin.bus.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
@@ -35,8 +35,8 @@
                             <div class="col-md-6">
 
                                 <div class="input__group mb-25">
-                                    <label>{{__('Name')}} <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" value="{{old('name')}}" placeholder="{{__('Bus Name')}}" class="form-control" required>
+                                    <label>{{trans('website.name')}} <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" value="{{old('name')}}" placeholder="{{trans('website.busName')}}" class="form-control" required>
                                     @if ($errors->has('name'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
                                     @endif
@@ -44,8 +44,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input__group mb-25">
-                                    <label>{{ __('Code') }} <span class="text-danger">*</span></label>
-                                    <input type="text" name="code" value="{{old('code')}}" placeholder="{{ __('Code') }}" class="form-control"
+                                    <label>{{ trans('website.code') }} <span class="text-danger">*</span></label>
+                                    <input type="text" name="code" value="{{old('code')}}" placeholder="{{ trans('website.code') }}" class="form-control"
                                            required>
                                     @if ($errors->has('code'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('code') }}</span>
@@ -54,9 +54,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input__group mb-25">
-                                    <label>{{__('Driver')}}</label>
+                                    <label>{{trans('website.driver')}}</label>
                                     <select name="driver_id" id="driver_id" class="form-select">
-                                        <option value="">{{__('Select Driver')}}</option>
+                                        <option value="">{{trans('website.selectDriver')}}</option>
                                         @foreach($drivers as $driver)
                                             <option value="{{$driver->id}}" @if(old('driver_id'))
                                                 {{old('driver_id') == $driver->id ? 'selected' : '' }}
@@ -68,7 +68,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12 text-right">
-                                <button class="btn btn-primary" type="submit">{{ __('Save') }}</button>
+                                <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
                             </div>
                         </div>
                     </form>

@@ -9,7 +9,7 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{__('Roles')}}</h2>
+                                <h2>{{trans('website.roles')}}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -27,15 +27,15 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{__('Roles')}}</h2>
-                            <a href="{{route('role.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{__('Add Role')}} </a>
+                            <h2>{{trans('website.roles')}}</h2>
+                            <a href="{{route('role.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('website.addRole')}} </a>
                         </div>
                         <div class="customers__table">
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{trans('website.name')}}</th>
+                                    <th>{{trans('website.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

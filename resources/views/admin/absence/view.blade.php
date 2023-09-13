@@ -28,7 +28,7 @@
 
             <form method="get" action="{{route('absence.index')}}" class="row">
                 <div class="row">
-                    <h1>{{trans("website.filters")}}</h1>
+                    <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="col-sm-2 m-3">
                     <label for="filterByJoining">{{trans("website.date_from")}}:</label>
