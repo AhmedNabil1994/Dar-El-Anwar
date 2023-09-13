@@ -84,7 +84,7 @@
                     </select>
                 </div>
                 <div class="text-end mb-3 d-flex justify-content-end">
-                    <button type="submit" id="btn_filter" class="btn btn-primary btn-sm">{{trans("website.filter")}}</button>
+                    <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                     <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>
             </form>

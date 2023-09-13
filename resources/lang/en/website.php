@@ -77,7 +77,7 @@ return [
 "enrolled"=> "مسجل",
 "suspended"=> "موقوف",
 "graduated"=> "تخرج",
-"filter"=>"فيلتر",
+"filter"=>"تصفية  ",
 "joining_date"=>"تاريخ الانضمام",
 "birthday"=>"تاريخ الميلاد",
 "gender"=>"الجنس",
