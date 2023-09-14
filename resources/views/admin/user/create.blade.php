@@ -32,7 +32,6 @@
                         </div>
                         <form action="{{route('user.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
-
                             <div class="custom-form-group mb-3 row">
                                 <label for="name" class="col-lg-3 text-lg-right text-black"> {{__('Name')}} </label>
                                 <div class="col-lg-9">

@@ -276,10 +276,10 @@ Route::prefix('student')->group(function () {
         Route::get('/treasury/expense/edit/{financialAccount}', [FinancialAccountController::class,'editExpenseTransaction'])->name('accounts.editExpenseTransaction');
         Route::post('/treasury/store', [FinancialAccountController::class,'storeTransaction'])->name('accounts.storeTransaction');
         Route::post('/treasury/update/{financialAccount}', [FinancialAccountController::class,'updateTransaction'])->name('accounts.updateTransaction');
-        Route::post('store', [FinancialAccountController::class, 'store'])->name('student.store');
-        Route::get('view/{id}', [FinancialAccountController::class, 'view'])->name('student.view');
-        Route::get('edit/{id}', [FinancialAccountController::class, 'edit'])->name('student.edit');
-        Route::post('update/{id}', [FinancialAccountController::class, 'update'])->name('student.update');
+//        Route::post('store', [FinancialAccountController::class, 'store'])->name('student.store');
+//        Route::get('view/{id}', [FinancialAccountController::class, 'view'])->name('student.view');
+//        Route::get('edit/{id}', [FinancialAccountController::class, 'edit'])->name('student.edit');
+//        Route::post('update/{id}', [FinancialAccountController::class, 'update'])->name('student.update');
         Route::delete('delete/{financialAccount}', [FinancialAccountController::class, 'deleteTransaction'])->name('accounts.delete');
         Route::post('change-student-status', [FinancialAccountController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
     });
@@ -410,11 +410,7 @@ Route::prefix('category')->group(function () {
 
 Route::prefix('reports')->as('reports.')->group(function () {
     Route::get('/report_students_ages', [ReportController::class, 'reportStudentsAge'])->name('reportStudentsAge');
-    Route::get('create', [ReportController::class, 'create'])->name('create');
-    Route::post('store', [ReportController::class, 'store'])->name('store');
-    Route::get('edit/{uuid}', [ReportController::class, 'edit'])->name('edit');
-    Route::post('update/{uuid}', [ReportController::class, 'update'])->name('update');
-    Route::get('delete/{uuid}', [ReportController::class, 'delete'])->name('delete');
+    Route::get('/report_parents', [ReportController::class, 'reportParents'])->name('reportParents');
 });
 
 

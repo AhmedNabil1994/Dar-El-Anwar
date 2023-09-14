@@ -779,6 +779,13 @@
                         <span>{{__('تقارير اعمار الطلاب')}}</span>
                     </a>
                 </li>
+
+                <li class="{{ active_if_match('reports/report_parents') }}">
+                    <a href="{{route('reports.reportParents')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('تقرير بيانات الاباء')}}</span>
+                    </a>
+                </li>
             </ul>
         </li>
 

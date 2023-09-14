@@ -17,7 +17,7 @@ class Student extends Authenticatable
 
     public function parent()
     {
-        return $this->hasOne(ParentInfo::class,'student_id');
+        return $this->hasMany(ParentInfo::class,'student_id');
     }
 
     public function courses()
@@ -62,7 +62,7 @@ class Student extends Authenticatable
 
     public function parentInfo()
     {
-        return $this->hasOne(ParentInfo::class);
+        return $this->hasMany(ParentInfo::class);
     }
 
     public function scopeApproved($query)
@@ -97,5 +97,15 @@ class Student extends Authenticatable
     public function assignment()
     {
         return $this->hasOne(Assignment::class);
+    }
+
+    public function father()
+    {
+        return $this->parent?->where('relationship','father')->first();
+    }
+
+    public function mother()
+    {
+        return $this->parent?->where('relationship','mother')->first();
     }
 }

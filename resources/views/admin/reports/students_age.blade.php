@@ -24,11 +24,76 @@
                 </div>
             </div>
             <div class="row justify-content-end">
-                <div class="form-group col-md-3">
-                    <a href="{{route('stores.movement.create')}}" class="form-control btn">
-                        <i class="fas fa-cash-register"></i>
-                    </a>
-                </div>
+                <form id="exam_form" method="get" action="{{route('reports.reportStudentsAge')}}">
+                    @csrf
+                    <div class="row mb-4 align-items-center">
+                        <div class="form-group col-sm-2">
+                            <label for="exam_name">عدد الاطفال : </label>
+                            <span type="text"
+                                   class="form-label">
+                            {{$count}}
+                            </span>
+                            @error('exam_name')
+                            {{--                                        <span class="text-danger">{{ $message}}</span>--}}
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="student_name">بحث باسم الطفل</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="student_name"
+                                   value="{{request('student_name')}}"/>
+                            @error('student_name')
+                            {{--                                        <span class="text-danger">{{ $message}}</span>--}}
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="birthdate">بحث في تاريخ الميلاد</label>
+                            <input type="date"
+                                   class="form-control"
+                                   name="birthdate"
+                                   value="{{request('birthdate')}}"/>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <button type="submit"><i class="fa fa-filter"></i></button>
+                        </div>
+
+                    </div>
+                    <div class="row mb-4">
+                        <div class="form-group col-md-3">
+                            <label for="from">بحث في عمر الاطفال من</label>
+                            <input type="number"
+                                   class="form-control"
+                                   name="from"
+                                   value="{{request('from')}}"/>
+                        </div>
+                        <div class="form-group col-md-3">
+
+                            <label for="to">الي</label>
+                            <input type="number"
+                                   class="form-control"
+                                   name="to"
+                                   value="{{request('to')}}"/>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="studen_name">فترة</label>
+                          <select name="period" class="form-select">
+                              <option value="">اختر الفترة</option>
+                              <option value="1"
+                                {{request('period') == 1?'selected':''}}
+                              >صباحي</option>
+                              <option value="2"
+                                  {{request('period') == 2?'selected':''}}
+                              >مسائي</option>
+                          </select>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                </form>
+
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -82,7 +147,7 @@
                                 <td>{{  $years }}</td>
 
                                 <td>
-                                    <a href="{{route('student.view',$student_age->id)}}" class="btn-action view"  title="{{ __('معايبة') }}">
+                                    <a href="{{route('student.edit',$student_age->id)}}" class="btn-action view"  title="{{ __('معايبة') }}">
                                        <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

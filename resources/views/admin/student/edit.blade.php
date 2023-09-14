@@ -39,7 +39,7 @@
                                             <input type="file" name="image" id="image" accept="image/*"  onchange="previewFile(this)">
                                             <div class="upload-img-box-icon">
                                                 <i class="fa fa-camera"></i>
-                                                <p class="m-0">{{trnas('website.image')}}</p>
+                                                <p class="m-0">{{trans('website.image')}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -108,8 +108,8 @@
                                     </div>
                                 </div>
 
-                                <!-- 
-                                    @hassan ===> this field is missing 
+                                <!--
+                                    @hassan ===> this field is missing
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">
                                             <label>{{trans('website.branch')}} <span class="text-danger">*</span></label>
@@ -191,7 +191,7 @@
                                         <option value="" selected>{{trans('website.select_period')}}</option>
                                         <option value="1" {{$student->period == 1 ? "selected":""}}>{{trans('website.morning')}}</option>
                                         <option value="2" {{$student->period == 2 ? "selected":""}}>{{trans('website.evening')}}</option>
-                                        <option value="3" {{$student->period == 3 ? "selected":""}}>{{trnas('website.both')}}</option>
+                                        <option value="3" {{$student->period == 3 ? "selected":""}}>{{trans('website.both')}}</option>
                                         </select>
                                         @if ($errors->has('period'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('period') }}</span>
@@ -251,10 +251,10 @@
                                     <div class="input__group mb-25">
                                         <label>{{trans('website.Status')}} <span class="text-danger">*</span></label>
                                         <select name="status" class="form-control" />
-                                        <option value="" selected >{{trnas('website.select_status')}}</option>
+                                        <option value="" selected >{{trans('website.select_status')}}</option>
                                         <option value="0" {{$student->status == 0 ? "selected":""}}>{{trans('website.pending')}}</option>
                                         <option value="1" {{$student->status == 1 ? "selected":""}}>{{trans('website.approved')}}</option>
-                                        <option value="2" {{$student->status == 2 ? "selected":""}}>{{trnas('website.blocked')}}</option>
+                                        <option value="2" {{$student->status == 2 ? "selected":""}}>{{trans('website.blocked')}}</option>
                                         </select>
                                         @if ($errors->has('status'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('status') }}</span>
@@ -266,7 +266,7 @@
                                         <label>{{trans('website.guardian_Relationship')}} <span class="text-danger">*</span></label>
                                         <select name="guardian_relationship" placeholder="{{trans('website.guardian_Relationship')}}" class="form-control" >
                                             <option value="Father" @if($parent->relationship == 'Father') selected @endif>{{trans('website.father')}}}</option>
-                                            <option value="Mother" @if($parent->relationship == 'Mother') selected @endif>{{trnas('website.mother')}}</option>
+                                            <option value="Mother" @if($parent->relationship == 'Mother') selected @endif>{{trans('website.mother')}}</option>
                                             <option value="Other" @if($parent->relationship == 'Other') selected @endif >{{trans('website.other')}}</option>
                                         </select>
                                         @if ($errors->has('guardian_relationship'))
