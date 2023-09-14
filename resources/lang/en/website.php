@@ -175,7 +175,7 @@ return [
 "delete"=> "مسح",
 "exam"=> "أختبار",
 "add_exam"=> "أضف اختبار",
-"all_exams"=> "كل الإختبارات",
+"all_exams"=> "كل الاختبارات",
 "adminList"=> "قائمة المديرين",
 "editExam"=> "تعديل الامتحان",
 "add_row"=> "إضافة صف",
@@ -266,5 +266,6 @@ return [
 "username"=>" اسم المستخدم  ",
 "confirmPassword"=>" تأكيد كلمة السر  ",
 "createAdmin"=>"  تعيين مشرف  ",
+"darElAnwar"=>"  دار الأنوار  ",
 ];
 

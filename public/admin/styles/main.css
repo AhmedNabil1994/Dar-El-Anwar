@@ -34,7 +34,7 @@ body {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  background: #000000;
+  background: #f5f7f9;
 }
 
 h1,
@@ -730,7 +730,7 @@ img {
   left: 0;
   width: 250px;
   height: 100vh;
-  background-color: #000000;
+  background-color: #ffffff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -928,14 +928,15 @@ img {
 
 .header__area {
   width: 100%;
-  height: 240px;
+  height: 230px;
+  padding: 20px;
   /* background-image: url("../images/background/header-background.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .header__navbar {
-  padding: 20px 0;
+  /* padding: 5px 0; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8867,6 +8868,9 @@ img {
 
 .customers__area {
   padding: 25px 25px 30px;
+}
+.customers__area__header {
+  padding: 2px 24px 0px;
 }
 
 .customers__top {
@@ -17140,9 +17144,9 @@ blockquote.right span::before {
 .breadcrumb__title h2 {
   text-transform: capitalize;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 32px;
-  color: #ffffff;
+  color: black;
 }
 
 .breadcrumb__content .breadcrumb {
@@ -18759,4 +18763,37 @@ blockquote.right span::before {
 }
 .ibox-title{
     margin-bottom: 20px;
+}
+
+#actions{
+  margin-bottom: 20px;
+}
+
+.site-title {
+  font-size: 25px;
+}
+
+
+/* @media(width:600px){
+  .header__navbar {
+    flex-direction: column;
+    align-items: end;
+  }
+  
+} */
+
+@media(max-width:500px){
+  .header__navbar {
+    flex-direction: column;
+    align-items: end;
+  }
+  .header__navbar ul {
+    margin-top: -24px;
+  }
+  .header__navbar ul li:first-of-type {
+    margin-right: 20px;
+  }
+  .user-profile {
+
+  }
 }

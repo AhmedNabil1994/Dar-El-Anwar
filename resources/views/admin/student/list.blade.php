@@ -25,7 +25,7 @@
             </div>
             <form method="get" action="{{route('student.index')}}" class="row">
                 <div class="row">
-                    <h1>{{trans("website.filters")}}</h1>
+                    <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="col-md-3 m-3">
                     <label for="filterByLevel">{{trans("website.level")}}:</label>

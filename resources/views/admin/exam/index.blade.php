@@ -5,25 +5,26 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('website.exam') }}</h2>
+                                <h2>{{ trans('website.all_exams') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('trans.all_exams ') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.all_exams') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
 
-            <h1> </h1>
 
 
 
@@ -106,7 +107,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between align-items-end">
-                            <h2>{{ trans('website.adminList') }}</h2>
+                            <h2>{{ trans('website.all_exams') }}</h2>
                             <a href="{{ route('admin.exam.create') }}" class="btn btn-sm buttons-style" style="background-color: #50bfa5;">
                                 <i class="fa fa-plus"></i> {{ trans('website.add_exam') }}
                             </a>

@@ -6,20 +6,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="breadcrumb__content">
-                        <div class="breadcrumb__content__left">
-                            <div class="breadcrumb__title">
-                                <h2>{{ trans('website.addExam') }}</h2>
+                    <div class="customers__area__header bg-style mb-30">
+                        <div class="breadcrumb__content">
+                            <div class="breadcrumb__content__left">
+                                <div class="breadcrumb__title">
+                                    <h2>{{ trans('website.add_exam') }}</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="breadcrumb__content__right">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ trans('website.all_exams') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.editExam') }}</li>
-                                </ul>
-                            </nav>
+                            <div class="breadcrumb__content__right">
+                                <nav aria-label="breadcrumb">
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                        <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ trans('website.all_exams') }}</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{ trans('website.editExam') }}</li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,15 +31,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title row row-cols-6 d-flex justify-content-between align-items-center m-5">
-                            <h5>{{trans('website.createExam')}}</h5>
-                            <button class="btn btn-sm buttons-style" id="addRowBtn">{{trans("website.add_row")}}</button>
-
-                        </div>
                         <div class="ibox-content mt-15">
 
                             <form id="exam_form" method="post" action="{{route('admin.exam.store')}}">
                                 @csrf
+                            <div class="customers__area bg-style mb-30 form-container">
                                 <div class="row mb-4">
                                     <div class="form-group col-md-6">
                                         <label for="course_id">{{trans('website.courseName')}}</label>
@@ -67,10 +65,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <hr>
+                            </div>
+                                <!-- <hr> -->
+                            <div class="customers__area__header bg-style mb-30">
+                                <div class="ibox-title row row-cols-6 d-flex justify-content-between align-items-center m-5">
+                                    <h5>{{trans('website.createExam')}}</h5>
+                                    <button type = "button" class="btn btn-sm buttons-style" id="addRowBtn">{{trans("website.add_row")}}</button>
+                                </div>
                                 <div class="row mb-4">
                                     <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                                        <!-- <table id="customers-table" class="row-border data-table-filter table-style"> -->
                                         <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
                                             <thead style="background-color: #50bfa5;">
                                             <tr>
@@ -90,6 +93,7 @@
 
                                     </div>
                                 </div>
+                            </div>
 
                             </form>
 
@@ -132,7 +136,7 @@
                                     <button type="submit" class="btn buttons-style" style="background-color: #50bfa5;">{{trans('website.save')}}</button>
                                     <a href="{{route('admin.exam.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                 </div>`)
-                    $('#exam_form').append(submitbtn)
+                    $('.form-container').append(submitbtn)
                 }
                 // Append the columns to the new row
                 newRow.append(columns);

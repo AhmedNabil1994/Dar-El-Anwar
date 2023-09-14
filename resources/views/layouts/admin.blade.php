@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{asset('admin/css/modules/employee.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/modules/chat.css')}}">
     <link href="{{asset('common/css/select2.css')}}" rel="stylesheet">
-    @toastr_css
+    <!-- @toastr_css -->
 
 </head>
 <body class=" direction-rtl">
