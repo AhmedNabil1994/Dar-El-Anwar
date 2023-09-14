@@ -31,12 +31,12 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('All Courses') }}</h2>
+                            <h2>{{ trans("website.allCourses") }}</h2>
                         </div>
 
                         <form method="get" action="{{route('admin.course.index')}}" class="row">
                             <div class="row">
-                                <h1>{{trans("website.filters")}}</h1>
+                                <h1>{{trans("website.filter")}}</h1>
                             </div>
                             <!-- Code Filter -->
                             <div class="col-md-2 m-3">
@@ -160,8 +160,8 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">{{__('Save')}}</button>
-                                <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                <button type="submit" class="btn buttons-style">{{trans("website.save")}}</button>
+                                <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
                             </div>
 
                         </form>
@@ -188,7 +188,6 @@
                                 </thead>
                                 <tbody>
                                 @foreach($courses as $course)
-
                                 <tr class="removable-item">
                                     <td>{{$course->code}}</td>
                                     <td>{{$course->title}}</td>
@@ -256,8 +255,8 @@
                                 <input class="form-control" name="student"/>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">{{__('Save')}}</button>
-                                <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                <button type="submit" class="btn buttons-style">{{trans("website.save")}}</button>
+                                <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
                             </div>
                         </form>
 

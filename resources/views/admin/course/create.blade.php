@@ -10,7 +10,7 @@
                 <div class="breadcrumb__content">
                     <div class="breadcrumb__content__left">
                         <div class="breadcrumb__title">
-                            <h2>{{ __('Create Course') }}</h2>
+                            <h2>{{ __('Create') }}</h2>
                         </div>
                     </div>
                     <div class="breadcrumb__content__right">
@@ -33,7 +33,7 @@
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>{{__('Create Course')}}</h5>
+                                <h5>{{trans("website.createCourse")}}</h5>
                             </div>
                             <div class="ibox-content mt-15">
 
@@ -41,7 +41,7 @@
                                     @csrf
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="code">{{__('Code')}}</label>
+                                            <label for="code">{{trans('website.code')}}</label>
 
                                             <input type="text"
                                                    class="form-control"
@@ -53,7 +53,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="title">{{__('Title')}}</label>
+                                            <label for="title">{{trans('website.courseTitle')}}</label>
 
                                             <input type="text"
                                                    class="form-control"
@@ -67,13 +67,13 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="instructor_id">{{__('Instructor')}}</label>
+                                            <label for="instructor_id">{{trans('website.instructor')}}</label>
 
                                             <select type="text"
                                                    class="form-control"
                                                    id="instructor_id"
                                                    name="instructor_id" >
-                                                <option value="">Seclect Teacher</option>
+                                                <option value="">{{trans("website.selectInstructor")}}</option>
                                                 @foreach($instructors as $instructor)
                                                     <option value="{{$instructor->id}}">{{$instructor->employee->name}}</option>
                                                 @endforeach
@@ -84,13 +84,13 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="subject_id">{{__('Subject')}}</label>
+                                            <label for="subject_id">{{trans('website.subject')}}</label>
 
                                             <select type="text"
                                                    class="form-control"
                                                    id="subject_id"
                                                    name="subject_id" >
-                                                <option value="">Seclect Subject</option>
+                                                <option value="">{{trans('website.selectSubject')}}</option>
                                                 @foreach($subjects as $subject)
                                                     <option value="{{$subject->id}}">{{$subject->name}}</option>
                                                 @endforeach
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="department_id">{{__('Department')}}</label>
+                                            <label for="department_id">{{trans('website.department')}}</label>
                                             <select type="text"
                                                    class="form-control"
                                                    id="department_id"
@@ -117,7 +117,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="content">{{__('Content')}}</label>
+                                            <label for="content">{{trans('website.content')}}</label>
 
                                             <textarea type=""
                                                    class="form-control"
@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="price">{{__('Price')}}</label>
+                                            <label for="price">{{trans('website.price')}}</label>
 
                                             <input type="number"
                                                     class="form-control"
@@ -143,7 +143,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="time">{{__('Time')}}</label>
+                                            <label for="time">{{trans('website.time')}}</label>
 
                                             <input type="time"
                                                       class="form-control"
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="date_to">{{__('Date TO')}} :</label>
+                                            <label for="date_to">{{trans('website.dateTo')}} :</label>
                                             <input type="date" id="date_to" name="date_to"
                                                    class="form-control">
 
@@ -165,7 +165,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="date_from">{{__('Date From')}} :</label>
+                                            <label for="date_from">{{trans('website.dateFrom')}} :</label>
                                             <input type="date" id="date_from" name="date_from"
                                                    class="form-control">
 
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="status">{{__('Status')}}  </label>
+                                            <label for="status">{{trans('website.status')}}  </label>
                                             <input type="checkbox" name="status"
                                                    class="input__checkbox">
 
@@ -186,8 +186,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">{{__('Save')}}</button>
-                                        <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                        <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>
+                                        <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                     </div>
                                 </form>
 

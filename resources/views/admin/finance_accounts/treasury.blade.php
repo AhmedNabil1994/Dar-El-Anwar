@@ -50,15 +50,15 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('Admin List') }}</h2>
-                            <a href="{{ route('admins.create') }}" class="btn btn-success btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('Add Admin') }}
+                            <h2>{{ trans('website.adminList') }}</h2>
+                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
+                                <i class="fa fa-plus"></i> {{ trans('website.addAdmin') }}
                             </a>
                         </div>
 
                         <div class="item-title d-flex justify-content-center">
-                               <a href="{{ route('balances.openingBalanceForm') }}" class="btn btn-success btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('Balances') }}
+                               <a href="{{ route('balances.openingBalanceForm') }}" class="btn buttons-style btn-sm">
+                                <i class="fa fa-plus"></i> {{ trans('website.balances') }}
                             </a>
                         </div>
 

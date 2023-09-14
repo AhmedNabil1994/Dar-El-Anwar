@@ -27,21 +27,21 @@
             </div>
 
             <div class="item-title d-flex justify-content-center">
-                <a href="{{ route('balances.createOpeningBalance') }}" class="btn btn-success btn-sm">
-                    <i class="fa fa-plus"></i> {{ __('Add Balance') }}
+                <a href="{{ route('balances.createOpeningBalance') }}" class="btn buttons-style btn-sm">
+                    <i class="fa fa-plus"></i> {{ trans('website.addBalance') }}
                 </a>
             </div>
 
             <div class="col-md-12">
-                <h1>Opening Balances</h1>
+                <h1>{{trans("website.openingBalances")}}</h1>
                 <table class="table">
                     <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>Date</th>
-                        <th>Opening Balance</th>
-                        <th>Closing Balance</th>
-                        <th>Action</th>
+                        <th>{{trans("website.date")}}</th>
+                        <th>{{trans("website.openingBalance")}}</th>
+                        <th>{{trans("website.closingBalance")}}</th>
+                        <th>{{trans("website.action")}}</th>
                     </tr>
                     </thead>
                     <tbody>

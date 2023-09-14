@@ -1,5 +1,5 @@
-<header class="header__area">
-    <div class="container-fluid">
+<nav class="header__area buttons-style">
+    <div class="container-fluid ">
         <div class="row">
             <div class="col-md-12">
                 <div class="header__navbar">
@@ -7,7 +7,7 @@
                         <button class="sidebar-toggler">
                             <img src="{{asset('admin/images/icons/header/bars.svg')}}" alt="">
                         </button>
-                        <a href="{{ route('main.index') }}" class="btn btn-blue">{{ __('Visit Site') }}</a>
+                        <p class="btn site-title">{{ __('website.darElAnwar') }}</p>
                     </div>
 
                     <div class="header__navbar__right">
@@ -18,7 +18,9 @@
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ @$totalAdminNotifications }}</span>
                                     <img src="{{asset('admin/images/icons/header/notification.svg')}}" alt="icon">
                                 </a>
+
                                 <!-- Notification Dropdown Start -->
+
                                 <ul class="dropdown-menu custom-scrollbar" aria-labelledby="dropdownNotification">
 {{--                                    @forelse(@$adminNotifications as $notification)--}}
 {{--                                        @if($notification->sender)--}}
@@ -45,25 +47,10 @@
 {{--                                        <p class="text-center">{{__('No Data Found')}}</p>--}}
 {{--                                    @endforelse--}}
                                 </ul>
-                                <!-- Notification Dropdown End -->
                             </li>
 
-                            <li>
-                                <a href="#" class="btn btn-dropdown site-language" id="dropdownLanguage" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{asset(selectedLanguage()->flag)}}" alt="icon">
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownLanguage">
-                                    @foreach(appLanguages() as $app_lang)
-                                        <li>
-                                            <a class="dropdown-item" href="{{ url('/local/'.$app_lang->iso_code) }}">
-                                                <img src="{{asset($app_lang->flag)}}" alt="icon">
-                                                <span>{{$app_lang->language}}</span>
-                                            </a>
-                                        </li>
-                                    @endforeach
-
-                                </ul>
-                            </li>
+                            <!-- Notification Dropdown End -->
+                            
                             <li>
                                 <a href="#" class="btn btn-dropdown user-profile" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
 {{--                                    <img src="{{getImageFile(auth::user()?auth::user()->image_path:'')}}" alt="icon">--}}
@@ -102,4 +89,17 @@
             </div>
         </div>
     </div>
-</header>
+</nav>
+
+
+
+
+
+
+<!-- <nav class="navbar navbar-light bg-danger">
+  <a class="navbar-brand">Navbar</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav> -->

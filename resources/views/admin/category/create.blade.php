@@ -28,13 +28,13 @@
                     <div class="col-md-12">
                         <div class="form-vertical__item bg-style">
                             <div class="item-top mb-30">
-                                <h2>{{__('Add New Category')}}</h2>
+                                <h2>{{trans('website.addNewCategory')}}</h2>
                             </div>
                             <form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="input__group mb-25">
-                                    <label for="name"> {{__('Name')}} </label>
+                                    <label for="name"> {{trans('website.name')}} </label>
                                     <input type="text" name="name" id="name" value="{{old('name')}}" class="form-control flat-input" placeholder="{{__('Name')}}">
                                     @if ($errors->has('name'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
@@ -42,14 +42,14 @@
                                 </div>
 
                                 <div class="input__group mb-25">
-                                    <label for="is_feature"> {{__('Feature')}} </label>
+                                    <label for="is_feature"> {{trans('website.feature')}} </label>
                                     <div>
                                         <label class="text-black"> <input type="checkbox" name="is_feature" id="is_feature" value="yes" {{old('is_feature') == 'yes' ? 'checked' : '' }} > {{ __('Yes') }} </label>
                                     </div>
                                 </div>
 
                                 <div class="custom-form-group mb-25">
-                                    <label for="image" class="text-lg-right text-black mb-2"> {{__('Image')}} </label>
+                                    <label for="image" class="text-lg-right text-black mb-2"> {{trans('website.image')}} </label>
                                     <div class="upload-img-box mb-25">
                                         <img src="">
                                         <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this)">

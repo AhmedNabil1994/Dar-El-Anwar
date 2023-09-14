@@ -31,7 +31,7 @@
             </div>
             <form method="get" action="{{route('admin.followup.index')}}" class="row">
                 <div class="row">
-                    <h1>{{trans("website.filters")}}</h1>
+                    <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="col-md-2 m-3">
                     <label for="followup_date">{{trans("website.followup_date")}}:</label>
@@ -67,15 +67,15 @@
                 <div class="col-md-2 m-3">
                 </div>
                 <div class="col-sm-2 m-3">
-                    <label for="dateFrom">Date From:</label>
+                    <label for="dateFrom">:{{trans("website.dateFrom")}}</label>
                     <input type="date" class="form-control" name="dateFrom" value="{{request('dateFrom')}}">
                 </div>
                 <div class="col-sm-2 m-3">
-                    <label for="dateTo">Date To:</label>
+                    <label for="dateTo">:{{trans("website.dateTo")}}</label>
                     <input type="date" class="form-control" name="dateTo" value="{{request('dateTo')}}">
                 </div>
                 <div class="text-end mb-3 d-flex justify-content-end">
-                    <button type="submit" id="btn_filter" class="btn btn-primary btn-sm">{{trans("website.filter")}}</button>
+                    <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                 </div>
             </form>
 

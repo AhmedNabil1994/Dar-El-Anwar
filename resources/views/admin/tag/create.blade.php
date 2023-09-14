@@ -9,7 +9,7 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{__('Add Tag')}}</h2>
+                                <h2>{{trans('website.addTag')}}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -28,15 +28,15 @@
                     <div class="col-md-12">
                         <div class="form-vertical__item bg-style">
                             <div class="item-top mb-30">
-                                <h2>{{__('Add Tag')}}</h2>
+                                <h2>{{trans('website.addTag')}}</h2>
                             </div>
                             <form action="{{route('tag.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="input__group mb-25">
-                                    <label for="name"> {{__('Name')}} </label>
+                                    <label for="name"> {{trans('website.name')}} </label>
                                     <div>
-                                        <input type="text" name="name" id="name" value="{{old('name')}}" class="form-control" placeholder=" {{__('Name')}} ">
+                                        <input type="text" name="name" id="name" value="{{old('name')}}" class="form-control" placeholder=" {{trans('website.name')}} ">
                                         @if ($errors->has('name'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
                                         @endif
@@ -45,7 +45,7 @@
 
                                 <div class="input__group">
                                     <div>
-                                       @saveWithAnotherButton
+                                      @saveWithAnotherButton
                                     </div>
                                 </div>
                             </form>

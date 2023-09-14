@@ -25,20 +25,20 @@
             </div>
             <form method="get" action="{{route('admin.assignments.index')}}" class="row">
                 <div class="row">
-                    <h1>Filters</h1>
+                    <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="col-sm-2 m-3">
-                    <label for="filterByJoining">Date From:</label>
+                    <label for="filterByJoining">:{{ trans('website.dateFrom') }}</label>
                     <input type="date" class="form-control" name="dateFrom">
                 </div>
                 <div class="col-sm-2 m-3">
-                    <label for="filterByJoining">Date To:</label>
+                    <label for="filterByJoining">:{{ trans('website.dateTo') }}</label>
                     <input type="date" class="form-control" name="dateTo">
                 </div>
                 <div class="col-sm-2 m-3">
-                    <label for="filterByDept">Department:</label>
+                    <label for="filterByDept">:{{ trans('website.department') }}:</label>
                     <select class="form-control" name="filterByDept">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($departments as $department)
                             <option value="{{$department->id}}" {{$department->id == request('filterByDept') ? 'selected' : ''}}>{{$department->name}}</option>
                         @endforeach
@@ -46,9 +46,9 @@
                 </div>
 
                 <div class="col-sm-2 m-3">
-                    <label for="filterByClass">Class:</label>
+                    <label for="filterByClass">:{{ trans('website.class') }}</label>
                     <select class="form-control" name="filterByClass">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($class_rooms as $class_room)
                             <option value="{{$class_room->id}}" {{$class_room->id == request('filterByClass') ? 'selected' : ''}}>{{$class_room->name}}</option>
                         @endforeach
@@ -56,9 +56,9 @@
                 </div>
 
                 <div class="col-sm-2 m-3">
-                    <label for="filterBySubject">Subject:</label>
+                    <label for="filterBySubject">:{{ trans('website.subject') }}</label>
                     <select class="form-control" name="filterBySubject">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($subjects as $subject)
                             <option value="{{$subject->id}}" {{$subject->id == request('filterBySubject') ? 'selected' : ''}}>{{$subject->name}}</option>
                         @endforeach
@@ -66,9 +66,9 @@
                 </div>
 
                 <div class="col-sm-2 m-3">
-                    <label for="filterByInst">Teacher:</label>
+                    <label for="filterByInst">:{{trans("website.teacher")}}</label>
                     <select class="form-control" name="filterByInst">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($instructors as $instructor)
                             <option value="{{$instructor->id}}" {{$instructor->id == request('filterByInst') ? 'selected' : ''}}>{{$instructor->employee->name}}</option>
                         @endforeach
@@ -76,9 +76,9 @@
                 </div>
 
                 <div class="col-sm-2 m-3">
-                    <label for="filterByStudent">Student:</label>
+                    <label for="filterByStudent">:{{trans("website.student")}}:</label>
                     <select class="form-control" name="filterByStudent">
-                        <option value="">All</option>
+                        <option value="">{{trans("website.all")}}</option>
                         @foreach($filter_students as $student)
                             <option value="{{$student->id}}" {{$student->id == request('filterByStudent') ? 'selected' : ''}}>{{$student->name}}</option>
                         @endforeach
@@ -87,7 +87,7 @@
 
 
                 <div class="col-md-3 my-3 mb-3">
-                    <button id="btn_filter" class="btn btn-primary mt-4">Filter</button>
+                    <button id="btn_filter" class="btn buttons-style mt-4">{{trans("website.filter")}}</button>
                 </div>
             </form>
             <div class="row">
@@ -138,11 +138,11 @@
                                                 @endphp
                                                 {{$grade}}
                                             </label>
-                                            <button class="btn btn-success openModal"
+                                            <button class="btn buttons-style openModal"
                                             data-student-id="{{$student->id}}" data-assign-id="{{$i}}"
                                             data-subject="{{$student->subject->id}}" data-dept="{{$student->dept->id}}"
                                             data-inst="{{$student->subject->instructor?->id}}">
-                                                {{ trans('website.set_mark') }}
+                                                {{ trans('website.setMark') }}
                                             </button>
                                         </td>
                                         @endfor
@@ -173,7 +173,7 @@
                 @csrf
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">{{ trans('website.enter_mark') }}</h4>
+                    <h4 class="modal-title">{{ trans('website.setMark') }}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -184,12 +184,12 @@
                     <input type="hidden"  name="subject_id" id="subject">
                     <input type="hidden"  name="dept_id" id="dept">
                     <input type="hidden"  name="instructor_id" id="instructor">
-                    <input type="text" class="form-control" name="markInput" id="markInput" placeholder="Enter mark">
+                    <input type="text" class="form-control" name="markInput" id="markInput" placeholder="{{ trans('website.setMark') }}">
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="saveMark">{{ trans('website.ok') }}</button>
+                    <button type="submit" class="btn buttons-style" id="saveMark">{{ trans('website.ok') }}</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('website.close') }}</button>
                 </div>
 

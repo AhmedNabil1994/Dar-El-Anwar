@@ -92,7 +92,7 @@
     <![endif]-->
 
     @stack('style')
-    @toastr_css
+    <!-- @toastr_css -->
     @include('frontend.layouts.dynamic-style')
     <script>
         function getLanguage(){

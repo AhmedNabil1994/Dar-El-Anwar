@@ -70,7 +70,7 @@
                                 <div class="col-md-12">
                                     <div class="input__group text-black">
                                         <label>{{ trans('website.subjectName') }} <span class="text-danger">*</span></label>
-                                        <input type="text" name="subject_name" value="{{old('subject_name')}}" placeholder="{{ __('Type subject name') }}"
+                                        <input type="text" name="subject_name" value="{{old('subject_name')}}" placeholder="{{ trans('website.typeSubjectName') }}"
                                                class="form-control" required>
                                         @if ($errors->has('subject_name'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('subject_name') }}</span>
@@ -82,7 +82,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-12 text-right">
-                                    <button class="btn btn-primary" type="submit">{{ trans('website.save') }}</button>
+                                    <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
 
                                 </div>
                             </div>

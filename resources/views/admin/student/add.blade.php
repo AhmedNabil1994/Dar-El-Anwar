@@ -101,7 +101,7 @@
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.department")}} <span class="text-danger">*</span></label>
                                         <select type="text" name="department" value=" " class="form-control" >
-                                            <option value="" >اختار القسم</option>
+                                            <option value="" >{{trans("website.chosseDepartment")}}</option>
                                             @foreach($depts as $dept)
                                                 <option value="{{$dept->id}}" >{{$dept->name}}</option>
                                             @endforeach
@@ -369,7 +369,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-25">
-                                            <label for="parents_card_copy">Parents Card Copy <i class="fa fa-file"></i></label>
+                                            <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i class="fa fa-file"></i></label>
                                             <input type="file" name="parents_card_copy" value="" placeholder="Parents Card Copy" class="form-control">
                                             @if ($errors->has('parents_card_copy'))
                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_name') }}</span>
@@ -379,7 +379,7 @@
                                 </div>
                             <div class="row mb-3">
                                 <div class="col-md-12 text-right">
-                                    <button class="btn btn-primary" type="submit">{{ trans('website.save') }}</button>
+                                    <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
                                 </div>
                             </div>
                             </div>

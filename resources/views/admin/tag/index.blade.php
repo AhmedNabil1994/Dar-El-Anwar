@@ -27,15 +27,15 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{__('Tag List')}}</h2>
-                            <a href="{{route('tag.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('Add Tag')}} </a>
+                            <h2>{{trans('website.tagList')}}</h2>
+                            <a href="{{route('tag.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('website.addTag')}} </a>
                         </div>
                         <div class="customers__table">
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{__('Name')}}</th>
-                                    <th width="12%">{{__('Action')}}</th>
+                                    <th>{{trans('website.name')}}</th>
+                                    <th width="12%">{{trans('website.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

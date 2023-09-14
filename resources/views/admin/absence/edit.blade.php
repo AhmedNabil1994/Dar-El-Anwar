@@ -96,7 +96,7 @@
 
 
 
-                            <button type="submit" class="btn btn-primary">@lang('Update')</button>
+                            <button type="submit" class="btn buttons-style">@lang('Update')</button>
                             <a href="{{ route('admins.index') }}" class="btn btn-secondary">@lang('Cancel')</a>
                         </form>
                     </div>
@@ -126,7 +126,7 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">@lang('Update')</button>
+                    <button type="submit" class="btn buttons-style">@lang('Update')</button>
                     <a href="{{ route('admins.index') }}" class="btn btn-secondary">@lang('Cancel')</a>
 
 
