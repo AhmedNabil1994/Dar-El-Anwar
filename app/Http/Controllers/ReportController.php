@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function reportStudentsAge(Request $request)
+    public function index()
     {
         //
-        $data['students_age'] = Student::query()->whereStatus(1)->paginate(25);
-        return view('admin.reports.students_age',$data);
     }
 
     /**

@@ -16,7 +16,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('certificate.index')}}">{{ __('Certificate List') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('certificate.index')}}">{{ __('قائمة الشهادات') }}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ __(@$title) }}</li>
                                 </ul>
                             </nav>
@@ -254,6 +254,21 @@
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-md-12 mb-15">
+                                                                            <div class="label-text-title color-heading font-16 mb-1">{{ __('Student Name') }}</div>
+                                                                            <select class="form-select" name="student_id">
+                                                                                <option value="">Student Name</option>
+                                                                                @foreach($students as $student)
+                                                                                    <option value="{{$student->id}}"
+                                                                                    >{{$student->name}}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                            @if ($errors->has('student_name'))
+                                                                                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('student_name') }}</span>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 mb-15">
                                                                             <div class="label-text-title color-heading font-16 mb-1">{{ __('Position Y') }}</div>
                                                                             <input type="number" min="0" name="student_name_y_position" value="{{old('student_name_y_position')}}" class="form-control" placeholder="30">
                                                                             @if ($errors->has('student_name_y_position'))
@@ -282,6 +297,82 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="accordion-item course-sidebar-accordion-item">
+                                                    <h2 class="accordion-header course-sidebar-title mb-2" id="panelsStayOpen-headingOne8">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne8" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne8">
+                                                            {{ __('Department') }}
+                                                        </button>
+                                                    </h2>
+
+                                                    <div id="panelsStayOpen-collapseOne8" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne8">
+                                                        <div class="accordion-body">
+                                                            <div class="certificate-inner-box">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Department') }}</div>
+                                                                        <div class="admin-certificate-radio d-flex align-items-center">
+                                                                            <div class="form-check mb-0 d-flex align-items-center">
+                                                                                <input class="form-check-input" type="radio" name="show_department" id="show_department_yes" value="yes" {{old('show_department') == 'yes' ? 'checked' : '' }}>
+                                                                                <label class="form-check-label mb-0 color-heading" for="show_department_yes">Yes</label>
+                                                                            </div>
+                                                                            <div class="form-check mb-0 d-flex align-items-center">
+                                                                                <input class="form-check-input" type="radio" name="show_department" id="show_department_no" value="no" {{old('show_department') == 'no' ? 'checked' : '' }}>
+                                                                                <label class="form-check-label mb-0 color-heading" for="show_department_no">No</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        @if ($errors->has('show_department'))
+                                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('show_department') }}</span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Department') }}</div>
+                                                                        <select class="form-select" name="department_id">
+                                                                            <option value="">Department</option>
+                                                                            @foreach($departs as $depart)
+                                                                                <option value="{{$depart->id}}"
+                                                                                    {{old('department_id') == $depart->id ? 'selected' : ''}}
+                                                                                >{{$depart->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @if ($errors->has('department_id'))
+                                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('department_id') }}</span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Position Y') }}</div>
+                                                                        <input type="number" min="0" name="department_y_position" value="{{old('department_y_position')}}" class="form-control" placeholder="30">
+                                                                        @if ($errors->has('department_y_position'))
+                                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('department_y_position') }}</span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Font Size') }}</div>
+                                                                        <input type="number" min="1" name="department_font_size" value="{{old('department_font_size')}}" class="form-control" placeholder="30">
+                                                                        @if ($errors->has('department_font_size'))
+                                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('department_font_size') }}</span>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Font Color') }}</div>
+                                                                        <span class="color-picker">
+                                                                                <label for="colorPicker8" class="mb-0">
+                                                                                    <input type="color" name="department_font_color" value="{{old('department_font_color')}}"  id="colorPicker8">
+                                                                                </label>
+                                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="accordion-item course-sidebar-accordion-item">
                                                     <h2 class="accordion-header course-sidebar-title mb-2" id="panelsStayOpen-headingTwo">
                                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -416,7 +507,14 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12 mb-15">
                                                                             <div class="label-text-title color-heading font-16 mb-1">{{ __('Title') }}</div>
-                                                                            <input type="text" name="role_2_title" value="{{old('role_2_title')}}" class="form-control" placeholder="{{ __('Instructor') }}">
+                                                                            <select type="text" name="role_2_title" class="form-control" >
+                                                                                <option value="">Instructor</option>
+                                                                                @foreach($instructors as $instructor)
+                                                                                    <option value="{{$instructor->id}}"
+                                                                                        {{$instructor->id == $certificate->role_2_title ? 'selected' : '' }}>
+                                                                                        {{$instructor->first_name}}</option>
+                                                                                @endforeach
+                                                                            </select>
                                                                             @if ($errors->has('role_2_title'))
                                                                                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('role_2_title') }}</span>
                                                                             @endif
@@ -449,6 +547,53 @@
                                                                             </span>
                                                                         </div>
                                                                     </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item course-sidebar-accordion-item">
+                                                    <h2 class="accordion-header course-sidebar-title mb-2" id="panelsStayOpen-headingThree9">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree9" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree9">
+                                                            {{ __('Receiving') }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="panelsStayOpen-collapseThree9" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree9">
+                                                        <div class="accordion-body">
+                                                            <div class="certificate-inner-box">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Received') }}</div>
+                                                                        <div class="admin-certificate-radio d-flex align-items-center">
+                                                                            <div class="form-check mb-0 d-flex align-items-center">
+                                                                                <input class="form-check-input" type="radio" name="receiving_type" id="received_yes" value="yes" {{old('receiving_type') == 'yes' ? 'checked' : '' }}>
+                                                                                <label class="form-check-label mb-0 color-heading" for="received_yes">{{ __('Yes') }}</label>
+                                                                            </div>
+                                                                            <div class="form-check mb-0 d-flex align-items-center">
+                                                                                <input class="form-check-input" type="radio" name="receiving_type" id="received_no" value="no" {{old('receiving_type') == 'no' ? 'checked' : '' }}>
+                                                                                <label class="form-check-label mb-0 color-heading" for="received_no">{{ __('No') }}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        @if ($errors->has('receiving_type'))
+                                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('receiving_type') }}</span>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="col-md-12 mb-15">
+                                                                        <div class="label-text-title color-heading font-16 mb-1">{{ __('Received By') }}</div>
+                                                                        <div class="admin-certificate-radio d-flex align-items-center">
+                                                                            <div class="form-check mb-0 d-flex align-items-center">
+                                                                                <input class="form-check-input" type="radio" name="receiving_way" id="received_hand" value="hand" {{old('receiving_way') == 'hand' ? 'checked' : '' }}>
+                                                                                <label class="form-check-label mb-0 color-heading" for="received_hand">{{ __('Hand') }}</label>
+                                                                            </div>
+                                                                            <div class="form-check mb-0 d-flex align-items-center">
+                                                                                <input class="form-check-input" type="radio" name="receiving_way" id="received_online" value="online" {{old('receiving_way') == 'online' ? 'checked' : '' }}>
+                                                                                <label class="form-check-label mb-0 color-heading" for="received_online">{{ __('Online') }}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        @if ($errors->has('receiving_way'))
+                                                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('receiving_way') }}</span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

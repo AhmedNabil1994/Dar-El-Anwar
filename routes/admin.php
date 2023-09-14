@@ -52,6 +52,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Instructor\InstructorController;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Admin\BusController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //Auth::routes(['register' => false]);
@@ -405,6 +406,17 @@ Route::prefix('category')->group(function () {
     Route::post('update/{uuid}', [CategoryController::class, 'update'])->name('category.update');
     Route::get('delete/{uuid}', [CategoryController::class, 'delete'])->name('category.delete');
 });
+
+
+Route::prefix('reports')->as('reports.')->group(function () {
+    Route::get('/report_students_ages', [ReportController::class, 'reportStudentsAge'])->name('reportStudentsAge');
+    Route::get('create', [ReportController::class, 'create'])->name('create');
+    Route::post('store', [ReportController::class, 'store'])->name('store');
+    Route::get('edit/{uuid}', [ReportController::class, 'edit'])->name('edit');
+    Route::post('update/{uuid}', [ReportController::class, 'update'])->name('update');
+    Route::get('delete/{uuid}', [ReportController::class, 'delete'])->name('delete');
+});
+
 
 Route::prefix('subcategory')->group(function () {
     Route::get('/', [SubcategoryController::class, 'index'])->name('subcategory.index');

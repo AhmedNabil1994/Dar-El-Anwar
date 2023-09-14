@@ -708,44 +708,44 @@
 {{--        @endcan--}}
 
 
-            <li class="">
-                <a class="has-arrow" href="#">
-                    <span class="iconify" data-icon="map:finance"></span>
-                    <span>{{ __('Financial Report') }}</span>
-                </a>
-                <ul>
-                    <li class="{{ active_if_match('admins/report/course-revenue-report') }}{{ active_if_match('admins/report/bundle-revenue-report') }}{{ active_if_match('admins/report/consultation-revenue-report') }}">
-                        <a href="{{route('course-report.revenue-report')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{ __('Revenue Report') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_if_match('admins/report/order-report') }}">
-                        <a href="{{route('report.order-report')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{ __('Order Report') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_if_match('admins/report/order-pending') }}">
-                        <a href="{{route('report.order-pending')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{ __('Order Pending') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_if_match('admins/report/order-cancelled') }}">
-                        <a href="{{route('report.order-cancelled')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{ __('Order Cancelled') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_if_match('admins/report/cancel-consultation-list') }}">
-                        <a href="{{route('report.cancel-consultation-list')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{ __('Consultation Cancel') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+{{--            <li class="">--}}
+{{--                <a class="has-arrow" href="#">--}}
+{{--                    <span class="iconify" data-icon="map:finance"></span>--}}
+{{--                    <span>{{ __('Financial Report') }}</span>--}}
+{{--                </a>--}}
+{{--                <ul>--}}
+{{--                    <li class="{{ active_if_match('admins/report/course-revenue-report') }}{{ active_if_match('admins/report/bundle-revenue-report') }}{{ active_if_match('admins/report/consultation-revenue-report') }}">--}}
+{{--                        <a href="{{route('course-report.revenue-report')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{ __('Revenue Report') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ active_if_match('admins/report/order-report') }}">--}}
+{{--                        <a href="{{route('report.order-report')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{ __('Order Report') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ active_if_match('admins/report/order-pending') }}">--}}
+{{--                        <a href="{{route('report.order-pending')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{ __('Order Pending') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ active_if_match('admins/report/order-cancelled') }}">--}}
+{{--                        <a href="{{route('report.order-cancelled')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{ __('Order Cancelled') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ active_if_match('admins/report/cancel-consultation-list') }}">--}}
+{{--                        <a href="{{route('report.cancel-consultation-list')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{ __('Consultation Cancel') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
             <li class="{{ @$navCertificateActiveClass }}">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
@@ -766,6 +766,21 @@
                     </li>
                 </ul>
             </li>
+
+        <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>{{__('Reports')}}</span>
+            </a>
+            <ul>
+                <li class="{{ active_if_match('reports/report_students_ages') }}">
+                    <a href="{{route('reports.reportStudentsAge')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('تقارير اعمار الطلاب')}}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
 {{--        @can('ranking_level')--}}
 {{--            <li class="{{ @$navRankingActiveClass }}">--}}

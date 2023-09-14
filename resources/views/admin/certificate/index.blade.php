@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{__('All Certificates')}}</h2>
+                                <h2>{{__('كل الشهادات')}}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{__('All Certificates')}}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{__('كل الشهادات')}}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -27,26 +27,50 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{__('All Certificates')}}</h2>
-                            <a href="{{route('certificate.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('Add Certificate')}} </a>
+                            <h2>{{__('كل الشهادات')}}</h2>
+                            <a href="{{route('certificate.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('اضافة شهادة')}} </a>
                         </div>
                         <div class="customers__table">
                             <table id="customers-table" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{__('Title')}}</th>
-                                    <th>{{__('Added_date')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>اسم الطالب</th>
+                                    <th>القسم</th>
+                                    <th>تاريخ الحصول</th>
+                                    <th>سبب الحصول</th>
+                                    <th>الإيميل</th>
+                                    <th>اسم مصدر الشهادة</th>
+                                    <th>طريقة التسليم</th>
+                                    <th>حالة التسليم</th>
+                                    <th>إعدادات</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($certificates as $certificate)
                                     <tr class="removable-item">
                                         <td>
-                                            {{$certificate->title}}
+                                            {{$certificate->student?->name}}
+                                        </td>
+                                        <td>
+                                            {{$certificate->department?->name}}
                                         </td>
                                         <td>
                                            {{$certificate->created_at->format("d/m/Y")}}
+                                        </td>
+                                        <td>
+                                            {{$certificate->student->email}}
+                                        </td>
+                                        <td>
+                                            {{$certificate->body}}
+                                        </td>
+                                        <td>
+                                            {{$certificate->role_2_title}}
+                                        </td>
+                                        <td>
+                                            {{$certificate->receiving_way == 'hand'? 'باليد':'اونلاين'}}
+                                        </td>
+                                        <td>
+                                        {{$certificate->receiving_type == 'yes'? 'استلم':'لم يستلم'}}
                                         </td>
                                         <td>
                                             <div class="action__buttons">

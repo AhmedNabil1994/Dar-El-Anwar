@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use App\Models\Course;
+use App\Models\Department;
+use App\Models\Instructor;
+use App\Models\Student;
 use App\Tools\Repositories\Crud;
 use App\Traits\General;
 use App\Traits\ImageGenerateFromHTML;
@@ -39,6 +43,10 @@ class CertificateController extends Controller
         } // end permission checking
 
         $data['title'] = 'Add Certificate';
+        $data['courses'] = Course::where('status',1)->get();
+        $data['students'] = Student::where('status',1)->get();
+        $data['departs'] = Department::where('status',1)->get();
+        $data['instructors'] = Instructor::where('status',1)->get();
         $data['navCertificateActiveClass'] = "mm-active";
         $data['subNavAddCertificateActiveClass'] = "mm-active";
         return view('admin.certificate.create')->with($data);
@@ -61,9 +69,13 @@ class CertificateController extends Controller
             'show_date' => 'required',
             'date_y_position' => 'required',
             'date_font_size' => 'required',
+            'student_id' => 'required',
             'show_student_name' => 'required',
             'student_name_y_position' => 'required',
             'student_name_font_size' => 'required',
+            'department_id' => 'required',
+            'department_y_position' => 'required',
+            'department_font_size' => 'required',
             'body' => 'required',
             'body_y_position' => 'required',
             'body_font_size' => 'required',
@@ -73,11 +85,13 @@ class CertificateController extends Controller
             'role_2_title' => 'required',
             'role_2_y_position' => 'required',
             'role_2_font_size' => 'required',
-            'background_image' => 'required|mimes:jpg,png|file|dimensions:min_width=1030,min_height=734,max_width=1030,max_height=734',
-            'role_1_signature' => 'required|mimes:png|file|dimensions:min_width=120,min_height=60,max_width=120,max_height=60',
+//            'background_image' => 'required|mimes:jpg,png|file|dimensions:min_width=1030,min_height=734,max_width=1030,max_height=734',
+//            'role_1_signature' => 'required|mimes:png|file|dimensions:min_width=120,min_height=60,max_width=120,max_height=60',
         ]);
 
         $certificate = new Certificate();
+
+
         $certificate->fill($request->all());
         $certificate->certificate_number = rand(1000000, 9999999);
         $certificate->image = $request->background_image ? $this->saveImage('certificate', $request->background_image, null, null) :   null;
@@ -106,7 +120,11 @@ class CertificateController extends Controller
             abort('403');
         } // end permission checking
 
-        $data['title'] = 'View Certificate';
+        $data['courses'] = Course::where('status',1)->get();
+        $data['students'] = Student::where('status',1)->get();
+        $data['departs'] = Department::where('status',1)->get();
+        $data['instructors'] = Instructor::where('status',1)->get();
+        $data['title'] = 'الشهادة';
         $data['navCertificateActiveClass'] = "mm-active";
         $data['subNavAddCertificateActiveClass'] = "mm-active";
         $data['certificate'] = Certificate::whereUuid($uuid)->first();
@@ -129,9 +147,13 @@ class CertificateController extends Controller
             'show_date' => 'required',
             'date_y_position' => 'required',
             'date_font_size' => 'required',
+            'student_id' => 'required',
             'show_student_name' => 'required',
             'student_name_y_position' => 'required',
             'student_name_font_size' => 'required',
+            'department_id' => 'required',
+            'department_y_position' => 'required',
+            'department_font_size' => 'required',
             'body' => 'required',
             'body_y_position' => 'required',
             'body_font_size' => 'required',
@@ -143,12 +165,13 @@ class CertificateController extends Controller
             'role_2_font_size' => 'required',
             'background_image' => 'mimes:jpg,png|file|dimensions:min_width=1030,min_height=734,max_width=1030,max_height=734',
             'role_1_signature' => 'mimes:png|file|dimensions:min_width=120,min_height=60,max_width=120,max_height=60',
-        ]);
+            ]);
 
         $certificate = Certificate::whereUuid($uuid)->first();
         $certificate->fill($request->all());
         if ($request->background_image)
         {
+
             $this->deleteFile($certificate->image);
             $certificate->image = $this->saveImage('certificate', $request->background_image, '1030', '730');
         }
