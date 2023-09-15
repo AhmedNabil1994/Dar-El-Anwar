@@ -60,11 +60,6 @@ class Student extends Authenticatable
         return $this->hasOne(City::class,'id','city_id');
     }
 
-    public function parentInfo()
-    {
-        return $this->hasMany(ParentInfo::class);
-    }
-
     public function scopeApproved($query)
     {
         return $query->where('status', 1);
@@ -89,9 +84,9 @@ class Student extends Authenticatable
         return $this->belongsToMany(Subscription::class);
     }
 
-    public function subject()
+    public function subjects()
     {
-        return $this->belongsTo(Subject::class,'subject_id');
+        return $this->belongsToMany(Subject::class,'student_subjects');
     }
 
     public function assignment()

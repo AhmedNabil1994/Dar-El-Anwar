@@ -411,6 +411,9 @@ Route::prefix('category')->group(function () {
 Route::prefix('reports')->as('reports.')->group(function () {
     Route::get('/report_students_ages', [ReportController::class, 'reportStudentsAge'])->name('reportStudentsAge');
     Route::get('/report_parents', [ReportController::class, 'reportParents'])->name('reportParents');
+    Route::get('/report_subscribtions', [ReportController::class, 'reportSubscribtions'])->name('reportSubscribtions');
+    Route::get('/report_invoices', [ReportController::class, 'reportInvoices'])->name('reportInvoices');
+    Route::get('/report_student/{id}', [ReportController::class, 'reportStudent'])->name('reportStudent');
 });
 
 
