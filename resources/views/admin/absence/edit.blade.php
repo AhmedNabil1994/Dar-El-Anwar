@@ -17,8 +17,8 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('كل المشرفين') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تحرير المشرف') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('All Admins') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Admin') }}</li>
                                 </ul>
                             </nav>
                         </div>

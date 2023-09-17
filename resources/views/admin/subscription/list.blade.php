@@ -60,7 +60,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('الاشتراك') }}</h2>
-                            <a id="openModalBtn" class="btn btn-success btn-sm">
+                            <a id="openModalBtn" class="btn buttons-style btn-sm">
                                 <i class="fa fa-plus"></i> {{ __('أضف صفحة') }}
                             </a>
                         </div>
@@ -86,12 +86,12 @@
 
                               </div>
                             <div class="col-md-3">
-                                  <button class="btn btn-green" type="submit">تم</button>
+                                  <button class="btn buttons-style" type="submit">تم</button>
                             </div>
                           </form>
                         </div>
-                        <div class="customers__table">
-                            <table class="row-border">
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>كود الاشتراك</th>

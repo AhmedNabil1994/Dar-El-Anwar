@@ -76,7 +76,8 @@
                         </div>
 
 
-                            <table class="table table-bordered">
+                            <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>الاجمالي</th>
@@ -104,14 +105,14 @@
                             </table>
                             <div class="row justify-content-end">
                                 <div class="col-md-6">
-                                    <button class="btn btn-green" type="button" id="addRowBtn">Add Row</button>
-                                    <button class="btn btn-danger" type="button" id="deleteRowBtn">Delete Row</button>
+                                    <button class="btn buttons-style" type="button" id="addRowBtn">أضف صف</button>
+                                    <button class="btn btn-danger" type="button" id="deleteRowBtn">أزل صف</button>
+                                    <button type="submit" class="btn buttons-style">إنشاء فاتورة</button>
                                 </div>
                             </div>
-                        <button type="submit" class="btn btn-primary">إنشاء فاتورة</button>
                     </form>
 
-                    <table class="table table-bordered">
+                    <!-- <table class="table table-bordered">
                         <thead>
 
                         </tr>
@@ -119,7 +120,7 @@
                         <tbody>
 
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
                 <div class="row">
                 </div>

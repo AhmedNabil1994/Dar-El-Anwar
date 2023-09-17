@@ -278,6 +278,7 @@ return [
 "createCourse"=>"   إنشاء دورة   ",
 "manageCourse"=>"   إدارة الدورة   ",
 "subjects"=>"    المواد   ",
+"total"=>"    الإجمالي   ",
 
 ];
 

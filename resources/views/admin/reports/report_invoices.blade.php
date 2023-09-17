@@ -40,9 +40,9 @@
 
             <hr>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                     <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
-                        <thead style="background-color: #50bfa5;">
+                        <thead >
                         <tr>
                             <th>رقم الفاتورة</th>
                             <th>اسم الطالب</th>

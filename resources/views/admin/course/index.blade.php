@@ -166,9 +166,9 @@
 
                         </form>
 
-
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                        <div class="row mb-4">
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>كود الدورة</th>
@@ -237,6 +237,7 @@
                             <div class="mt-3">
                                 {{$courses->links()}}
                             </div>
+                        </div>
                         </div>
 
                         <form method="get" action="" class="row">

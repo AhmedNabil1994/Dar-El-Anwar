@@ -8,15 +8,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add Page') }}</h2>
+                                <h2>{{ __('أضف صفحة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('All Pages') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Add Page') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('كل الصفحات') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('أضف صفحة') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -75,9 +75,10 @@
 
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <h2>حركات المنتجات</h2>
-                    <table class="table table-bordered">
+                <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                    <h2 style = "text-align:center;">حركات المنتجات</h2>
+                    
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>رقم الإذن</th>

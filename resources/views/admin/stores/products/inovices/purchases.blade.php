@@ -8,15 +8,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add Page') }}</h2>
+                                <h2>{{ __('أضف صفحة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('All Pages') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Add Page') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('كل الصفحات') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('أضف صفحة') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -79,14 +79,14 @@
                             </table>
                             <div class="row justify-content-end">
                                 <div class="col-md-6">
-                                    <button class="btn btn-green" type="button" id="addRowBtn">Add Row</button>
-                                    <button class="btn btn-danger" type="button" id="deleteRowBtn">Delete Row</button>
+                                    <button class="btn buttons-style" type="button" id="addRowBtn"> أضف صف</button>
+                                    <button class="btn btn-danger" type="button" id="deleteRowBtn">أزل صف</button>
                                 </div>
                             </div>
-                        <button type="submit" class="btn btn-primary">إنشاء فاتورة</button>
+                        <button type="submit" class="btn buttons-style">إنشاء فاتورة</button>
                     </form>
 
-                    <table class="table table-bordered">
+                    <!-- <table class="table table-bordered">
                         <thead>
 
                         </tr>
@@ -94,7 +94,7 @@
                         <tbody>
 
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
                 <div class="row">
                 </div>

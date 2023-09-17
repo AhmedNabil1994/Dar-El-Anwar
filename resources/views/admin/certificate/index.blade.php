@@ -30,8 +30,8 @@
                             <h2>{{__('كل الشهادات')}}</h2>
                             <a href="{{route('certificate.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('اضافة شهادة')}} </a>
                         </div>
-                        <div class="customers__table" style="overflow:auto;">
-                            <table id="customers-table" class="row-border data-table-filter table-style"
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                            >
                                 <thead>
                                 <tr>

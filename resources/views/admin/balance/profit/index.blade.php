@@ -10,15 +10,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('تحرير المشرف') }}</h2>
+                                <h2>{{ __('تحرير') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('كل المشرفين') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تحرير المشرف') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{trans('website.allAdmins') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{__('تحرير مشرف') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -55,36 +55,8 @@
 
             <div class="col-md-12">
                 <h1>صافي الربح</h1>
-                <div style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: center;align-items: center;">
-                <table class="table m-3">
-                    <thead>
-                    <tr class="text-center">
-                        <th>#</th>
-                        <th>رقم الحركة</th>
-                        <th>التاريخ</th>
-                        <th>الوقت</th>
-                        <th>المستخدم</th>
-                        <th>المبلغ</th>
-                        <th>الحساب</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($income_transactions as $transaction)
-                        <tr class="text-center">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $transaction->trans_no }}</td>
-                            <td>{{ \Carbon\Carbon::parse($transaction->date)->format('Y-m-d') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($transaction->date)->format('h:m:s') }}</td>
-                            <td>{{ $transaction->user->name }}</td>
-                            <td>{{ $transaction->amount }}</td>
-                            <td>{{ $transaction->account }}</td>
-
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-
-                <table class="table m-3">
+                <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                     <thead>
                     <tr class="text-center">
                         <th>#</th>

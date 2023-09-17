@@ -8978,6 +8978,9 @@ img {
   width: 100%;
   text-align: center;
 }
+.customers__table thead {
+  background-color: #50bfa5
+}
 
 .customers__table table {
   width: 100%;

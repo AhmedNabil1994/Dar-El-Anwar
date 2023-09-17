@@ -42,9 +42,9 @@
 
             <hr>
             <div class="row">
-                <div class="col-md-12" style="overflow: auto">
+                <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl" style="overflow: auto">
                     <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
-                        <thead style="background-color: #50bfa5;">
+                        <thead >
                         <tr>
                             <th>الفصل</th>
                             <th>الموعد / المادة</th>

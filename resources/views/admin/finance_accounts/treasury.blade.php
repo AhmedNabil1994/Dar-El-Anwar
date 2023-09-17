@@ -87,24 +87,24 @@
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <a href="{{route('accounts.createIncomeTransaction')}}" class="btn btn-primary w-100" >قبض</a>
+                                <a href="{{route('accounts.createIncomeTransaction')}}" class="btn buttons-style w-100" >قبض</a>
                             </div>
 
                             <div class="col-sm-2">
-                                <a href="{{route('accounts.createExpenseTransaction')}}" class="btn btn-primary w-100" >صرف</a>
+                                <a href="{{route('accounts.createExpenseTransaction')}}" class="btn buttons-style w-100" >صرف</a>
                             </div>
 
                             <div class="col-sm-2">
-                                <a href="{{route('accounts.treasury',['fiterByType'=>'income'])}}" class="btn btn-primary w-100">تقارير الايرادات</a>
+                                <a href="{{route('accounts.treasury',['fiterByType'=>'income'])}}" class="btn buttons-style w-100">تقارير الايرادات</a>
                             </div>
 
                             <div class="col-sm-2">
-                                <a href="{{route('accounts.treasury',['fiterByType'=>'expense'])}}" class="btn btn-primary w-100">تقارير المصروفات</a>
+                                <a href="{{route('accounts.treasury',['fiterByType'=>'expense'])}}" class="btn buttons-style w-100">تقارير المصروفات</a>
                             </div>
                         </div>
 
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
