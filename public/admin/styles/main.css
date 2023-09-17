@@ -34,7 +34,7 @@ body {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  background: #f5f7f9;
+  background: #f6f8fa;
 }
 
 h1,
@@ -168,7 +168,7 @@ img {
 }
 
 .main-content {
-  margin-right: 250px;
+  margin-left: 250px;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -201,7 +201,7 @@ img {
 }
 
 .page-content {
-    background-color: #fff;
+    background-color: #f6f8fa;
     margin-top: -150px;
     padding: 10px;
 }
@@ -727,6 +727,7 @@ img {
   position: fixed;
   z-index: 9999;
   top: 0;
+  left: 0;
   width: 250px;
   height: 100vh;
   background-color: #ffffff;
@@ -884,14 +885,9 @@ img {
 .sidebar__menu ul li a i {
   font-size: 4px;
 }
-.breadcrumb-item+.breadcrumb-item::before {
-    float: right;
-    padding-right: 0;
-    padding-left: .5rem;
-}
+
 .sidebar__menu ul li a span {
   margin-left: 11px;
-  margin-right: 11px;
 }
 
 .sidebar__menu ul li a:hover, .sidebar__menu ul li a.active {
@@ -1028,6 +1024,8 @@ img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 110px;
+  justify-content: space-between;
 }
 
 .header__menu li:not(:first-child) {
@@ -1063,7 +1061,7 @@ img {
 
 .header__menu li .user-profile img {
   width: 40px;
-  height: 40px;
+  height: 30px;
   border-radius: 50%;
 }
 
@@ -18783,7 +18781,7 @@ blockquote.right span::before {
     flex-direction: column;
     align-items: end;
   }
-
+  
 } */
 
 @media(max-width:500px){
