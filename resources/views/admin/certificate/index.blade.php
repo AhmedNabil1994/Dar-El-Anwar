@@ -15,7 +15,7 @@
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{__('كل الشهادات')}}</li>
                                 </ul>
                             </nav>
@@ -30,8 +30,8 @@
                             <h2>{{__('كل الشهادات')}}</h2>
                             <a href="{{route('certificate.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('اضافة شهادة')}} </a>
                         </div>
-                        <div class="customers__table" style="overflow:auto;">
-                            <table id="customers-table" class="row-border data-table-filter table-style"
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                            >
                                 <thead>
                                 <tr>

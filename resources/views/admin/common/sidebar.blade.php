@@ -28,7 +28,7 @@
             <li class="{{ @$navUserParentActiveClass }}">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="bxs:user-account"></span>
-                    <span>{{__('المسؤولين')}}</span>
+                    <span>{{__('المسؤولون')}}</span>
                 </a>
 
                 <ul class="{{ @$navUserParentShowClass }}">
@@ -54,7 +54,7 @@
             <li class="{{ @$navEmployeeParentActiveClass }}">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="bx:bx-user"></span>
-                    <span>{{ __('الموظفين') }}</span>
+                    <span>{{ __('الموظفون') }}</span>
                 </a>
                 <ul class="{{ @$navEmployeeParentShowClass }}">
                     <li class="{{ @$subNavEmployeeListActiveClass }}">
@@ -66,7 +66,7 @@
                     <li class="{{ @$subNavEmployeeCreateActiveClass }}">
                         <a href="{{ route('employees.create') }}">
                             <i class="fa fa-circle"></i>
-                            <span>{{ __('اضافة موظف') }}</span>
+                            <span>{{ __('إضافة موظف') }}</span>
                         </a>
                     </li>
                 </ul>
@@ -89,7 +89,7 @@
                     <li class="{{ active_if_match('admins/student/create') }}">
                         <a href="{{route('student.create')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{ __('اضافة طالب') }}</span>
+                            <span>{{ __('إضافة طالب') }}</span>
                         </a>
                     </li>
                 </ul>
@@ -171,7 +171,7 @@
                     <li class="{{ active_if_match('admins/absence/create') }}">
                         <a href="{{route('absence.create')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{ __('اضافة غياب') }}</span>
+                            <span>{{ __('إضافة غياب') }}</span>
                         </a>
                     </li>
                 </ul>
@@ -230,7 +230,7 @@
                     <li class="{{ active_if_match('admins/course/create') }}">
                         <a href="{{route('admin.course.create')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{ __('اضافة دورة') }}</span>
+                            <span>{{ __('إضافة دورة') }}</span>
                         </a>
                     </li>
 
@@ -259,7 +259,7 @@
                         <li class="{{ active_if_match('admins/subject/create') }}">
                             <a href="{{route('admin.subject.create')}}">
                                 <i class="fa fa-circle"></i>
-                                <span>{{ __('اضافة مادة') }}</span>
+                                <span>{{ __('إضافة مادة') }}</span>
                             </a>
                         </li>
 
@@ -285,7 +285,7 @@
                         <li class="{{ active_if_match('admins/category') }}">
                             <a href="{{route('category.index')}}">
                                 <i class="fa fa-circle"></i>
-                                <span>{{__('جميع الاقسام')}}</span>
+                                <span>{{__('جميع الأقسام')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -313,7 +313,7 @@
                     <li class="{{ active_if_match('admins/exam/create') }}">
                         <a href="{{route('admin.exam.create')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{ __('اضافة اختبار') }}</span>
+                            <span>{{ __('إضافة اختبار') }}</span>
                         </a>
                     </li>
 
@@ -332,14 +332,14 @@
             <li>
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
-                    <span>{{__('الباصات')}}</span>
+                    <span>{{__('الحافلات')}}</span>
                 </a>
                 <ul>
                     @can('all_course')
                         <li class="{{ active_if_match('admins/bus') }}">
                                 <a href="{{route('admin.bus.index')}}">
                                 <i class="fa fa-circle"></i>
-                                <span>{{__('عرض الباصات')}}</span>
+                                <span>{{__('عرض الحافلات')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -347,7 +347,7 @@
                     <li class="{{ active_if_match('admins/bus/assign') }}">
                         <a href="{{route('admin.bus.create')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{ __('اضافة باص') }}</span>
+                            <span>{{ __('إضافة حافلة') }}</span>
                         </a>
                     </li>
 
@@ -458,7 +458,7 @@
                 <li class="{{ active_if_match('assignments/create') }}">
                     <a href="{{route('admin.assignments.create')}}">
                         <i class="fa fa-circle"></i>
-                        <span>{{ __('اضافة واجب') }}</span>
+                        <span>{{ __('إضافة واجب') }}</span>
                     </a>
                 </li>
 
@@ -522,7 +522,7 @@
                 <li class="{{ active_if_match('admin/subscriptions') }}">
                     <a href="{{route('subscriptions.index')}}">
                         <i class="fa fa-circle"></i>
-                        <span>{{ __('الاستراكات') }}</span>
+                        <span>{{ __('الاشتراكات') }}</span>
                     </a>
                 </li>
 
@@ -822,6 +822,68 @@
 {{--                    </li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
+
+            <li class="{{ @$navCertificateActiveClass }}">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                    <span>{{__('الشهادات')}}</span>
+                </a>
+                <ul>
+                    <li class="{{ @$subNavAllCertificateActiveClass }}">
+                        <a href="{{route('certificate.index')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('الشهادات المصدرة')}}</span>
+                        </a>
+                    </li>
+                    <li class="{{ @$subNavAddCertificateActiveClass }}">
+                        <a href="{{route('certificate.create')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('تصميم الشهادة')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-paper-plane"></i>
+                <span>{{__('تقارير')}}</span>
+            </a>
+            <ul>
+                <li class="{{ active_if_match('reports/report_students_ages') }}">
+                    <a href="{{route('reports.reportStudentsAge')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('تقارير أعمار الطلاب')}}</span>
+                    </a>
+                </li>
+
+                <li class="{{ active_if_match('reports/report_parents') }}">
+                    <a href="{{route('reports.reportParents')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('تقرير بيانات الآباء')}}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('reports/report_subscribtions') }}">
+                    <a href="{{route('reports.reportInvoices')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('قائمة الفواتير')}}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('reports/report_buses') }}">
+                    <a href="{{route('reports.reportBuses')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('قائمة مدفوعات الباص لكل سائق')}}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('reports/report_buses') }}">
+                    <a href="{{route('reports.reportCountStudent')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('تقرير عدد الطلبة الفعلي')}}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+>>>>>>> 42deb9feac5900b6987494c23b9017b250ac4f3a
 
 {{--        @can('ranking_level')--}}
 {{--            <li class="{{ @$navRankingActiveClass }}">--}}

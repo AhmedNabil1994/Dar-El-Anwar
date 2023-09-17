@@ -26,7 +26,7 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary">حفظ</button>
+            <button type="submit" class="btn buttons-style">حفظ</button>
         </form>
         </div>
     </div>

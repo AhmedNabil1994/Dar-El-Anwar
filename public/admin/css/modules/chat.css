@@ -64,7 +64,7 @@
 
 .chat__content .chat__filters .show-filter{
   display: flex;
-  justify-content: end;
+  /* justify-content: end; */
 
 }
 

@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{__('Instructors')}}</h2>
+                                <h2>{{trans('website.instructors')}}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{__('Approved Instructors')}}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('website.approvedInstructors')}}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -166,9 +166,9 @@
 
                         </form>
 
-
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                        <div class="row mb-4">
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>كود الدورة</th>
@@ -237,6 +237,7 @@
                             <div class="mt-3">
                                 {{$courses->links()}}
                             </div>
+                        </div>
                         </div>
 
                         <form method="get" action="" class="row">

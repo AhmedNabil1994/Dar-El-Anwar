@@ -96,8 +96,8 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table " >
-                            <table id="" class="row-border data-table-filter table-style">
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>{{ trans('website.select') }}</th>
@@ -124,8 +124,8 @@
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->dept->name }}</td>
-                                        <td>{{ $student->subject->name }}</td>
-                                        <td>{{ $student->subject->instructor?->employee?->name }}</td>
+                                        <td>{{ $student->subject?->name }}</td>
+                                        <td>{{ $student->subject?->instructor?->employee?->name }}</td>
                                         @for($i = 1; $i <= 15; $i++)
                                         <td>
 
@@ -140,8 +140,8 @@
                                             </label>
                                             <button class="btn buttons-style openModal"
                                             data-student-id="{{$student->id}}" data-assign-id="{{$i}}"
-                                            data-subject="{{$student->subject->id}}" data-dept="{{$student->dept->id}}"
-                                            data-inst="{{$student->subject->instructor?->id}}">
+                                            data-subject="{{$student->subject?->id}}" data-dept="{{$student->dept->id}}"
+                                            data-inst="{{$student->subject?->instructor?->id}}">
                                                 {{ trans('website.setMark') }}
                                             </button>
                                         </td>

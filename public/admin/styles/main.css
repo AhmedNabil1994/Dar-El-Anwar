@@ -849,7 +849,7 @@ img {
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  color: #929BAC;
+  color: #000000;
   -webkit-transition: 0.33s;
   transition: 0.33s;
 }
@@ -8977,6 +8977,9 @@ img {
 .customers__table {
   width: 100%;
   text-align: center;
+}
+.customers__table thead {
+  background-color: #50bfa5
 }
 
 .customers__table table {
@@ -18797,4 +18800,8 @@ blockquote.right span::before {
   .user-profile {
 
   }
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  float: none !important;
 }

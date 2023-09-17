@@ -7,7 +7,7 @@
             <div class="chat chat__wrapper" style="min-height: 95vh;height: auto;">
               <header class="chat__header">
                 <h2 class="text-center">
-                  Contact Us / Conversation
+                   تواصل معنا / المحادثات
                 </h2>
               </header>
 
@@ -16,30 +16,30 @@
               <!-- Start chat sidebar -->
               <div class="chat__sidebar border px-4">
                 <h6>
-                 Conversation 
+                 المحادثات 
                 </h6>
                 <ul class="chat__list">
                   <li>
                     <a href="#">
                     <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/teacher.png" alt="archived">
-                    my Teachers
+                    أساتذتي
                   </a>
                   </li>
                   <li>
                     <a href="#">
                       <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/recieved.png" alt="archived">
-                      Recieving Messages</a>
+                      استقبال الرسائل </a>
                   </li>
                   <li>
                     <a href="#">
                       <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/sent.png" alt="archived">
-                      Sending Messages
+                      إرسال الرسائل 
                     </a>
                   </li>
                   <li>
                   <a href="#">
                     <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/chat.png" alt="archived">
-                    Chats
+                    الدردشة
                   </a>
                   </li>
                 </ul>
