@@ -159,7 +159,7 @@ button {
 
 ul {
   list-style: none;
-  margin: 0;
+  margin: -7px 0px;
   padding: 0;
 }
 
@@ -863,7 +863,7 @@ img {
 }
 
 .sidebar__menu li a.active, .sidebar__menu li a:hover {
-  background-color: #1B1F28;
+  background-color:#50bfa5;
   color: #ffffff;
 }
 
@@ -927,7 +927,7 @@ img {
 
 .header__area {
   width: 100%;
-  height: 230px;
+  height: 200px;
   padding: 20px;
   /* background-image: url("../images/background/header-background.png"); */
   background-repeat: no-repeat;
