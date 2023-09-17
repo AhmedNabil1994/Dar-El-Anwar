@@ -18,7 +18,6 @@ class ReportController extends Controller
      */
     public function reportStudentsAge(Request $request)
     {
-        //
         $age_from = Carbon::now()->year - $request->from;
         $age_to = Carbon::now()->year - $request->to;
         $data['students_age'] = Student::query()->whereStatus(1);
@@ -29,7 +28,7 @@ class ReportController extends Controller
             $data['students_age']->where('birthdate',$request->birthdate);
         if($request->period)
             $data['students_age']->where('period',$request->period);
-        if($request->from || $request->to)
+        if($request->from ||     $request->to)
             $data['students_age']->whereBetween('birthdate',[$age_from.'-01-01',$age_to.'-01-01']);
         $data['students_age'] = $data['students_age']->paginate(25);
         return view('admin.reports.students_age',$data);
