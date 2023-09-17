@@ -168,7 +168,7 @@ img {
 }
 
 .main-content {
-  margin-left: 250px;
+  margin-right: 250px;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -727,7 +727,6 @@ img {
   position: fixed;
   z-index: 9999;
   top: 0;
-  left: 0;
   width: 250px;
   height: 100vh;
   background-color: #ffffff;
@@ -18781,7 +18780,7 @@ blockquote.right span::before {
     flex-direction: column;
     align-items: end;
   }
-  
+
 } */
 
 @media(max-width:500px){
