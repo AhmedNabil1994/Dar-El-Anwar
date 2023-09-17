@@ -30,9 +30,9 @@ class Student extends Authenticatable
         return $this->belongsTo(ClassRoom::class,'classroom');
     }
 
-    public function is_absence()
+    public function absences()
     {
-        return $this->hasMany(Absence::class,'student');
+        return $this->hasMany(Absence::class,'student_id');
     }
 
     public function dept()
@@ -89,6 +89,11 @@ class Student extends Authenticatable
         return $this->belongsToMany(Subject::class,'student_subjects');
     }
 
+    public function student_subject()
+    {
+        return $this->belongsTo(StudentSubject::class);
+    }
+
     public function assignment()
     {
         return $this->hasOne(Assignment::class);
@@ -102,5 +107,15 @@ class Student extends Authenticatable
     public function mother()
     {
         return $this->parent?->where('relationship','mother')->first();
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    public function students_subscriped()
+    {
+        return $this->hasMany(StudentSubscription::class);
     }
 }

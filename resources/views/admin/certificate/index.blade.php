@@ -30,8 +30,9 @@
                             <h2>{{__('كل الشهادات')}}</h2>
                             <a href="{{route('certificate.create')}}" class="btn btn-success btn-sm"> <i class="fa fa-plus"></i> {{__('اضافة شهادة')}} </a>
                         </div>
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                        <div class="customers__table" style="overflow:auto;">
+                            <table id="customers-table" class="row-border data-table-filter table-style"
+                           >
                                 <thead>
                                 <tr>
                                     <th>اسم الطالب</th>
@@ -58,7 +59,7 @@
                                            {{$certificate->created_at->format("d/m/Y")}}
                                         </td>
                                         <td>
-                                            {{$certificate->student->email}}
+                                            {{$certificate->student?->email}}
                                         </td>
                                         <td>
                                             {{$certificate->body}}

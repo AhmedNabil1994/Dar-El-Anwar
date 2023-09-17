@@ -9,15 +9,15 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __(@$title) }}</h2>
+                                <h2>{{ __('اضافة شهادة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('لوحة التحكم')}}</a></li>
                                     <li class="breadcrumb-item"><a href="{{route('certificate.index')}}">{{ __('قائمة الشهادات') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __(@$title) }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __("اضافة شهادة") }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -28,8 +28,8 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30 admin-certificate-page">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __(@$title) }}</h2>
-                            <div><a href="{{route('certificate.index')}}" class="theme-btn theme-button1 green-theme-btn default-hover-btn">{{ __('Certificate List') }}</a></div>
+                            <h2>{{ __('اضافة شهادة') }}</h2>
+                            <div><a href="{{route('certificate.index')}}" class="theme-btn theme-button1 green-theme-btn default-hover-btn">{{ __('قائمة الشهادات') }}</a></div>
                         </div>
 
                         <div class="admin-create-certifiate">
@@ -510,8 +510,7 @@
                                                                             <select type="text" name="role_2_title" class="form-control" >
                                                                                 <option value="">Instructor</option>
                                                                                 @foreach($instructors as $instructor)
-                                                                                    <option value="{{$instructor->id}}"
-                                                                                        {{$instructor->id == $certificate->role_2_title ? 'selected' : '' }}>
+                                                                                    <option value="{{$instructor->id}}">
                                                                                         {{$instructor->first_name}}</option>
                                                                                 @endforeach
                                                                             </select>

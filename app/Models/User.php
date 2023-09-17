@@ -141,7 +141,7 @@ class User extends Authenticatable
         {
             return $this->image;
         } else {
-            return 'uploads/default/instructor-default.png';
+            return 'frontend/assets/img/achievement-icons/3.png';
         }
     }
 

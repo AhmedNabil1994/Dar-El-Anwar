@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bus;
 use App\Models\ClassRoom;
 use App\Models\Department;
 use App\Models\Invoice;
+use App\Models\Level;
 use App\Models\ParentInfo;
 use App\Models\Student;
+use App\Models\StudentBus;
 use App\Models\StudentSubscription;
 use App\Models\Subscription;
 use Carbon\Carbon;
@@ -123,5 +126,33 @@ class ReportController extends Controller
     {
         $data['student'] = Student::find($id);
         return view('admin.reports.report_student',$data);
+    }
+
+    public function reportBuses(Request $request)
+    {
+        $data['students_buses'] = StudentBus::query();
+        if($request->bus_id)
+            $data['students_buses']->where('bus_id',$request->bus_id);
+        if($request->date_from||$request->date_to)
+            $data['students_buses']->whereBetween('updated_at',[$request->date_from,$request->date_to]);
+        if($request->student_name)
+            $data['students_buses']->whereHas('student',function ($q) use ($request){
+                $q->where('name','like','%'.$request->student_name.'%');
+            });
+        if($request->student_name)
+            $data['students_buses']->whereHas('student',function ($q) use ($request){
+                $q->where('level_id',$request->level_id);
+            });
+        $data['students_buses'] = $data['students_buses']->paginate(25);
+        $data['buses'] = Bus::whereStatus(1)->get();
+        $data['levels'] = Level::all();
+        return view('admin.reports.report_buses',$data);
+    }
+
+
+    public function reportCountStudent(Request $request)
+    {
+        $data['department'] = Department::first();
+        return view('admin.reports.report_count_students',$data);
     }
 }

@@ -782,6 +782,18 @@
                         <span>{{__('قائمة الفواتير')}}</span>
                     </a>
                 </li>
+                <li class="{{ active_if_match('reports/report_buses') }}">
+                    <a href="{{route('reports.reportBuses')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('قائمة مدفوعات الباص لكل سائق')}}</span>
+                    </a>
+                </li>
+                <li class="{{ active_if_match('reports/report_buses') }}">
+                    <a href="{{route('reports.reportCountStudent')}}">
+                        <i class="fa fa-money"></i>
+                        <span>{{__('تقرير عدد الطلبة الفعلي')}}</span>
+                    </a>
+                </li>
             </ul>
         </li>
 

@@ -9,6 +9,7 @@ use App\Models\Menu;
 use App\Models\Notification;
 use App\Models\Setting;
 use App\Models\Wishlist;
+use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        get_absence_notify();
+        get_subscription_notify();
+        get_late_subscription_notify();
+        get_welcome_notify();
+
         Schema::defaultStringLength(191);
         Paginator::useBootstrapFive();
 

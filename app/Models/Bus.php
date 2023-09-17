@@ -15,4 +15,12 @@ class Bus extends Model
     {
         return $this->belongsTo(Employee::class,'driver_id');
     }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class);
+    }
 }

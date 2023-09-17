@@ -1,6 +1,6 @@
 <?php
 return [
-"total_students"=> "عدد التلاميذ",
+"total_students"=> "عدد الطلبة",
 "total_instructors"=> "عدد الموظفين",
 "new_students_month"=> "طلاب جدد خلال الشهر",
 "rejected"=> "طلاب مستبعدين",

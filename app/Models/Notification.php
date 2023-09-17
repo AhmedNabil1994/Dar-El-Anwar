@@ -13,6 +13,7 @@ class Notification extends Model
 
     protected $table = 'notifications';
     protected $primaryKey = 'id';
+    protected $guarded = [];
 
     public function user()
     {
