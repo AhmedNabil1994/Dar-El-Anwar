@@ -16,7 +16,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.all_admins') }}</li>
+                                    <!-- <li class="breadcrumb-item active" aria-current="page">{{ trans('website.all_admins') }}</li> -->
                                 </ul>
                             </nav>
                         </div>
