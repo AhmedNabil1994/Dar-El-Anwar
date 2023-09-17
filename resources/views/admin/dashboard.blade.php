@@ -168,6 +168,7 @@
                         <div class="status__box__text">
                             <a href="#">
                                 <h1 class="color-yellow"></h1>
+                                <h1 class="color-yellow">{{$total_get_money}}</h1>
                                 <h2>{{ trans('website.total_income') }}</h2>
                             </a>
                         </div>
@@ -219,33 +220,50 @@
                         <div class="revenue__chart-v2__top">
                             <div class="revenue__chart-v2__top__left">
                                 <div class="content-title">
-                                    <h2>{{ __('Enrollment') }}</h2>
-                                </div>
-                            </div>
-                            <div class="revenue__chart-v2__top__right">
-                                <div class="revenue__chart-v2__list">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <button class="nav-link" id="nav-two-tab" data-bs-toggle="tab" data-bs-target="#nav-two" type="button" role="tab"
-                                                    aria-controls="nav-two" aria-selected="false">
-                                                {{ __('Month') }}
-                                            </button>
-                                            <button class="nav-link active" id="nav-three-tab" data-bs-toggle="tab" data-bs-target="#nav-three" type="button" role="tab"
-                                                    aria-controls="nav-three" aria-selected="false">
-                                                {{ __('Year') }}
-                                            </button>
-                                        </div>
-                                    </nav>
+                                    <h2>{{ __('الخزينة') }}</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
-                                <div id="chartMonth"></div>
+                            <a href="{{ route('accounts.treasury') }}" class="row">
+                                <div id="chartIncome" class="col-md-6"></div>
+                                <div id="chartExpense" class="col-md-6"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('subscriptions.index') }}">
+                    <div class="revenue__chart-v2__area bg-style">
+                        <div class="revenue__chart-v2__top">
+                            <div class="revenue__chart-v2__top__left">
+                                <div class="content-title">
+                                    <h2>{{ __('اجمالي المبيعات في المخزن و الكانتين') }}</h2>
+                                </div>
                             </div>
-                            <div class="tab-pane fade show active" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
-                                <div id="chartYear"></div>
+                        </div>
+                        <div class="tab-content" id="nav-tabContent">
+                                <div id="chartSales" class="col-md-12"></div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="revenue__chart-v2__area bg-style">
+                        <div class="revenue__chart-v2__top">
+                            <div class="revenue__chart-v2__top__left">
+                                <div class="content-title">
+                                    <h2>{{ __('إجمالي نسب الطلاب') }}</h2>
+                                </div>
                             </div>
+                        </div>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div id="chartPercentage" class="col-md-12"></div>
                         </div>
                     </div>
                 </div>
@@ -261,10 +279,71 @@
 
         'use strict'
 
+        var incomes = @json($total_incomes_month);
+        var expenses = @json($total_expenses_month);
+        var sales = @json($total_sales);
+        var precentage = @json($percentage_of_students);
+        var incomesDates = [];
+        var incomesAmounts = [];
+        var expensesDates = [];
+        var expensesAmounts = [];
+        var salesDates = [];
+        var salesAmounts = [];
+        var precentageStatus = [];
+        var precentageCount = [];
+
+
+        incomes.forEach(function (e)
+            {
+                incomesDates.push(e.date)
+            }
+        )
+        incomes.forEach(function (e)
+            {
+                incomesAmounts.push(e.count)
+            }
+        )
+        expenses.forEach(function (e)
+            {
+                expensesDates.push(e.date)
+            }
+        )
+        expenses.forEach(function (e)
+            {
+                expensesAmounts.push(e.count)
+            }
+        )
+        sales.forEach(function (e)
+            {
+                salesDates.push(e.date)
+            }
+        )
+        sales.forEach(function (e)
+            {
+                salesAmounts.push(e.count)
+            }
+        )
+        precentage.forEach(function (e)
+            {
+                if(e.status == 1)
+                    e.status = 'جدد'
+                else if(e.status == 3)
+                    e.status = 'المستبعدين'
+                else if(e.status == 4)
+                    e.status = 'نم نقله'
+                precentageStatus.push(e.status)
+            }
+        )
+        precentage.forEach(function (e)
+            {
+                precentageCount.push(e.count)
+            }
+        )
+        console.log(incomesDates)
         // Month
         var options = {
             series: [{
-                name: 'Total Enroll students',
+                name: 'المصروفات',
                 data: []
             }],
             chart: {
@@ -272,14 +351,14 @@
                 type: 'area'
             },
             dataLabels: {
-                enabled: false
+                enabled: true
             },
             stroke: {
                 curve: 'smooth'
             },
             xaxis: {
                 type: 'year',
-                categories: [1, 2, 3, 4, 5, 6]
+                categories: incomesDates
             },
             tooltip: {
                 x: {
@@ -288,13 +367,21 @@
             },
         };
 
-        var chart = new ApexCharts(document.querySelector("#chartMonth"), options);
+        var chart = new ApexCharts(document.querySelector("#chartIncome"), options);
         chart.render();
+
+
+        var newData = incomesAmounts; // Replace this with your actual data
+
+        // Update the chart's data property
+        chart.updateSeries([{
+            data: newData
+        }]);
 
         // Year
         var options = {
             series: [{
-                name: 'Total enroll students',
+                name: 'الايرادات',
                 data: []
             }],
             chart: {
@@ -302,14 +389,14 @@
                 type: 'area'
             },
             dataLabels: {
-                enabled: false
+                enabled: true
             },
             stroke: {
                 curve: 'smooth'
             },
             xaxis: {
-                type: 'year',
-                categories: []
+                type: 'incomes',
+                categories: expensesDates
             },
             tooltip: {
                 x: {
@@ -318,31 +405,92 @@
             },
         };
 
-        var chart = new ApexCharts(document.querySelector("#chartYear"), options);
+        var chart = new ApexCharts(document.querySelector("#chartExpense"), options);
         chart.render();
+
+
+        var newData = expensesAmounts; // Replace this with your actual data
+
+        // Update the chart's data property
+        chart.updateSeries([{
+            data: newData
+        }]);
+
 
         var options = {
-            series: [],
+            series: [{
+                name: 'المبيعات في المحزن و الكانتين',
+                data: []
+            }],
             chart: {
-                type: 'donut',
+                height: 350,
+                type: 'area'
             },
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
+            dataLabels: {
+                enabled: true
             },
-            ],
-            labels: []
+            stroke: {
+                curve: 'smooth'
+            },
+            xaxis: {
+                type: 'المبيعات',
+                categories: salesDates
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy HH:mm'
+                },
+            },
         };
 
-        var chart = new ApexCharts(document.querySelector("#topSellerChart"), options);
+        var chart = new ApexCharts(document.querySelector("#chartSales"), options);
         chart.render();
+
+
+        var newData = salesAmounts; // Replace this with your actual data
+
+        // Update the chart's data property
+        chart.updateSeries([{
+            data: newData
+        }]);
+
+        var options = {
+            series: [{
+                name: 'إجمالي نسب الطلاب',
+                data: []
+            }],
+            chart: {
+                height: 350,
+                type: 'area'
+            },
+            dataLabels: {
+                enabled: true
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            xaxis: {
+                type: 'إجمالي نسب الطلاب',
+                categories: precentageStatus
+
+            },
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy HH:mm'
+                },
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chartPercentage"), options);
+        chart.render();
+
+
+        var newData = precentageCount; // Replace this with your actual data
+
+        // Update the chart's data property
+        chart.updateSeries([{
+            data: newData
+        }]);
 
     </script>
 @endpush
