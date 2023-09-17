@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Traits\HasPermissions;
 
@@ -24,14 +25,6 @@ class Admin extends  Authenticatable
     protected $table = 'admins';
     protected $guarded = [];
 
-//    protected $fillable = [
-//        'name',
-//        'email',
-//        'username',
-//        'phone',
-//        'password',
-//        'hidden',
-//    ];
 
 
     protected $hidden = [
@@ -39,5 +32,11 @@ class Admin extends  Authenticatable
     ];
 
     protected $guard = 'admins';
+
+    public function rol()
+    {
+        $this->belongsToMany(Role::class);
+    }
+
 
 }

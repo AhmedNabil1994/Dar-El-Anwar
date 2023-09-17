@@ -27,43 +27,41 @@
             <h1> </h1>
 
 
-
-{{--             {{dd(auth()->guard('admins')->user()->roles('manage-admins'))}}--}}
-{{--                @if (auth()->guard('admins')->user()->hasPermissionTo('manage-admins'))--}}
-
-{{--                <p>You have the "manage-admins" permission on the "web" guard</p>--}}
-{{--                @endif--}}
-{{--             --}}
-
-
-{{--            </h1>--}}
-{{--                @can('manage-admins', 'web')--}}
-{{--            @endcan--}}
-
-{{--            @can('manage-admins', 'admins')--}}
-{{--            @endcan--}}
-
-
-{{--        @can('manage-admins', 'admins')--}}
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.admin_list') }}</h2>
-                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
-                            </a>
+
+                        </div>
+                        <div class="row m-3 justify-content-end">
+                            <div class="col-md-3">
+                                <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
+                                    <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
+                                </a>
+                            </div>
+                            <form method="GET" class="row align-items-end" action="{{ route('admins.index') }}">
+                                <div class="col-md-3">
+                                    <label class="form-label">بحث</label>
+                                    <input class="form-control" value="{{request('search')}}" name="search">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn buttons-style"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
-                                <thead>
+                        <div class="customers__table" style="overflow: auto">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead style="background-color: #50bfa5;">
                                 <tr>
                                     <th>{{ trans('website.name') }}</th>
+                                    <th>{{ trans('website.username') }}</th>
                                     <th>{{ trans('website.email') }}</th>
-                                    <th>{{ trans('website.name') }}</th>
                                     <th>{{ trans('website.phone_number') }}</th>
-                                    <th>{{ trans('website.status') }}</th>
+                                    <th>{{ trans('الصفة') }}</th>
+                                    <th>{{ trans('المجموعة') }}</th>
+                                    <th>{{ trans('مستخدم حاص') }}</th>
                                     <th>{{ trans('website.action') }}</th>
                                 </tr>
                                 </thead>
@@ -72,10 +70,12 @@
                                 @foreach($admins as $admin)
                                     <tr class="removable-item">
                                         <td>{{$admin->name}}</td>
-                                        <td>{{$admin->email}}</td>
                                         <td>{{$admin->username}}</td>
+                                        <td>{{$admin->email}}</td>
                                         <td>{{$admin->phone}}</td>
-                                        <td>{{ $admin->hidden ? __('Inactive') : __('Active') }}</td>
+                                        <td>{{ $admin->position }}</td>
+                                        <td>{{ $admin->roles->first()?->name }}</td>
+                                        <td>{{ $admin->private_user == 1? 'نعم' : 'لا' }}</td>
                                         <td>
                                             <div class="action__buttons">
 {{--                                                @can('edit-admins', 'admins')--}}
