@@ -7,7 +7,7 @@
                         <button class="sidebar-toggler">
                             <img src="{{asset('admin/images/icons/header/bars.svg')}}" alt="">
                         </button>
-                        <p class="btn site-title">{{ __('website.darElAnwar') }}</p>
+                        <!-- <p class="btn site-title">{{ __('website.darElAnwar') }}</p> -->
                     </div>
                     <div class="header__navbar__right">
                         <ul class="header__menu">
@@ -57,7 +57,8 @@
                             <li>
                                 <a href="#" class="btn btn-dropdown user-profile" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
 {{--                                    <img src="{{getImageFile(auth::user()?auth::user()->image_path:'')}}" alt="icon">--}}
-                                    <img src="{{asset('admin/images/icons/user.svg')}}" alt="icon">
+                                    <!-- <img src="{{asset('admin/images/icons/user.svg')}}" alt="icon"> -->
+                                    <img src="{{asset('admin/images/icons/user_2.png')}}" alt="icon">
 
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownUser">
