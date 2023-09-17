@@ -59,7 +59,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/add-student.png" alt="students per month">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{route('student.index')}}">
+                            <a href="{{route('student.index',['filterByJoining'=>1])}}">
                                 <h1 class="color-blue">{{$new_students}}</h1>
                                 <h2>{{ trans('website.new_students_month') }}</h2>
                             </a>
@@ -73,7 +73,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/remove-student.png" alt="rejected students">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{route('student.index')}}">
+                            <a href="{{route('student.index',['filterByJoining'=>3])}}">
                                 <h1 class="color-green">{{$excluded_students}}</h1>
                                 <h2>{{ trans('website.rejected') }}</h2>
                             </a>
@@ -126,39 +126,15 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students_trans.png" alt="students transactions">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{route('student.index')}}">
+                            <a href="{{route('student.index',['filterByJoining'=>4])}}">
                                 <h1 class="color-green">{{$converted_students}}</h1>
                                 <h2>{{ trans('website.students_trans') }}</h2>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/bank.png" alt="banking">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-red"></h1>
-                                <h2>{{ trans('website.balance') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/book-money.png" alt="book-money">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-red"></h1>
-                                <h2>{{ trans('website.sales_books_things') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
+
 
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
@@ -180,7 +156,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/absent.png" alt="revenue">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{route('student.index')}}">
+                            <a href="{{route('absence.index')}}">
                                 <h1 class="color-yellow">{{$absence_students}}</h1>
                                 <h2>{{ trans('website.absent_students') }}</h2>
                             </a>
@@ -200,55 +176,45 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/analytics.png" alt="icon">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="#">
-                                <h1 class="color-yellow"></h1>
-                                <h2>{{ trans('website.students_rate') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="revenue__chart-v2__area bg-style">
                         <div class="revenue__chart-v2__top">
                             <div class="revenue__chart-v2__top__left">
+                                <a href="{{ route('accounts.treasury') }}" class="row">
                                 <div class="content-title">
                                     <h2>{{ __('الخزينة') }}</h2>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
-                            <a href="{{ route('accounts.treasury') }}" class="row">
+                            <div class="row">
                                 <div id="chartIncome" class="col-md-6"></div>
                                 <div id="chartExpense" class="col-md-6"></div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('subscriptions.index') }}">
                     <div class="revenue__chart-v2__area bg-style">
                         <div class="revenue__chart-v2__top">
                             <div class="revenue__chart-v2__top__left">
-                                <div class="content-title">
-                                    <h2>{{ __('اجمالي المبيعات في المخزن و الكانتين') }}</h2>
-                                </div>
+                                <a href="{{ route('subscriptions.index') }}">
+                                    <div class="content-title">
+                                        <h2>{{ __('اجمالي المبيعات في المخزن و الكانتين') }}</h2>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
                                 <div id="chartSales" class="col-md-12"></div>
                         </div>
                     </div>
-                    </a>
                 </div>
             </div>
 

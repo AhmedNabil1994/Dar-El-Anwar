@@ -36,9 +36,12 @@ class DashboardController extends Controller
         $data['new_students'] = Student::where('status',1 )->count();
         $data['excluded_students'] = Student::where('status','3')->count();
         $data['converted_students'] = Student::where('status','4')->count();
-        $data['absence_students'] = Absence::count();
+        $data['absence_students'] = Absence::distinct('student_id')->count();
         $data['total_employees'] = Employee::where('status',1)->count();
         $data['total_courses'] = Course::where('status',1)->count();
+        $data['total_best_courses'] = Course::with(['reviews' => function ($query) {
+            $query->orderBy('rating', '>' ,'3');
+        }])->where('status',1)->count();
         $data['total_admins'] = Users::where('status',1)->count();
         $data['total_incomes_month'] = Transaction::query()
                                         ->select('date',\DB::raw('sum(amount) as count'))
@@ -50,9 +53,6 @@ class DashboardController extends Controller
             ->select('date',\DB::raw('sum(amount) as count'))
             ->groupBy('date')->where('transaction_type','expense')
             ->whereNotNull('product_id')->get();
-        $data['total_best_courses'] = Course::with(['reviews' => function ($query) {
-        $query->orderBy('rating', '>' ,'3');
-            }])->count();
         $data['total_get_money']  = 0;
         $total_data = StudentSubscription::where('payment_status','paid')->get();
         foreach ($total_data as $item){
