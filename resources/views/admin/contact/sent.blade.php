@@ -25,7 +25,7 @@
             <div class="chat" style="min-height: 95vh;height: auto;">
                 <header class="chat__header">
                     <h2 class="text-center">
-                        صندوق الوارد
+                        صندوق الصادر
                     </h2>
                 </header>
 
@@ -56,11 +56,11 @@
                                     <div class="show-filter">
                                         <a href="#">
                                             <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/reply.png" alt="archived">
-                                            reply
+                                            رد
                                         </a>
                                         <a href="#">
                                             <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/show.png" alt="archived">
-                                            show
+                                            إظهار
                                         </a>
                                     </div>
                                 </form>

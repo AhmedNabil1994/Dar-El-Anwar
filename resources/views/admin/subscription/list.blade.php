@@ -41,14 +41,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Pages') }}</h2>
+                                <h2>{{ __('الصفحات') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All Page') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('كل الصفحات') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -61,7 +61,7 @@
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('الاشتراك') }}</h2>
                             <a id="openModalBtn" class="btn btn-success btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('Add Page') }}
+                                <i class="fa fa-plus"></i> {{ __('أضف صفحة') }}
                             </a>
                         </div>
                         <div>
@@ -86,7 +86,7 @@
 
                               </div>
                             <div class="col-md-3">
-                                  <button class="btn btn-green" type="submit">Done</button>
+                                  <button class="btn btn-green" type="submit">تم</button>
                             </div>
                           </form>
                         </div>

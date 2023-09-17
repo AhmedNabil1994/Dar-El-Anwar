@@ -849,7 +849,7 @@ img {
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  color: #929BAC;
+  color: #000000;
   -webkit-transition: 0.33s;
   transition: 0.33s;
 }
@@ -18797,4 +18797,8 @@ blockquote.right span::before {
   .user-profile {
 
   }
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  float: none !important;
 }

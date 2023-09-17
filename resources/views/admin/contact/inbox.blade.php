@@ -56,11 +56,11 @@
                         <div class="show-filter">
                           <a href="#">
                             <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/reply.png" alt="archived">
-                            reply
+                            رد
                           </a>
                           <a href="#">
                             <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/show.png" alt="archived">
-                            show
+                            إظهار
                           </a>
                         </div>
                       </form>

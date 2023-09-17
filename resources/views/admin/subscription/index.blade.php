@@ -61,7 +61,7 @@
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('الاشتراك') }}</h2>
                             <a id="openModalBtn" class="btn btn-success btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('Add Page') }}
+                                <i class="fa fa-plus"></i> {{ __('أضف صفحة') }}
                             </a>
                         </div>
                         <div>
