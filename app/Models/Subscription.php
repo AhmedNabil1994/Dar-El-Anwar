@@ -22,9 +22,24 @@ class Subscription extends Model
         return $this->belongsToMany(Student::class);
     }
 
+    public function students_subscriped()
+    {
+        return $this->hasMany(StudentSubscription::class);
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class,'department_id');
     }
 
 }

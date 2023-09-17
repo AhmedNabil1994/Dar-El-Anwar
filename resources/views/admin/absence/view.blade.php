@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Absence') }}</h2>
+                                <h2>{{ trans('website.absence') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All Student') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.all_student') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -25,18 +25,13 @@
             </div>
 
 
-
             <form method="get" action="{{route('absence.index')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="col-sm-2 m-3">
-                    <label for="filterByJoining">{{trans("website.date_from")}}:</label>
-                    <input type="date" class="form-control" name="dateFrom">
-                </div>
-                 <div class="col-sm-2 m-3">
-                    <label for="filterByJoining">{{trans("website.date_to")}}:</label>
-                     <input type="date" class="form-control" name="dateTo">
+                    <label for="filterByJoining">{{trans("website.date")}}:</label>
+                    <input type="date" class="form-control" name="dateFrom" value="{{request('dateFrom')}}">
                 </div>
                 <div class="col-sm-2 m-3">
                     <label for="filterByDept">{{trans("website.department")}}:</label>
@@ -49,7 +44,7 @@
                 </div>
 
                 <div class="col-sm-2 m-3">
-                    <label for="filterByClass">{{trans("website.class")}}:</label>
+                    <label for="filterByClass">{{trans("website.level")}}:</label>
                     <select class="form-control" name="filterByClass">
                         <option value="">{{trans("website.all")}}</option>
                         @foreach($class_rooms as $class_room)
@@ -61,7 +56,7 @@
                 <div class="col-sm-2 m-3">
                     <label for="filterBySubject">{{trans("website.subject")}}:</label>
                     <select class="form-control" name="filterBySubject">
-                        <option value="">{{trans("website.all")}}</option>
+                        <option value="">{{trans('website.all')}}</option>
                         @foreach($subjects as $subject)
                             <option value="{{$subject->id}}" {{$subject->id == request('filterBySubject') ? 'selected' : ''}}>{{$subject->name}}</option>
                         @endforeach
@@ -107,66 +102,70 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
 
-                        <div class="customers__table" style="overflow-x: auto;">
-                            <table id="customers-table" class="row-border data-table-filter">
-                                <thead>
+                        <div class="customers__table" style="overflow: auto">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead style="background-color: #50bfa5;">
                                 <tr>
                                     <th>{{ trans('website.date') }}</th>
                                     <th>{{ trans('website.student_code') }}</th>
                                     <th>{{ trans('website.student_name') }}</th>
                                     <th>{{ trans('website.department') }}</th>
-                                    <th>{{ trans('website.class') }}</th>
+                                    <th>{{ trans('website.level') }}</th>
                                     <th>{{ trans('website.subject') }}</th>
                                     <th>{{ trans('website.teacher') }}</th>
                                     <th>{{ trans('website.registered') }}</th>
                                     <th>{{ trans('website.registering_time') }}</th>
-                                    <th >{{ trans('website.absence_range') }}</th>
+                                    <th>{{ trans('نسبة الغياب') }}</th>
+                                    <th>{{ trans('الغاء الغياب') }}</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach($absences as $absence)
-                                    <tr class="removable-item">
-                                        <td>{{\Carbon\Carbon::parse($absence->created_at)->format('d/m/Y')}}</td>
-                                        <td>{{$absence->students->code}}</td>
-                                        <td>{{$absence->students->name}}</td>
-                                        <td>{{$absence->dept?->name}}</td>
-                                        <td>{{$absence->class_room?->name}}</td>
-                                        <td>{{$absence->subject?->name}}</td>
-                                        <td>
-                                            {{ $absence->instructor->employee->name}}
-                                        </td>
-                                        <td>
-{{--                                            {{is_null($absence->student->is_absence->first()) ? "Not Bone" : "Done"}}--}}
-                                        </td>
-                                        <td>
-{{--                                            {{is_null($absence->student->is_absence->first()) ? "" : $student->is_absence->first()->created_at->format('d/m/y')}}--}}
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                                     style="width:
-                                                     {{$absence->students->is_absence->count()*100/10 }};
+                                    <form method="GET" action="{{route('absence.store')}}">
+                                        <tr class="removable-item">
+                                            <td>{{\Carbon\Carbon::parse($absence->date)->format('y/m/d')}}</td>
+                                            <td>{{$absence->student?->code}}</td>
+                                            <td>{{$absence->student?->name}}</td>
+                                            <td>{{$absence->student_subject->subject->department?->name}}</td>
+                                            <td>{{$absence->student?->level?->name}}</td>
+                                            <td>{{$absence->student_subject->subject->name}}</td>
+                                            <td>{{$absence->student_subject->subject->instructor?->employee?->name}}</td>
+                                            <td>{{$absence->instructor?->employee?->name}}</td>
+                                            <td>{{\Carbon\Carbon::parse($absence->time)->format('H:i:s')}}</td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                                         style="width:
+                                                     {{$absence->student_subject->abscence_count*100/10 }};
                                                      "
-                                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                                         aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                                     <span>
-                                                        {{$absence->students->is_absence->count()*100/10 }}%
+                                                        {{$absence->student_subject->abscence_count*100/10 }}%
                                                     </span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" data-url="{{route('absence.delete', [$absence->id])}}" class="btn-action delete" title="Delete">
+                                                    <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </form>
                                 @endforeach
+
                                 </tbody>
                             </table>
                             <div class="mt-3">
                                 {{$absences->appends(request()->input())->links()}}
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-{{--            @endcan--}}
+            {{--            @endcan--}}
         </div>
     </div>
     <!-- Page content area end -->
@@ -181,35 +180,7 @@
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).on('click', '.btn-action.delete', function(e) {
-            e.preventDefault();
-            var admin_id = $(this).data('id');
-            var url = "{{ route('admins.delete') }}";
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: { id: admin_id, _token: "{{ csrf_token() }}" },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        alert(response.message);
-                        window.location.reload();
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    // console.log(xhr.responseText);
-                    alert('Error: ' + xhr.responseText);
-                }
-            });
-        });
-
-
-
-    </script>
-    <!-- Ajax Search Script -->
+   <!-- Ajax Search Script -->
     <script>
         $(function() {
             $('#searchForm input[name="search"]').on('keyup', function() {
@@ -229,26 +200,5 @@
         });
     </script>
 
-    <script>
 
-        function is_absence(data)
-        {
-            data = {
-                'student_id' : data.getAttribute('data-value'),
-                'is_checked' : data.checked,
-            }
-            $.ajax({
-                url: '{{ route("absence.store") }}',
-                type: 'get',
-                data: data,
-                success: function(res) {
-                    console.log(res);
-                },
-                error: function(jqXHR, status, error) {
-                    // console.log(status + ": " + error);
-                }
-            });
-        }
-
-    </script>
 @endpush

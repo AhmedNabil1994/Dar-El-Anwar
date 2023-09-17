@@ -74,9 +74,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="customers__table" style="overflow: auto;">
-                            <table id="parent-info-table" class="row-border data-table-filter table-style">
-                                    <thead>
+                        <div class="" style="overflow: auto">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead style="background-color: #50bfa5;">
                                         <tr>
                                             <th class="text-center" >{{trans("website.code")}}</th>
                                             <th class="text-center" >{{trans("website.instructor_name")}}</th>

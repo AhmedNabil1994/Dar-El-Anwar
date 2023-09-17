@@ -22,17 +22,18 @@
     <link rel="stylesheet" href="{{asset('admin/css/admin-extra.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/modules/employee.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/modules/chat.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="{{asset('common/css/select2.css')}}" rel="stylesheet">
 </head>
-<body class=" direction-rtl">
+<body dir="rtl">
 
-@if(get_option('allow_preloader') == 1)
-    <!-- Pre Loader Area start -->
-    <div id="preloader">
-        <div id="preloader_status"><img src="{{getImageFile(get_option('app_preloader'))}}" alt="img" /></div>
-    </div>
-    <!-- Pre Loader Area End -->
-@endif
+{{--@if(get_option('allow_preloader') == 1)--}}
+{{--    <!-- Pre Loader Area start -->--}}
+{{--    <div id="preloader">--}}
+{{--        <div id="preloader_status"><img src="{{getImageFile(get_option('app_preloader'))}}" alt="img" /></div>--}}
+{{--    </div>--}}
+{{--    <!-- Pre Loader Area End -->--}}
+{{--@endif--}}
 
 <!-- Sidebar area start -->
 @include('admin.common.sidebar')
@@ -89,6 +90,7 @@
 <input type="hidden" id="base_url" value="{{url('/')}}">
 
 <!-- All Javascript files included here -->
+
 <script src="{{asset('frontend/assets/vendor/jquery/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('admin/js/popper.min.js')}}"></script>
 <script src="{{ asset('frontend/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -100,19 +102,26 @@
 <script src="{{asset('admin/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('admin/js/main.js')}}"></script>
 <script src="{{asset('common/js/select2.min.js')}}"></script>
-
-@toastr_js
-@toastr_render
-
-@if (@$errors->any())
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Initialize Toastr
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: 'toast-top-left',
+        };
+    });
+</script>
+@if(session('success'))
     <script>
-        "use strict";
-        @foreach ($errors->all() as $error)
-            toastr.options.positionClass = 'toast-bottom-right';
-            toastr.error("{{ $error }}")
-        @endforeach
+        toastr.success("{{ session('success') }}");
+    </script>
+@endif
 
-        $(document).DataTable()
+@if(session('error'))
+    <script>
+        toastr.error("{{ session('error') }}");
     </script>
 @endif
 </body>

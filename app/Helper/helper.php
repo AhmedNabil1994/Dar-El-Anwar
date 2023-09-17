@@ -23,6 +23,128 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+
+
+function get_notify()
+{
+    $notifications = \App\Models\Notification::orderBy('id','DESC')
+        ->where('user_id', Auth::id())
+        ->where('user_type',1)
+        ->where('is_seen','no')->get();
+    return $notifications;
+}
+
+function get_absence_notify()
+{
+    $collect_student = collect([]);
+    $students = \App\Models\Student::all();
+    foreach($students as $student){
+        $isSeries = false;
+        $previousDate = null;
+        $times=0;
+        foreach ($student->absences as $absence){
+            if ($previousDate !== null) {
+                $currentDate = \Carbon\Carbon::parse($absence->date);
+                if ($currentDate->diffInDays($previousDate) == 1) {
+                    $isSeries = true;
+                    $times++;
+                    if($times <= get_setting('validate_abscent_times')??0)
+                        $isSeries = false;
+
+                }
+                else
+                    $isSeries = false;
+            }
+            $previousDate = \Carbon\Carbon::parse($absence->date);
+
+
+        }
+        if ($isSeries) {
+            $collect_student->push($student);
+        }
+
+    }
+
+    if ($collect_student->count() > 0) {
+            foreach ($collect_student as $student) {
+                $notify = \App\Models\Notification::where('text',get_setting('warning_abscent_text'))
+                    ->where('is_seen','no')->first();
+                if (!$notify)
+                    \App\Models\Notification::create([
+                        'user_id' => 1,
+                        'sender_id' => 1,
+                        'text' => get_setting('warning_abscent_text')??0,
+                    ]);
+            }
+    }
+}
+
+function get_subscription_notify()
+{
+    $students = \App\Models\Student::whereHas('students_subscriped',function ($q){
+        $q->where('payment_status' , 'unpaid');
+    })->get();
+
+
+    if ($students->count() > 0) {
+        foreach ($students as $student) {
+            $notify = \App\Models\Notification::where('text',get_setting('warning_subscription_text'))
+                ->where('is_seen','no')->first();
+            if (!$notify)
+                \App\Models\Notification::create([
+                    'user_id' => 1,
+                    'sender_id' => 1,
+                    'text' => get_setting('warning_subscription_text'),
+
+                ]);
+        }
+    }
+}
+
+function get_late_subscription_notify()
+{
+    $students = \App\Models\Student::whereHas('students_subscriped',function ($q){
+        $q->where('payment_status' , 'unpaid')->where('active_days' ,'<=', 30 - get_setting('warning_late_subscription_time'));
+    })->get();
+
+
+    if ($students->count() > 0) {
+        foreach ($students as $student) {
+            $notify = \App\Models\Notification::where('text',get_setting('warning_late_subscription_text'))
+                ->where('is_seen','no')->first();
+            if (!$notify)
+                \App\Models\Notification::create([
+                    'user_id' => 1,
+                    'sender_id' => 1,
+                    'text' => get_setting('warning_late_subscription_text'),
+
+                ]);
+        }
+    }
+}
+
+function get_welcome_notify()
+{
+    $today = now()->format('Y-m-d'); // Get today's date in 'Y-m-d' format
+
+    $students = \App\Models\Student::whereDate('created_at','>=', $today)->get();
+
+
+    if ($students->count() > 0) {
+        foreach ($students as $student) {
+            $notify = get_setting('welcome_text')
+                ->where('is_seen','no')->first();
+            if (!$notify)
+                \App\Models\Notification::create([
+                    'user_id' => 1,
+                    'sender_id' => 1,
+                    'text' => get_setting('welcome_text'),
+
+                ]);
+        }
+    }
+}
+
 function staticMeta($id)
 {
     $meta = \App\Models\Meta::find($id);

@@ -7,62 +7,156 @@
             <div class="chat chat__wrapper" style="min-height: 95vh;height: auto;">
               <header class="chat__header">
                 <h2 class="text-center">
-                  Messages
+                  قائمة الرسائل
                 </h2>
               </header>
 
               <div class="row">
                 <div class="col-md-3">
-              <!-- Start chat sidebar -->
-              <div class="chat__sidebar border px-4">
-                <h6>
-                 Conversation 
-                </h6>
-                <ul class="chat__list">
-                  <li>
-                    <a href="#">
-                    <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/teacher.png" alt="archived">
-                    my Teachers
-                  </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/recieved.png" alt="archived">
-                      Recieving Messages</a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/sent.png" alt="archived">
-                      Sending Messages
-                    </a>
-                  </li>
-                  <li>
-                  <a href="#">
-                    <img class="img-responsive w-full" src="{{ asset('admin') }}/images/messages/chat.png" alt="archived">
-                    Chats
-                  </a>
-                  </li>
-                </ul>
-              </div>
-              <!-- end chat sidebar -->
-            </div>
-            <div class="col-9">
-              <div class="chat__main-content" >
-                <div class="messages-field">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, eveniet!
-                </div>
-                <form action="" class="send-message">
-                  <input type="text" vlaue="" placeholder="Insert your message">
-                  <div class="send-message__controller">
-                    <div class="icon">
-                      <img class="img-responsive" src="{{ asset('admin') }}/images/messages/docs.png" alt="upload files">
-                    </div>
-                    <div class="icon">
-                      <img class="img-responsive" src="{{ asset('admin') }}/images/messages/send-msg.png" alt="send">
+                  <!-- Start chat sidebar -->
+                  <div class="chat__sidebar border px-4">
+                    <h6>
+                     خيارات
+                    </h6>
+                    <div class="chat__list">
+                        <div class="row form-group mt-3">
+                            <label class="form-label col-12">التنبيه بالغباب في حالة الغياب عدد ايام</label>
+                            <div class="col-sm-12">
+                            <input type="number" min="0" class="form-control" name="validate_abscent_times"
+                             value="{{get_setting('validate_abscent_times')}}">
+                            </div>
+                        </div>
+                        <div class="row form-group mt-3">
+                            <label class="form-label col-12">وقت رسالة الترحيب</label>
+                            <div class="col-sm-12">
+                                <input type="number" min="0" class="form-control" name="welcome_time"
+                                       value="{{get_setting('welcome_time')}}">
+                            </div>
+                        </div>
+                        <div class="row form-group mt-3">
+                            <label class="form-label col-12">التنبيه عند تأخير السداد بعد يوم</label>
+                            <div class="col-sm-12">
+                                <input type="number" min="0" class="form-control" name="warning_late_subscription_time"
+                                       value="{{get_setting('warning_late_subscription_time')}}">
+                            </div>
+                        </div>
+                        <div class="row form-group mt-3">
+                            <label class="form-label col-12">رسالة بسداد الاشتراك</label>
+                            <div class="col-sm-12">
+                                <input type="number" min="0" class="form-control" name="warning_late_subscription_time"
+                                       value="{{get_setting('warning_late_subscription_time')}}">
+                            </div>
+                        </div>
+                        <div class="row form-group mt-3">
+                            <label class="form-label col-12">المرسل اليه</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" name="send_user_type">
+
+                                    <option value="1"
+                                        {{1 == get_setting('send_user_type')? 'selected' : ''}}
+                                    >الكل</option>
+                                    <option value="2"
+                                        {{2== get_setting('send_user_type')? 'selected' : ''}}
+                                    >ولي الامر</option>
+                                    <option value="3"
+                                        {{3 == get_setting('send_user_type')? 'selected' : ''}}
+                                    >طالب</option>
+                                    <option value="4"
+                                        {{4 == get_setting('send_user_type')? 'selected' : ''}}
+                                    >مدرس</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group mt-3">
+                            <label class="form-label col-12">طريقة ىالارسال</label>
+                            <div class="col-sm-12">
+                                <select class="form-control" name="sending_way[]" multiple>
+                                    @php
+                                        $arr = explode(',',get_setting('sending_way'));
+                                    @endphp
+
+                                    <option value="1"
+                                    {{in_array(1,$arr)? 'selected' : ''}}
+                                    >الايميل</option>
+                                    <option value="2"
+                                        {{in_array(2,$arr)?'selected' : ''}}
+                                    >لوحة التحكم</option>
+                                    <option value="3"
+                                        {{in_array(3,$arr)?'selected' : ''}}
+                                    >الواتس اب</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                   </div>
-                </form>
-              </div>
+                  <!-- end chat sidebar -->
+            </div>
+                <div class="col-md-9">
+                <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                    @csrf
+                  <div class="row">
+                      <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
+                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                              @csrf
+                              <input type="hidden" value="welcome_text" name="option_key[]">
+                              <h3 class="h3 text-dark">رسالة ترحيب</h3>
+                              <textarea class="form-control-lg" name="option_value[]">{{get_setting('welcome_text')}}</textarea>
+                              <div class="col-md- mt-3">
+                                  <button class="btn btn-primary">ارسال</button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
+                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                              @csrf
+                              <input type="hidden" value="warning_subscription_text" name="option_key[]">
+                              <h3 class="h3 text-dark">رسالة سداد الاشتراك</h3>
+                              <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_subscription_text')}}</textarea>
+                              <div class="col-md- mt-3">
+                                  <button class="btn btn-primary">ارسال</button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
+                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                              @csrf
+                              <input type="hidden" value="warning_abscent_text" name="option_key[]">
+                              <h3 class="h3 text-dark">رسالة التنبيه بالغياب</h3>
+                              <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_abscent_text')}}</textarea>
+                              <div class="col-md- mt-3">
+                                  <button class="btn btn-primary">ارسال</button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
+                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                              @csrf
+                              <input type="hidden" value="warning_late_subscription_text" name="option_key[]">
+                              <h3 class="h3 text-dark">رسالة التأخير عن السداد</h3>
+                              <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_late_subscription_text')}}</textarea>
+                              <div class="col-md- mt-3">
+                                  <button class="btn btn-primary">ارسال</button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
+                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                              @csrf
+                              <input type="hidden" value="warning_late_subscription_text" name="option_key[]">
+                              <h3 class="h3 text-dark">تذكير اوملاحظة</h3>
+                              <textarea class="form-control-lg" name="option_value[]">{{get_setting('noting_messages')}}</textarea>
+                              <div class="col-md- mt-3">
+                                  <button class="btn btn-primary">ارسال</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="row justify-content-end">
+                      <div class="col-md-2">
+                      <button class="btn btn-primary">حفظ</button>
+                      </div>
+                  </div>
+              </form>
             </div>
           </div>
         </div>

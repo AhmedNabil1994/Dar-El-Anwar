@@ -255,7 +255,7 @@
     padding-right: .5rem;
 }
 
-.direction-rtl .breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
     float: right;
     padding-right: 0;
     padding-left: .5rem;

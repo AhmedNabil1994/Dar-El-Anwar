@@ -8,7 +8,7 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add Page') }}</h2>
+                                <h2>تقرير بيانات الاباء</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -23,42 +23,45 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-4">
+
+
+            <form method="GET" action="{{route('reports.reportParents')}}"
+                  class="customers__area bg-style mb-30 form-container row align-items-end">
                 <div class="form-group col-md-3">
-                    <label for="from">بحث في عمر الاطفال من</label>
-                    <input type="number"
-                           class="form-control"
-                           name="from"
-                           value="{{request('from')}}"/>
+                        <label for="student_name">بحث باسم الطفل</label>
+                        <input type="text"
+                               class="form-control"
+                               name="student_name"
+                               value="{{request('student_name')}}"/>
                 </div>
                 <div class="form-group col-md-3">
 
-                    <label for="to">الي</label>
-                    <input type="number"
+                    <label for="father_name">بحث باسم الاب</label>
+                    <input type="text"
                            class="form-control"
-                           name="to"
-                           value="{{request('to')}}"/>
+                           name="father_name"
+                           value="{{request('father_name')}}"/>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="studen_name">فترة</label>
-                    <select name="period" class="form-select">
-                        <option value="">اختر الفترة</option>
-                        <option value="1"
-                            {{request('period') == 1?'selected':''}}
-                        >صباحي</option>
-                        <option value="2"
-                            {{request('period') == 2?'selected':''}}
-                        >مسائي</option>
-                    </select>
+                    <label for="mother_name">بحث باسم الام</label>
+                    <input type="text"
+                           class="form-control"
+                           name="mother_name"
+                           value="{{request('mother_name')}}"/>
                 </div>
-            </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn" style="background-color: #50bfa5;">
+                        <i class="fa fa-filter"></i>
+                    </button>
+                </div>
+
+            </form>
 
             <hr>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>تقرير مفصل عن أعمار الطلبة وتواريخ ميلادهم</h2>
-                    <table class="table table-bordered">
-                        <thead>
+                    <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                        <thead style="background-color: #50bfa5;">
                         <tr>
                             <th>اسم الطفل</th>
                             <th>الاب</th>
@@ -82,11 +85,11 @@
                                 <td>{{ $student->father()?->phone_number }}</td>
                                 <td>{{ $student->mother()?->phone_number }}</td>
                                 <td>{{ $student->parents_marital_status }}</td>
-{{--                                <td>--}}
-{{--                                    <a href="{{route('student.edit',$student_age->id)}}" class="btn-action view"  title="{{ __('معايبة') }}">--}}
-{{--                                        <i class="fa fa-eye"></i>--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
+                                <td>
+                                    <a href="{{route('student.edit',$student->id)}}" class="btn-action view"  title="{{ __('معايبة') }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -20,4 +20,9 @@ class Subject extends Model
         return $this->belongsTo(Instructor::class);
     }
 
+    public function student()
+    {
+        return $this->belongsToMany(Student::class,'student_subjects');
+    }
+
 }

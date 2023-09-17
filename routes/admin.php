@@ -1,18 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\AbsenceController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AffiliateController;
 use App\Http\Controllers\Admin\AssignmentController;
+use App\Http\Controllers\Admin\BalanceController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BlogCategoryController;
-use App\Http\Controllers\Admin\StoreController;
-use App\Http\Controllers\Admin\FinancialAccountController;
-use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\InvoiceController;
-use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\ContactUsIssueController;
@@ -21,38 +19,40 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\BalanceController;
 use App\Http\Controllers\Admin\difficultyLevelController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\FinancialAccountController;
+use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\ForumCategoryController;
+use App\Http\Controllers\Admin\GoalController;
 use App\Http\Controllers\Admin\HomeSettingController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ParentInfoController;
 use App\Http\Controllers\Admin\PayoutController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProfitController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\RankingLevelController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SpecialPromotionTagController;
+use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SupportTicketController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\SubjectController;
-use App\Http\Controllers\Admin\AbsenceController;
-use App\Http\Controllers\Admin\ProfitController;
-use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Instructor\InstructorController;
 use App\Http\Controllers\Student\StudentController;
-use App\Http\Controllers\Admin\BusController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //Auth::routes(['register' => false]);
@@ -194,6 +194,7 @@ Route::prefix('course')->group(function () {
     Route::prefix('contact_us')->group(function () {
         Route::get('/inbox', [ContactUsController::class, 'contactUsInbox'])->name('admin.contact_us.contactUsInbox');
         Route::get('/sent', [ContactUsController::class, 'contactUsSent'])->name('admin.contact_us.contactUsSent');
+        Route::post('/sent/store', [ContactUsController::class, 'contactUsSentStore'])->name('admin.contact_us.contactUsSentStore');
         Route::get('/conversations', [ContactUsController::class, 'contactUsConversations'])->name('admin.contact_us.contactUsConversations');
         Route::get('/messages', [ContactUsController::class, 'contactUsMessages'])->name('admin.contact_us.contactUsMessages');
     });
@@ -322,7 +323,19 @@ Route::prefix('student')->group(function () {
         Route::get('create', [AbsenceController::class, 'create'])->name('absence.create');
         Route::get('store', [AbsenceController::class, 'store'])->name('absence.store');
         Route::post('update/{id}', [AbsenceController::class, 'update'])->name('absence.update');
+        Route::get('delete/{id}', [AbsenceController::class, 'delete'])->name('absence.delete');
     });
+
+    Route::prefix('notification')->as('notification.')->group(function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+        Route::get('show/{id}', [NotificationController::class, 'show'])->name('show');
+        Route::get('create', [NotificationController::class, 'create'])->name('create');
+        Route::post('store', [NotificationController::class, 'store'])->name('store');
+        Route::post('send', [NotificationController::class, 'send'])->name('send');
+        Route::post('update/{id}', [NotificationController::class, 'update'])->name('update');
+        Route::get('delete/{id}', [NotificationController::class, 'delete'])->name('delete');
+    });
+
 
     Route::prefix('profit')->group(function () {
         Route::get('/', [ProfitController::class, 'index'])->name('profit.index');
@@ -411,6 +424,11 @@ Route::prefix('category')->group(function () {
 Route::prefix('reports')->as('reports.')->group(function () {
     Route::get('/report_students_ages', [ReportController::class, 'reportStudentsAge'])->name('reportStudentsAge');
     Route::get('/report_parents', [ReportController::class, 'reportParents'])->name('reportParents');
+    Route::get('/report_subscribtions', [ReportController::class, 'reportSubscribtions'])->name('reportSubscribtions');
+    Route::get('/report_invoices', [ReportController::class, 'reportInvoices'])->name('reportInvoices');
+    Route::get('/report_student/{id}', [ReportController::class, 'reportStudent'])->name('reportStudent');
+    Route::get('/report_buses', [ReportController::class, 'reportBuses'])->name('reportBuses');
+    Route::get('/report_count_students', [ReportController::class, 'reportCountStudent'])->name('reportCountStudent');
 });
 
 

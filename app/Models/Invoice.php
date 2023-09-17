@@ -34,5 +34,10 @@ class Invoice extends Model
         return $query->whereNull('paid_at');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
 }

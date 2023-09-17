@@ -34,13 +34,41 @@ class ContactUsController extends Controller
         return view('admin.contact.index', $data);
     }
 
+    public function contactUsSentStore(Request $request)
+    {
+        if (!Auth::user()->can('manage_contact')) {
+            abort('403');
+        } // end permission checking
+
+        $data['title'] = 'Contact Us List';
+        $data['navContactUsParentActiveClass'] = 'mm-active';
+        $data['navContactUsParentShowClass'] = 'mm-show';
+        $data['subNavContactUsIndexActiveClass'] = 'mm-active';
+
+        $data['contactUss'] = $this->model->getOrderById('DESC', 25);
+        return view('admin.contact.index', $data);
+    }
+
+
+
     public function contactUsInbox()
     {
-        return view('admin.contact.inbox');
+        $data['received_messages'] = ContactUs::query()->orderBy('id','DESC')
+                            ->where('reciever_id',\Illuminate\Support\Facades\Auth::id());
+
+        $data['received_messages'] = $data['received_messages']->paginate(25);
+
+        return view('admin.contact.inbox',$data);
     }
-    public function contactUsSent()
+
+
+    public function contactUsSent(Request $request)
     {
-        return view('admin.contact.sent');
+        $data['sent_messages'] = ContactUs::query()->orderBy('id','DESC')
+            ->where('sender_id',\Illuminate\Support\Facades\Auth::id());
+        $data['sent_messages'] = $data['sent_messages']->paginate(25);
+
+        return view('admin.contact.sent',$data);
     }
 
     public function contactUsConversations()

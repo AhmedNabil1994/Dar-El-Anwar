@@ -30,9 +30,9 @@ class Student extends Authenticatable
         return $this->belongsTo(ClassRoom::class,'classroom');
     }
 
-    public function is_absence()
+    public function absences()
     {
-        return $this->hasMany(Absence::class,'student');
+        return $this->hasMany(Absence::class,'student_id');
     }
 
     public function dept()
@@ -60,11 +60,6 @@ class Student extends Authenticatable
         return $this->hasOne(City::class,'id','city_id');
     }
 
-    public function parentInfo()
-    {
-        return $this->hasMany(ParentInfo::class);
-    }
-
     public function scopeApproved($query)
     {
         return $query->where('status', 1);
@@ -89,9 +84,14 @@ class Student extends Authenticatable
         return $this->belongsToMany(Subscription::class);
     }
 
-    public function subject()
+    public function subjects()
     {
-        return $this->belongsTo(Subject::class,'subject_id');
+        return $this->belongsToMany(Subject::class,'student_subjects');
+    }
+
+    public function student_subject()
+    {
+        return $this->belongsTo(StudentSubject::class);
     }
 
     public function assignment()
@@ -107,5 +107,15 @@ class Student extends Authenticatable
     public function mother()
     {
         return $this->parent?->where('relationship','mother')->first();
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    public function students_subscriped()
+    {
+        return $this->hasMany(StudentSubscription::class);
     }
 }

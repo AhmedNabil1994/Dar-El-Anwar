@@ -70,7 +70,7 @@
                     <select class="form-control" name="filterByClass">
                         <option value="">{{trans("website.all")}}</option>
                         @foreach($class_rooms as $class_room)
-                            <option value="{{$class_rooms->id}}" {{$class_rooms->id == request('filterByClass')? 'selected' : ''}}>{{$class_rooms->name}}</option>
+                            <option value="{{$class_room->id}}" {{$class_room->id == request('filterByClass')? 'selected' : ''}}>{{$class_room->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -95,9 +95,9 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table " >
-                            <table id="" class="row-border data-table-filter table-style">
-                                <thead>
+                        <div class="customers__table" style="overflow: auto">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead style="background-color: #50bfa5;">
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>

@@ -11,17 +11,18 @@ class Department extends Model
     use HasFactory;
 
     protected $table = 'departments';
-    protected $fillable = [
-        'name',
-        'image',
-        'is_feature',
-        'slug',
-    ];
+    protected $guarded = [];
 
     public function courses()
     {
         return $this->hasMany(Course::class, 'category_id');
     }
+
+    public function classes()
+    {
+        return $this->hasMany(ClassRoom::class);
+    }
+
 
     public function activeCourses()
     {

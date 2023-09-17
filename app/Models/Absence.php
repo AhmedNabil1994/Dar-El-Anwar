@@ -12,23 +12,24 @@ class Absence extends Model
 
     public function instructor()
     {
-        return $this->belongsTo(Instructor::class,'teacher');
+        return $this->belongsTo(Instructor::class,'instructor_id');
     }
-    public function students()
+    public function student()
     {
-        return $this->belongsTo(Student::class,'student');
+        return $this->belongsTo(Student::class,'student_id');
     }
-    public function subject()
+    public function student_subject()
     {
-        return $this->belongsTo(Subject::class,'subject_id');
+        return $this->belongsTo(StudentSubject::class,'student_subjects_id');
     }
     public function dept()
     {
-        return $this->belongsTo(Department::class,'department');
+        return $this->belongsTo(Department::class,'department_id');
     }
 
-    public function class_room()
+    public function level()
     {
-        return $this->belongsTo(ClassRoom::class,'class');
+        return $this->belongsTo(Level::class,'level_id');
     }
+
 }
