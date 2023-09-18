@@ -823,7 +823,7 @@
 {{--                </ul>--}}
 {{--            </li>--}}
 
-            <li class="{{ @$navCertificateActiveClass }}">
+         {{--   <li class="{{ @$navCertificateActiveClass }}">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
                     <span>{{__('الشهادات')}}</span>
@@ -838,11 +838,11 @@
                     <li class="{{ @$subNavAddCertificateActiveClass }}">
                         <a href="{{route('certificate.create')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{__('تصميم الشهادة')}}</span>
+                            <manage_certificatespan>{{__('تصميم الشهادة')}}</manage_certificatespan>
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>--}}
 
         <li>
             <a class="has-arrow" href="#">
@@ -883,7 +883,6 @@
                 </li>
             </ul>
         </li>
->>>>>>> 42deb9feac5900b6987494c23b9017b250ac4f3a
 
 {{--        @can('ranking_level')--}}
 {{--            <li class="{{ @$navRankingActiveClass }}">--}}

@@ -140,7 +140,7 @@
                           </form>
                       </div>
                       <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
-                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
+                      <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
                               @csrf
                               <input type="hidden" value="warning_late_subscription_text" name="option_key[]">
                               <h3 class="h3 text-dark">تذكير اوملاحظة</h3>
