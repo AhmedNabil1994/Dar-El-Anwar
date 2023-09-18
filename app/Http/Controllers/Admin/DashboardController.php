@@ -64,4 +64,9 @@ class DashboardController extends Controller
         return view('admin.dashboard', $data);
     }
 
+    public function calender()
+    {
+        return view('admin.common.apps-calendar');
+    }
+
 }

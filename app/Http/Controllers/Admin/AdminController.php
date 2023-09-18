@@ -61,7 +61,7 @@ class AdminController extends Controller
     {
 
 
-        $admins = Admin::query();
+        $admins = Admin::query()->orderBy('id','DESC');
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -107,6 +107,10 @@ class AdminController extends Controller
         $admin->save();
 
         $admin->roles()->attach(Role::findOrFail($request->role_id));
+        if($request->role == 1)
+            $admin->update(['private_user'=>1]);
+        else
+            $admin->update(['private_user'=>0]);
         return redirect()->route('admins.index')->with('success', 'Admin created successfully.');
     }
 
@@ -129,9 +133,14 @@ class AdminController extends Controller
         if (!empty($request->input('password'))) {
             $admin->password = Hash::make($request->input('password'));
         }
-        $admin->save();
-        $admin->roles()->attach(Role::findOrFail($request->role));
 
+
+        $admin->save();
+        $admin->roles()->sync(Role::findOrFail($request->role));
+        if($request->role == 1)
+            $admin->update(['private_user'=>1]);
+        else
+            $admin->update(['private_user'=>0]);
         return redirect()->route('admins.index')->with('success', 'Admin updated successfully.');
     }
 

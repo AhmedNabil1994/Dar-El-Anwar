@@ -142,7 +142,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/revenue.png" alt="total income">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
+                            <a href="{{ route('subscriptions.students_subscription') }}">
                                 <h1 class="color-yellow"></h1>
                                 <h1 class="color-yellow">{{$total_get_money}}</h1>
                                 <h2>{{ trans('website.total_income') }}</h2>
@@ -169,7 +169,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/calendar.png" alt="icon">
                         </div>
                         <div class="status__box__text">
-                            <a href="#">
+                            <a href="{{ route('calender.index') }}">
                                 <h1 class="color-yellow"></h1>
                                 <h2>{{ trans('website.calendar') }}</h2>
                             </a>

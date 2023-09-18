@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\BalanceController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\CalenderController;
+use App\Http\Controllers\Admin\ClassRoomController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -239,35 +241,35 @@ Route::prefix('course')->group(function () {
     Route::post('course-upload-rules/store', [CourseController::class, 'courseUploadRuleStore'])->name('course-rules.store');
 
 
-Route::prefix('instructor')->group(function () {
-    Route::get('/', [InstructorController::class, 'index'])->name('instructor.index');
-    Route::get('view/{id}', [InstructorController::class, 'view'])->name('instructor.view');
-    Route::get('edit/{id}', [InstructorController::class, 'edit'])->name('instructor.edit');
-    Route::post('update/{id}', [InstructorController::class, 'update'])->name('instructor.update');
-    Route::get('pending', [InstructorController::class, 'pending'])->name('instructor.pending');
-    Route::get('approved', [InstructorController::class, 'approved'])->name('instructor.approved');
-    Route::get('blocked', [InstructorController::class, 'blocked'])->name('instructor.blocked');
-    Route::get('change-status/{uuid}/{status}', [InstructorController::class, 'changeStatus'])->name('instructor.status-change');
-    Route::post('change-instructor-status', [InstructorController::class, 'changeInstructorStatus'])->name('admin.instructor.changeInstructorStatus');
-    Route::get('delete/{uuid}', [InstructorController::class, 'delete'])->name('instructor.delete');
+    Route::prefix('instructor')->group(function () {
+        Route::get('/', [InstructorController::class, 'index'])->name('instructor.index');
+        Route::get('view/{id}', [InstructorController::class, 'view'])->name('instructor.view');
+        Route::get('edit/{id}', [InstructorController::class, 'edit'])->name('instructor.edit');
+        Route::post('update/{id}', [InstructorController::class, 'update'])->name('instructor.update');
+        Route::get('pending', [InstructorController::class, 'pending'])->name('instructor.pending');
+        Route::get('approved', [InstructorController::class, 'approved'])->name('instructor.approved');
+        Route::get('blocked', [InstructorController::class, 'blocked'])->name('instructor.blocked');
+        Route::get('change-status/{uuid}/{status}', [InstructorController::class, 'changeStatus'])->name('instructor.status-change');
+        Route::post('change-instructor-status', [InstructorController::class, 'changeInstructorStatus'])->name('admin.instructor.changeInstructorStatus');
+        Route::get('delete/{uuid}', [InstructorController::class, 'delete'])->name('instructor.delete');
 
-    Route::get('get-state-by-country/{country_id}', [InstructorController::class, 'getStateByCountry']);
-    Route::get('get-city-by-state/{state_id}', [InstructorController::class, 'getCityByState']);
+        Route::get('get-state-by-country/{country_id}', [InstructorController::class, 'getStateByCountry']);
+        Route::get('get-city-by-state/{state_id}', [InstructorController::class, 'getCityByState']);
 
-    Route::get('create', [InstructorController::class, 'create'])->name('instructor.create');
-    Route::post('store', [InstructorController::class, 'store'])->name('instructor.store');
-});
+        Route::get('create', [InstructorController::class, 'create'])->name('instructor.create');
+        Route::post('store', [InstructorController::class, 'store'])->name('instructor.store');
+    });
 
-Route::prefix('student')->group(function () {
-    Route::get('/', [StudentController::class, 'index'])->name('student.index');
-    Route::get('create', [StudentController::class, 'create'])->name('student.create');
-    Route::post('store', [StudentController::class, 'store'])->name('student.store');
-    Route::get('view/{id}', [StudentController::class, 'view'])->name('student.view');
-    Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
-    Route::post('update/{id}', [StudentController::class, 'update'])->name('student.update');
-    Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
-    Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
-});
+    Route::prefix('student')->group(function () {
+        Route::get('/', [StudentController::class, 'index'])->name('student.index');
+        Route::get('create', [StudentController::class, 'create'])->name('student.create');
+        Route::post('store', [StudentController::class, 'store'])->name('student.store');
+        Route::get('view/{id}', [StudentController::class, 'view'])->name('student.view');
+        Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+        Route::post('update/{id}', [StudentController::class, 'update'])->name('student.update');
+        Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
+        Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
+    });
 
     Route::prefix('accounts')->group(function () {
         Route::get('treasury', [FinancialAccountController::class, 'treasury'])->name('accounts.treasury');
@@ -324,6 +326,12 @@ Route::prefix('student')->group(function () {
         Route::get('store', [AbsenceController::class, 'store'])->name('absence.store');
         Route::post('update/{id}', [AbsenceController::class, 'update'])->name('absence.update');
         Route::get('delete/{id}', [AbsenceController::class, 'delete'])->name('absence.delete');
+    });
+
+    Route::prefix('calender')->group(function () {
+        Route::get('', [CalenderController::class, 'index'])->name('calender.index');
+        Route::get('/events', [CalenderController::class, 'events']);
+        Route::get('/event/store', [CalenderController::class, 'storeEvent'])->name('event.store');
     });
 
     Route::prefix('notification')->as('notification.')->group(function () {
@@ -440,6 +448,15 @@ Route::prefix('subcategory')->group(function () {
     Route::post('update/{uuid}', [SubcategoryController::class, 'update'])->name('subcategory.update');
     Route::get('delete/{uuid}', [SubcategoryController::class, 'delete'])->name('subcategory.delete');
 });
+
+    Route::prefix('class_room')->group(function () {
+        Route::get('/', [ClassRoomController::class, 'index'])->name('class_room.index');
+        Route::get('create', [ClassRoomController::class, 'create'])->name('class_room.create');
+        Route::post('store', [ClassRoomController::class, 'store'])->name('class_room.store');
+        Route::get('edit/{class}', [ClassRoomController::class, 'edit'])->name('class_room.edit');
+        Route::post('update/{class}', [ClassRoomController::class, 'update'])->name('class_room.update');
+        Route::get('delete/{class}', [ClassRoomController::class, 'delete'])->name('class_room.delete');
+    });
 
 Route::prefix('tag')->group(function () {
     Route::get('/', [TagController::class, 'index'])->name('tag.index');

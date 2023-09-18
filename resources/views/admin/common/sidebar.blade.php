@@ -17,7 +17,7 @@
 
     <ul id="sidebar-menu" class="sidebar__menu">
 
-        <li class=" {{ active_if_match('admins/dashboard') }} ">
+        <li class=" {{ active_if_match('admins/dashboard/') }} ">
             <a href="{{route('admin.dashboard')}}">
                 <span class="iconify" data-icon="bxs:dashboard"></span>
                 <span>{{__('لوحة التحكم')}}</span>
@@ -43,7 +43,7 @@
                     <li class="{{ @$subNavUserRoleActiveClass }}">
                         <a href="{{route('role.index')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{__('الأدوار')}}</span>
+                            <span>{{__('المجموعات')}}</span>
                         </a>
                     </li>
                 </ul>
@@ -178,7 +178,7 @@
             </li>
         @endcan
 
-        @canany(['manage_course', 'pending_course', 'hold_course', 'approved_course', 'all_course'])
+        @can(['manage_course'])
             <li>
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
@@ -237,9 +237,9 @@
 
                 </ul>
             </li>
-        @endcanany
+        @endcan
 
-        @canany(['manage_course', 'pending_course', 'hold_course', 'approved_course', 'all_course'])
+        @canany(['manage_subject'])
             <li>
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
@@ -274,7 +274,7 @@
             </li>
         @endcanany
 
-        @canany(['manage_course_reference', 'manage_course_category', 'manage_course_subcategory', 'manage_course_tag', 'manage_course_language', 'manage_course_difficulty_level'])
+        @canany('manage_department')
             <li class="{{ @$navCourseActiveClass }}">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="codicon:references"></span>
@@ -293,7 +293,7 @@
             </li>
         @endcanany
 
-        @canany(['manage_course', 'pending_course', 'hold_course', 'approved_course', 'all_course'])
+        @canany(['manage_exam'])
             <li>
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
@@ -328,7 +328,7 @@
             </li>
         @endcanany
 
-        @canany(['manage_course', 'all_course'])
+        @canany(['manage_bus'])
             <li>
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
@@ -362,6 +362,7 @@
         @endcanany
 
 
+        @can('manage_contact')
         <li>
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
@@ -398,6 +399,26 @@
                 </ul>
             </li>
 
+        @endcanany
+
+        @can('manage_class_room')
+            <li>
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-bus"></i>
+                    <span>{{__('الفصول')}}</span>
+                </a>
+                <ul>
+                    <li class="{{ active_if_match('class_room') }}">
+                        <a href="{{route('class_room.index')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('قائمة الفصول')}}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+        @endcanany
 {{--        <li>--}}
 {{--            <a class="has-arrow" href="#">--}}
 {{--                <i class="fa fa-bus"></i>--}}
@@ -420,8 +441,8 @@
 
 {{--            </ul>--}}
 {{--        </li>--}}
-
-        <li>
+        @can('manage_duties')
+            <li>
             <a class="has-arrow" href="#">
                 <i class="fa fa-bus"></i>
                 <span>{{__('الواجبات اليومية')}}</span>
@@ -443,8 +464,9 @@
 
             </ul>
         </li>
+        @endcan
 
-
+        @can('manage_followup')
         <li>
             <a class="has-arrow" href="#">
                 <i class="fa fa-bus"></i>
@@ -481,7 +503,9 @@
 
             </ul>
         </li>
+        @endcan
 
+        @can('manage_finance')
         <li>
             <a class="has-arrow" href="#">
                 <i class="fa fa-bus"></i>
@@ -551,8 +575,70 @@
 
             </ul>
         </li>
+        @endcan
+        @can('manage_certificate')
+            <li class="{{ @$navCertificateActiveClass }}">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                    <span>{{__('الشهادات')}}</span>
+                </a>
+                <ul>
+                    <li class="{{ @$subNavAllCertificateActiveClass }}">
+                        <a href="{{route('certificate.index')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('الشهادات المصدرة')}}</span>
+                        </a>
+                    </li>
+                    <li class="{{ @$subNavAddCertificateActiveClass }}">
+                        <a href="{{route('certificate.create')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>{{__('تصميم الشهادة')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+        @can('manage_report')
+            <li class="{{ active_if_match('/reports/report_students_ages/') }}">
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>{{__('تقارير')}}</span>
+                </a>
+                <ul>
+                    <li class="{{ active_if_match('reports/report_students_ages') }}">
+                        <a href="{{route('reports.reportStudentsAge')}}">
+                            <i class="fa fa-money"></i>
+                            <span>{{__('تقارير اعمار الطلاب')}}</span>
+                        </a>
+                    </li>
 
-
+                    <li class="{{ active_if_match('reports/report_parents') }}">
+                        <a href="{{route('reports.reportParents')}}">
+                            <i class="fa fa-money"></i>
+                            <span>{{__('تقرير بيانات الاباء')}}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('reports/report_subscribtions') }}">
+                        <a href="{{route('reports.reportInvoices')}}">
+                            <i class="fa fa-money"></i>
+                            <span>{{__('قائمة الفواتير')}}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('reports/report_buses') }}">
+                        <a href="{{route('reports.reportBuses')}}">
+                            <i class="fa fa-money"></i>
+                            <span>{{__('قائمة مدفوعات الباص لكل سائق')}}</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_if_match('reports/report_buses') }}">
+                        <a href="{{route('reports.reportCountStudent')}}">
+                            <i class="fa fa-money"></i>
+                            <span>{{__('تقرير عدد الطلبة الفعلي')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
                         {{--                    @can('manage_course_subcategory')--}}
                         {{--                        <li class="{{ active_if_match('admins/subcategory') }}">--}}
@@ -736,66 +822,67 @@
 {{--                    </li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
-            <li class="{{ @$navCertificateActiveClass }}">
-                <a class="has-arrow" href="#">
-                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
-                    <span>{{__('الشهادات')}}</span>
-                </a>
-                <ul>
-                    <li class="{{ @$subNavAllCertificateActiveClass }}">
-                        <a href="{{route('certificate.index')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{__('الشهادات المصدرة')}}</span>
-                        </a>
-                    </li>
-                    <li class="{{ @$subNavAddCertificateActiveClass }}">
-                        <a href="{{route('certificate.create')}}">
-                            <i class="fa fa-circle"></i>
-                            <span>{{__('تصميم الشهادة')}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
-        <li>
-            <a class="has-arrow" href="#">
-                <i class="fa fa-paper-plane"></i>
-                <span>{{__('تقارير')}}</span>
-            </a>
-            <ul>
-                <li class="{{ active_if_match('reports/report_students_ages') }}">
-                    <a href="{{route('reports.reportStudentsAge')}}">
-                        <i class="fa fa-money"></i>
-                        <span>{{__('تقارير أعمار الطلاب')}}</span>
-                    </a>
-                </li>
+{{--            <li class="{{ @$navCertificateActiveClass }}">--}}
+{{--                <a class="has-arrow" href="#">--}}
+{{--                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>--}}
+{{--                    <span>{{__('الشهادات')}}</span>--}}
+{{--                </a>--}}
+{{--                <ul>--}}
+{{--                    <li class="{{ @$subNavAllCertificateActiveClass }}">--}}
+{{--                        <a href="{{route('certificate.index')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{__('الشهادات المصدرة')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ @$subNavAddCertificateActiveClass }}">--}}
+{{--                        <a href="{{route('certificate.create')}}">--}}
+{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            <span>{{__('تصميم الشهادة')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
 
-                <li class="{{ active_if_match('reports/report_parents') }}">
-                    <a href="{{route('reports.reportParents')}}">
-                        <i class="fa fa-money"></i>
-                        <span>{{__('تقرير بيانات الآباء')}}</span>
-                    </a>
-                </li>
-                <li class="{{ active_if_match('reports/report_subscribtions') }}">
-                    <a href="{{route('reports.reportInvoices')}}">
-                        <i class="fa fa-money"></i>
-                        <span>{{__('قائمة الفواتير')}}</span>
-                    </a>
-                </li>
-                <li class="{{ active_if_match('reports/report_buses') }}">
-                    <a href="{{route('reports.reportBuses')}}">
-                        <i class="fa fa-money"></i>
-                        <span>{{__('قائمة مدفوعات الباص لكل سائق')}}</span>
-                    </a>
-                </li>
-                <li class="{{ active_if_match('reports/report_buses') }}">
-                    <a href="{{route('reports.reportCountStudent')}}">
-                        <i class="fa fa-money"></i>
-                        <span>{{__('تقرير عدد الطلبة الفعلي')}}</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+{{--        <li>--}}
+{{--            <a class="has-arrow" href="#">--}}
+{{--                <i class="fa fa-paper-plane"></i>--}}
+{{--                <span>{{__('تقارير')}}</span>--}}
+{{--            </a>--}}
+{{--            <ul>--}}
+{{--                <li class="{{ active_if_match('reports/report_students_ages') }}">--}}
+{{--                    <a href="{{route('reports.reportStudentsAge')}}">--}}
+{{--                        <i class="fa fa-money"></i>--}}
+{{--                        <span>{{__('تقارير أعمار الطلاب')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+
+{{--                <li class="{{ active_if_match('reports/report_parents') }}">--}}
+{{--                    <a href="{{route('reports.reportParents')}}">--}}
+{{--                        <i class="fa fa-money"></i>--}}
+{{--                        <span>{{__('تقرير بيانات الآباء')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="{{ active_if_match('reports/report_subscribtions') }}">--}}
+{{--                    <a href="{{route('reports.reportInvoices')}}">--}}
+{{--                        <i class="fa fa-money"></i>--}}
+{{--                        <span>{{__('قائمة الفواتير')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="{{ active_if_match('reports/report_buses') }}">--}}
+{{--                    <a href="{{route('reports.reportBuses')}}">--}}
+{{--                        <i class="fa fa-money"></i>--}}
+{{--                        <span>{{__('قائمة مدفوعات الباص لكل سائق')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="{{ active_if_match('reports/report_buses') }}">--}}
+{{--                    <a href="{{route('reports.reportCountStudent')}}">--}}
+{{--                        <i class="fa fa-money"></i>--}}
+{{--                        <span>{{__('تقرير عدد الطلبة الفعلي')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
 
 {{--        @can('ranking_level')--}}
 {{--            <li class="{{ @$navRankingActiveClass }}">--}}

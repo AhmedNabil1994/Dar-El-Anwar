@@ -89,19 +89,20 @@
 </script>
 <input type="hidden" id="base_url" value="{{url('/')}}">
 
-<!-- All Javascript files included here -->
-
 <script src="{{asset('frontend/assets/vendor/jquery/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('admin/js/popper.min.js')}}"></script>
 <script src="{{ asset('frontend/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{asset('common/js/apexcharts.min.js')}}"></script>
 <script src="{{asset('admin/sweetalert2/sweetalert2.all.js')}}"></script>
 <script src="{{ asset('common/js/iconify.min.js') }}"></script>
+
 @stack('script')
 <script src="{{asset('admin/js/admin-custom.js')}}"></script>
 <script src="{{asset('admin/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('admin/js/main.js')}}"></script>
 <script src="{{asset('common/js/select2.min.js')}}"></script>
+
+<!-- All Javascript files included here -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     $(document).ready(function() {

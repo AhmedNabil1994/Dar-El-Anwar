@@ -2,6 +2,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    @can('manage_promotion')
     <!-- Page content area start -->
     <div class="page-content">
         <div class="container-fluid">
@@ -137,6 +138,9 @@
 
 
         </div>
+        </div>
+    </div>
+    @endcan
 
     <!-- Page content area end -->
 @endsection
