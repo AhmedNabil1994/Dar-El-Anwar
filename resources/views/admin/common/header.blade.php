@@ -94,7 +94,18 @@
     </div>
 </nav>
 
-
+@push('script')
+<script>
+    $(document).ready(function() {
+    $(".sidebar-toggler").click(function() {
+        console.log("toggler clicked")
+        // $(".sidebar__area").fadeIn(500)
+        $(".sidebar__area").removeClass("non-active")
+        $(".sidebar__area").addClass("active")
+    });
+    });
+</script>
+@endpush
 
 
 

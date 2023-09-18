@@ -1,4 +1,4 @@
-<div class="sidebar__area">
+<div class="sidebar__area ">
     <div class="sidebar__close">
         <button class="close-btn">
             <i class="fa fa-close"></i>
@@ -1240,3 +1240,15 @@
 {{--        </li>--}}
     </ul>
 </div>
+
+@push('script')
+<script>
+    $(document).ready(function() {
+        $(".close-btn").click(function() {
+            console.log("clicked")
+            $(".sidebar__area").removeClass("active")
+            $(".sidebar__area").addClass("non-active")
+        });
+    });
+</script>
+@endpush
