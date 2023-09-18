@@ -68,20 +68,20 @@
                                             @else
                                                 <img src="" alt="">
                                             @endif
-                                                <span>{{__('Profile')}}</span>
+                                                <span>{{__('الملف الشخصي')}}</span>
                                         </a>
                                     </li>
 
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.change-password') }}">
                                             <img src="{{asset('admin/images/icons/settings.svg')}}" alt="icon">
-                                            <span>{{__('Change Password')}}</span>
+                                            <span>{{__('تغيير كلمة السر')}}</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{route('admin.logout')}}">
                                             <img src="{{asset('admin/images/icons/logout.svg')}}" alt="icon">
-                                            <span>{{__('Logout')}}</span>
+                                            <span>{{__('تسجيل الخروج')}}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -94,7 +94,16 @@
     </div>
 </nav>
 
-
+@push('script')
+<script>
+    $(document).ready(function() {
+    $(".sidebar-toggler").click(function() {
+        $(".sidebar__area").removeClass("non-active")
+        $(".sidebar__area").addClass("active")
+    });
+    });
+</script>
+@endpush
 
 
 
