@@ -132,7 +132,7 @@ function get_welcome_notify()
 
     if ($students->count() > 0) {
         foreach ($students as $student) {
-            $notify = get_setting('welcome_text')
+            $notify = \App\Models\Notification::where('text',get_setting('welcome_text'))
                 ->where('is_seen','no')->first();
             if (!$notify)
                 \App\Models\Notification::create([
@@ -142,6 +142,16 @@ function get_welcome_notify()
 
                 ]);
         }
+    }
+}
+
+if (!function_exists('api_asset')) {
+    function api_asset($id)
+    {
+        if (($asset = \App\Models\Upload::find($id)) != null) {
+            return asset($asset->file_name);
+        }
+        return "";
     }
 }
 

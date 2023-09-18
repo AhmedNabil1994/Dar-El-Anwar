@@ -21,7 +21,7 @@ class Assignment extends Model
     }
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsToMany(Student::class,'student_duties');
     }
 
 

@@ -218,6 +218,7 @@ Route::prefix('course')->group(function () {
         Route::get('edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
         Route::post('update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
         Route::get('delete/{id}', [AssignmentController::class, 'destroy'])->name('admin.assignments.delete');
+        Route::get('student_assignment/{id}', [AssignmentController::class, 'student_duties'])->name('admin.assignments.student_duties');
     });
 
     Route::prefix('followup')->group(function () {
@@ -265,7 +266,9 @@ Route::prefix('course')->group(function () {
         Route::get('create', [StudentController::class, 'create'])->name('student.create');
         Route::post('store', [StudentController::class, 'store'])->name('student.store');
         Route::get('view/{id}', [StudentController::class, 'view'])->name('student.view');
-        Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+        Route::get('getClasses/{id}', [StudentController::class, 'getClasses'])->name('student.getClasses');
+        Route::get('change_status/{id}', [StudentController::class, 'change_status'])->name('student.change_status');
+       Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
         Route::post('update/{id}', [StudentController::class, 'update'])->name('student.update');
         Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
         Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
