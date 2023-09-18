@@ -26,17 +26,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title btn-title-container">
                             <h2>{{trans('website.roles')}}</h2>
                             <a href="{{route('role.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('website.addRole')}} </a>
                         </div>
                         <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
-                                <tr>
-                                    <th>{{trans('website.name')}}</th>
-                                    <th>{{trans('website.action')}}</th>
-                                </tr>
+                                    <tr>
+                                        <th>{{trans('website.name')}}</th>
+                                        <th>{{trans('website.action')}}</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($roles as $role)

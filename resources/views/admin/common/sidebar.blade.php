@@ -1332,7 +1332,6 @@
 <script>
     $(document).ready(function() {
         $(".close-btn").click(function() {
-            console.log("clicked")
             $(".sidebar__area").removeClass("active")
             $(".sidebar__area").addClass("non-active")
         });

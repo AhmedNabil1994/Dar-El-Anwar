@@ -30,17 +30,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title btn-title-container">
                             <h2>{{ trans('website.admin_list') }}</h2>
-
+                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
+                                <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
+                            </a>
                         </div>
-                        <div class="row m-3 justify-content-end">
-                            <div class="col-md-3">
-                                <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
-                                    <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
-                                </a>
-                            </div>
-                            <form method="GET" class="row align-items-end" action="{{ route('admins.index') }}">
+                        <div class="row m-3 ">    
+                            <form method="GET" class="row align-items-end justify-content-center" action="{{ route('admins.index') }}">
                                 <div class="col-md-3">
                                     <label class="form-label">بحث</label>
                                     <input class="form-control" value="{{request('search')}}" name="search">
@@ -53,7 +50,7 @@
 
                         <div class="customers__table" style="overflow: auto">
                             <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
-                                <thead style="background-color: #50bfa5;">
+                                <thead >
                                 <tr>
                                     <th>{{ trans('website.name') }}</th>
                                     <th>{{ trans('website.username') }}</th>
