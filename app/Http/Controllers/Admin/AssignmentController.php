@@ -9,6 +9,7 @@ use App\Models\Department;
 use App\Models\Instructor;
 use App\Models\rc;
 use App\Models\Student;
+use App\Models\StudentDuties;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -49,11 +50,15 @@ class AssignmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function student_duties($id)
     {
         //
+        $data['students_duties'] = StudentDuties::query()->orderBy('id','DESC')
+                                    ->where('student_id',$id);
+        $data['students_duties'] = $data['students_duties']->paginate(25);
+        return view('admin.assignment.students.list',$data);
     }
 
     /**

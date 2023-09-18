@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{__('Profile')}}</h2>
+                                <h2>{{__('الملف الشخصي')}}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{__('Update Profile')}}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{__('تحديث الملف الشخصي')}}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{__('Update Profile')}}</h2>
+                            <h2>{{__('تحديث الملف الشخصي')}}</h2>
                         </div>
                         <form action="{{route('admin.profile.update')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
@@ -38,7 +38,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input__group mb-25">
-                                                <label for="name">{{__('Name')}} <span class="text-danger">*</span></label>
+                                                <label for="name">{{trans('website.name')}} <span class="text-danger">*</span></label>
                                                 <input type="text" name="name" id="name" value="{{auth::guard('admins')->user()->name}}" placeholder="{{__('Name')}}" class="form-control">
                                                 @if ($errors->has('name'))
                                                     <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input__group mb-25">
-                                                <label for="phone_number">{{__('Phone Number')}} <span class="text-danger">*</span></label>
+                                                <label for="phone_number">{{trans('website.phone_number')}} <span class="text-danger">*</span></label>
                                                 <input type="text" name="phone_number" id="phone_number" value="{{auth::guard('admins')->user()->phone_number}}" placeholder="{{__('Phone Number')}}" class="form-control">
                                                 @if ($errors->has('phone_number'))
                                                     <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('phone_number') }}</span>
@@ -58,7 +58,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input__group mb-25">
-                                                <label for="address">{{__('Email')}} <span class="text-danger">*</span></label>
+                                                <label for="address">{{trans('website.email')}} <span class="text-danger">*</span></label>
                                                 <input type="text" name="email" id="email" value="{{auth::guard('admins')->user()->email}}" placeholder="{{ __('Email') }}" class="form-control">
                                                 @if ($errors->has('email'))
                                                     <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('email') }}</span>
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input__group mb-25">
-                                                <label for="address">{{__('Address')}} <span class="text-danger">*</span></label>
+                                                <label for="address">{{trans('website.address')}} <span class="text-danger">*</span></label>
                                                 <textarea name="address" id="address" class="form-control" placeholder="{{__('Address')}}">{{auth::guard('admins')->user()->address}}</textarea>
                                                 @if ($errors->has('address'))
                                                     <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('address') }}</span>
@@ -90,7 +90,7 @@
                                             <p class="m-0">{{__('Image')}}</p>
                                         </div>
                                     </div>
-                                    <p>{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ __('Accepted Size') }}: 300 x 300 (1MB)</p>
+                                    <p class = "image-desc">{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ __('Accepted Size') }}: 300 x 300 (1MB)</p>
                                 </div>
                             </div>
 

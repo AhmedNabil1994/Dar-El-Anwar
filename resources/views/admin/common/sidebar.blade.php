@@ -1,4 +1,4 @@
-<div class="sidebar__area">
+<div class="sidebar__area ">
     <div class="sidebar__close">
         <button class="close-btn">
             <i class="fa fa-close"></i>
@@ -362,7 +362,7 @@
         @endcanany
 
 
-        @canany(['manage_contact'])
+        @can('manage_contact')
         <li>
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
@@ -844,18 +844,18 @@
                 </ul>
             </li>--}}
 
-        <li>
-            <a class="has-arrow" href="#">
-                <i class="fa fa-paper-plane"></i>
-                <span>{{__('تقارير')}}</span>
-            </a>
-            <ul>
-                <li class="{{ active_if_match('reports/report_students_ages') }}">
-                    <a href="{{route('reports.reportStudentsAge')}}">
-                        <i class="fa fa-money"></i>
-                        <span>{{__('تقارير أعمار الطلاب')}}</span>
-                    </a>
-                </li>
+{{--        <li>--}}
+{{--            <a class="has-arrow" href="#">--}}
+{{--                <i class="fa fa-paper-plane"></i>--}}
+{{--                <span>{{__('تقارير')}}</span>--}}
+{{--            </a>--}}
+{{--            <ul>--}}
+{{--                <li class="{{ active_if_match('reports/report_students_ages') }}">--}}
+{{--                    <a href="{{route('reports.reportStudentsAge')}}">--}}
+{{--                        <i class="fa fa-money"></i>--}}
+{{--                        <span>{{__('تقارير أعمار الطلاب')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
                 <li class="{{ active_if_match('reports/report_parents') }}">
                     <a href="{{route('reports.reportParents')}}">
@@ -1327,3 +1327,14 @@
 {{--        </li>--}}
     </ul>
 </div>
+
+@push('script')
+<script>
+    $(document).ready(function() {
+        $(".close-btn").click(function() {
+            $(".sidebar__area").removeClass("active")
+            $(".sidebar__area").addClass("non-active")
+        });
+    });
+</script>
+@endpush
