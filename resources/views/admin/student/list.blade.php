@@ -95,9 +95,9 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table" style="overflow: auto">
-                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
-                                <thead style="background-color: #50bfa5;">
+                        <div class="customers__table" style="overflow: auto;">
+                            <table  class="row-border data-table-filter table-style table table-bordered table-striped" >
+                                <thead >
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>
