@@ -91,7 +91,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="bg-style mb-30 " style="overflow-x:auto;">
+                    <div class="bg-style mb-30 table-title-container " style="overflow-x:auto;">
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
