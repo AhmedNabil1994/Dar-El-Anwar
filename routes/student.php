@@ -61,27 +61,25 @@ use Illuminate\Support\Facades\Route;
 
 
 //
-
-Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
-Route::post('/login/submit', [AdminController::class, 'loginAdmin'])->name('admin.loginAdmin');
+Route::get('/login', [AdminController::class, 'login'])->name('login');
+Route::post('/login/submit', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
 
 Route::group(['middleware' => ['student']], function () {
-    Route::get('student/logout', [StudentController::class, 'logout'])->name('student.logout');
+    Route::get('student/logout', [StudentController::class, 'logout'])->name('logout');
 
-    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
+    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
 
-    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'student_dashboard'])->name('student.dashboard');
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'student_dashboard'])->name('dashboard');
 
-    Route::group(['as' => 'student.'], function () {
         Route::get('my_profile', [StudentController::class, 'profile'])->name('profile');
         Route::post('my_wallet', [StudentController::class, 'wallet'])->name('wallet');
         Route::get('complete-withdraw', [PayoutController::class, 'completeWithdraw'])->name('complete-withdraw');
         Route::get('rejected-withdraw', [PayoutController::class, 'rejectedWithdraw'])->name('rejected-withdraw');
         Route::post('change-withdraw-status', [PayoutController::class, 'changeWithdrawStatus'])->name('change-withdraw-status');
-    });
+
 
 
 // Start:: Admins
@@ -148,97 +146,97 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
     });
 
     Route::prefix('course')->group(function () {
-        Route::get('/', [CourseController::class, 'index'])->name('admin.course.index');
-        Route::get('view/{uuid}', [CourseController::class, 'view'])->name('admin.course.view');
-        Route::get('create', [CourseController::class, 'create'])->name('admin.course.create');
-        Route::get('approved', [CourseController::class, 'approved'])->name('admin.course.approved');
-        Route::get('review-pending', [CourseController::class, 'reviewPending'])->name('admin.course.review_pending');
-        Route::get('hold', [CourseController::class, 'hold'])->name('admin.course.hold');
-        Route::get('status-change/{uuid}/{status}', [CourseController::class, 'statusChange'])->name('admin.course.status-change');
-        Route::get('delete/{uuid}', [CourseController::class, 'delete'])->name('admin.course.delete');
-        Route::post('store', [CourseController::class, 'store'])->name('admin.course.store');
+        Route::get('/', [CourseController::class, 'index'])->name('course.index');
+        Route::get('view/{uuid}', [CourseController::class, 'view'])->name('course.view');
+        Route::get('create', [CourseController::class, 'create'])->name('course.create');
+        Route::get('approved', [CourseController::class, 'approved'])->name('course.approved');
+        Route::get('review-pending', [CourseController::class, 'reviewPending'])->name('course.review_pending');
+        Route::get('hold', [CourseController::class, 'hold'])->name('course.hold');
+        Route::get('status-change/{uuid}/{status}', [CourseController::class, 'statusChange'])->name('course.status-change');
+        Route::get('delete/{uuid}', [CourseController::class, 'delete'])->name('course.delete');
+        Route::post('store', [CourseController::class, 'store'])->name('course.store');
     });
 
     Route::prefix('exam')->group(function () {
 
-        Route::get('/', [ExamController::class, 'index'])->name('admin.exam.index');
-        Route::get('view/{uuid}', [ExamController::class, 'view'])->name('admin.exam.view');
-        Route::get('create', [ExamController::class, 'create'])->name('admin.exam.create');
-        Route::get('edit/{uuid}', [ExamController::class, 'edit'])->name('admin.exam.edit');
-        Route::get('approved', [ExamController::class, 'approved'])->name('admin.exam.approved');
-        Route::get('review-pending', [ExamController::class, 'reviewPending'])->name('admin.exam.review_pending');
-        Route::get('hold', [ExamController::class, 'hold'])->name('admin.exam.hold');
-        Route::get('status-change/{uuid}/{status}', [ExamController::class, 'statusChange'])->name('admin.exam.status-change');
-        Route::get('delete/{uuid}', [ExamController::class, 'delete'])->name('admin.exam.delete');
-        Route::post('store', [ExamController::class, 'store'])->name('admin.exam.store');
-        Route::post('update/{id}', [ExamController::class, 'update'])->name('admin.exam.update');
+        Route::get('/', [ExamController::class, 'index'])->name('exam.index');
+        Route::get('view/{uuid}', [ExamController::class, 'view'])->name('exam.view');
+        Route::get('create', [ExamController::class, 'create'])->name('exam.create');
+        Route::get('edit/{uuid}', [ExamController::class, 'edit'])->name('exam.edit');
+        Route::get('approved', [ExamController::class, 'approved'])->name('exam.approved');
+        Route::get('review-pending', [ExamController::class, 'reviewPending'])->name('exam.review_pending');
+        Route::get('hold', [ExamController::class, 'hold'])->name('exam.hold');
+        Route::get('status-change/{uuid}/{status}', [ExamController::class, 'statusChange'])->name('exam.status-change');
+        Route::get('delete/{uuid}', [ExamController::class, 'delete'])->name('exam.delete');
+        Route::post('store', [ExamController::class, 'store'])->name('exam.store');
+        Route::post('update/{id}', [ExamController::class, 'update'])->name('exam.update');
     });
 
 
 
 
     Route::prefix('subject')->group(function () {
-        Route::get('/', [SubjectController::class, 'index'])->name('admin.subject.index');
-        Route::get('view/{uuid}', [SubjectController::class, 'view'])->name('admin.subject.view');
-        Route::get('create', [SubjectController::class, 'create'])->name('admin.subject.create');
-        Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('admin.subject.edit');
-        Route::post('update/{id}', [SubjectController::class, 'update'])->name('admin.subject.update');
-        Route::get('delete/{uuid}', [SubjectController::class, 'delete'])->name('admin.subject.delete');
-        Route::post('store', [SubjectController::class, 'store'])->name('admin.subject.store');
+        Route::get('/', [SubjectController::class, 'index'])->name('subject.index');
+        Route::get('view/{uuid}', [SubjectController::class, 'view'])->name('subject.view');
+        Route::get('create', [SubjectController::class, 'create'])->name('subject.create');
+        Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('subject.edit');
+        Route::post('update/{id}', [SubjectController::class, 'update'])->name('subject.update');
+        Route::get('delete/{uuid}', [SubjectController::class, 'delete'])->name('subject.delete');
+        Route::post('store', [SubjectController::class, 'store'])->name('subject.store');
     });
 
     Route::prefix('bus')->group(function () {
-        Route::get('/', [BusController::class, 'index'])->name('admin.bus.index');
-        Route::get('create', [BusController::class, 'create'])->name('admin.bus.create');
-        Route::post('store', [BusController::class, 'store'])->name('admin.bus.store');
-        Route::get('edit/{id}', [BusController::class, 'edit'])->name('admin.bus.edit');
-        Route::post('update/{id}', [BusController::class, 'update'])->name('admin.bus.update');
-        Route::get('delete/{id}', [BusController::class, 'destroy'])->name('admin.bus.delete');
+        Route::get('/', [BusController::class, 'index'])->name('bus.index');
+        Route::get('create', [BusController::class, 'create'])->name('bus.create');
+        Route::post('store', [BusController::class, 'store'])->name('bus.store');
+        Route::get('edit/{id}', [BusController::class, 'edit'])->name('bus.edit');
+        Route::post('update/{id}', [BusController::class, 'update'])->name('bus.update');
+        Route::get('delete/{id}', [BusController::class, 'destroy'])->name('bus.delete');
     });
 
     Route::prefix('contact_us')->group(function () {
-        Route::get('/inbox', [ContactUsController::class, 'contactUsInbox'])->name('admin.contact_us.contactUsInbox');
-        Route::get('/sent', [ContactUsController::class, 'contactUsSent'])->name('admin.contact_us.contactUsSent');
-        Route::post('/sent/store', [ContactUsController::class, 'contactUsSentStore'])->name('admin.contact_us.contactUsSentStore');
-        Route::get('/conversations', [ContactUsController::class, 'contactUsConversations'])->name('admin.contact_us.contactUsConversations');
-        Route::get('/messages', [ContactUsController::class, 'contactUsMessages'])->name('admin.contact_us.contactUsMessages');
+        Route::get('/inbox', [ContactUsController::class, 'contactUsInbox'])->name('contact_us.contactUsInbox');
+        Route::get('/sent', [ContactUsController::class, 'contactUsSent'])->name('contact_us.contactUsSent');
+        Route::post('/sent/store', [ContactUsController::class, 'contactUsSentStore'])->name('contact_us.contactUsSentStore');
+        Route::get('/conversations', [ContactUsController::class, 'contactUsConversations'])->name('contact_us.contactUsConversations');
+        Route::get('/messages', [ContactUsController::class, 'contactUsMessages'])->name('contact_us.contactUsMessages');
     });
 
     Route::prefix('goals')->group(function () {
-        Route::get('/', [GoalController::class, 'index'])->name('admin.goals.index');
-        Route::get('create', [GoalController::class, 'create'])->name('admin.goals.create');
-        Route::post('store', [GoalController::class, 'store'])->name('admin.goals.store');
-        Route::get('edit/{id}', [GoalController::class, 'edit'])->name('admin.goals.edit');
-        Route::post('update/{id}', [GoalController::class, 'update'])->name('admin.goals.update');
-        Route::get('delete/{id}', [GoalController::class, 'destroy'])->name('admin.goals.delete');
+        Route::get('/', [GoalController::class, 'index'])->name('goals.index');
+        Route::get('create', [GoalController::class, 'create'])->name('goals.create');
+        Route::post('store', [GoalController::class, 'store'])->name('goals.store');
+        Route::get('edit/{id}', [GoalController::class, 'edit'])->name('goals.edit');
+        Route::post('update/{id}', [GoalController::class, 'update'])->name('goals.update');
+        Route::get('delete/{id}', [GoalController::class, 'destroy'])->name('goals.delete');
     });
 
 
     Route::prefix('assignments')->group(function () {
-        Route::get('/', [AssignmentController::class, 'index'])->name('admin.assignments.index');
-        Route::get('create', [AssignmentController::class, 'create'])->name('admin.assignments.create');
-        Route::post('store', [AssignmentController::class, 'store'])->name('admin.assignments.store');
-        Route::get('edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
-        Route::post('update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
-        Route::get('delete/{id}', [AssignmentController::class, 'destroy'])->name('admin.assignments.delete');
-        Route::get('student_assignment/{id}', [AssignmentController::class, 'student_duties'])->name('admin.assignments.student_duties');
+        Route::get('/', [AssignmentController::class, 'index'])->name('assignments.index');
+        Route::get('create', [AssignmentController::class, 'create'])->name('assignments.create');
+        Route::post('store', [AssignmentController::class, 'store'])->name('assignments.store');
+        Route::get('edit/{id}', [AssignmentController::class, 'edit'])->name('assignments.edit');
+        Route::post('update/{id}', [AssignmentController::class, 'update'])->name('assignments.update');
+        Route::get('delete/{id}', [AssignmentController::class, 'destroy'])->name('assignments.delete');
+        Route::get('student_assignment/{id}', [AssignmentController::class, 'student_duties'])->name('assignments.student_duties');
     });
 
     Route::prefix('followup')->group(function () {
-        Route::get('/', [FollowupController::class, 'index'])->name('admin.followup.index');
-        Route::get('create_class', [FollowupController::class, 'createClass'])->name('admin.followup.create');
-        Route::get('reading', [FollowupController::class, 'createReading'])->name('admin.followup.reading');
-        Route::get('quran', [FollowupController::class, 'createQuran'])->name('admin.followup.quran');
-        Route::post('store_class', [FollowupController::class, 'storeClass'])->name('admin.followup.storeClass');
-        Route::post('store_reading', [FollowupController::class, 'storeReading'])->name('admin.followup.storeReading');
-        Route::post('store_quran', [FollowupController::class, 'storeQuran'])->name('admin.followup.storeQuran');
-        Route::get('edit_class/{followup}', [FollowupController::class, 'editClass'])->name('admin.followup.editClass');
-        Route::get('edit_quran/{followup}', [FollowupController::class, 'editQuran'])->name('admin.followup.editQuran');
-        Route::get('edit_reading/{followup}', [FollowupController::class, 'editReading'])->name('admin.followup.editReading');
-        Route::post('update_class/{followup}', [FollowupController::class, 'updateClass'])->name('admin.followup.updateClass');
-        Route::post('update_quran/{followup}', [FollowupController::class, 'updateQuran'])->name('admin.followup.updateQuran');
-        Route::post('update_reading/{followup}', [FollowupController::class, 'updateReading'])->name('admin.followup.updateReading');
-        Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('admin.followup.delete');
+        Route::get('/', [FollowupController::class, 'index'])->name('followup.index');
+        Route::get('create_class', [FollowupController::class, 'createClass'])->name('followup.create');
+        Route::get('reading', [FollowupController::class, 'createReading'])->name('followup.reading');
+        Route::get('quran', [FollowupController::class, 'createQuran'])->name('followup.quran');
+        Route::post('store_class', [FollowupController::class, 'storeClass'])->name('followup.storeClass');
+        Route::post('store_reading', [FollowupController::class, 'storeReading'])->name('followup.storeReading');
+        Route::post('store_quran', [FollowupController::class, 'storeQuran'])->name('followup.storeQuran');
+        Route::get('edit_class/{followup}', [FollowupController::class, 'editClass'])->name('followup.editClass');
+        Route::get('edit_quran/{followup}', [FollowupController::class, 'editQuran'])->name('followup.editQuran');
+        Route::get('edit_reading/{followup}', [FollowupController::class, 'editReading'])->name('followup.editReading');
+        Route::post('update_class/{followup}', [FollowupController::class, 'updateClass'])->name('followup.updateClass');
+        Route::post('update_quran/{followup}', [FollowupController::class, 'updateQuran'])->name('followup.updateQuran');
+        Route::post('update_reading/{followup}', [FollowupController::class, 'updateReading'])->name('followup.updateReading');
+        Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('followup.delete');
     });
 
     Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');
@@ -254,7 +252,7 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
         Route::get('approved', [InstructorController::class, 'approved'])->name('instructor.approved');
         Route::get('blocked', [InstructorController::class, 'blocked'])->name('instructor.blocked');
         Route::get('change-status/{uuid}/{status}', [InstructorController::class, 'changeStatus'])->name('instructor.status-change');
-        Route::post('change-instructor-status', [InstructorController::class, 'changeInstructorStatus'])->name('admin.instructor.changeInstructorStatus');
+        Route::post('change-instructor-status', [InstructorController::class, 'changeInstructorStatus'])->name('instructor.changeInstructorStatus');
         Route::get('delete/{uuid}', [InstructorController::class, 'delete'])->name('instructor.delete');
 
         Route::get('get-state-by-country/{country_id}', [InstructorController::class, 'getStateByCountry']);
@@ -270,12 +268,12 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
         Route::post('store', [StudentController::class, 'store'])->name('student.store');
         Route::get('view/{id}', [StudentController::class, 'view'])->name('student.view');
         Route::get('getClasses/{id}', [StudentController::class, 'getClasses'])->name('student.getClasses');
-        Route::post('student_update/{id}', [StudentController::class, 'student_update'])->name('student.student_update');
+        Route::post('student_update/{id}', [StudentController::class, 'student_update'])->name('student_update');
         Route::get('change_status/{id}', [StudentController::class, 'change_status'])->name('student.change_status');
         Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
         Route::post('update/{id}', [StudentController::class, 'update'])->name('student.update');
         Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
-        Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
+        Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('student.changeStudentStatus');
 
     });
 
@@ -292,11 +290,11 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
 //        Route::get('edit/{id}', [FinancialAccountController::class, 'edit'])->name('student.edit');
 //        Route::post('update/{id}', [FinancialAccountController::class, 'update'])->name('student.update');
         Route::delete('delete/{financialAccount}', [FinancialAccountController::class, 'deleteTransaction'])->name('accounts.delete');
-        Route::post('change-student-status', [FinancialAccountController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
+        Route::post('change-student-status', [FinancialAccountController::class, 'changeStudentStatus'])->name('student.changeStudentStatus');
     });
 
 
-    Route::prefix('subscriptions')->as('student.')->group(function () {
+    Route::prefix('subscriptions')->group(function () {
         Route::get('', 'SubscriptionController@index')->name('subscriptions.index');
         Route::get('students_subscription', 'SubscriptionController@students_subscription')->name('subscriptions.students_subscription');
         Route::get('edit/{subscription}', 'SubscriptionController@edit')->name('subscriptions.edit');
@@ -387,8 +385,8 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
             Route::prefix('invoice')->group(function () {
                 Route::get('purcahse', [StoreController::class, 'invoicePurchasedProduct'])->name('stores.product.invoice.purchases');
                 Route::get('sales', [StoreController::class, 'invoiceSalesProduct'])->name('stores.product.invoice.sales');
-                Route::post('store', [StoreController::class, 'storeInvoicePurchasedProduct'])->name('admin.product.invoices.store');
-                Route::post('sales/store', [StoreController::class, 'storeInvoiceSalesProduct'])->name('admin.product.invoices.sales.store');
+                Route::post('store', [StoreController::class, 'storeInvoicePurchasedProduct'])->name('product.invoices.store');
+                Route::post('sales/store', [StoreController::class, 'storeInvoiceSalesProduct'])->name('product.invoices.sales.store');
             });
         });
         Route::post('update/{id}', [StoreController::class, 'update'])->name('stores.update');
@@ -559,10 +557,10 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
     });
 
     Route::prefix('profile')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('admin.profile');
-        Route::get('change-password', [ProfileController::class, 'changePassword'])->name('admin.change-password');
-        Route::post('change-password', [ProfileController::class, 'changePasswordUpdate'])->name('admin.change-password.update');
-        Route::post('update', [ProfileController::class, 'update'])->name('admin.profile.update');
+//        Route::get('/', [ProfileController::class, 'index'])->name('profile');
+        Route::get('change-password', [ProfileController::class, 'changePassword'])->name('change-password');
+        Route::post('change-password', [ProfileController::class, 'changePasswordUpdate'])->name('change-password.update');
+        Route::post('update', [ProfileController::class, 'update'])->name('profile.update');
     });
 
 
@@ -586,12 +584,12 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
     });
 
     Route::group(['prefix' => 'support-ticket', 'as' => 'support-ticket.'], function () {
-        Route::get('index', [SupportTicketController::class, 'ticketIndex'])->name('admin.index');
-        Route::get('open', [SupportTicketController::class, 'ticketOpen'])->name('admin.open');
-        Route::get('show/{uuid}', [SupportTicketController::class, 'ticketShow'])->name('admin.show');
-        Route::get('delete/{uuid}', [SupportTicketController::class, 'ticketDelete'])->name('admin.delete');
-        Route::post('change-ticket-status', [SupportTicketController::class, 'changeTicketStatus'])->name('admin.changeTicketStatus');
-        Route::post('message-store', [SupportTicketController::class, 'messageStore'])->name('admin.messageStore');
+        Route::get('index', [SupportTicketController::class, 'ticketIndex'])->name('index');
+        Route::get('open', [SupportTicketController::class, 'ticketOpen'])->name('open');
+        Route::get('show/{uuid}', [SupportTicketController::class, 'ticketShow'])->name('show');
+        Route::get('delete/{uuid}', [SupportTicketController::class, 'ticketDelete'])->name('delete');
+        Route::post('change-ticket-status', [SupportTicketController::class, 'changeTicketStatus'])->name('changeTicketStatus');
+        Route::post('message-store', [SupportTicketController::class, 'messageStore'])->name('messageStore');
     });
 
 
@@ -620,7 +618,7 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
     });
 //End:: Menu
 
-    Route::name('admin.')->group(function (){
+    Route::name('')->group(function (){
         Route::group(['prefix' => 'forum', 'as' => 'forum.'], function (){
             Route::get('category-index', [ForumCategoryController::class, 'index'])->name('category.index');
             Route::post('category-store', [ForumCategoryController::class, 'store'])->name('category.store');
@@ -802,25 +800,25 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
         Route::get('migrate-update', [SettingController::class, 'migrateUpdate'])->name('migrate-update');
     });
 
-    Route::get('privacy-policy', [PolicyController::class, 'privacyPolicy'])->name('admin.privacy-policy');
-    Route::post('privacy-policy', [PolicyController::class, 'privacyPolicyStore'])->name('admin.privacy-policy.store');
+    Route::get('privacy-policy', [PolicyController::class, 'privacyPolicy'])->name('privacy-policy');
+    Route::post('privacy-policy', [PolicyController::class, 'privacyPolicyStore'])->name('privacy-policy.store');
 
-    Route::get('terms-conditions', [PolicyController::class, 'termConditions'])->name('admin.terms-conditions');
-    Route::post('terms-conditions', [PolicyController::class, 'termConditionsStore'])->name('admin.terms-conditions.store');
+    Route::get('terms-conditions', [PolicyController::class, 'termConditions'])->name('terms-conditions');
+    Route::post('terms-conditions', [PolicyController::class, 'termConditionsStore'])->name('terms-conditions.store');
 
-    Route::get('cookie-policy', [PolicyController::class, 'cookiePolicy'])->name('admin.cookie-policy');
-    Route::post('cookie-policy', [PolicyController::class, 'cookiePolicyStore'])->name('admin.cookie-policy.store');
+    Route::get('cookie-policy', [PolicyController::class, 'cookiePolicy'])->name('cookie-policy');
+    Route::post('cookie-policy', [PolicyController::class, 'cookiePolicyStore'])->name('cookie-policy.store');
 
 
     Route::group(['prefix' => 'affiliate','as' => 'affiliate.'], function () {
 
         // TODO:don't delete,  this will need
 //    Route::get('/affiliator-history', function () {
-//        return view('admin.affiliate.affiliator-history');
+//        return view('affiliate.affiliator-history');
 //    })->name('affiliator-history');
 
 //    Route::get('/payouts', function () {
-//        return view('admin.affiliate.payouts');
+//        return view('affiliate.payouts');
 //    })->name('payouts');
 
         Route::get('affiliation-settings', [SettingController::class, 'referralSettings'])->name('affiliation-settings');

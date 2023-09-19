@@ -7,6 +7,7 @@ use App\Models\ClassRoom;
 use App\Models\Level;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClassRoomController extends Controller
 {
@@ -18,7 +19,10 @@ class ClassRoomController extends Controller
     public function index()
     {
         //
-        $data['classes'] = ClassRoom::query()->whereStatus(1)->orderBy('id','DESC');
+        $data['classes'] = ClassRoom::query()->whereStatus(1)
+            ->whereHas('students',function ($q){
+                $q->where('id',Auth::guard('students')->id());
+            })->orderBy('id','DESC');
 
         $data['classes'] = $data['classes']->paginate(25);
 

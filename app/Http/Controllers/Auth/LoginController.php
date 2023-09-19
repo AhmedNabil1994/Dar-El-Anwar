@@ -81,6 +81,7 @@ class LoginController extends Controller
         }
 
         else if(Auth::guard('students')->attempt($credentials)) {
+
             if (get_option('registration_email_verification') == 1){
                 $user = Auth::guard('students')->user()->hasVerifiedEmail();
                 if (!$user){
@@ -118,6 +119,7 @@ class LoginController extends Controller
 
 
 
+        dd(Auth::guard('students')->check());
         $this->showToastrMessage('error', __('Ops! You have entered invalid credentials'));
 
         return redirect("login");

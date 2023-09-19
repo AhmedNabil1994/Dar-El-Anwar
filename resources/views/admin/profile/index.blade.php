@@ -39,7 +39,7 @@
                                         <div class="col-md-6">
                                             <div class="input__group mb-25">
                                                 <label for="name">{{trans('website.name')}} <span class="text-danger">*</span></label>
-                                                <input type="text" name="name" id="name" value="{{auth::guard('admins')->user()->name}}" placeholder="{{__('Name')}}" class="form-control">
+                                                <input type="text" name="name" id="name" value="{{auth::guard('students')->user()->name}}" placeholder="{{__('Name')}}" class="form-control">
                                                 @if ($errors->has('name'))
                                                     <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
                                                 @endif

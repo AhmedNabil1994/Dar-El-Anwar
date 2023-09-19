@@ -57,8 +57,11 @@
                                 <tr>
                                     <th>{{ trans('#') }}</th>
                                     <th>{{ trans('website.name') }}</th>
+                                    <th>{{ trans('website.level') }}</th>
                                     <th>{{ trans('website.status') }}</th>
+                                    @can('manage_class_room')
                                     <th>{{ trans('website.action') }}</th>
+                                    @endcan
                                 </tr>
                                 </thead>
 
@@ -67,7 +70,9 @@
                                     <tr class="removable-item">
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$class->name}}</td>
+                                        <td>{{$class->level?->name}}</td>
                                         <td>{{$class->status == 0 ?'غير نشط' : 'نشط'}}</td>
+                                        @can('manage_class_room')
                                         <td>
                                             <div class="action__buttons">
                                                 {{--                                                @can('edit-admins', 'admins')--}}
@@ -86,6 +91,7 @@
 
                                             </div>
                                         </td>
+                                            @endcan
                                     </tr>
                                 @endforeach
 

@@ -95,6 +95,11 @@ class Course extends Model
         return $this->belongsToMany(Student::class,'student_courses');
     }
 
+    public function student_courses()
+    {
+        return $this->hasMany(StudentCourse::class);
+    }
+
     public function resources()
     {
         return $this->hasMany(CourseResource::class);

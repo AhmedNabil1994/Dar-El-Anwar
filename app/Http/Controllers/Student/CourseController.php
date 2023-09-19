@@ -43,13 +43,12 @@ class CourseController extends Controller
 
     public function index(Request $request)
     {
-        if (!Auth::user()->can('all_course')) {
-            abort('403');
-        } // end permission checking
 
         $data['title'] = 'All Courses';
-        $data['courses'] = Course::query()->orderBy('id','DESC');
-
+        $data['courses'] = Course::query()->orderBy('id','DESC')
+            ->whereHas('student_courses',function ($student) {
+                $student->where('student_id',\Illuminate\Support\Facades\Auth::guard('students')->id());
+            });
         // Filter by code if filterByCode is provided in the request
         if ($request->filterByCode) {
             $data['courses']->where('code', $request->input('filterByCode'));
@@ -122,7 +121,7 @@ class CourseController extends Controller
         // Retrieve the filtered courses
         $data['courses'] = $data['courses']->paginate(10); // You can adjust the pagination as needed
 
-        return view('admin.course.index', $data);
+        return view('student.course.index', $data);
     }
 
     public function create()

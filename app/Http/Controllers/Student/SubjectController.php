@@ -28,18 +28,16 @@ class SubjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
-        if (!Auth::user()->can('all_course')) {
-            abort('403');
-        } // end permission checking
 
         $data['title'] = 'All Subjects';
-        $subjects = $this->model->getOrderById('DESC', 25);
-        return view('admin.subject.index', compact('subjects'));
+        $subjects = Subject::whereHas('student',function ($q){
+            $q->where('students.id',Auth::guard('students')->user()->id);
+        })->orderby('id','DESC')->paginate(25);
+        return view('student.subject.index', compact('subjects'));
     }
 
     /**
