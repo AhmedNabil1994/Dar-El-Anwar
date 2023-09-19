@@ -28,21 +28,28 @@
                     <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="col-md-3 m-3">
+                    <button class="btn buttons-style" onclick="exportToExcel()">Export to Excel</button>
+                    <a class="btn buttons-style" id="printTable">Print Table</a>
+
+
+                </div>
+                <div class="col-md-3 m-3">
                     <label for="filterByLevel">{{trans("website.level")}}:</label>
                     <select class="form-control" name="filterByLevel">
                         <option value="">{{trans("website.all")}}</option>
-
+                        @foreach($levels as $level)
+                            <option value="{{$level->id}}">{{$level->name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-3 m-3">
                     <label for="filterByJoining">{{trans("website.status")}}:</label>
                     <select class="form-control" name="filterByJoining">
                         <option value="">{{trans("website.all")}}</option>
-                        <option value="2" {{request('filterByJoining') == 2? 'selected' : ''}}>{{trans("website.active")}}</option>
-                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>{{trans("website.suspend")}}</option>
+                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>{{trans("website.active")}}</option>
+                        <option value="0" {{request('filterByJoining') === '0'? 'selected' : ''}}>{{trans("website.suspend")}}</option>
                         <option value="3" {{request('filterByJoining') == 3? 'selected' : ''}}>{{trans("website.excluded")}}</option>
                         <option value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>{{trans("website.converted")}}</option>
-                        <option value="5" {{request('filterByJoining') == 5? 'selected' : ''}}>{{trans("website.joining")}}</option>
                     </select>
                 </div>
                 <div class="col-md-3 m-3">
@@ -96,7 +103,7 @@
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
                         <div class="customers__table" style="overflow: auto">
-                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                            <table id="table1" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead style="background-color: #50bfa5;">
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>
@@ -170,7 +177,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('subscriptions.index',['child_name',$student->name])}}">
+                                            <a href="{{route('subscriptions.index',['child_name'=>[$student->name]])}}">
                                                 <img style="width:50px" src="{{asset('admin/images/students/subscription.png')}}" alt="edit">
                                             </a>
                                         </td>
@@ -287,4 +294,31 @@
         })
 
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <script>
+        // Function to export the HTML table to an Excel file
+        function exportToExcel() {
+            const table = document.getElementById('table1'); // Replace with your table ID
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
+            XLSX.writeFile(wb, 'exported-data.xlsx');
+        }
+
+        // Function to print the Excel file
+    </script>
+    <script>
+        $('#printTable').on('click', function() {
+            console.log('test')
+            const table = document.getElementById('table1'); // Replace with your table ID
+            const newWin = window.open('','_blank');
+
+            newWin.document.write(table.outerHTML);
+            newWin.document.close();
+            newWin.print();
+            newWin.onafterprint = function() {
+                newWin.close();
+            };
+        });
+    </script>
+
+
 @endpush

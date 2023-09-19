@@ -38,7 +38,7 @@
                             <form method="post" action="{{route('class_room.update',$class)}}">
                                 @csrf
                                 <div class="row mb-4">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                         <label for="name">{{__('website.name')}}</label>
 
                                         <input type="text"
@@ -48,6 +48,24 @@
                                         value="{{$class->name}}"/>
 
                                         @error('name')
+                                        <span class="text-danger">{{ $message}}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <label for="level_id">{{__('المستوي')}}</label>
+
+                                        <select class="form-select"
+                                                id="level_id"
+                                                name="level_id" >
+                                            <option value="">اختر مستوي</option>
+                                            @foreach($levels as $level)
+                                                <option value="{{$level->id}}"
+                                                {{$level->id == $class->level_id ? "selected" : ""}}
+                                                >{{$level->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('level_id')
                                         <span class="text-danger">{{ $message}}</span>
                                         @enderror
                                     </div>
@@ -70,7 +88,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn buttons-style">{{__('website.edit')}}</button>
-                                    <a href="{{route('admins.index')}}" class="btn btn-secondary">{{__('website.cancel')}}</a>
+                                    <a href="{{route('class_room.index')}}" class="btn btn-secondary">{{__('website.cancel')}}</a>
                                 </div>
                             </form>
 

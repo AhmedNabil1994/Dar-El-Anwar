@@ -40,9 +40,11 @@ class StudentController extends Controller
         $this->studentModel = new Crud($student);
     }
 
+
     public function logout()
     {
-        Auth::guard('students')->logout();
+        if(Auth::guard('students')->check())
+            Auth::guard('students')->logout();
         return redirect('/login');
     }
 
@@ -74,7 +76,7 @@ class StudentController extends Controller
     public function getClasses($id){
 
         $data['class_rooms'] = ClassRoom::where('status',1)
-                                ->where('level_id',$id)->get();
+            ->where('level_id',$id)->get();
         return $data['class_rooms'];
     }
 
@@ -313,6 +315,190 @@ class StudentController extends Controller
     }
 
 
+    public function student_update(Request $request, $id)
+    {
+        $photos = [];
+
+        $guardianRelationships = $request->guardian_relationship;
+
+        $uniqueValues = array_unique($request->guardian_relationship);
+
+        if(count($guardianRelationships) !== count($uniqueValues))
+            return redirect()->back()->with('error','خانة الصلة مكررة');
+
+        $student = Student::find($id);
+
+        $student_data = [
+            'user_id' => $user->id??null,
+            'name' => $request->name, // updated from $request->first_name
+            'email' => $request->email, // updated from $request->first_name
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'gender' => $request->gender,
+            'about_me' => $request->about_me,
+            'birthdate' => $request->birthdate,
+            'status' => $request->status,
+            'city_id' => $request->city_id, // newly added
+            'branch_id' => $request->branch_id, // newly added
+            'period' => $request->period, // newly added
+            'bus' => $request->bus, // newly added
+            'blood_type' => $request->blood_type, // newly added
+            'how_did_you_hear_about_us' => $request->how_did_you_hear_about_us, // newly added
+            'joining_date' => $request->joining_date, // newly added
+            'medical_history' => $request->medical_history, // newly added
+            'class_room_id' => $request->classroom, // newly added
+            'password' =>  Hash::make($request->password), // newly added
+            'parents_marital_status' => $request->parents_social_status, // newly added
+            'notes' => $request->notes, // newly added
+        ];
+
+        if($request->password != null)
+        {
+            $student_data['password'] = Hash::make($request->password);
+
+        }
+
+        $student->update($student_data);
+
+        $student->dept()->sync($request->department);
+
+        $student->courses()->sync($request->appointment);
+
+        $student->level()->sync($request->level_id);
+
+        if ($request->hasFile('image')) {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('image')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('image')->store('uploads/all','public');
+
+            $upload->user_id = $student->id;
+            $upload->extension = $request->file('image')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('image')->getSize();
+            $upload->save();
+
+            $student->update([
+                'image' => $upload->id,
+            ]);
+        }
+
+        if ($request->hasFile('parents_card_copy')) {
+            foreach ($request->parents_card_copy as $parents_card_copy)
+            {
+                $upload = new Upload;
+                $upload->file_original_name = null;
+                $arr = explode('.', $parents_card_copy->getClientOriginalName());
+
+
+                for($i=0; $i < count($arr)-1; $i++){
+                    if($i == 0){
+                        $upload->file_original_name .= $arr[$i];
+                    }
+                    else{
+                        $upload->file_original_name .= ".".$arr[$i];
+                    }
+                }
+                $upload->file_name = $parents_card_copy->store('uploads/all','public');
+
+                $upload->user_id = $student->id;
+                $upload->extension = $parents_card_copy->getClientOriginalExtension();
+                $upload->type = 'image';
+                $upload->file_size = $parents_card_copy->getSize();
+                $upload->save();
+
+                array_push($photos,$upload->id);
+
+                $student->update([
+                    'parents_card_copy' => $photos,
+                ]);
+            }
+
+        }
+
+        if ($request->hasFile('birth_certificate')) {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('birth_certificate')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('birth_certificate')->store('uploads/all','public');
+
+            $upload->user_id = $student->id;
+            $upload->extension = $request->file('birth_certificate')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('birth_certificate')->getSize();
+            $upload->save();
+
+            $student->update([
+                'birth_certificate' => $upload->id,
+            ]);
+        }
+
+        if ($request->hasFile('another_file')) {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('another_file')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('another_file')->store('uploads/all','public');
+
+            $upload->user_id = $student->id;
+            $upload->extension = $request->file('another_file')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('another_file')->getSize();
+            $upload->save();
+
+            $student->update([
+                'another_file' => $upload->id,
+            ]);
+        }
+
+        foreach ($student->parent as $key => $parent){
+            $parent->update([
+                'student_id' => $student->id,
+                'name' => $request->guardian_name[$key],
+                'profession' => $request->profession[$key],
+                'relationship' => $request->guardian_relationship[$key],
+                'phone_number' => $request->guardian_phone_number[$key], // newly added
+                'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
+                'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
+                'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
+                'email' => $request->guardian_email[$key], // newly added
+                'national_id' => $request->id_number[$key], // newly added
+            ]);
+        }
+
+        return redirect()->back()
+            ->with('success', __('تم تحديث بيانات الطالب'));
+    }
+
     public function store(Request $request)
     {
         $guardianRelationships = $request->guardian_relationship;
@@ -529,4 +715,40 @@ class StudentController extends Controller
 
         return 'success';
     }
+
+    public function profile(Request $request)
+    {
+        $data['user'] = Auth::guard('students')->user();
+        $data['parent'] = $data['user']->parent;
+        $branches = Branch::all();
+        $data['depts'] = Department::where('status',1)->get();
+        $data['class_rooms'] = ClassRoom::where('status',1)->get();
+        $data['levels'] = Level::where('status',1)->get();
+        $branches = Branch::all();
+        $data['appointments'] = Course::whereStatus(1)->get();
+        $cities = City::all();
+        return view('student.profile',$data,
+            compact('branches', 'cities',));
+    }
+
+    public function wallet(Request $request)
+    {
+        $user = Auth::guard('students')->user();
+        $wallet = $user->wallet;
+        $amount = $request->amount;
+        if($request->act == 'on')
+        {
+            if($wallet < $amount)
+                return redirect()->back()->with('error','هذا المبلغ اكبر من الموجود في المحفظة');
+            $user->update(['wallet'=> $amount - $wallet]);
+        }
+        else
+        {
+            $user->update(['wallet'=> $amount + $wallet]);
+
+            return redirect()->back()->with('success','تمت اضافة المبلغ');
+        }
+
+    }
+
 }

@@ -24,7 +24,6 @@ class Admin
          * instructor & student can not access admin panel
          */
 
-
         if (!Auth::guard('admins')->user()) {
 
             return redirect(route('admin.login'));

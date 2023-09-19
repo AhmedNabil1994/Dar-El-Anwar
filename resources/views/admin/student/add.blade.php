@@ -36,6 +36,7 @@
                                     <div class="col-md-3">
                                         <div class="upload-img-box mb-25">
                                             <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this)">
+                                            <img id="upload-img-box-icon" >
                                             <div class="upload-img-box-icon">
                                                 <i class="fa fa-camera"></i>
                                                 <p class="m-0">{{trans('website.image')}}</p>
@@ -51,7 +52,7 @@
                                     <div class="input__group mb-25">
                                         <label>{{trans("website.name")}} <span class="text-danger">*</span></label>
                                         <input type="text" name="name" value="" placeholder='{{trans("website.name")}}' class="form-control" />
-                                        <img id="upload-img-box-icon" >
+
                                         @if ($errors->has('name'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('name') }}</span>
                                         @endif
@@ -636,4 +637,29 @@
             }
         });
     </script>
+    <script>
+        function previewFile(input) {
+            "use strict";
+
+            const preview = document.getElementById('upload-img-box-icon');
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            if(input.files[0].size > 1000000){
+                alert("Maximum file size is 1MB!");
+            } else {
+                reader.onload = function() {
+                    console.log(reader)
+                    preview.src =  reader.result;
+                };
+                if(file) {
+                    reader.readAsDataURL(file);
+                }
+                else {
+                    preview.src = "";
+                }
+            }
+        }
+    </script>
+
 @endpush

@@ -15,4 +15,10 @@ class Level extends Model
     {
         return $this->belongsToMany(Student::class,'student_levels');
     }
+
+    public function class()
+    {
+        return $this->hasMany(ClassRoom::class, 'level_id');
+    }
+
 }

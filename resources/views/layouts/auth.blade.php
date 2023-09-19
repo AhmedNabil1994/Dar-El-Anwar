@@ -95,13 +95,13 @@
 
 <body class="{{selectedLanguage()->rtl == 1 ? 'direction-rtl' : 'direction-ltr' }}">
 
-@if(get_option('allow_preloader') == 1)
-    <!-- Pre Loader Area start -->
-    <div id="preloader">
-        <div id="preloader_status"><img src="{{getImageFile(get_option('app_preloader'))}}" alt="img" /></div>
-    </div>
-    <!-- Pre Loader Area End -->
-@endif
+{{--@if(get_option('allow_preloader') == 1)--}}
+{{--    <!-- Pre Loader Area start -->--}}
+{{--    <div id="preloader">--}}
+{{--        <div id="preloader_status"><img src="{{getImageFile(get_option('app_preloader'))}}" alt="img" /></div>--}}
+{{--    </div>--}}
+{{--    <!-- Pre Loader Area End -->--}}
+{{--@endif--}}
 
 @yield('content')
 

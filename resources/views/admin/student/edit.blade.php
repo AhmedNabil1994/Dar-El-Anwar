@@ -123,7 +123,7 @@
                                             <option value="">اختر الموعد</option>
                                             @foreach($appointments as $appointment)
                                                 <option value="{{$appointment->id}}"
-                                                    {{in_array($appointment->id, $student->courses->pluck('id')->toArray())}}
+                                                    {{in_array($appointment->id, $student->courses->pluck('id')->toArray())? 'selected' : ''}}
                                                 >
                                                     {{$appointment->name}} - {{$appointment->day}} - {{$appointment->time_from}} - {{$appointment->time_to}}
                                                 </option>
@@ -325,6 +325,7 @@
                                         @endif
                                     </div>
                                 </div>
+                            </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input__group mt-25 mb-25">
@@ -368,10 +369,11 @@
                                             <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i class="fa fa-file"></i></label>
                                             <input type="file" name="parents_card_copy[]"  multiple id="imageInput3" value="" placeholder="Parents Card Copy" class="form-control">
                                             <div id="imagePreviews3" style="display: flex; flex-wrap: wrap;">
+                                                @if($student->parents_card_copy)
                                                 @foreach(json_decode($student->parents_card_copy) as $photo)
                                                     <img src="{{api_asset($photo)}}" style=" max-width: 150px; height: 150px;">
                                                 @endforeach
-
+                                             @endif
                                             </div>
                                         </div>
                                     </div>
@@ -609,8 +611,6 @@
             })
         });
     </script>
-
-
     <script>
         $('#imageInput').on('change', function(event) {
             const input = event.target;
@@ -704,5 +704,4 @@
             }
         }
     </script>
-
 @endpush

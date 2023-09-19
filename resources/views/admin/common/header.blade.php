@@ -78,12 +78,22 @@
                                             <span>{{__('تغيير كلمة السر')}}</span>
                                         </a>
                                     </li>
+                                    @if(\Illuminate\Support\Facades\Auth::guard('admins')->check())
                                     <li>
                                         <a class="dropdown-item" href="{{route('admin.logout')}}">
                                             <img src="{{asset('admin/images/icons/logout.svg')}}" alt="icon">
                                             <span>{{__('تسجيل الخروج')}}</span>
                                         </a>
                                     </li>
+                                    @elseif(\Illuminate\Support\Facades\Auth::guard('students')->check())
+                                        <li>
+                                            <a class="dropdown-item" href="{{route('student.logout')}}">
+                                                <img src="{{asset('admin/images/icons/logout.svg')}}" alt="icon">
+                                                <span>{{__('تسجيل الخروج')}}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
                                 </ul>
                             </li>
                         </ul>
