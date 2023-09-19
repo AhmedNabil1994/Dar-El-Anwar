@@ -19,4 +19,9 @@ class ClassRoom extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 }

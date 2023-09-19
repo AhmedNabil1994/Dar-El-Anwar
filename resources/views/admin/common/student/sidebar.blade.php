@@ -72,9 +72,36 @@
                 <span>{{ __('الاشتراكات') }}</span>
             </a>
 
+        <li class="{{ @$navCertificateActiveClass }}">
+            <a class="" href="{{route('student.certificate.index')}}">
+                <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                <span>{{__('شهاداتي')}}</span>
+            </a>
         </li>
 
-        @can('manage_student')
+        <li class="">
+            <a class="" href="{{route('student.class_room.index')}}">
+                <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                <span>{{__('الفصول')}}</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a class="" href="{{route('student.course.index')}}">
+                <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                <span>{{__('المواعيد')}}</span>
+            </a>
+        </li>
+
+        <li class="">
+            <a class="" href="{{route('student.subject.index')}}">
+                <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                <span>{{__('المواد')}}</span>
+            </a>
+        </li>
+
+
+    @can('manage_student')
             <li class=" {{ active_if_match('admins/student') }} ">
                 <a class="has-arrow" href="#">
                     <span class="iconify" data-icon="ph:student"></span>

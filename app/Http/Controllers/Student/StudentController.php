@@ -68,6 +68,7 @@ class StudentController extends Controller
         $data['branches'] = Branch::whereStatus(1)->get();
         $data['class_rooms'] = ClassRoom::all();
         $data['count'] = Student::count();
+        $data['levels'] = Level::all();
 
         $students = $students->paginate(50);
         return view('admin.student.list', $data, compact('students'));

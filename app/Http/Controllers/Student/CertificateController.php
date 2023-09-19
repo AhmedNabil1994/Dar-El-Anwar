@@ -24,15 +24,11 @@ class CertificateController extends Controller
 
     public function index()
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
-
         $data['title'] = ' Certificates';
         $data['navCertificateActiveClass'] = "mm-active";
         $data['subNavAllCertificateActiveClass'] = "mm-active";
-        $data['certificates'] = Certificate::paginate(25);
-        return view('admin.certificate.index')->with($data);
+        $data['certificates'] = Certificate::where('student_id',Auth::guard('students')->id())->paginate(25);
+        return view('student.certificate.index')->with($data);
     }
 
 
