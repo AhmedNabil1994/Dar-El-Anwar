@@ -6,6 +6,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="customers__area__header bg-style mb-30">
                         <div class="breadcrumb__content">
                             <div class="breadcrumb__content__left">
                                 <div class="breadcrumb__title">
@@ -21,6 +22,7 @@
                                 </nav>
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -32,7 +34,7 @@
                             </div>
                             <div class="customers__table">
                                 <!-- <table id="customers-table" class="row-border data-table-filter table-style"> -->
-                                <table  class="row-border data-table-filter table-style">
+                                <table class="row-border data-table-filter table-style">
                                     <thead>
                                     <tr>
                                         <th>{{trans('website.image')}}</th>

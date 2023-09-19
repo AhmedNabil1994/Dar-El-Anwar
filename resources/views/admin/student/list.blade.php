@@ -27,9 +27,9 @@
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
                 </div>
-                <div class="col-md-3 m-3">
-                    <button class="btn buttons-style" onclick="exportToExcel()">Export to Excel</button>
-                    <a class="btn buttons-style" id="printTable">Print Table</a>
+                <div class="text-end mb-3 d-flex justify-content-start">
+                    <button class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
+                    <a class="btn btn-secondary" id="printTable">قم بطباعة الجدول</a>
 
 
                 </div>
@@ -102,15 +102,9 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-<<<<<<< HEAD
                         <div class="customers__table" style="overflow: auto;">
                             <table  class="row-border data-table-filter table-style table table-bordered table-striped" >
                                 <thead >
-=======
-                        <div class="customers__table" style="overflow: auto">
-                            <table id="table1" class="row-border data-table-filter table-style table table-bordered table-striped">
-                                <thead style="background-color: #50bfa5;">
->>>>>>> 105250e8487881f03aca662165135cfdd4b233c8
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>

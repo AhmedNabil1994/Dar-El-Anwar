@@ -19056,6 +19056,7 @@ p.image-desc {
 }
 
 #btn_filter,
-.button-save {
+.button-save,
+.button-excel {
     margin-left: 20px;
 }
