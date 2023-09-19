@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -20,6 +21,7 @@
                                 </ul>
                             </nav>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -37,7 +39,7 @@
                             </a>
                         </div>
                         <div class="row m-3 ">    
-                            <form method="GET" class="row align-items-end justify-content-center" action="{{ route('admins.index') }}">
+                            <form method="GET" class="row align-items-end " action="{{ route('admins.index') }}">
                                 <div class="col-md-3">
                                     <label class="form-label">بحث</label>
                                     <input class="form-control" value="{{request('search')}}" name="search">

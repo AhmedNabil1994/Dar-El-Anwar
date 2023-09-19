@@ -27,12 +27,19 @@ use Illuminate\Support\Str;
 
 function get_notify()
 {
-    $notifications = \App\Models\Notification::orderBy('id','DESC')
-        ->where('user_id', Auth::id())
-        ->where('user_type',1)
-        ->where('is_seen','no')->get();
+    if(Auth::guard('admins')->check())
+        $notifications = \App\Models\Notification::orderBy('id','DESC')
+            ->where('user_id', Auth::id())
+            ->where('user_type',1)
+            ->where('is_seen','no')->get();
+    if(Auth::guard('students')->check())
+        $notifications = \App\Models\StudentNotification::orderBy('id','DESC')
+            ->where('user_id', Auth::guard('students')->id())
+            ->where('is_seen','no')->get();
+
     return $notifications;
 }
+
 
 function get_absence_notify()
 {
@@ -144,6 +151,20 @@ function get_welcome_notify()
         }
     }
 }
+
+//function get_student_notify()
+//{
+//    $today = now()->format('Y-m-d'); // Get today's date in 'Y-m-d' format
+//
+//    $students = \App\Models\Student::whereDate('created_at','>=', $today)->get();
+//
+//    $notify = \App\Models\StudentNotification::where('text',get_setting('welcome_text'))
+//        ->where('user_id', )
+//        ->where('is_seen', 'no')->first();
+//    if ($students->count() > 0 || $notify > 0) {
+//        return $notify;
+//    }
+//}
 
 if (!function_exists('api_asset')) {
     function api_asset($id)

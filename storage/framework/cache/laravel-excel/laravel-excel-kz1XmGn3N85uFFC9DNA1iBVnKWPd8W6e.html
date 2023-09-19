@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Student</title>
+    <!-- Favicon included -->
+    <link rel="shortcut icon" href="http://127.0.0.1:8001/uploads_demo/setting/fav-icon.png" type="image/x-icon">
+
+    <!-- Apple touch icon included -->
+    <link rel="apple-touch-icon" href="http://127.0.0.1:8001/uploads_demo/setting/fav-icon.png">
+
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/sweetalert2/sweetalert2.css">
+
+    <!-- All CSS files included here -->
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/css/all.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/frontend/assets/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://127.0.0.1:8001/admin/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/css/metisMenu.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/styles/main.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/css/admin-extra.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/css/modules/employee.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8001/admin/css/modules/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="http://127.0.0.1:8001/common/css/select2.css" rel="stylesheet">
+</head>
+<body dir="rtl">
+
+
+
+
+
+
+
+
+
+<!-- Sidebar area start -->
+<div class="sidebar__area ">
+    <div class="sidebar__close">
+        <button class="close-btn">
+            <i class="fa fa-close"></i>
+        </button>
+    </div>
+
+    <div class="sidebar__brand">
+        <a href="http://127.0.0.1:8001/admin/dashboard">
+                            <img src="http://127.0.0.1:8001/uploads_demo/setting/logo.png" alt="">
+                    </a>
+    </div>
+
+    <ul id="sidebar-menu" class="sidebar__menu">
+
+        <li class="  ">
+            <a href="http://127.0.0.1:8001/admin/dashboard">
+                <span class="iconify" data-icon="bxs:dashboard"></span>
+                <span>لوحة التحكم</span>
+            </a>
+        </li>
+
+                    <li class="">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="bxs:user-account"></span>
+                    <span>المسؤولون</span>
+                </a>
+
+                <ul class="">
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/admins">
+                            <i class="fa fa-circle"></i>
+                            <span>جميع المسؤولين</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/role">
+                            <i class="fa fa-circle"></i>
+                            <span>المجموعات</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+                    <li class="">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="bx:bx-user"></span>
+                    <span>الموظفون</span>
+                </a>
+                <ul class="">
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/employees">
+                            <i class="fa fa-circle"></i>
+                            <span>جميع الموظفين</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/employees/create">
+                            <i class="fa fa-circle"></i>
+                            <span>إضافة موظف</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+                    <li class="  ">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="ph:student"></span>
+                    <span>الطلاب</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/student">
+                            <i class="fa fa-circle"></i>
+                            <span>جميع الطلاب</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/student/create">
+                            <i class="fa fa-circle"></i>
+                            <span>إضافة طالب</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+       
+
+                    <li class="  ">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="ph:student"></span>
+                    <span>الغياب</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/absence">
+                            <i class="fa fa-circle"></i>
+                            <span>عرض الغياب</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/absence/create">
+                            <i class="fa fa-circle"></i>
+                            <span>إضافة غياب</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+                    <li>
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
+                    <span>الدورات التدريبية</span>
+                </a>
+                <ul>
+                   
+                                            <li class="">
+                            <a href="http://127.0.0.1:8001/admin/course">
+                                <i class="fa fa-circle"></i>
+                                <span>جميع الدورات</span>
+                            </a>
+                        </li>
+                    
+                    
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/course/create">
+                            <i class="fa fa-circle"></i>
+                            <span>إضافة دورة</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+        
+                    <li>
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
+                    <span>المواد</span>
+                </a>
+                <ul>
+
+                                            <li class="">
+                        <a href="http://127.0.0.1:8001/admin/subject">
+                                <i class="fa fa-circle"></i>
+                                <span>جميع المواد</span>
+                            </a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="http://127.0.0.1:8001/admin/subject/create">
+                                <i class="fa fa-circle"></i>
+                                <span>إضافة مادة</span>
+                            </a>
+                        </li>
+
+                        <li class="">
+                        
+                        </li>
+
+                </ul>
+            </li>
+        
+                    <li class="">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="codicon:references"></span>
+                    <span>الاقسام</span>
+                </a>
+                <ul>
+                                            <li class="">
+                            <a href="http://127.0.0.1:8001/admin/category">
+                                <i class="fa fa-circle"></i>
+                                <span>جميع الأقسام</span>
+                            </a>
+                        </li>
+                                    </ul>
+            </li>
+        
+                    <li>
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
+                    <span>الاختبارات</span>
+                </a>
+                <ul>
+
+                                            <li class="">
+                            <a href="http://127.0.0.1:8001/admin/exam">
+                                <i class="fa fa-circle"></i>
+                                <span>جميع الاختبارات</span>
+                            </a>
+                        </li>
+                    
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/exam/create">
+                            <i class="fa fa-circle"></i>
+                            <span>إضافة اختبار</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        
+                    </li>
+
+                </ul>
+            </li>
+        
+                    <li>
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-bus"></i>
+                    <span>الحافلات</span>
+                </a>
+                <ul>
+                                            <li class="">
+                                <a href="http://127.0.0.1:8001/admin/bus">
+                                <i class="fa fa-circle"></i>
+                                <span>عرض الحافلات</span>
+                            </a>
+                        </li>
+                    
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/bus/create">
+                            <i class="fa fa-circle"></i>
+                            <span>إضافة حافلة</span>
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </li>
+        
+
+                <li>
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-bus"></i>
+                    <span>تواصل معنا</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/contact_us/inbox">
+                            <i class="fa fa-circle"></i>
+                            <span>صندوق الوارد</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/contact_us/sent">
+                            <i class="fa fa-circle"></i>
+                            <span>صندوق الصادر</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/contact_us/conversations">
+                            <i class="fa fa-circle"></i>
+                            <span>المحادثات</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/contact_us/messages">
+                            <i class="fa fa-circle"></i>
+                            <span>الرسائل</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        
+                    <li>
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-bus"></i>
+                    <span>الفصول</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/class_room">
+                            <i class="fa fa-circle"></i>
+                            <span>قائمة الفصول</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>الواجبات اليومية</span>
+            </a>
+            <ul>
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/assignments">
+                        <i class="fa fa-circle"></i>
+                            <span>عرض الواجبات</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/assignments/create">
+                        <i class="fa fa-circle"></i>
+                        <span>إضافة واجب</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        
+                <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>المتابعات</span>
+            </a>
+            <ul>
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/followup">
+                        <i class="fa fa-circle"></i>
+                        <span>متابعة الخطط</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/followup/create_class">
+                        <i class="fa fa-circle"></i>
+                        <span>تقرير متابعة حصة دراسية</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/followup/reading">
+                        <i class="fa fa-circle"></i>
+                        <span>تقرير متابعة القراءة</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/followup/quran">
+                        <i class="fa fa-circle"></i>
+                        <span>تقرير متابعة القران</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        
+                <li>
+            <a class="has-arrow" href="#">
+                <i class="fa fa-bus"></i>
+                <span>الحسابات</span>
+            </a>
+            <ul>
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/accounts/treasury">
+                        <i class="fa fa-money"></i>
+                        <span>الخزينة</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/subscriptions">
+                        <i class="fa fa-circle"></i>
+                        <span>الاشتراكات</span>
+                    </a>
+                </li>
+
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/subscriptions/students_subscription">
+                        <i class="fa fa-circle"></i>
+                        <span>سداد الاشتراكات</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/invoices">
+                        <i class="fa fa-circle"></i>
+                        <span>الفواتير</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/profit">
+                        <i class="fa fa-circle"></i>
+                        <span>صافي الربح</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/stores/movement">
+                        <i class="fa fa-circle"></i>
+                        <span>المخازن</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/stores/product">
+                        <i class="fa fa-circle"></i>
+                        <span>تقارير المنتجات</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/stores/product/invoice/purcahse">
+                        <i class="fa fa-circle"></i>
+                        <span>المشتريات</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="http://127.0.0.1:8001/admin/stores/product/invoice/sales">
+                        <i class="fa fa-circle"></i>
+                        <span>المبيعات</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+                            <li class="">
+                <a class="has-arrow" href="#">
+                    <span class="iconify" data-icon="fluent:certificate-20-filled"></span>
+                    <span>الشهادات</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/certificate">
+                            <i class="fa fa-circle"></i>
+                            <span>الشهادات المصدرة</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/certificate/create">
+                            <i class="fa fa-circle"></i>
+                            <span>تصميم الشهادة</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+                            <li class="">
+                <a class="has-arrow" href="#">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>تقارير</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/reports/report_students_ages">
+                            <i class="fa fa-money"></i>
+                            <span>تقارير اعمار الطلاب</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/reports/report_parents">
+                            <i class="fa fa-money"></i>
+                            <span>تقرير بيانات الاباء</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/reports/report_invoices">
+                            <i class="fa fa-money"></i>
+                            <span>قائمة الفواتير</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/reports/report_buses">
+                            <i class="fa fa-money"></i>
+                            <span>قائمة مدفوعات الباص لكل سائق</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/reports/report_count_students">
+                            <i class="fa fa-money"></i>
+                            <span>تقرير عدد الطلبة الفعلي</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+                    <li class="">
+                <a class="has-arrow" href="">
+                    <span class="iconify"></span>
+                    <span>المستويات</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="http://127.0.0.1:8001/admin/level">
+                            <i class="fa fa-circle"></i>
+                            <span>All Level</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </ul>
+</div>
+
+<!-- Sidebar area end -->
+
+<!-- Main Content area start -->
+<div class="main-content">
+
+    <!-- Header section start -->
+    <nav class="header__area buttons-style">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header__navbar">
+                    <div class="header__navbar__left">
+                        <button class="sidebar-toggler">
+                            <img src="http://127.0.0.1:8001/admin/images/icons/header/bars.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="header__navbar__right">
+                        <ul class="header__menu">
+
+                            <li class="admin-notification-menu position-relative">
+                                <a href="#" class="btn btn-dropdown site-language" id="dropdownNotification" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="position-absolute top-0 start-100 translate-middle
+                                                                          rounded-pill bg-danger"></span>
+                                    <img src="http://127.0.0.1:8001/admin/images/icons/header/notification.svg" alt="icon">
+                                </a>
+
+                                <!-- Notification Dropdown Start -->
+
+                                <ul class="dropdown-menu custom-scrollbar" aria-labelledby="dropdownNotification">
+                                                                            <p class="text-center">لا توجد بيانات</p>
+                                                                    </ul>
+                            </li>
+
+                            <!-- Notification Dropdown End -->
+
+                            <li>
+                                <a href="#" class="btn btn-dropdown user-profile" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                    <!-- <img src="http://127.0.0.1:8001/admin/images/icons/user.svg" alt="icon"> -->
+                                    <img src="http://127.0.0.1:8001/admin/images/icons/user_2.png" alt="icon">
+
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownUser">
+                                    <li>
+                                        <a class="dropdown-item" href="http://127.0.0.1:8001/admin/profile">
+                                                                                            <img src="http://127.0.0.1:8001/uploads_demo/setting/logo.png" alt="">
+                                                                                            <span>الملف الشخصي</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="http://127.0.0.1:8001/admin/profile/change-password">
+                                            <img src="http://127.0.0.1:8001/admin/images/icons/settings.svg" alt="icon">
+                                            <span>تغيير كلمة السر</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="http://127.0.0.1:8001/admin/logout">
+                                            <img src="http://127.0.0.1:8001/admin/images/icons/logout.svg" alt="icon">
+                                            <span>تسجيل الخروج</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+    <!-- Header section end -->
+
+    <!-- page content wrap start -->
+    <div class="page-content-wrap">
+        <!-- Page content area start -->
+            <!-- Page content area start -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb__content">
+                        <div class="breadcrumb__content__left">
+                            <div class="breadcrumb__title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb__content__right">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bg-style mb-30 " style="overflow-x:auto;">
+                        <div class="item-title d-flex justify-content-between ms-3 my-2">
+                            <h2>الطلاب</h2>
+                        </div>
+                        <div class="customers__table" style="overflow: auto">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead style="background-color: #50bfa5;">
+                                <tr>
+                                    <th>الكود</th>
+                                    <th>  الاسم   </th>
+                                    <th>الفرع</th>
+                                    <th>العنوان</th>
+                                    <th>تاريخ الميلاد</th>
+                                    <th>المستوى</th>
+                                    <th>اسم الفصل</th>
+                                    <th>الفترة</th>
+                                    <th>رقم الهاتف</th>
+                                    <th>الجنس</th>
+                                    <th>التعديل \ الحذف</th>
+                                    <th>الأرشفة</th>
+                                    <th>قيد الالتحاق</th>
+                                    <th>اشتراكات</th>
+                                    <th>ملاحظات</th>
+                                    <th>وجبات</th>
+                                    <th>فواتير</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr class="removable-item">
+                                        <td>202320227</td>
+                                        <td>حسن صلاح الدين حسن محجوب</td>
+                                        <td>Branch 2</td>
+                                        <td>2 ش انطون سانت</td>
+                                        <td>2000-05-12</td>
+                                        <td>المستوي 1</td>
+                                        <td>فصل 1</td>
+                                        <td>
+                                                                                            Morning
+                                                                                    </td>
+                                        <td>01012345678</td>
+                                        <td>ذكر</td>
+
+                                        <td>
+                                            <div class="action__buttons">
+                                                
+                                                
+                                                
+                                                <a  href="http://127.0.0.1:8001/admin/student/edit/227" class="btn btn-primary me-2" title="Edit Details">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_227" title="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                                <form action="http://127.0.0.1:8001/admin/student/delete/227" method="post" id="delete_row_form_227">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="U1QjtOCu1saLmoq7xNwsIxRa6OStQPhZqatVE5Eq">
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="archeived" data-id="227">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/archived.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/subscriptions?child_name%5B0%5D=%D8%AD%D8%B3%D9%86%20%D8%B5%D9%84%D8%A7%D8%AD%20%D8%A7%D9%84%D8%AF%D9%8A%D9%86%20%D8%AD%D8%B3%D9%86%20%D9%85%D8%AD%D8%AC%D9%88%D8%A8">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/subscription.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/assignments/student_assignment/227">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/meals.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/invoices?child_name=%D8%AD%D8%B3%D9%86%20%D8%B5%D9%84%D8%A7%D8%AD%20%D8%A7%D9%84%D8%AF%D9%8A%D9%86%20%D8%AD%D8%B3%D9%86%20%D9%85%D8%AD%D8%AC%D9%88%D8%A8">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/bills.png" alt="edit">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                                                    <tr class="removable-item">
+                                        <td>2861</td>
+                                        <td>آدم حسام عتمان</td>
+                                        <td>Branch 1</td>
+                                        <td>دماص</td>
+                                        <td>2018-01-01</td>
+                                        <td></td>
+                                        <td>فصل 1</td>
+                                        <td>
+                                                                                            Morning
+                                                                                    </td>
+                                        <td></td>
+                                        <td>ذكر</td>
+
+                                        <td>
+                                            <div class="action__buttons">
+                                                
+                                                
+                                                
+                                                <a  href="http://127.0.0.1:8001/admin/student/edit/7" class="btn btn-primary me-2" title="Edit Details">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_7" title="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                                <form action="http://127.0.0.1:8001/admin/student/delete/7" method="post" id="delete_row_form_7">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="U1QjtOCu1saLmoq7xNwsIxRa6OStQPhZqatVE5Eq">
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="archeived" data-id="7">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/archived.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/subscriptions?child_name%5B0%5D=%D8%A2%D8%AF%D9%85%20%D8%AD%D8%B3%D8%A7%D9%85%20%D8%B9%D8%AA%D9%85%D8%A7%D9%86">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/subscription.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/assignments/student_assignment/7">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/meals.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/invoices?child_name=%D8%A2%D8%AF%D9%85%20%D8%AD%D8%B3%D8%A7%D9%85%20%D8%B9%D8%AA%D9%85%D8%A7%D9%86">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/bills.png" alt="edit">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                                                    <tr class="removable-item">
+                                        <td>11111111111</td>
+                                        <td>Catherine Reeves</td>
+                                        <td>Branch 1</td>
+                                        <td>Consectetur aut har</td>
+                                        <td>1974-08-03</td>
+                                        <td></td>
+                                        <td>فصل 1</td>
+                                        <td>
+                                                                                            Morning
+                                                                                    </td>
+                                        <td>01234567890</td>
+                                        <td>ذكر</td>
+
+                                        <td>
+                                            <div class="action__buttons">
+                                                
+                                                
+                                                
+                                                <a  href="http://127.0.0.1:8001/admin/student/edit/5" class="btn btn-primary me-2" title="Edit Details">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_5" title="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                                <form action="http://127.0.0.1:8001/admin/student/delete/5" method="post" id="delete_row_form_5">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="U1QjtOCu1saLmoq7xNwsIxRa6OStQPhZqatVE5Eq">
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="archeived" data-id="5">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/archived.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                                                                    <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/under-enrollment.png" alt="edit">
+                                                                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/subscriptions?child_name%5B0%5D=Catherine%20Reeves">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/subscription.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/assignments/student_assignment/5">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/meals.png" alt="edit">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="http://127.0.0.1:8001/admin/invoices?child_name=Catherine%20Reeves">
+                                                <img style="width:50px" src="http://127.0.0.1:8001/admin/images/students/bills.png" alt="edit">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                
+                                </tbody>
+                            </table>
+
+                            <div class="mt-3">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Page content area end -->
+        <!-- Page content area end -->
+
+        <!-- Footer section start -->
+        <footer class="footer__area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer__copyright">
+                    <div class="footer__copyright__left">
+                        <h2>© 2023 جميع الحقوق محقوظة دار الانوار</h2>
+                    </div>
+                    <div class="footer__copyright__right">
+                        <h2>دار الانوار</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+        <!-- Footer section end -->
+    </div>
+    <!-- page content wrap end -->
+
+</div>
+<!-- Main Content area end -->
+<script>
+    function getLanguage(){
+        return {
+            "sEmptyTable": "No data available in table",
+            "sInfo": "Showing _START_ To _END_ Of _TOTAL_ Entries",
+            "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+            "sInfoFiltered": "(filtered from _MAX_ total entries)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": "Show _MENU_ entries",
+            "sLoadingRecords": "Loading...",
+            "sProcessing": "Processing...",
+            "sSearch": "Search:",
+            "sZeroRecords": "No matching records found",
+            "oPaginate": {
+                "sFirst": "First",
+                "sLast": "Last",
+                "sNext": "Next",
+                "sPrevious": "Previous"
+            },
+            "oAria": {
+                "sSortAscending": ": activate to sort column ascending",
+                "sSortDescending": ": activate to sort column descending"
+            }
+        };
+    }
+</script>
+<input type="hidden" id="base_url" value="http://127.0.0.1:8001">
+
+<script src="http://127.0.0.1:8001/frontend/assets/vendor/jquery/jquery-3.6.0.min.js"></script>
+<script src="http://127.0.0.1:8001/admin/js/popper.min.js"></script>
+<script src="http://127.0.0.1:8001/frontend/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://127.0.0.1:8001/common/js/apexcharts.min.js"></script>
+<script src="http://127.0.0.1:8001/admin/sweetalert2/sweetalert2.all.js"></script>
+<script src="http://127.0.0.1:8001/common/js/iconify.min.js"></script>
+
+    <script src="http://127.0.0.1:8001/admin/js/jquery.dataTables.min.js"></script>
+    <script src="http://127.0.0.1:8001/admin/js/custom/data-table-page.js"></script>
+    <script>
+        'use strict'
+        $(".status").change(function () {
+            var id = $(this).closest('tr').find('#hidden_id').html();
+            var status_value = $(this).closest('tr').find('.status option:selected').val();
+            Swal.fire({
+                title: "Are you sure to change status?",
+                text: "You won`t be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Change it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://127.0.0.1:8001/admin/accounts/change-student-status",
+                        data: {"status": status_value, "id": id, "_token": "U1QjtOCu1saLmoq7xNwsIxRa6OStQPhZqatVE5Eq",},
+                        datatype: "json",
+                        success: function (data) {
+                            toastr.options.positionClass = 'toast-bottom-right';
+                            toastr.success('', "Student status has been updated");
+                        },
+                        error: function () {
+                            alert("Error!");
+                        },
+                    });
+                } else if (result.dismiss === "cancel") {
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#btn_filter').on('click', function () {
+                var filter_department = $('#filter_department').val();
+                var filter_level = $('#filter_level').val();
+                var filter_status = $('#filter_status').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/students/filter',
+                    data: {
+                        department: filter_department,
+                        level: filter_level,
+                        status: filter_status
+                    },
+                    success: function (data) {
+                        // Update the table with the filtered data
+                        // ...
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+                window.print();
+        });
+    </script>
+    <script>
+        $('.archeived').on('click',function (){
+            var student_id = $(this).data('id');
+            $.ajax({
+                type: 'GET',
+                url: "http://127.0.0.1:8001/admin/student/change_status/" + student_id,
+                data: {"status": 2},
+                success: function (data) {
+
+                }
+            })
+        })
+
+    </script>
+<script>
+    $(document).ready(function() {
+        $(".close-btn").click(function() {
+            $(".sidebar__area").removeClass("active")
+            $(".sidebar__area").addClass("non-active")
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+    $(".sidebar-toggler").click(function() {
+        $(".sidebar__area").removeClass("non-active")
+        $(".sidebar__area").addClass("active")
+    });
+    });
+</script>
+<script src="http://127.0.0.1:8001/admin/js/admin-custom.js"></script>
+<script src="http://127.0.0.1:8001/admin/js/metisMenu.min.js"></script>
+<script src="http://127.0.0.1:8001/admin/js/main.js"></script>
+<script src="http://127.0.0.1:8001/common/js/select2.min.js"></script>
+
+<!-- All Javascript files included here -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Initialize Toastr
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: 'toast-top-left',
+        };
+    });
+</script>
+</body>
+</html>

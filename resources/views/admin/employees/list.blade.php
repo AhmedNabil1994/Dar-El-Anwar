@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -21,16 +22,18 @@
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                        <div class="bg-style mb-30 table-title-container " style="overflow-x:auto;">
+                        <div class="bg-style mb-30 table-title-container table-title-container " style="overflow-x:auto;">
                             <div class="item-title d-flex justify-content-between ms-3 my-2">
                                 <h2>{{ trans('website.all_emplyee') }}</h2>
                             </div>
                             <!-- searching inputs -->
                             <div class="employees mb-4">
+                                <div class="customers__area__header bg-style mb-30">
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-items-center">
                                         <form>
@@ -73,6 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                             <div class="customers__table" style="overflow: auto;">
                                 <table class="row-border data-table-filter table-style table table-bordered table-striped">

@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ParentInfoController;
 use App\Http\Controllers\Admin\PayoutController;
@@ -272,6 +273,7 @@ Route::prefix('course')->group(function () {
         Route::post('update/{id}', [StudentController::class, 'update'])->name('student.update');
         Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
         Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
+
     });
 
     Route::prefix('accounts')->group(function () {
@@ -330,6 +332,16 @@ Route::prefix('course')->group(function () {
         Route::post('update/{id}', [AbsenceController::class, 'update'])->name('absence.update');
         Route::get('delete/{id}', [AbsenceController::class, 'delete'])->name('absence.delete');
     });
+
+    Route::prefix('level')->group(function () {
+        Route::get('/', [LevelController::class, 'index'])->name('level.index');
+        Route::get('create', [LevelController::class, 'create'])->name('level.create');
+        Route::post('store', [LevelController::class, 'store'])->name('level.store');
+        Route::get('edit/{level}', [LevelController::class, 'edit'])->name('level.edit');
+        Route::post('update/{level}', [LevelController::class, 'update'])->name('level.update');
+        Route::get('delete/{level}', [LevelController::class, 'delete'])->name('level.delete');
+    });
+    Route::get('/export', [\App\Http\Controllers\ExportController::class,'export'])->name('export');
 
     Route::prefix('calender')->group(function () {
         Route::get('', [CalenderController::class, 'index'])->name('calender.index');

@@ -124,7 +124,7 @@
                                             <td>{{$student_subject->student?->code}}</td>
                                             <td>{{$student_subject->student?->name}}</td>
                                             <td>{{$student_subject->subject->department?->name}}</td>
-                                            <td>{{$student_subject->student?->level?->name}}</td>
+                                            <td>{{$student_subject->student?->level?->first()?->name}}</td>
                                             <td>{{$student_subject->subject->name}}</td>
                                             <td>{{$student_subject->subject->instructor?->name}}</td>
                                             <td>

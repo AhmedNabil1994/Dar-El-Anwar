@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClassRoom;
+use App\Models\Level;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,8 @@ class ClassRoomController extends Controller
     public function create()
     {
         //
-        return view('admin.class_room.create');
+        $data['levels'] = Level::whereStatus(1)->get();
+        return view('admin.class_room.create',$data);
     }
 
     /**
@@ -71,7 +73,8 @@ class ClassRoomController extends Controller
     public function edit(ClassRoom $class)
     {
         //
-        return view('admin.class_room.edit',compact('class'));
+        $data['levels'] = Level::whereStatus(1)->get();
+        return view('admin.class_room.edit',compact('class'),$data);
     }
 
     /**

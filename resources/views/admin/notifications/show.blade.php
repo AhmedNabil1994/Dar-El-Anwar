@@ -24,7 +24,7 @@
                                             <li>
                                                 <a href="{{ route('notification.show',$notify->id) }}" class="message-user-item dropdown-item">
                                                     <div class="message-user-item-left">
-                                                        <p class="text-dark">{{$notification->sender->name}}</p>
+                                                        <p class="text-dark">{{$notify->sender->name}}</p>
                                                         <div class="single-notification-item d-flex align-items-center">
                                                             <div class="flex-shrink-0">
                                                                 <div class="user-img-wrap position-relative radius-50">
@@ -35,7 +35,7 @@
 
                                                             <div class="flex-grow-1 ms-2"  style="text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden">
                                                                <p class="font-13 mb-0">{{ __($notify->text) }}</p>
-                                                                <div class="font-11 color-gray mt-1">{{$notification->created_at->diffForHumans()}}</div>
+                                                                <div class="font-11 color-gray mt-1">{{$notify->created_at->diffForHumans()}}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -50,7 +50,7 @@
                         <!-- end chat sidebar -->
                     </div>
                     <div class="col-md-9">
-
+                            @if(@$notification)
                             <div class="row">
                                 <div class="col-md-12 m-3 d-flex justify-content-center flex-column ">
                                         <input type="hidden" value="welcome_text" name="option_key[]">
@@ -58,6 +58,7 @@
                                         <textarea class="form-control-lg" disabled style="height: 500px" name="option_value[]">{{$notification->text  }}</textarea>
                                 </div>
                             </div>
+                        @endif
                     </div>
                 </div>
             </div>

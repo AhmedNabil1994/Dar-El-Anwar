@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Student
 {
@@ -26,18 +27,12 @@ class Student
          * instructor & student both can access student panel
          */
 
-        if (file_exists(storage_path('installed'))) {
-            if (auth()->user()->role == 2 || auth()->user()->role == 3) {
-                if (auth()->user()->student->status == 1) {
-                    return $next($request);
-                } else {
-                    abort('403');
-                }
-            } else {
-                abort('403');
-            }
-        } else {
-            return redirect()->to('/install');
+        if (!Auth::guard('students')->user()) {
+
+            return redirect(route('login'));
         }
+
+
+        return $next($request);
     }
 }

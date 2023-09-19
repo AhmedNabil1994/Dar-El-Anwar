@@ -128,7 +128,7 @@
                                             <td>{{$absence->student?->code}}</td>
                                             <td>{{$absence->student?->name}}</td>
                                             <td>{{$absence->student_subject->subject->department?->name}}</td>
-                                            <td>{{$absence->student?->level?->name}}</td>
+                                            <td>{{$absence->student?->level?->first()?->name}}</td>
                                             <td>{{$absence->student_subject->subject->name}}</td>
                                             <td>{{$absence->student_subject->subject->instructor?->employee?->name}}</td>
                                             <td>{{$absence->instructor?->employee?->name}}</td>

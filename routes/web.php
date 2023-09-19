@@ -86,10 +86,10 @@ Route::group(['middleware' => ['auth']], function () {
 //    });
 
 
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
 
 Route::get('version-update', [VersionUpdateController::class, 'versionUpdate'])->name('version-update');
 Route::post('process-update', [VersionUpdateController::class, 'processUpdate'])->name('process-update');
-
 
 Route::match(array('GET','POST'),'/payment-notify/{id}', [PaymentApiController::class, 'paymentNotifier'])->name('paymentNotify');
 

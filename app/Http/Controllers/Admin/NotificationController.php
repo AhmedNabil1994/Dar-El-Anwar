@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Setting;
+use App\Models\StudentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,12 +38,42 @@ class NotificationController extends Controller
 
     public function show(Request $request,$id)
     {
-        $data['notification'] = Notification::find($id);
-        $data['notification']->update(['is_seen'=>'yes']);
-        $data['notifications'] = Notification::orderBy('id','DESC')
-            ->where('user_id', Auth::id())
-            ->where('user_type',1)
-            ->get();
+        if(Auth::guard('admins')->check()){
+            $data['notification'] = Notification::find($id);
+            $data['notification']->update(['is_seen'=>'yes']);
+            $data['notifications'] = Notification::orderBy('id','DESC')
+                ->where('user_id', Auth::id())
+                ->where('user_type',1)
+                ->get();
+        }
+
+        if(Auth::guard('students')->check()){
+            $data['notification'] = StudentNotification::find($id);
+            $data['notification']->update(['is_seen'=>'yes']);
+            $data['notifications'] = StudentNotification::orderBy('id','DESC')
+                ->where('user_id', Auth::id())
+                ->where('user_type',1)
+                ->get();
+        }
+
+        return view('admin.notifications.show',$data);
+    }
+
+    public function index(Request $request)
+    {
+        if(Auth::guard('admins')->check()){
+            $data['notifications'] = Notification::orderBy('id','DESC')
+                ->where('user_id', Auth::id())
+                ->where('user_type',1)
+                ->get();
+        }
+
+        if(Auth::guard('students')->check()){
+            $data['notifications'] = StudentNotification::orderBy('id','DESC')
+                ->where('user_id', Auth::id())
+                ->where('user_type',1)
+                ->get();
+        }
 
         return view('admin.notifications.show',$data);
     }

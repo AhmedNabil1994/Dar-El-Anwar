@@ -36,17 +36,20 @@
 {{--@endif--}}
 
 <!-- Sidebar area start -->
-@include('admin.common.sidebar')
+
+@if(\Illuminate\Support\Facades\Auth::guard('admins')->check())
+    @include('admin.common.sidebar')
+@elseif(\Illuminate\Support\Facades\Auth::guard('students')->check())
+    @include('admin.common.student.sidebar')
+@endif
+
 <!-- Sidebar area end -->
 
 <!-- Main Content area start -->
 <div class="main-content">
-
     <!-- Header section start -->
-    @include('admin.common.header')
-    <!-- Header section end -->
-
-    <!-- page content wrap start -->
+        @include('admin.common.header')
+    <!-- Header section end -->    <!-- page content wrap start -->
     <div class="page-content-wrap">
         <!-- Page content area start -->
         @yield('content')
@@ -114,16 +117,5 @@
         };
     });
 </script>
-@if(session('success'))
-    <script>
-            toastr.success("{{ session('success') }}");
-    </script>
-@endif
-
-@if(session('error'))
-    <script>
-        toastr.error("{{ session('error') }}");
-    </script>
-@endif
 </body>
 </html>

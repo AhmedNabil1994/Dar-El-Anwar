@@ -69,18 +69,22 @@
                               <div class="col-md-3">
                                   <label class="form-label">اسم الطفل</label>
                                       <select multiple class="form-select" name="child_name[]">
-                                          <option value="">select child</option>
+                                          <option value="">اختر اسم الطفل</option>
                                           @foreach($students as $student)
-                                                <option value="{{$student->name}}">{{$student->name}}</option>
+                                                <option value="{{$student->name}}"
+                                                {{in_array($student->name,request('child_name'))?'selected':''}}
+                                                >{{$student->name}}</option>
                                           @endforeach
                                       </select>
                               </div>
                               <div class="col-md-3">
                                   <label class="form-label">اسم الاشتراك</label>
                                   <select multiple class="form-select" name="subscription_name[]">
-                                      <option value="">select subscription name</option>
+                                      <option value="">اختر اشتراك</option>
                                       @foreach($subscription_names as $subscription_name)
-                                            <option value="{{$subscription_name->name}}">{{$subscription_name->name}}</option>
+                                            <option value="{{$subscription_name->name}}"
+                                            {{request('subscription_name')?in_array($subscription_name->name,request('subscription_name'))?'selected':'':''}}
+                                            >{{$subscription_name->name}}</option>
                                       @endforeach
                                   </select>
 
