@@ -185,8 +185,8 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>
+                                    <div class="form-group mb-4">
+                                        <button type="submit" class="btn buttons-style button-save">{{trans('website.save')}}</button>
                                         <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                     </div>
                                 </form>

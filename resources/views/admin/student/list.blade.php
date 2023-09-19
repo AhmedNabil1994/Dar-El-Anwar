@@ -83,7 +83,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="text-end mb-3 d-flex justify-content-end">
+                <div class="text-end mb-3 d-flex justify-content-start">
                     <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                     <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>

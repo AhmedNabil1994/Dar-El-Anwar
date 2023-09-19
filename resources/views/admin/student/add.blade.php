@@ -32,7 +32,7 @@
                         <form action="{{route('student.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="row">
+                                <div class="row justify-content-evenly">
                                     <div class="col-md-3">
                                         <div class="upload-img-box mb-25">
                                             <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this)">
@@ -45,7 +45,7 @@
                                     @if ($errors->has('image'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('image') }}</span>
                                     @endif
-                                    <p>{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p>
+                                    <p class = "image-desc">{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
