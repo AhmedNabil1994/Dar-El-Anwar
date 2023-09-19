@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -23,9 +24,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-end">
-                <div class="form-group col-md-3">
-                    <a href="{{route('stores.movement.create')}}" class="form-control btn">
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-group col-md-3 ">
+                    <a href="{{route('stores.movement.create')}}" class="form-control btn mb-3 " style = "background-color:#50bfa5">
                         <i class="fas fa-cash-register"></i>
                     </a>
                 </div>
@@ -49,9 +51,9 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-sm-2 m-3 d-flex align-items-center flex-column justify-content-end">
+                    <div class="col-3 d-flex align-items-center flex-column justify-content-end">
 
-                    <button type="submit" class="form-control btn btn-success">
+                    <button type="submit" class="form-control btn" style = "background-color:#50bfa5">
                         <i class="fas fa-filter "></i>
                     </button>
                     </div>
@@ -66,7 +68,7 @@
                         <input type="date" class="form-control" name="dateTo" value="{{request('dateTo')}}" required>
                     </div>
                     <div class="col-sm-2 m-3 d-flex align-items-center flex-column justify-content-end">
-                        <button type="submit" class="form-control btn btn-success">
+                        <button type="submit" class="form-control btn" style = "background-color:#50bfa5">
                             <i class="fas fa-filter "></i>
                         </button>
                     </div>
@@ -75,10 +77,11 @@
 
             </div>
             <div class="row">
+                <div class="col-md-12">
+                <div class="customers__area bg-style mb-30 ">
+                    <h2>حركات المنتجات</h2>
                 <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                    <h2 style = "text-align:center;">حركات المنتجات</h2>
-                    
-                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                    <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>رقم الإذن</th>
@@ -124,6 +127,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 @endsection
 

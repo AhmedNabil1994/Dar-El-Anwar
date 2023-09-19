@@ -23,11 +23,32 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
+                    <div class="breadcrumb__content">
+                        <div class="breadcrumb__content__left">
+                            <div class="breadcrumb__title">
+                                <h2>{{ trans('متابعة الخطط') }}</h2>
+                            </div>
+                        </div>
+                        <div class="breadcrumb__content__right">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('المتابعات') }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
             <div class="item-title d-flex justify-content-center mx-4">
-                <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعة المعلمين</i></a>
-                <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القرآن</i></a>
-                <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة حصة دراسية</i></a>
-                <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القراءة</i></a>
+                <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>خطة متابعة المعلمين</a>
+                <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القرآن</a>
+                <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة حصة دراسية</a>
+                <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القراءة</a>
             </div>
             <form method="get" action="{{route('admin.followup.index')}}" class="row">
                 <div class="row">
@@ -74,19 +95,20 @@
                     <label for="dateTo">:{{trans("website.dateTo")}}</label>
                     <input type="date" class="form-control" name="dateTo" value="{{request('dateTo')}}">
                 </div>
-                <div class="text-end mb-3 d-flex justify-content-end">
+                <div class="text-end mb-3 d-flex justify-content-start">
                     <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                 </div>
             </form>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="bg-style mb-30 " style="overflow-x:auto;">
+                    <div class="bg-style mb-30 table-title-container " style="overflow-x:auto;">
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
                         <div class="customers__table" >
-                            <table id="" class="row-border data-table-filter table-style">
+                            <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
+                            <table  class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>{{ trans('website.followup_date') }}</th>

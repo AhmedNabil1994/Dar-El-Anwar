@@ -23,11 +23,27 @@
                 </div>
             </div> -->
             <div class="chat" style="min-height: 95vh;height: auto;">
-              <header class="chat__header">
-                <h2 class="text-center">
-                  صندوق الوارد
-                </h2>
-              </header>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
+                    <div class="breadcrumb__content">
+                        <div class="breadcrumb__content__left">
+                            <div class="breadcrumb__title">
+                                <h2>{{ __('صندوق الوارد') }}</h2>
+                            </div>
+                        </div>
+                        <div class="breadcrumb__content__right">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{__('تواصل معنا') }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
 
               <div class="row" style="min-height: 95%;height: auto;">
               <!-- Start chat sidebar -->

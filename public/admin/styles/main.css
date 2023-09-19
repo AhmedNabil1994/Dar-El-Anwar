@@ -17607,7 +17607,7 @@ blockquote.right span::before {
 }
 
 .btn.btn-success:hover {
-    background-color: #228322;
+    /* background-color: #228322; */
     color: #ffffff;
 }
 
@@ -19059,4 +19059,14 @@ p.image-desc {
 .button-save,
 .button-excel {
     margin-left: 20px;
+}
+
+h3{
+    font-size: 20px !important;
+}
+.messages textarea {
+    height: 50px;
+}
+.form-style-container {
+    padding: 16px 24px 17px;
 }

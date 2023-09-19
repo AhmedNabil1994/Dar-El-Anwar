@@ -7,6 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -22,6 +23,7 @@
                                 </ul>
                             </nav>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -45,8 +47,8 @@
                         <label class="form-label">التاريح الي</label>
                         <input type="date" name="date_to" class="form-control" value="{{request('date_to')}}"/>
                     </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <button type="submit">
+                    <div class="col-sm-1 d-flex justify-content-center align-items-center" style = "height:90px">
+                        <button type="submit" class = "btn buttons-style">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -54,9 +56,10 @@
             </div>
 
             <div class="col-md-12">
-                <h1>صافي الربح</h1>
+                <div class="customers__area__header bg-style mb-30 table-title-container">
+                <h1 class = "mb-3">صافي الربح</h1>
                 <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                    <table class="row-border data-table-filter table-style table table-bordered table-striped">
                     <thead>
                     <tr class="text-center">
                         <th>#</th>
@@ -101,6 +104,7 @@
                     <input disabled class="form-control" value="{{$expenses}}">
                 </div>
             </div>
+        </div>
         </div>
     </div>
 

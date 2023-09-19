@@ -33,7 +33,7 @@
                             </div>
                             <!-- searching inputs -->
                             <div class="employees mb-4">
-                                <div class="customers__area__header bg-style mb-30">
+                                <div class="customers__area__header form-style-container bg-style mb-30">
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-items-center">
                                         <form>

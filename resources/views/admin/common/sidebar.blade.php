@@ -35,14 +35,14 @@
 
                     <li class="{{ @$subNavPageIndexActiveClass }}">
                         <a href="{{route('admins.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('جميع المسؤولين')}}</span>
                         </a>
                     </li>
 
                     <li class="{{ @$subNavUserRoleActiveClass }}">
                         <a href="{{route('role.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('المجموعات')}}</span>
                         </a>
                     </li>
@@ -59,13 +59,13 @@
                 <ul class="{{ @$navEmployeeParentShowClass }}">
                     <li class="{{ @$subNavEmployeeListActiveClass }}">
                         <a href="{{ route('employees.index') }}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('جميع الموظفين') }}</span>
                         </a>
                     </li>
                     <li class="{{ @$subNavEmployeeCreateActiveClass }}">
                         <a href="{{ route('employees.create') }}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('إضافة موظف') }}</span>
                         </a>
                     </li>
@@ -82,13 +82,13 @@
                 <ul>
                     <li class="{{ active_if_match('admins/student') }}">
                         <a href="{{route('student.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('جميع الطلاب') }}</span>
                         </a>
                     </li>
                     <li class="{{ active_if_match('admins/student/create') }}">
                         <a href="{{route('student.create')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('إضافة طالب') }}</span>
                         </a>
                     </li>
@@ -106,7 +106,7 @@
 <!--                    @can('pending_instructor')
                         <li class="{{ active_if_match('admins/instructor/pending') }}">
                             <a href="{{route('instructor.pending')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('Pending Instructor')}}</span>
                             </a>
                         </li>
@@ -115,7 +115,7 @@
                     @can('approved_instructor')
                         <li class="{{ active_if_match('admins/instructor/approved') }}">
                             <a href="{{route('instructor.approved')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('Approved Instructors')}}</span>
                             </a>
                         </li>
@@ -123,7 +123,7 @@
                     @can('approved_instructor')
                         <li class="{{ active_if_match('admins/instructor/blocked') }}">
                             <a href="{{route('instructor.blocked')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('Blocked Instructors')}}</span>
                             </a>
                         </li>
@@ -132,7 +132,7 @@
                     @can('add_instructor')
                         <li class="{{ active_if_match('admins/instructor/create') }}">
                             <a href="{{route('instructor.create')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{ __('Add Instructor') }}</span>
                             </a>
                         </li>
@@ -146,7 +146,7 @@
                         {{ active_if_match('admins/instructor/view/*') }}
                     ">
                             <a href="{{route('instructor.index')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('All Instructors')}}</span>
                             </a>
                         </li>
@@ -164,13 +164,13 @@
                 <ul>
                     <li class="{{ active_if_match('admins/absence') }}">
                         <a href="{{route('absence.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('عرض الغياب') }}</span>
                         </a>
                     </li>
                     <li class="{{ active_if_match('admins/absence/create') }}">
                         <a href="{{route('absence.create')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('إضافة غياب') }}</span>
                         </a>
                     </li>
@@ -188,7 +188,7 @@
                    {{-- @can('pending_course')
                         <li class="{{ active_if_match('admins/course/review-pending') }}">
                             <a href="{{route('admin.course.review_pending')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('Review Pending')}}</span>
                             </a>
                         </li>
@@ -196,7 +196,7 @@
                     @can('hold_course')
                         <li class="{{ active_if_match('admins/course/hold') }}">
                             <a href="{{route('admin.course.hold')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('Hold')}}</span>
                             </a>
                         </li>
@@ -205,7 +205,7 @@
 
                         <li class="{{ active_if_match('admins/course/approved') }}">
                             <a href="{{route('admin.course.approved')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('Approved')}}</span>
                             </a>
                         </li>
@@ -214,7 +214,7 @@
                     @can('all_course')
                         <li class="{{ active_if_match('admins/course') }}">
                             <a href="{{route('admin.course.index')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('جميع الدورات')}}</span>
                             </a>
                         </li>
@@ -222,14 +222,14 @@
 
                     {{--<li class="{{ active_if_match('admins/course/enroll') }}">
                         <a href="{{route('admin.course.enroll')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('Enroll In Course') }}</span>
                         </a>
                     </li>--}}
 
                     <li class="{{ active_if_match('admins/course/create') }}">
                         <a href="{{route('admin.course.create')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('إضافة دورة') }}</span>
                         </a>
                     </li>
@@ -250,7 +250,7 @@
                     @can('all_course')
                         <li class="{{ active_if_match('admins/subject') }}">
                         <a href="{{route('admin.subject.index')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('جميع المواد')}}</span>
                             </a>
                         </li>
@@ -258,14 +258,14 @@
 
                         <li class="{{ active_if_match('admins/subject/create') }}">
                             <a href="{{route('admin.subject.create')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{ __('إضافة مادة') }}</span>
                             </a>
                         </li>
 
                         <li class="{{ active_if_match('admins/subject/create') }}">
                         {{--<a href="{{route('admin.subject.enroll')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('Assign Subject') }}</span>
                         </a>--}}
                         </li>
@@ -284,7 +284,7 @@
                     @can('manage_course_category')
                         <li class="{{ active_if_match('admins/category') }}">
                             <a href="{{route('category.index')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('جميع الأقسام')}}</span>
                             </a>
                         </li>
@@ -304,7 +304,7 @@
                     @can('all_course')
                         <li class="{{ active_if_match('admins/exam') }}">
                             <a href="{{route('admin.exam.index')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('جميع الاختبارات')}}</span>
                             </a>
                         </li>
@@ -312,14 +312,14 @@
 
                     <li class="{{ active_if_match('admins/exam/create') }}">
                         <a href="{{route('admin.exam.create')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('إضافة اختبار') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_if_match('admins/subject/create') }}">
                         {{--<a href="{{route('admin.subject.enroll')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('Assign Subject') }}</span>
                         </a>--}}
                     </li>
@@ -338,7 +338,7 @@
                     @can('all_course')
                         <li class="{{ active_if_match('admins/bus') }}">
                                 <a href="{{route('admin.bus.index')}}">
-                                <i class="fa fa-circle"></i>
+                                
                                 <span>{{__('عرض الحافلات')}}</span>
                             </a>
                         </li>
@@ -346,14 +346,14 @@
 
                     <li class="{{ active_if_match('admins/bus/assign') }}">
                         <a href="{{route('admin.bus.create')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('إضافة حافلة') }}</span>
                         </a>
                     </li>
 
                     {{--                    <li class="{{ active_if_match('admins/course/create') }}">--}}
                     {{--                        <a href="{{route('admin.course.create')}}">--}}
-                    {{--                            <i class="fa fa-circle"></i>--}}
+                    {{--                            --}}
                     {{--                                <span>{{ __('Create Course') }}</span>--}}
                     {{--                        </a>--}}
                     {{--                    </li>--}}
@@ -371,28 +371,28 @@
                 <ul>
                     <li class="{{ active_if_match('contact_us/inbox') }}">
                         <a href="{{route('admin.contact_us.contactUsInbox')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('صندوق الوارد')}}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_if_match('contact_us/sent') }}">
                         <a href="{{route('admin.contact_us.contactUsSent')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('صندوق الصادر') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_if_match('contact_us/conversations') }}">
                         <a href="{{route('admin.contact_us.contactUsConversations')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('المحادثات') }}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_if_match('contact_us/messages') }}">
                         <a href="{{route('admin.contact_us.contactUsMessages')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{ __('الرسائل') }}</span>
                         </a>
                     </li>
@@ -410,7 +410,7 @@
                 <ul>
                     <li class="{{ active_if_match('class_room') }}">
                         <a href="{{route('class_room.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('قائمة الفصول')}}</span>
                         </a>
                     </li>
@@ -427,14 +427,14 @@
 {{--            <ul>--}}
 {{--                <li class="{{ active_if_match('goals/inbox') }}">--}}
 {{--                    <a href="{{route('admin.contact_us.contactUsInbox')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{__('All Goals')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 
 {{--                <li class="{{ active_if_match('goals/sent') }}">--}}
 {{--                    <a href="{{route('admin.contact_us.contactUsSent')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{ __('Create Goals') }}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
@@ -450,14 +450,14 @@
             <ul>
                 <li class="{{ active_if_match('assignments/index') }}">
                     <a href="{{route('admin.assignments.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                             <span>{{__('عرض الواجبات')}}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('assignments/create') }}">
                     <a href="{{route('admin.assignments.create')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('إضافة واجب') }}</span>
                     </a>
                 </li>
@@ -475,28 +475,28 @@
             <ul>
                 <li class="{{ active_if_match('followup/index') }}">
                     <a href="{{route('admin.followup.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{__('متابعة الخطط')}}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('followup/create_class') }}">
                     <a href="{{route('admin.followup.create')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('تقرير متابعة حصة دراسية') }}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('followup/reading') }}">
                     <a href="{{route('admin.followup.reading')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('تقرير متابعة القراءة') }}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('followup/quran') }}">
                     <a href="{{route('admin.followup.quran')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('تقرير متابعة القران') }}</span>
                     </a>
                 </li>
@@ -521,7 +521,7 @@
 
                 <li class="{{ active_if_match('admin/subscriptions') }}">
                     <a href="{{route('subscriptions.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('الاشتراكات') }}</span>
                     </a>
                 </li>
@@ -529,46 +529,46 @@
 
                 <li class="{{ active_if_match('admin/students_subscription') }}">
                     <a href="{{route('subscriptions.students_subscription')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('سداد الاشتراكات') }}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('admin/invoices') }}">
                     <a href="{{route('invoices.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('الفواتير') }}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('admin/profit') }}">
                     <a href="{{route('profit.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('صافي الربح') }}</span>
                     </a>
                 </li>
 
                 <li class="{{ active_if_match('admin/stores/movement') }}">
                     <a href="{{route('stores.movement.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('المخازن') }}</span>
                     </a>
                 </li>
                 <li class="{{ active_if_match('admin/product/movement') }}">
                     <a href="{{route('stores.product.index')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('تقارير المنتجات') }}</span>
                     </a>
                 </li>
                 <li class="{{ active_if_match('admin/product/invoice') }}">
                     <a href="{{route('stores.product.invoice.purchases')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('المشتريات') }}</span>
                     </a>
                 </li>
                 <li class="{{ active_if_match('admin/product/invoice') }}">
                     <a href="{{route('stores.product.invoice.sales')}}">
-                        <i class="fa fa-circle"></i>
+                        
                         <span>{{ __('المبيعات') }}</span>
                     </a>
                 </li>
@@ -585,13 +585,13 @@
                 <ul>
                     <li class="{{ @$subNavAllCertificateActiveClass }}">
                         <a href="{{route('certificate.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('الشهادات المصدرة')}}</span>
                         </a>
                     </li>
                     <li class="{{ @$subNavAddCertificateActiveClass }}">
                         <a href="{{route('certificate.create')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('تصميم الشهادة')}}</span>
                         </a>
                     </li>
@@ -649,7 +649,7 @@
                 <ul>
                     <li class="{{ @$navLevelActiveClass }}">
                         <a href="{{route('level.index')}}">
-                            <i class="fa fa-circle"></i>
+                            
                             <span>{{__('All Level')}}</span>
                         </a>
                     </li>
@@ -666,7 +666,7 @@
 {{--                <ul>--}}
 {{--                    <li class="{{ active_if_match('admins/language') }}">--}}
 {{--                        <a href="{{route('language.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Language Settings')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -683,13 +683,13 @@
 {{--                <ul class="">--}}
 {{--                    <li class="{{ @$subNavSupportTicketIndexActiveClass }}">--}}
 {{--                        <a href="{{ route('support-ticket.admin.index') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span> {{__('All Tickets')}} </span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ @$subNavSupportTicketOpenActiveClass }}">--}}
 {{--                        <a href="{{ route('support-ticket.admin.open') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Open Ticket')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -717,13 +717,13 @@
 
 {{--                    <li class="{{ @$subNavUserCreateActiveClass }}">--}}
 {{--                        <a href="{{route('user.create')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span> {{__('Add User')}} </span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ @$subNavUserActiveClass }}">--}}
 {{--                        <a href="{{route('user.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('All Users')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -744,14 +744,14 @@
 {{--                <ul class="{{ @$navEmailParentShowClass }}">--}}
 {{--                    <li class="{{ @$subNavEmailTemplateActiveClass }}">--}}
 {{--                        <a href="{{route('email-template.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Email Template')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 
 {{--                    <li class="{{ @$subNavSendMailActiveClass }}">--}}
 {{--                        <a href="{{route('email-template.send-email')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Send Email')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -769,13 +769,13 @@
 {{--            <ul class="">--}}
 {{--                <li class="{{ @$subNavPageAddActiveClass }}">--}}
 {{--                    <a href="{{route('page.create')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span> {{__('Add Page')}} </span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ @$subNavPageIndexActiveClass }}">--}}
 {{--                    <a href="{{route('page.index')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{__('All Pages')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
@@ -791,13 +791,13 @@
 {{--            <ul class="">--}}
 {{--                <li class="{{ @$subNavStaticMenuIndexActiveClass }}">--}}
 {{--                    <a href="{{route('menu.static')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{__('Static Menu')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ @$subNavDynamicMenuIndexActiveClass }}">--}}
 {{--                    <a href="{{route('menu.dynamic')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{__('Dynamic Menu')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
@@ -817,7 +817,7 @@
 {{--                    @can('global_setting')--}}
 {{--                        <li class="{{ @$subNavGlobalSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.general_setting') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Global Settings')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
@@ -826,7 +826,7 @@
 
 {{--                    <li class="{{ @$subNavLocationSettingsActiveClass }}">--}}
 {{--                        <a href="{{ route('settings.location.country.index') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Location Settings')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -834,7 +834,7 @@
 {{--                    @can('home_setting')--}}
 {{--                        <li class="{{ @$subNavHomeSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.section-settings') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Home Settings')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
@@ -844,7 +844,7 @@
 
 {{--                        <li class="{{ @$subNavMailConfigSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.mail-configuration') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Mail Configuration')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
@@ -852,7 +852,7 @@
 {{--                    @can('payment_option')--}}
 {{--                        <li class="{{ @$subNavPaymentOptionsSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.payment_method_settings') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Payment Options')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
@@ -860,52 +860,52 @@
 {{--                    @can('content_setting')--}}
 {{--                        <li class="{{ @$subNavInstructorSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.instructor-feature') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Become Instructor')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 
 {{--                        <li class="{{ @$subNavFAQSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.faq.cms') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('FAQ')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 {{--                        <li class="{{ @$subNavSupportSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.support-ticket.cms') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Support Ticket')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 
 {{--                        <li class="{{ @$subNavAboutUsSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.about.gallery-area') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('About Us')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 
 {{--                        <li class="{{ @$subNavContactUsSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.contact.cms') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Contact Us')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 {{--                        <li class="{{ @$subNavMaintenanceModeSettingsActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.maintenance') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Maintenance Mode')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 {{--                        <li class="{{ @$subNavCacheActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.cache-settings') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Cache Settings')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
 {{--                        <li class="{{ @$subNavMigrateActiveClass }}">--}}
 {{--                            <a href="{{ route('settings.migrate-settings') }}">--}}
-{{--                                <i class="fa fa-circle"></i>--}}
+{{--                                --}}
 {{--                                <span>{{__('Migrate Settings')}}</span>--}}
 {{--                            </a>--}}
 {{--                        </li>--}}
@@ -923,19 +923,19 @@
 {{--            <ul>--}}
 {{--                <li class="{{ @$subNavTermConditionsActiveClass }}">--}}
 {{--                    <a href="{{ route('admin.terms-conditions') }}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span> {{__('Terms Conditions')}} </span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ @$subNavPrivacyPolicyActiveClass }}">--}}
 {{--                    <a href="{{ route('admin.privacy-policy') }}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span> {{__('Privacy Policy')}} </span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ @$subNavCookiePolicyActiveClass }}">--}}
 {{--                    <a href="{{ route('admin.cookie-policy') }}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span> {{__('Cookie Policy')}} </span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
@@ -951,19 +951,19 @@
 {{--                <ul class="{{ @$navContactUsParentShowClass }}">--}}
 {{--                    <li class="{{ @$subNavContactUsIndexActiveClass }}">--}}
 {{--                        <a href="{{ route('contact.index') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span> {{__('All Contact Us')}} </span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ @$subNavContactUsIssueIndexActiveClass }}">--}}
 {{--                        <a href="{{ route('contact.issue.index') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('All Contact Us Issue')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ @$subNavContactUsIssueAddActiveClass }}">--}}
 {{--                        <a href="{{ route('contact.issue.create') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Add Contact Us Issue')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -981,25 +981,25 @@
 {{--                <ul>--}}
 {{--                    <li class="{{ active_if_match('admins/blog/create') }}">--}}
 {{--                        <a href="{{route('blog.create')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Add Blog')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ active_if_match('admins/blog') }} {{ active_if_match('admins/blog/edit/*') }}">--}}
 {{--                        <a href="{{route('blog.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('All Blog')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ @$subNavBlogCommentListActiveClass }}">--}}
 {{--                        <a href="{{route('blog.blog-comment-list')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{ __('Blog Comment List') }}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ @$subNavBlogCategoryIndexActiveClass }}">--}}
 {{--                        <a href="{{route('blog.blog-category.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Blog Category')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -1015,7 +1015,7 @@
 {{--                <ul>--}}
 {{--                    <li class="{{ @$subNavForumCategoryIndexActiveClass }}">--}}
 {{--                        <a href="{{route('admin.forum.category.index')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{ __('Forum Category') }}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -1031,13 +1031,13 @@
 {{--                <ul class="{{ @$navUserParentShowClass }}">--}}
 {{--                    <li class="{{ active_if_match('admins/profile') }}">--}}
 {{--                        <a href="{{route('admin.profile')}}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span> {{__('Profile')}} </span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                    <li class="{{ active_if_match('admins/profile/change-password') }}">--}}
 {{--                        <a href="{{ route('admin.change-password') }}">--}}
-{{--                            <i class="fa fa-circle"></i>--}}
+{{--                            --}}
 {{--                            <span>{{__('Change Password')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -1054,19 +1054,19 @@
 {{--            <ul class="">--}}
 {{--                <li class="{{ @$subNavAffiliateManageListActiveClass }}">--}}
 {{--                    <a href="{{route('affiliate.affiliate-request-list')}}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span> {{__('Affiliate Request List')}} </span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ active_if_match('admins/affiliate/affiliation-settings') }}">--}}
 {{--                    <a href="{{ route('affiliate.affiliation-settings') }}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{__('Affiliate Settings')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ @$subNavAffiliateHistoryActiveClass }}">--}}
 {{--                    <a href="{{ route('affiliate.affiliate-history') }}">--}}
-{{--                        <i class="fa fa-circle"></i>--}}
+{{--                        --}}
 {{--                        <span>{{__('Affiliate history')}}</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
