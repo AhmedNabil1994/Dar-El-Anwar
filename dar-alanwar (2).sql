@@ -1,11 +1,11 @@
-    -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2023 at 09:19 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Sep 18, 2023 at 08:29 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -99,24 +99,26 @@ CREATE TABLE `admins` (
   `email` varchar(150) NOT NULL,
   `username` varchar(60) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `role` tinyint(4) NOT NULL DEFAULT 2 COMMENT '1=admin, 2=instructor, 3=student',
+  `role` varchar(255) NOT NULL DEFAULT '2' COMMENT '1=admin, 2=instructor, 3=student',
   `password` varchar(191) NOT NULL,
+  `private_user` int(11) DEFAULT NULL,
   `hidden` tinyint(4) NOT NULL DEFAULT 1,
+  `status` int(11) DEFAULT NULL,
   `image` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `position` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `email`, `username`, `phone`, `role`, `password`, `hidden`, `image`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'Admin User', 'admin@app.com', 'admin', '1234567890', 1, '$2y$10$bLck7TCSQ8zYj7bLsHIwvO3VWJNiK9xe9RS34lbhmI5iRswmYjozm', 1, NULL, '2023-04-03 13:37:53', '2023-04-03 13:37:53', 1),
-(2, 'Hassan Admin', 'hassanadmin@gmail.com', 'Hassan125', '11235556554', 2, '$2y$10$IUUaMCdTeqCbqDmNL4JKl.ua68cAmG8ZJn.dTJXmKgq8FeVL5hzDW', 1, NULL, '2023-05-18 10:53:57', '2023-05-18 10:53:57', 1),
-(3, 'هبة أحمد جليلة', 'hebaahmed221@gmail.com', 'هبة أحمد', '01551067448', 2, '$2y$10$sZgLMu55ZIyDR8Gf.UubA.WVfZc2o/Ch5aXfE9hE8/1AELVSRsFXa', 1, NULL, '2023-07-13 15:41:54', '2023-07-13 15:41:54', 1),
-(4, 'مروة قناوي', 'marwakenawi20@gmail.com', 'مروة', '01014893908', 2, '$2y$10$Bx7p6L9iOxWRgvpNgnswreZvgXwnbaTgy/f91gcUy8uqPp.nKNium', 1, NULL, '2023-07-13 15:46:22', '2023-07-13 15:46:22', 1);
+INSERT INTO `admins` (`id`, `name`, `email`, `username`, `phone`, `role`, `password`, `private_user`, `hidden`, `status`, `image`, `created_at`, `updated_at`, `position`) VALUES
+(1, 'Admin User', 'admin@app.com', 'admin', '1234567890', '1', '$2y$10$bLck7TCSQ8zYj7bLsHIwvO3VWJNiK9xe9RS34lbhmI5iRswmYjozm', 1, 1, 1, NULL, '2023-04-03 13:37:53', '2023-09-18 04:20:45', NULL),
+(2, 'Hassan Admin', 'hassanadmin@gmail.com', 'Hassan125', '11235556554', '2', '$2y$10$IUUaMCdTeqCbqDmNL4JKl.ua68cAmG8ZJn.dTJXmKgq8FeVL5hzDW', NULL, 1, 1, NULL, '2023-05-18 10:53:57', '2023-05-18 10:53:57', NULL),
+(3, 'هبة أحمد جليلة', 'hebaahmed221@gmail.com', 'هبة أحمد', '01551067448', '2', '$2y$10$sZgLMu55ZIyDR8Gf.UubA.WVfZc2o/Ch5aXfE9hE8/1AELVSRsFXa', NULL, 1, 1, NULL, '2023-07-13 15:41:54', '2023-07-13 15:41:54', NULL),
+(4, 'مروة قناوي', 'marwakenawi20@gmail.com', 'مروة', '01014893908', '2', '$2y$10$Bx7p6L9iOxWRgvpNgnswreZvgXwnbaTgy/f91gcUy8uqPp.nKNium', NULL, 1, 1, NULL, '2023-07-13 15:46:22', '2023-07-13 15:46:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,7 +315,7 @@ CREATE TABLE `balances` (
 --
 
 INSERT INTO `balances` (`id`, `date`, `opening_balance`, `closing_balance`, `created_at`, `updated_at`) VALUES
-(1, '2023-09-16', 1000.00, NULL, '2023-09-15 20:26:57', '2023-09-15 20:26:57');
+(1, '2023-09-16', '1000.00', NULL, '2023-09-15 20:26:57', '2023-09-15 20:26:57');
 
 -- --------------------------------------------------------
 
@@ -543,6 +545,33 @@ INSERT INTO `buses` (`id`, `code`, `name`, `driver_id`, `subscription_id`, `depa
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `calenders`
+--
+
+CREATE TABLE `calenders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(191) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `start` datetime DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `calenders`
+--
+
+INSERT INTO `calenders` (`id`, `title`, `user_id`, `start`, `end`, `created_at`, `updated_at`) VALUES
+(1, 'ffgfg', NULL, '2023-09-17 00:00:00', '2023-09-17 00:00:00', '2023-09-17 09:30:22', '2023-09-17 09:30:22'),
+(2, 'ffgfg', NULL, '2023-09-17 00:00:00', '2023-09-17 00:00:00', '2023-09-17 09:31:01', '2023-09-17 09:31:01'),
+(3, 'بيبي', NULL, '2023-09-17 00:00:00', '2023-09-17 00:00:00', '2023-09-17 09:31:12', '2023-09-17 09:31:12'),
+(4, 'dfdf', NULL, '2023-09-17 00:00:00', '2023-09-17 00:00:00', '2023-09-17 09:34:50', '2023-09-17 09:34:50'),
+(5, 'dsds', NULL, '2023-09-17 00:00:00', '2023-09-17 00:00:00', '2023-09-17 09:43:49', '2023-09-17 09:43:49');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cart_management`
 --
 
@@ -636,11 +665,11 @@ CREATE TABLE `certificates` (
 INSERT INTO `certificates` (`id`, `uuid`, `certificate_number`, `image`, `show_number`, `number_x_position`, `number_y_position`, `number_font_size`, `number_font_color`, `title`, `title_x_position`, `title_y_position`, `title_font_size`, `title_font_color`, `show_date`, `date_x_position`, `date_y_position`, `date_font_size`, `date_font_color`, `show_student_name`, `student_name_x_position`, `student_name_y_position`, `student_name_font_size`, `student_name_font_color`, `show_department`, `department_y_position`, `department_id`, `department_x_position`, `department_font_size`, `department_font_color`, `body`, `body_max_length`, `body_x_position`, `body_y_position`, `body_font_size`, `body_font_color`, `role_1_title`, `role_1_signature`, `role_1_x_position`, `role_1_y_position`, `role_1_font_size`, `role_1_font_color`, `role_2_title`, `role_2_x_position`, `role_2_y_position`, `role_2_font_size`, `role_2_font_color`, `path`, `receiving_type`, `receiving_way`, `created_at`, `updated_at`, `student_id`) VALUES
 (2, 'd1213a88-ab10-41c0-b5e0-a6d4c41bab19', '3135274', 'uploads/certificate/1694602288-E7Y2d7lpZq.jpg', 'yes', 0, 20, 20, '#363234', 'First Certificat', 0, 30, 20, '#000000', 'yes', 0, 40, 20, '#363234', 'yes', 0, 30, 20, '#363234', NULL, NULL, NULL, NULL, NULL, NULL, '[Hassan Salah][Course Reading] jdjdjdjd sjdnsjdjs jsdad jdksajd ndjksaldla', 80, 0, 20, 20, '#363234', 'Hassan', 'uploads/certificate/1694602260-Tuex3N7fNT.jpg', 16, 55, 20, '#363234', 'Hasona', 0, 55, 20, '#000000', '/uploads/certificate/certificate-d1213a88-ab10-41c0-b5e0-a6d4c41bab19.pdf', NULL, NULL, '2023-09-13 07:51:00', '2023-09-13 08:13:43', '208'),
 (3, 'b91cdbcc-f596-4af3-aeb0-a0f35c53cb4a', '4419632', 'uploads/certificate/1694607944-CKqSnVYKw5.jpg', 'yes', 0, 631, 526, '#85eeb8', 'Deleniti aut deserun', 0, 50, 27, '#ce0509', 'yes', 0, 8, 17, '#e42a9e', 'yes', 0, 15, 12, '#0107e6', NULL, NULL, NULL, NULL, NULL, NULL, 'Irure ipsa officia', 80, 0, 34, 0, '#a940f9', 'Quo et reiciendis oc', 'uploads/certificate/1694607944-qdSnny8Fjk.jpg', 16, 10, 9, '#342dee', 'Repellendus Est inc', 0, 2, 97, '#6d9d06', NULL, NULL, NULL, '2023-09-13 09:25:44', '2023-09-13 09:25:44', '208'),
-(4, '5b77ed47-6316-4995-8e4e-bbcc1077a7e7', '3410923', 'uploads/certificate/1694608340-46elp50bfa.jpg', 'yes', 0, 631, 526, '#85eeb8', 'Deleniti aut deserun', 0, 50, 27, '#ce0509', 'yes', 0, 8, 17, '#e42a9e', 'yes', 0, 15, 12, '#0107e6', NULL, 80.00, 13, NULL, 6.00, '#419caa', 'Irure ipsa officia', 80, 0, 34, 0, '#a940f9', 'Quo et reiciendis oc', 'uploads/certificate/1694608341-KbdAjdFkiQ.jpg', 16, 10, 9, '#342dee', 'Repellendus Est inc', 0, 2, 97, '#6d9d06', '/uploads/certificate/certificate-5b77ed47-6316-4995-8e4e-bbcc1077a7e7.pdf', NULL, NULL, '2023-09-13 09:32:21', '2023-09-13 09:32:21', '208'),
-(5, 'e3e9310e-9266-4e70-86f1-fab9be2b62b5', '6862629', 'uploads/certificate/1694608607-ywGlxyfaHc.jpg', 'no', 0, 900, 571, '#ac49d9', 'Nam rerum pariatur', 0, 52, 50, '#fc20f9', 'no', 0, 85, 21, '#a7ab9d', 'yes', 0, 92, 100, '#f573d4', NULL, 89.00, 13, NULL, 20.00, '#7218ba', 'Dolor sint consequu', 80, 0, 14, 86, '#90310e', 'Delectus eos rerum', 'uploads/certificate/1694608607-HVtM3cree1.jpg', 16, 94, 30, '#5a384b', 'Non ea pariatur Seq', 0, 57, 70, '#eb9f10', '/uploads/certificate/certificate-e3e9310e-9266-4e70-86f1-fab9be2b62b5.pdf', NULL, NULL, '2023-09-13 09:36:47', '2023-09-13 09:36:47', '7'),
-(6, '98990bec-df34-4134-aaae-ef4f42d3a28b', '6784702', 'uploads/certificate/1694608607-cjalwfCOns.jpg', 'no', 0, 900, 571, '#ac49d9', 'Nam rerum pariatur', 0, 52, 50, '#fc20f9', 'no', 0, 85, 21, '#a7ab9d', 'yes', 0, 92, 100, '#f573d4', NULL, 89.00, 13, NULL, 20.00, '#7218ba', 'Dolor sint consequu', 80, 0, 14, 86, '#90310e', 'Delectus eos rerum', 'uploads/certificate/1694608608-3ZXbsFiDIP.jpg', 16, 94, 30, '#5a384b', 'Non ea pariatur Seq', 0, 57, 70, '#eb9f10', '/uploads/certificate/certificate-98990bec-df34-4134-aaae-ef4f42d3a28b.pdf', NULL, NULL, '2023-09-13 09:36:48', '2023-09-13 09:36:48', '7'),
-(7, '3de51583-abea-4509-8c31-70d62650063d', '6586119', 'uploads/certificate/1694608693-MZXF9T8H1I.jpg', 'no', 0, 20, 20, '#ac49d9', 'Nam rerum pariatur', 0, 30, 20, '#fc20f9', 'yes', 0, 40, 20, '#a7ab9d', 'yes', 0, 30, 20, '#f573d4', NULL, 30.00, 13, NULL, 30.00, '#7218ba', 'Dolor sint consequu', 80, 0, 20, 20, '#90310e', 'Delectus eos rerum', 'uploads/certificate/1694608693-fwD5wVTDaO.jpg', 16, 55, 20, '#5a384b', 'Non ea pariatur Seq', 0, 55, 20, '#eb9f10', '/uploads/certificate/certificate-3de51583-abea-4509-8c31-70d62650063d.pdf', NULL, NULL, '2023-09-13 09:38:13', '2023-09-13 09:38:13', '7'),
-(8, 'da391707-ed37-4954-a798-1a859ce0b49c', '7378498', 'uploads/certificate/1694613608-oAMIDkynSk.png', 'no', 0, 620, 81, '#20e52d', 'Aliquid placeat vel', 0, 91, 55, '#cdee38', 'no', 0, 72, 37, '#1d033d', 'yes', 0, 46, 86, '#042fa9', NULL, 50.00, 12, NULL, 97.00, '#fe84c8', 'Ut similique volupta', 80, 0, 82, 54, '#b914c5', 'Ad sit sunt volupta', 'uploads/certificate/1694613609-GsE0oQ06b0.jpg', 16, 74, 24, '#f4c2d3', 'Enim quo corrupti d', 0, 0, 67, '#a704d9', '/uploads/certificate/certificate-da391707-ed37-4954-a798-1a859ce0b49c.pdf', 'yes', 'hand', '2023-09-13 11:00:09', '2023-09-13 11:00:09', '6');
+(4, '5b77ed47-6316-4995-8e4e-bbcc1077a7e7', '3410923', 'uploads/certificate/1694608340-46elp50bfa.jpg', 'yes', 0, 631, 526, '#85eeb8', 'Deleniti aut deserun', 0, 50, 27, '#ce0509', 'yes', 0, 8, 17, '#e42a9e', 'yes', 0, 15, 12, '#0107e6', NULL, '80.00', 13, NULL, '6.00', '#419caa', 'Irure ipsa officia', 80, 0, 34, 0, '#a940f9', 'Quo et reiciendis oc', 'uploads/certificate/1694608341-KbdAjdFkiQ.jpg', 16, 10, 9, '#342dee', 'Repellendus Est inc', 0, 2, 97, '#6d9d06', '/uploads/certificate/certificate-5b77ed47-6316-4995-8e4e-bbcc1077a7e7.pdf', NULL, NULL, '2023-09-13 09:32:21', '2023-09-13 09:32:21', '208'),
+(5, 'e3e9310e-9266-4e70-86f1-fab9be2b62b5', '6862629', 'uploads/certificate/1694608607-ywGlxyfaHc.jpg', 'no', 0, 900, 571, '#ac49d9', 'Nam rerum pariatur', 0, 52, 50, '#fc20f9', 'no', 0, 85, 21, '#a7ab9d', 'yes', 0, 92, 100, '#f573d4', NULL, '89.00', 13, NULL, '20.00', '#7218ba', 'Dolor sint consequu', 80, 0, 14, 86, '#90310e', 'Delectus eos rerum', 'uploads/certificate/1694608607-HVtM3cree1.jpg', 16, 94, 30, '#5a384b', 'Non ea pariatur Seq', 0, 57, 70, '#eb9f10', '/uploads/certificate/certificate-e3e9310e-9266-4e70-86f1-fab9be2b62b5.pdf', NULL, NULL, '2023-09-13 09:36:47', '2023-09-13 09:36:47', '7'),
+(6, '98990bec-df34-4134-aaae-ef4f42d3a28b', '6784702', 'uploads/certificate/1694608607-cjalwfCOns.jpg', 'no', 0, 900, 571, '#ac49d9', 'Nam rerum pariatur', 0, 52, 50, '#fc20f9', 'no', 0, 85, 21, '#a7ab9d', 'yes', 0, 92, 100, '#f573d4', NULL, '89.00', 13, NULL, '20.00', '#7218ba', 'Dolor sint consequu', 80, 0, 14, 86, '#90310e', 'Delectus eos rerum', 'uploads/certificate/1694608608-3ZXbsFiDIP.jpg', 16, 94, 30, '#5a384b', 'Non ea pariatur Seq', 0, 57, 70, '#eb9f10', '/uploads/certificate/certificate-98990bec-df34-4134-aaae-ef4f42d3a28b.pdf', NULL, NULL, '2023-09-13 09:36:48', '2023-09-13 09:36:48', '7'),
+(7, '3de51583-abea-4509-8c31-70d62650063d', '6586119', 'uploads/certificate/1694608693-MZXF9T8H1I.jpg', 'no', 0, 20, 20, '#ac49d9', 'Nam rerum pariatur', 0, 30, 20, '#fc20f9', 'yes', 0, 40, 20, '#a7ab9d', 'yes', 0, 30, 20, '#f573d4', NULL, '30.00', 13, NULL, '30.00', '#7218ba', 'Dolor sint consequu', 80, 0, 20, 20, '#90310e', 'Delectus eos rerum', 'uploads/certificate/1694608693-fwD5wVTDaO.jpg', 16, 55, 20, '#5a384b', 'Non ea pariatur Seq', 0, 55, 20, '#eb9f10', '/uploads/certificate/certificate-3de51583-abea-4509-8c31-70d62650063d.pdf', NULL, NULL, '2023-09-13 09:38:13', '2023-09-13 09:38:13', '7'),
+(8, 'da391707-ed37-4954-a798-1a859ce0b49c', '7378498', 'uploads/certificate/1694613608-oAMIDkynSk.png', 'no', 0, 620, 81, '#20e52d', 'Aliquid placeat vel', 0, 91, 55, '#cdee38', 'no', 0, 72, 37, '#1d033d', 'yes', 0, 46, 86, '#042fa9', NULL, '50.00', 12, NULL, '97.00', '#fe84c8', 'Ut similique volupta', 80, 0, 82, 54, '#b914c5', 'Ad sit sunt volupta', 'uploads/certificate/1694613609-GsE0oQ06b0.jpg', 16, 74, 24, '#f4c2d3', 'Enim quo corrupti d', 0, 0, 67, '#a704d9', '/uploads/certificate/certificate-da391707-ed37-4954-a798-1a859ce0b49c.pdf', 'yes', 'hand', '2023-09-13 11:00:09', '2023-09-13 11:00:09', '6');
 
 -- --------------------------------------------------------
 
@@ -1115,6 +1144,7 @@ CREATE TABLE `class_room` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `uuid` char(36) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `level_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `course_id` bigint(20) DEFAULT NULL,
   `lesson_id` bigint(20) DEFAULT NULL,
@@ -1141,9 +1171,9 @@ CREATE TABLE `class_room` (
 -- Dumping data for table `class_room`
 --
 
-INSERT INTO `class_room` (`id`, `uuid`, `name`, `status`, `course_id`, `lesson_id`, `department_id`, `title`, `lecture_type`, `file_path`, `url_path`, `file_size`, `file_duration`, `file_duration_second`, `type`, `vimeo_upload_type`, `text`, `image`, `pdf`, `slide_document`, `audio`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'فصل 1', NULL, NULL, NULL, 12, NULL, 2, NULL, NULL, NULL, NULL, NULL, 'uploaded_video', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, NULL, 'فصل 2', NULL, NULL, NULL, 12, NULL, 2, NULL, NULL, NULL, NULL, NULL, 'uploaded_video', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `class_room` (`id`, `uuid`, `name`, `level_id`, `status`, `course_id`, `lesson_id`, `department_id`, `title`, `lecture_type`, `file_path`, `url_path`, `file_size`, `file_duration`, `file_duration_second`, `type`, `vimeo_upload_type`, `text`, `image`, `pdf`, `slide_document`, `audio`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'فصل 1', 1, 1, NULL, NULL, 12, NULL, 2, NULL, NULL, NULL, NULL, NULL, 'uploaded_video', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, NULL, 'فصل 2', 1, 1, NULL, NULL, 12, NULL, 2, NULL, NULL, NULL, NULL, NULL, 'uploaded_video', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1547,7 +1577,7 @@ CREATE TABLE `courses` (
   `category_id` bigint(20) DEFAULT NULL,
   `subcategory_id` bigint(20) DEFAULT NULL,
   `course_language_id` bigint(20) DEFAULT NULL,
-  `difficulty_level_id` bigint(20) DEFAULT NULL,
+  `level_id` bigint(20) DEFAULT NULL,
   `title` varchar(191) DEFAULT NULL,
   `subtitle` text DEFAULT NULL,
   `description` mediumtext DEFAULT NULL,
@@ -1566,22 +1596,23 @@ CREATE TABLE `courses` (
   `code` varchar(250) DEFAULT NULL,
   `subject` varchar(250) DEFAULT NULL,
   `content` varchar(500) DEFAULT NULL,
-  `time` date DEFAULT NULL,
-  `date_from` date DEFAULT NULL,
-  `date_to` date DEFAULT NULL,
+  `time_from` time DEFAULT NULL,
+  `time_to` time DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `students_count` int(11) DEFAULT NULL,
-  `instructor_id` int(11) NOT NULL
+  `instructor_id` int(11) NOT NULL,
+  `day` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `uuid`, `user_id`, `category_id`, `subcategory_id`, `course_language_id`, `difficulty_level_id`, `title`, `subtitle`, `description`, `feature_details`, `price`, `learner_accessibility`, `image`, `intro_video_check`, `video`, `youtube_video_id`, `slug`, `status`, `average_rating`, `created_at`, `updated_at`, `code`, `subject`, `content`, `time`, `date_from`, `date_to`, `students_count`, `instructor_id`) VALUES
-(9, '63b7d279-5bad-4466-90fb-06492b7e0b73', 1, 1, NULL, NULL, NULL, 'In tempor quis bland', NULL, NULL, NULL, 331.00, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0.00, '2023-05-25 15:22:04', '2023-05-25 15:22:04', 'Maiores maxime nulla', NULL, 'Quis libero qui sint', '1990-10-04', '2010-10-06', '2002-07-22', NULL, 6),
-(10, '5e35db80-bd6f-4024-9b6c-57205d4fb35e', 1, 1, NULL, NULL, NULL, 'Velit ut atque cons', NULL, NULL, NULL, 517.00, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0.00, '2023-05-25 15:22:12', '2023-05-25 15:22:12', 'Dolorum et reiciendi', NULL, 'Nulla itaque sit en', '2009-06-04', '2017-05-08', '1975-08-14', NULL, 6),
-(11, '854ea133-c392-4e54-ac53-4eee971cab2a', 6, NULL, NULL, NULL, NULL, 'Id qui maiores est', 'Nesciunt expedita m', 'Repellendus Aut duc', NULL, 0.00, NULL, NULL, NULL, NULL, NULL, 'id-qui-maiores-est', 4, 0.00, '2023-07-09 12:45:02', '2023-07-09 12:45:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(12, 'ffec4473-1d6c-4ce5-b0b9-fd9972dc54e0', 3, 1, NULL, NULL, NULL, 'النون الساكنة', NULL, NULL, NULL, 100.00, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0.00, '2023-07-15 14:46:57', '2023-07-15 14:46:57', NULL, '2', 'أحكام النون الساكنة والتنوين', '2009-01-01', '2023-07-01', '2023-08-01', NULL, 10);
+INSERT INTO `courses` (`id`, `uuid`, `user_id`, `category_id`, `subcategory_id`, `course_language_id`, `level_id`, `title`, `subtitle`, `description`, `feature_details`, `price`, `learner_accessibility`, `image`, `intro_video_check`, `video`, `youtube_video_id`, `slug`, `status`, `average_rating`, `created_at`, `updated_at`, `code`, `subject`, `content`, `time_from`, `time_to`, `date`, `students_count`, `instructor_id`, `day`) VALUES
+(9, '63b7d279-5bad-4466-90fb-06492b7e0b73', 1, 1, NULL, NULL, NULL, 'In tempor quis bland', NULL, NULL, NULL, '331.00', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0.00', '2023-05-25 15:22:04', '2023-05-25 15:22:04', 'Maiores maxime nulla', NULL, 'Quis libero qui sint', '00:00:00', NULL, '2002-07-22', NULL, 6, NULL),
+(10, '5e35db80-bd6f-4024-9b6c-57205d4fb35e', 1, 1, NULL, NULL, NULL, 'Velit ut atque cons', NULL, NULL, NULL, '517.00', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0.00', '2023-05-25 15:22:12', '2023-05-25 15:22:12', 'Dolorum et reiciendi', NULL, 'Nulla itaque sit en', '00:00:00', NULL, '1975-08-14', NULL, 6, NULL),
+(11, '854ea133-c392-4e54-ac53-4eee971cab2a', 6, NULL, NULL, NULL, NULL, 'Id qui maiores est', 'Nesciunt expedita m', 'Repellendus Aut duc', NULL, '0.00', NULL, NULL, NULL, NULL, NULL, 'id-qui-maiores-est', 4, '0.00', '2023-07-09 12:45:02', '2023-07-09 12:45:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(12, 'ffec4473-1d6c-4ce5-b0b9-fd9972dc54e0', 3, 1, NULL, NULL, NULL, 'النون الساكنة', NULL, NULL, NULL, '100.00', NULL, NULL, NULL, NULL, NULL, NULL, 1, '0.00', '2023-07-15 14:46:57', '2023-07-15 14:46:57', NULL, '2', 'أحكام النون الساكنة والتنوين', '00:00:00', NULL, '2023-08-01', NULL, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -1973,22 +2004,23 @@ CREATE TABLE `financial_accounts` (
 --
 
 INSERT INTO `financial_accounts` (`id`, `date`, `trans_no`, `student_id`, `branch_id`, `name`, `description`, `amount`, `transaction_type`, `created_at`, `updated_at`, `user_id`, `last_amount`, `account`, `product_type`, `model_id`, `product_id`) VALUES
-(1, '2023-09-09', 1395, NULL, 1, 'Catherine Reeves', 'دفع الاشتراك', 504.00, 'income', '2023-09-09 17:39:59', '2023-09-09 17:39:59', 1, 0.00, NULL, NULL, NULL, NULL),
-(2, '2023-09-09', 6459, NULL, 2, 'Catherine Reeves', 'دفع الاشتراك', 504.00, 'income', '2023-09-09 17:40:28', '2023-09-09 17:40:28', 1, 504.00, NULL, NULL, NULL, NULL),
-(3, '2023-09-09', 2064, NULL, 3, 'Catherine Reeves', 'دفع الاشتراك', 504.00, 'income', '2023-09-09 17:40:56', '2023-09-09 17:40:56', 1, 504.00, NULL, NULL, NULL, NULL),
-(6, '2023-09-12', 358, NULL, NULL, 'شراء منتجات', 'شراء منتجات', 671648.00, 'expense', NULL, '2023-09-12 07:08:38', 1, 504.00, 'Ralph Larsen', NULL, NULL, '[\"2\",\"2\",\"4\"]'),
-(7, '2023-09-12', 4711, NULL, NULL, 'بيع منتجات', 'بيع منتجات', 551082.00, 'income', NULL, '2023-09-12 10:07:32', 1, 504.00, '6', NULL, NULL, '[\"2\",\"1\",\"1\"]'),
-(8, '2023-09-12', 2007, NULL, NULL, 'بيع منتجات', 'بيع منتجات', 15310.00, 'income', NULL, '2023-09-12 10:07:56', 1, 504.00, '5', NULL, NULL, '[\"2\",\"1\",\"1\"]'),
-(9, '2023-09-12', 9970, NULL, NULL, 'شراء منتجات', 'شراء منتجات', 1000.00, 'expense', NULL, '2023-09-12 10:18:44', 1, 504.00, 'Kylan Morin', NULL, NULL, '[\"1\",\"4\"]'),
-(10, '2023-09-12', 3202, NULL, NULL, 'شراء منتجات', 'شراء منتجات', 5500.00, 'expense', NULL, '2023-09-12 10:20:20', 1, 504.00, 'Odysseus Cotton', NULL, NULL, '[\"4\",\"1\"]'),
-(11, '2023-09-12', 2918, NULL, NULL, 'بيع منتجات', 'بيع منتجات', 200.00, 'income', NULL, '2023-09-12 10:21:08', 1, 504.00, '6', NULL, NULL, '[\"4\"]'),
-(12, '2023-09-16', 2852, NULL, NULL, 'opening_balance', NULL, 1000.00, 'income', '2023-09-15 20:26:57', '2023-09-15 20:26:57', 1, 0.00, NULL, NULL, NULL, NULL),
-(13, '2023-09-16', 9130, NULL, NULL, NULL, NULL, 1000.00, 'income', '2023-09-15 20:27:15', '2023-09-15 20:27:15', 1, 0.00, NULL, NULL, NULL, NULL),
-(14, '2023-09-16', 6177, NULL, NULL, NULL, NULL, 1000.00, 'income', '2023-09-15 20:27:54', '2023-09-15 20:27:54', 1, 0.00, NULL, NULL, NULL, NULL),
-(15, '2023-09-16', 1630, NULL, NULL, NULL, NULL, 1000.00, 'income', '2023-09-15 20:28:06', '2023-09-15 20:28:06', 1, 0.00, NULL, NULL, NULL, NULL),
-(16, '2023-09-16', 6030, NULL, NULL, NULL, NULL, 1000.00, 'income', '2023-09-15 20:28:24', '2023-09-15 20:28:24', 1, 0.00, NULL, NULL, NULL, NULL),
-(17, '2023-09-16', 9372, NULL, NULL, NULL, NULL, 1000.00, 'income', '2023-09-15 20:28:36', '2023-09-15 20:28:36', 1, 0.00, NULL, NULL, NULL, NULL),
-(18, '2023-09-16', 2903, NULL, NULL, NULL, NULL, 1000.00, 'income', '2023-09-15 20:28:58', '2023-09-15 20:28:58', 1, 0.00, NULL, NULL, NULL, NULL);
+(1, '2023-09-09', 1395, NULL, 1, 'Catherine Reeves', 'دفع الاشتراك', '504.00', 'income', '2023-09-09 17:39:59', '2023-09-09 17:39:59', 1, '0.00', NULL, NULL, NULL, NULL),
+(2, '2023-09-09', 6459, NULL, 2, 'Catherine Reeves', 'دفع الاشتراك', '504.00', 'income', '2023-09-09 17:40:28', '2023-09-09 17:40:28', 1, '504.00', NULL, NULL, NULL, NULL),
+(3, '2023-09-09', 2064, NULL, 3, 'Catherine Reeves', 'دفع الاشتراك', '504.00', 'income', '2023-09-09 17:40:56', '2023-09-09 17:40:56', 1, '504.00', NULL, NULL, NULL, NULL),
+(6, '2023-09-12', 358, NULL, NULL, 'شراء منتجات', 'شراء منتجات', '671648.00', 'expense', NULL, '2023-09-12 07:08:38', 1, '504.00', 'Ralph Larsen', NULL, NULL, '[\"2\",\"2\",\"4\"]'),
+(7, '2023-09-12', 4711, NULL, NULL, 'بيع منتجات', 'بيع منتجات', '551082.00', 'income', NULL, '2023-09-12 10:07:32', 1, '504.00', '6', NULL, NULL, '[\"2\",\"1\",\"1\"]'),
+(8, '2023-09-12', 2007, NULL, NULL, 'بيع منتجات', 'بيع منتجات', '15310.00', 'income', NULL, '2023-09-12 10:07:56', 1, '504.00', '5', NULL, NULL, '[\"2\",\"1\",\"1\"]'),
+(9, '2023-09-12', 9970, NULL, NULL, 'شراء منتجات', 'شراء منتجات', '1000.00', 'expense', NULL, '2023-09-12 10:18:44', 1, '504.00', 'Kylan Morin', NULL, NULL, '[\"1\",\"4\"]'),
+(10, '2023-09-12', 3202, NULL, NULL, 'شراء منتجات', 'شراء منتجات', '5500.00', 'expense', NULL, '2023-09-12 10:20:20', 1, '504.00', 'Odysseus Cotton', NULL, NULL, '[\"4\",\"1\"]'),
+(11, '2023-09-12', 2918, NULL, NULL, 'بيع منتجات', 'بيع منتجات', '200.00', 'income', NULL, '2023-09-12 10:21:08', 1, '504.00', '6', NULL, NULL, '[\"4\"]'),
+(12, '2023-09-16', 2852, NULL, NULL, 'opening_balance', NULL, '1000.00', 'income', '2023-09-15 20:26:57', '2023-09-15 20:26:57', 1, '0.00', NULL, NULL, NULL, NULL),
+(13, '2023-09-16', 9130, NULL, NULL, NULL, NULL, '1000.00', 'income', '2023-09-15 20:27:15', '2023-09-15 20:27:15', 1, '0.00', NULL, NULL, NULL, NULL),
+(14, '2023-09-16', 6177, NULL, NULL, NULL, NULL, '1000.00', 'income', '2023-09-15 20:27:54', '2023-09-15 20:27:54', 1, '0.00', NULL, NULL, NULL, NULL),
+(15, '2023-09-16', 1630, NULL, NULL, NULL, NULL, '1000.00', 'income', '2023-09-15 20:28:06', '2023-09-15 20:28:06', 1, '0.00', NULL, NULL, NULL, NULL),
+(16, '2023-09-16', 6030, NULL, NULL, NULL, NULL, '1000.00', 'income', '2023-09-15 20:28:24', '2023-09-15 20:28:24', 1, '0.00', NULL, NULL, NULL, NULL),
+(17, '2023-09-16', 9372, NULL, NULL, NULL, NULL, '1000.00', 'income', '2023-09-15 20:28:36', '2023-09-15 20:28:36', 1, '0.00', NULL, NULL, NULL, NULL),
+(18, '2023-09-16', 2903, NULL, NULL, NULL, NULL, '1000.00', 'income', '2023-09-15 20:28:58', '2023-09-15 20:28:58', 1, '0.00', NULL, NULL, NULL, NULL),
+(19, '2023-09-17', 3433, NULL, NULL, 'شراء منتجات', 'شراء منتجات', '10000.00', 'expense', '2023-09-17 08:52:03', '2023-09-17 08:52:05', 1, '0.00', 'sdsd', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2435,7 +2467,7 @@ CREATE TABLE `invoices` (
 --
 
 INSERT INTO `invoices` (`id`, `student_id`, `amount`, `paid_at`, `note`, `subscription_id`, `classroom`, `created_at`, `updated_at`, `user_id`) VALUES
-(1, 5, 504.00, '2023-09-08 21:00:00', NULL, 1, NULL, '2023-09-09 17:40:56', '2023-09-09 17:40:56', NULL);
+(1, 5, '504.00', '2023-09-08 21:00:00', NULL, 1, NULL, '2023-09-09 17:40:56', '2023-09-09 17:40:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -2490,6 +2522,13 @@ CREATE TABLE `levels` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `levels`
+--
+
+INSERT INTO `levels` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'المستوي الاول', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2764,7 +2803,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (163, '2023_09_15_170139_create_student_subjects_table', 15),
 (164, '2023_09_15_212259_create_student_buses_table', 16),
 (165, '2023_09_15_215923_create_levels_table', 17),
-(166, '2023_09_15_220021_create_student_levels_table', 17);
+(166, '2023_09_15_220021_create_student_levels_table', 17),
+(167, '2023_09_17_115340_create_calenders_table', 18),
+(168, '2023_09_18_081805_create_student_departments_table', 19),
+(169, '2023_09_18_161537_create_student_duties_table', 20);
 
 -- --------------------------------------------------------
 
@@ -2797,7 +2839,8 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\Admin', 1),
 (1, 'App\\Models\\Admin', 2),
-(5, 'App\\Models\\Admin', 3);
+(5, 'App\\Models\\Admin', 3),
+(7, 'App\\Models\\Admin', 4);
 
 -- --------------------------------------------------------
 
@@ -2858,7 +2901,8 @@ INSERT INTO `notifications` (`id`, `uuid`, `sender_id`, `user_id`, `text`, `targ
 (44, 'f94d72e9-b969-41c8-93b9-2af7dd8d5592', 1, 1, 'warning_subscription_text', NULL, 'yes', 1, '2023-09-16 11:39:03', '2023-09-16 14:21:15'),
 (49, '74e37da3-8bca-4ddd-b88b-1e0aa0ac7512', 1, 1, 'subscriped', NULL, 'yes', 1, '2023-09-16 11:49:07', '2023-09-16 14:15:10'),
 (50, 'c103815a-ae31-4cde-9d23-6c571482d408', 1, 1, 'غيااااب', NULL, 'yes', 1, '2023-09-16 11:49:09', '2023-09-16 14:15:24'),
-(51, 'c91e0fee-94c9-45da-9cef-cdd98f55165f', 1, 1, 'subscriped', NULL, 'no', 2, '2023-09-16 14:21:39', '2023-09-16 14:21:39');
+(51, 'c91e0fee-94c9-45da-9cef-cdd98f55165f', 1, 1, 'subscriped', NULL, 'no', 2, '2023-09-16 14:21:39', '2023-09-16 14:21:39'),
+(52, 'bb37ab2f-dd06-4ef3-a20c-ef76ffded50c', 1, 1, 'اهلا بك يا طاالب', NULL, 'no', 2, '2023-09-18 06:50:45', '2023-09-18 06:50:45');
 
 -- --------------------------------------------------------
 
@@ -3018,10 +3062,11 @@ CREATE TABLE `parent_infos` (
 --
 
 INSERT INTO `parent_infos` (`id`, `student_id`, `name`, `profession`, `national_id`, `phone_number`, `whatsapp_number`, `follow_up_person`, `relationship`, `student_pickup_optional`, `parents_marital_status`, `parents_id_card`, `created_at`, `updated_at`, `email`) VALUES
-(1, 5, 'John Doe', 'Engineer', '12345678909', '01234567890', '01234567891', '1', 'father', 0, 'Married', '1234567890123456', '2023-04-03 13:37:53', '2023-04-03 13:37:53', 'peraciruv2@mailinator.com'),
-(4, 5, 'Adele Deleon', 'Quis in facere quos', '957', '+1 (841) 804-1525', '138', '1', 'mother', 1, 'Temporibus dolor off', NULL, '2023-05-17 11:19:49', '2023-05-17 11:19:49', 'peraciruv@mailinator.com'),
-(5, 7, 'هناء محمد', 'موظف حكومي', '87654321235780087', '01012345678', '01012345678', '0', 'mother', 0, 'متزوجين', NULL, '2023-07-15 11:54:16', '2023-07-15 11:54:16', 'hana@gmail.com'),
-(6, 7, 'اشرف ذكي', 'موظف حكومي', '87654321235781087', '01012345678', '01012345678', '1', 'father', 1, 'متزوجين', '1234567890123456', NULL, NULL, 'ashraf@gmail.com');
+(1, 5, 'John Doe', 'Engineer', '12345678909', '01234567890', '01234567891', '1', '1', 0, 'Married', '1234567890123456', '2023-04-03 13:37:53', '2023-04-03 13:37:53', 'peraciruv2@mailinator.com'),
+(4, 5, 'Adele Deleon', 'Quis in facere quos', '957', '+1 (841) 804-1525', '138', '1', '2', 1, 'Temporibus dolor off', NULL, '2023-05-17 11:19:49', '2023-05-17 11:19:49', 'peraciruv@mailinator.com'),
+(6, 227, 'حنان حالد', 'موظف حكومي', '87654321235780084', '01012345678', '01012345678', '1', '1', 1, 'متزوجين', NULL, '2023-07-15 11:54:16', '2023-09-18 10:25:48', 'ashraf@gmail.com'),
+(5, 227, 'اشرف ذكي', 'موظف حكومي', '87654321235780083', '01012345678', '01012345678', '1', '2', 1, '1', '1234567890123456', NULL, NULL, 'ashraf@gmail.com'),
+(8, 226, 'Lance Garrison', 'Dolor adipisicing mo', '812', '+1 (505) 737-4284', '641', '0', '1', 0, '1', NULL, '2023-09-18 07:05:42', '2023-09-18 07:05:42', 'dafici@mailinator.com');
 
 -- --------------------------------------------------------
 
@@ -3149,7 +3194,16 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (78, 'edit-admins', 'admins', '2023-04-03 13:37:53', '2023-04-03 13:37:53'),
 (79, 'delete-admins', 'admins', '2023-04-03 13:37:53', '2023-04-03 13:37:53'),
 (80, 'manage-admins', 'admins', '2023-04-03 13:37:53', '2023-04-03 13:37:53'),
-(81, 'manage_absence', 'admins', NULL, NULL);
+(81, 'manage_absence', 'admins', '2023-09-17 14:49:01', '2023-09-17 14:49:03'),
+(82, 'manage_subject', 'admins', '2023-09-17 14:48:57', '2023-09-17 14:49:04'),
+(83, 'manage_department', 'admins', '2023-09-17 14:48:59', '2023-09-17 14:49:05'),
+(84, 'manage_exam', 'admins', '2023-09-17 14:49:31', '2023-09-17 14:49:29'),
+(85, 'manage_bus', 'admins', '2023-09-17 14:49:59', '2023-09-17 14:50:00'),
+(86, 'manage_report', 'admins', '2023-09-17 14:50:28', '2023-09-17 14:50:29'),
+(87, 'manage_duties', 'admins', '2023-09-17 14:53:29', '2023-09-17 14:53:32'),
+(88, 'manage_followup', 'admins', '2023-09-17 14:53:28', '2023-09-17 14:53:35'),
+(89, 'manage_finance', 'admins', '2023-09-17 14:53:31', '2023-09-17 14:53:36'),
+(90, 'manage_class_room', 'admins', '2023-09-17 16:01:09', '2023-09-17 16:01:10');
 
 -- --------------------------------------------------------
 
@@ -3218,10 +3272,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `uuid`, `sku`, `description`, `name`, `image`, `supplier`, `meta_description`, `unit`, `slug`, `status`, `tags`, `canonical`, `quantity`, `price`, `user_id`, `department_id`, `receiver`, `created_at`, `updated_at`, `parcode`) VALUES
-(1, NULL, 'Eu minim lorem rem l', 'Obcaecati tempora qu', 'Harrison Wooten', NULL, 'Magni eligendi adipi', 'Deserunt eveniet su', 'لتر (لتر)', 'Ad pariatur Ullamco', 1, 'Quasi porro ipsum es', 'Ut accusantium molli', 718, 1.00, 1, NULL, NULL, '2023-09-11 06:18:24', '2023-09-11 06:18:24', NULL),
-(2, NULL, 'Eu minim lorem rem l', 'Obcaecati tempora qu', 'Harrison Wooten', '14', 'Magni eligendi adipi', 'Deserunt eveniet su', 'لتر (لتر)', 'Ad pariatur Ullamco', 1, 'Quasi porro ipsum es', 'Ut accusantium molli', 718, 1.00, 1, NULL, NULL, '2023-09-11 06:20:07', '2023-09-11 06:20:08', NULL),
-(3, NULL, 'Non ea ullamco nulla', 'Incidunt deserunt d', 'Tanya Maxwell', NULL, 'Et ut quo ea dolor r', 'Natus optio delenit', 'عبوة', 'Nulla in necessitati', 1, 'Consequatur placeat', 'Praesentium quo dolo', 475, 2.00, 1, NULL, NULL, '2023-09-11 06:24:14', '2023-09-11 06:24:14', NULL),
-(4, NULL, 'منتج جديد', 'منتج جديد منتج جديد منتج جديد منتج جديد', '2543', '15', 'احمد سيد', 'منتج جديد منتج جديد منتج جديد', 'كيلوجرام (كجم)', 'منتج-جديد', 1, 'منتج جديد', 'منتج جديد', 89, 4.00, 1, 12, 'خالد اشرف', '2023-09-11 06:37:56', '2023-09-11 08:07:28', NULL);
+(1, NULL, 'Eu minim lorem rem l', 'Obcaecati tempora qu', 'Harrison Wooten', NULL, 'Magni eligendi adipi', 'Deserunt eveniet su', 'لتر (لتر)', 'Ad pariatur Ullamco', 1, 'Quasi porro ipsum es', 'Ut accusantium molli', 718, '1.00', 1, NULL, NULL, '2023-09-11 06:18:24', '2023-09-11 06:18:24', NULL),
+(2, NULL, 'Eu minim lorem rem l', 'Obcaecati tempora qu', 'Harrison Wooten', '14', 'Magni eligendi adipi', 'Deserunt eveniet su', 'لتر (لتر)', 'Ad pariatur Ullamco', 1, 'Quasi porro ipsum es', 'Ut accusantium molli', 718, '1.00', 1, NULL, NULL, '2023-09-11 06:20:07', '2023-09-11 06:20:08', NULL),
+(3, NULL, 'Non ea ullamco nulla', 'Incidunt deserunt d', 'Tanya Maxwell', NULL, 'Et ut quo ea dolor r', 'Natus optio delenit', 'عبوة', 'Nulla in necessitati', 1, 'Consequatur placeat', 'Praesentium quo dolo', 475, '2.00', 1, NULL, NULL, '2023-09-11 06:24:14', '2023-09-11 06:24:14', NULL),
+(4, NULL, 'منتج جديد', 'منتج جديد منتج جديد منتج جديد منتج جديد', '2543', '15', 'احمد سيد', 'منتج جديد منتج جديد منتج جديد', 'كيلوجرام (كجم)', 'منتج-جديد', 1, 'منتج جديد', 'منتج جديد', 89, '4.00', 1, 12, 'خالد اشرف', '2023-09-11 06:37:56', '2023-09-11 08:07:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -3363,6 +3417,7 @@ CREATE TABLE `reviews` (
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `role_parent_id` int(11) DEFAULT NULL,
   `name` varchar(191) NOT NULL,
   `guard_name` varchar(191) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -3373,13 +3428,9 @@ CREATE TABLE `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'admins', '2023-04-03 13:37:53', '2023-04-03 13:37:53'),
-(2, 'admin', 'admins', '2023-04-03 13:37:53', '2023-04-03 13:37:53'),
-(3, 'new', 'admins', '2023-05-11 13:24:44', '2023-05-11 13:24:44'),
-(4, 'role1', 'admins', '2023-07-11 17:14:23', '2023-07-11 17:14:23'),
-(5, 'المدير', 'admins', '2023-07-13 15:25:52', '2023-07-13 15:25:52'),
-(6, 'سكرتارية', 'admins', '2023-07-13 15:30:12', '2023-07-13 15:30:12');
+INSERT INTO `roles` (`id`, `role_parent_id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'الادمن الاساسي', 'admins', '2023-04-03 13:37:53', '2023-09-17 12:22:22'),
+(7, 1, 'مجموعة 1', 'admins', '2023-09-17 11:03:30', '2023-09-17 12:22:28');
 
 -- --------------------------------------------------------
 
@@ -3398,205 +3449,98 @@ CREATE TABLE `role_has_permissions` (
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
+(1, 7),
 (2, 1),
-(2, 3),
-(2, 4),
-(2, 5),
-(2, 6),
+(2, 7),
 (3, 1),
-(3, 4),
-(3, 5),
-(3, 6),
+(3, 7),
 (4, 1),
-(4, 5),
-(4, 6),
 (5, 1),
-(5, 3),
-(5, 5),
-(5, 6),
 (6, 1),
-(6, 5),
-(6, 6),
 (7, 1),
-(7, 5),
-(7, 6),
 (8, 1),
-(8, 5),
-(8, 6),
 (9, 1),
-(9, 5),
-(9, 6),
 (10, 1),
-(10, 5),
-(10, 6),
 (11, 1),
-(11, 5),
-(11, 6),
 (12, 1),
-(12, 5),
-(12, 6),
 (13, 1),
-(13, 5),
-(13, 6),
 (14, 1),
-(14, 5),
-(14, 6),
 (15, 1),
-(15, 5),
-(15, 6),
 (16, 1),
-(16, 5),
-(16, 6),
 (17, 1),
-(17, 5),
-(17, 6),
 (18, 1),
-(18, 5),
 (19, 1),
-(19, 5),
 (20, 1),
-(20, 5),
 (21, 1),
-(21, 5),
 (22, 1),
-(22, 5),
 (23, 1),
-(23, 5),
-(23, 6),
 (24, 1),
-(24, 5),
 (25, 1),
-(25, 5),
-(25, 6),
 (26, 1),
-(26, 5),
 (27, 1),
-(27, 5),
 (28, 1),
-(28, 5),
-(28, 6),
 (29, 1),
-(29, 5),
 (30, 1),
-(30, 5),
 (31, 1),
-(31, 5),
 (32, 1),
-(32, 5),
 (33, 1),
-(33, 5),
 (34, 1),
-(34, 5),
 (35, 1),
-(35, 5),
 (36, 1),
-(36, 5),
 (37, 1),
-(37, 5),
 (38, 1),
-(38, 5),
 (39, 1),
-(39, 5),
 (40, 1),
-(40, 5),
-(41, 2),
-(41, 5),
-(42, 2),
-(42, 5),
-(43, 2),
-(43, 5),
-(43, 6),
-(44, 2),
-(44, 5),
-(44, 6),
-(45, 2),
-(45, 5),
-(45, 6),
-(46, 2),
-(46, 5),
-(46, 6),
-(47, 2),
-(47, 5),
-(47, 6),
-(48, 2),
-(48, 5),
-(48, 6),
-(49, 2),
-(49, 5),
-(49, 6),
-(50, 2),
-(50, 5),
-(50, 6),
-(51, 2),
-(51, 5),
-(51, 6),
-(52, 2),
-(52, 5),
-(52, 6),
-(53, 2),
-(53, 5),
-(53, 6),
-(54, 2),
-(54, 5),
-(55, 2),
-(55, 5),
-(56, 2),
-(56, 5),
-(57, 2),
-(57, 5),
-(58, 2),
-(58, 5),
-(59, 2),
-(59, 5),
-(60, 2),
-(60, 5),
-(61, 2),
-(61, 5),
-(62, 2),
-(62, 5),
-(63, 2),
-(63, 5),
-(64, 2),
-(64, 5),
-(65, 2),
-(65, 5),
-(66, 2),
-(66, 5),
-(67, 2),
-(67, 5),
-(68, 2),
-(68, 5),
-(69, 2),
-(69, 5),
-(70, 2),
-(70, 5),
-(71, 2),
-(71, 5),
-(72, 2),
-(72, 5),
-(73, 2),
-(73, 5),
-(74, 2),
-(74, 5),
-(75, 2),
-(75, 5),
-(76, 2),
-(76, 5),
-(77, 2),
-(77, 5),
-(78, 2),
-(78, 5),
-(79, 2),
-(79, 5),
-(80, 2),
-(80, 5),
+(41, 1),
+(42, 1),
+(43, 1),
+(44, 1),
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1),
+(51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(55, 1),
+(56, 1),
+(57, 1),
+(58, 1),
+(59, 1),
+(60, 1),
+(61, 1),
+(62, 1),
+(63, 1),
+(64, 1),
+(65, 1),
+(66, 1),
+(67, 1),
+(68, 1),
+(69, 1),
+(70, 1),
+(71, 1),
+(72, 1),
+(73, 1),
+(74, 1),
+(75, 1),
+(76, 1),
+(77, 1),
+(78, 1),
+(79, 1),
+(80, 1),
 (81, 1),
-(81, 5),
-(81, 6);
+(82, 1),
+(83, 1),
+(84, 1),
+(85, 1),
+(86, 1),
+(87, 1),
+(88, 1),
+(89, 1),
+(90, 1);
 
 -- --------------------------------------------------------
 
@@ -3910,9 +3854,9 @@ CREATE TABLE `stokes` (
 --
 
 INSERT INTO `stokes` (`id`, `product_id`, `price`, `quantity`, `supplier`, `receiver`, `description`, `created_at`, `updated_at`, `remain`, `branch_id`, `creditor`, `student_id`, `store_id`, `total`, `client_name`, `client_code`, `client_type`, `trans_type`) VALUES
-(31, 4, 50.00, 100, 'Odysseus Cotton', 'Lorem necessitatibus', 'Facilis reiciendis q', '2011-06-06 22:00:00', '2023-09-12 10:20:20', NULL, NULL, NULL, NULL, NULL, 5000.00, NULL, NULL, NULL, 'expense'),
-(32, 1, 10.00, 50, 'Odysseus Cotton', 'Lorem necessitatibus', NULL, '2011-06-06 22:00:00', '2023-09-12 10:20:20', NULL, NULL, NULL, NULL, NULL, 500.00, NULL, NULL, NULL, 'expense'),
-(33, 4, 10.00, 80, 'Malik Alvarado', NULL, 'Harum itaque nulla e', '1996-09-02 21:00:00', '2023-09-12 10:21:08', NULL, NULL, NULL, NULL, NULL, 200.00, '6', '6', 'student', 'income');
+(31, 4, '50.00', 100, 'Odysseus Cotton', 'Lorem necessitatibus', 'Facilis reiciendis q', '2011-06-06 22:00:00', '2023-09-12 10:20:20', NULL, NULL, NULL, NULL, NULL, '5000.00', NULL, NULL, NULL, 'expense'),
+(32, 1, '10.00', 50, 'Odysseus Cotton', 'Lorem necessitatibus', NULL, '2011-06-06 22:00:00', '2023-09-12 10:20:20', NULL, NULL, NULL, NULL, NULL, '500.00', NULL, NULL, NULL, 'expense'),
+(33, 4, '10.00', 80, 'Malik Alvarado', NULL, 'Harum itaque nulla e', '1996-09-02 21:00:00', '2023-09-12 10:21:08', NULL, NULL, NULL, NULL, NULL, '200.00', '6', '6', 'student', 'income');
 
 -- --------------------------------------------------------
 
@@ -3957,9 +3901,9 @@ CREATE TABLE `store_transactions` (
 --
 
 INSERT INTO `store_transactions` (`id`, `permission_number`, `movement_type`, `product_id`, `quantity`, `price`, `movement_date`, `supplier`, `receiver`, `balance_after_movement`, `current_balance`, `notes`, `created_at`, `updated_at`) VALUES
-(1, '3043', 'income', '4', 10, 40.00, '2023-09-11 11:02:21', 'احمد سيد', 'حسن حسام', 40.00, 40.00, 'سيسيس', '2023-09-11 08:02:21', '2023-09-11 08:02:21'),
-(2, '55', 'income', '4', 19, 76.00, '2023-09-11 11:05:55', 'احمد سيد', 'حسن حسام', 59.00, 59.00, 'dfdf', '2023-09-11 08:05:55', '2023-09-11 08:05:55'),
-(3, '6904', 'income', '4', 30, 120.00, '2023-09-11 11:07:28', 'احمد سيد', 'حسن حسام', 89.00, 89.00, 'sss', '2023-09-11 08:07:28', '2023-09-11 08:07:28');
+(1, '3043', 'income', '4', 10, '40.00', '2023-09-11 11:02:21', 'احمد سيد', 'حسن حسام', '40.00', '40.00', 'سيسيس', '2023-09-11 08:02:21', '2023-09-11 08:02:21'),
+(2, '55', 'income', '4', 19, '76.00', '2023-09-11 11:05:55', 'احمد سيد', 'حسن حسام', '59.00', '59.00', 'dfdf', '2023-09-11 08:05:55', '2023-09-11 08:05:55'),
+(3, '6904', 'income', '4', 30, '120.00', '2023-09-11 11:07:28', 'احمد سيد', 'حسن حسام', '89.00', '89.00', 'sss', '2023-09-11 08:07:28', '2023-09-11 08:07:28');
 
 -- --------------------------------------------------------
 
@@ -3995,7 +3939,7 @@ CREATE TABLE `students` (
   `email` text NOT NULL,
   `password` text NOT NULL,
   `joining_date` date DEFAULT NULL,
-  `medical_history` date DEFAULT NULL,
+  `medical_history` longtext DEFAULT NULL,
   `id_number` int(11) DEFAULT NULL,
   `derpatment` varchar(250) DEFAULT NULL,
   `guardian_email` varchar(250) DEFAULT NULL,
@@ -4007,22 +3951,23 @@ CREATE TABLE `students` (
   `image` varchar(250) DEFAULT NULL,
   `department_id` varchar(250) DEFAULT NULL,
   `birth_certificate` int(11) DEFAULT NULL,
-  `parents_card_copy` int(11) DEFAULT NULL,
+  `parents_card_copy` varchar(255) DEFAULT NULL,
   `another_file` int(11) DEFAULT NULL,
   `level_id` varchar(250) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
   `wallet` decimal(10,2) DEFAULT NULL,
-  `parents_marital_status` varchar(255) DEFAULT NULL
+  `parents_marital_status` varchar(255) DEFAULT NULL,
+  `notes` longtext DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `code`, `gender`, `birthdate`, `city_id`, `user_id`, `phone_number`, `address`, `about_me`, `status`, `branch_id`, `period`, `guardian_relationship`, `guardian_name`, `guardian_phone_number`, `guardian_whatsapp_number`, `bus`, `how_did_you_hear_about_us`, `personal_photo`, `blood_type`, `parent_id`, `created_at`, `updated_at`, `email`, `password`, `joining_date`, `medical_history`, `id_number`, `derpatment`, `guardian_email`, `profession`, `receiving_officer`, `followup_officer`, `appointment`, `class_room_id`, `image`, `department_id`, `birth_certificate`, `parents_card_copy`, `another_file`, `level_id`, `subject_id`, `wallet`, `parents_marital_status`) VALUES
-(5, 'Catherine Reeves', '11111111111', 1, '1974-08-03', '173', NULL, '+1 (842) 632-6725', 'Consectetur aut har', NULL, 1, 1, 1, NULL, NULL, NULL, NULL, 1, 'Duis odio veniam er', NULL, 'Voluptate exercitati', NULL, '2023-05-17 11:19:27', '2023-09-09 17:29:52', 'hassanstudent2@daranwar.com', '$2y$10$WtfGDRRiUVt6RF63TDVpMO5HnTkIWTtKdDy.fW2I6nqURgrSTBgvm', '2013-11-14', '1972-07-24', NULL, '14', NULL, NULL, NULL, NULL, '2020-02-05', '1', '10', '12', NULL, NULL, NULL, NULL, 2, -504.00, 'متزوجين'),
-(6, 'Palmer Roberts', 'Temporibus labore il', 2, '1998-01-01', '210', NULL, '+1 (994) 739-7801', 'Exercitationem sed n', NULL, 1, 1, 3, NULL, NULL, NULL, NULL, 1, 'Deleniti qui quis de', NULL, 'Omnis tenetur vero n', NULL, '2023-05-17 11:19:49', '2023-05-17 15:48:10', 'hassanstudent@daranwar.com', '$2y$10$bLck7TCSQ8zYj7bLsHIwvO3VWJNiK9xe9RS34lbhmI5iRswmYjozm', '1992-07-15', '1996-08-09', NULL, '12', NULL, NULL, NULL, NULL, '2007-12-12', '1', '4', '14', NULL, NULL, NULL, NULL, 3, NULL, 'متزوجين'),
-(7, 'آدم حسام عتمان', '2861', 1, '2018-01-01', '139', NULL, '01012345678', 'دماص', NULL, 1, 1, 1, NULL, NULL, NULL, NULL, 0, 'من الأصدقاء', NULL, 'b', NULL, '2023-07-15 11:54:16', '2023-07-15 11:54:16', 'adam@gmail.com', '$2y$10$2aBAY8u8fXbmabf9/tv6T.Bq1DyxzXfkf3TSe4yo6kOkuy5Yb47Le', '2020-11-01', '2018-01-01', NULL, '13', NULL, NULL, NULL, NULL, '2018-11-11', '1', NULL, '13', NULL, NULL, NULL, NULL, 2, NULL, 'متزوجين');
+INSERT INTO `students` (`id`, `name`, `code`, `gender`, `birthdate`, `city_id`, `user_id`, `phone_number`, `address`, `about_me`, `status`, `branch_id`, `period`, `guardian_relationship`, `guardian_name`, `guardian_phone_number`, `guardian_whatsapp_number`, `bus`, `how_did_you_hear_about_us`, `personal_photo`, `blood_type`, `parent_id`, `created_at`, `updated_at`, `email`, `password`, `joining_date`, `medical_history`, `id_number`, `derpatment`, `guardian_email`, `profession`, `receiving_officer`, `followup_officer`, `appointment`, `class_room_id`, `image`, `department_id`, `birth_certificate`, `parents_card_copy`, `another_file`, `level_id`, `subject_id`, `wallet`, `parents_marital_status`, `notes`) VALUES
+(5, 'Catherine Reeves', '11111111111', 1, '1974-08-03', '173', NULL, '+1 (842) 632-6725', 'Consectetur aut har', NULL, 0, 1, 1, NULL, NULL, NULL, NULL, 1, 'Duis odio veniam er', NULL, 'Voluptate exercitati', NULL, '2023-05-17 11:19:27', '2023-09-09 17:29:52', 'hassanstudent2@daranwar.com', '$2y$10$WtfGDRRiUVt6RF63TDVpMO5HnTkIWTtKdDy.fW2I6nqURgrSTBgvm', '2013-11-14', '1972-07-24', NULL, '14', NULL, NULL, NULL, NULL, '2020-02-05', '1', '10', '12', NULL, NULL, NULL, NULL, 2, '-504.00', '1', NULL),
+(7, 'آدم حسام عتمان', '2861', 1, '2018-01-01', '139', NULL, '01012345678', 'دماص', NULL, 3, 1, 1, NULL, NULL, NULL, NULL, 0, 'من الأصدقاء', NULL, 'b', NULL, '2023-07-15 11:54:16', '2023-07-15 11:54:16', 'adam@gmail.com', '$2y$10$2aBAY8u8fXbmabf9/tv6T.Bq1DyxzXfkf3TSe4yo6kOkuy5Yb47Le', '2020-11-01', '2018-01-01', NULL, '13', NULL, NULL, NULL, NULL, '2018-11-11', '1', NULL, '13', NULL, NULL, NULL, NULL, 2, NULL, '1', NULL),
+(227, 'حسن صلاح الدين حسن محجوب', '202320227', 1, '2000-05-12', '1', NULL, NULL, '2 ش انطون سانت', NULL, 1, 2, 1, NULL, NULL, NULL, NULL, 0, 'لينكد ان', NULL, 'O', NULL, '2023-09-18 07:55:07', '2023-09-18 13:02:02', 'Aboali@gmail.com', '$2y$10$bp5PFh6CkAO18o73n2ig4uk60KIGnqmtBdF3D3GlJBg8jnER6O9RG', '2023-09-18', 'تاريخ مرضيي', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '30', NULL, 25, '[27,28]', 29, NULL, NULL, NULL, '2', NULL);
 
 -- --------------------------------------------------------
 
@@ -4071,6 +4016,49 @@ CREATE TABLE `student_courses` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student_departments`
+--
+
+CREATE TABLE `student_departments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_departments`
+--
+
+INSERT INTO `student_departments` (`id`, `student_id`, `department_id`, `created_at`, `updated_at`) VALUES
+(1, 223, 12, NULL, NULL),
+(2, 223, 14, NULL, NULL),
+(3, 224, 12, NULL, NULL),
+(4, 224, 14, NULL, NULL),
+(5, 225, 14, NULL, NULL),
+(6, 226, 12, NULL, NULL),
+(7, 226, 13, NULL, NULL),
+(8, 227, 12, NULL, NULL),
+(9, 227, 13, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_duties`
+--
+
+CREATE TABLE `student_duties` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `assignment_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student_levels`
 --
 
@@ -4081,6 +4069,13 @@ CREATE TABLE `student_levels` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_levels`
+--
+
+INSERT INTO `student_levels` (`id`, `student_id`, `level_id`, `created_at`, `updated_at`) VALUES
+(1, 227, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4128,7 +4123,7 @@ CREATE TABLE `student_subscription` (
 --
 
 INSERT INTO `student_subscription` (`id`, `student_id`, `subscription_id`, `rec_time`, `payment_status`, `active_days`, `created_at`, `updated_at`) VALUES
-(1, 6, 1, NULL, 'unpaid', 12, '2023-09-09 17:09:07', '2023-09-09 17:40:56');
+(1, 6, 1, 1, 'paid', 12, '2023-09-09 17:09:07', '2023-09-09 17:40:56');
 
 -- --------------------------------------------------------
 
@@ -4435,7 +4430,22 @@ INSERT INTO `uploads` (`id`, `file_original_name`, `file_name`, `user_id`, `file
 (12, 'Screenshot from 2023-07-10 00-13-04', 'uploads/all/EaU46FnMICpKZP7CuFfUPErWQwr9Vby7YJKfyLcg.png', 18, 116952, 'png', 'image', '2023-07-11 17:19:34', '2023-07-11 17:19:34', NULL),
 (13, '1', 'uploads/all/YGpN5TTmnwcASdBt3uqcg7ORoftzm3rT3kzJhH23.jpg', 19, 179041, 'jpg', 'image', '2023-07-13 16:20:22', '2023-07-13 16:20:22', NULL),
 (14, 'coffee-slider-_4', 'uploads/products/kL4ccDfAkYrL6FDENRij7JguOw9slS5QB0Y9Vuwk.jpg', 2, 548551, 'jpg', 'image', '2023-09-11 06:20:08', '2023-09-11 06:20:08', NULL),
-(15, 'air-conditioner-slider_d46e949f-d786-4780-89e5-5e0989ca66a0', 'uploads/products/oMtHZZvVuxGuEPfejMg9S9u5UjVPwrho6PDCNR8S.jpg', 4, 763040, 'jpg', 'image', '2023-09-11 06:37:56', '2023-09-11 06:37:56', NULL);
+(15, 'air-conditioner-slider_d46e949f-d786-4780-89e5-5e0989ca66a0', 'uploads/products/oMtHZZvVuxGuEPfejMg9S9u5UjVPwrho6PDCNR8S.jpg', 4, 763040, 'jpg', 'image', '2023-09-11 06:37:56', '2023-09-11 06:37:56', NULL),
+(16, 'koolen 04', 'uploads/all/CHZd0C8b9c232zdzHVqd0RVl8hanvP4cU7LFqf8o.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:17:09', '2023-09-18 10:17:09', NULL),
+(17, 'koolen 04', 'uploads/all/cvr1k5q9Y5xI7mCjkkdoQ0qZj0D7qIa1zo9UrYHl.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:18:19', '2023-09-18 10:18:19', NULL),
+(18, 'koolen 04', 'uploads/all/FO8YCm8k64xr1tGxni2m2kLLzTCbcQko0ETgzuEg.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:18:27', '2023-09-18 10:18:27', NULL),
+(19, 'koolen 04', 'uploads/all/4AqDJZPiwUy8R0pdd1l1YF4pPCsNsZUCtDABvuzO.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:21:05', '2023-09-18 10:21:05', NULL),
+(20, 'koolen 04', 'uploads/all/IeFwTNAtT9o5l3Y6OypknuYfNZqeIjpuRFAkky5q.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:21:29', '2023-09-18 10:21:29', NULL),
+(21, 'koolen 04', 'uploads/all/hDvsvpZkexkUdxvLncS3eKUshKV96nRxGN5dRRLc.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:24:07', '2023-09-18 10:24:07', NULL),
+(22, 'koolen 04', 'uploads/all/QF2nxxA5kTli4qYorUZlq6uWuRDmJmRlPkF6moDb.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:24:41', '2023-09-18 10:24:41', NULL),
+(23, 'koolen 04', 'uploads/all/a3gf3XwQw6aiPzmtR3Megxou8G9rzw6uZGhH05FP.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:25:36', '2023-09-18 10:25:36', NULL),
+(24, 'koolen 04', 'uploads/all/wyzkUChoJoi2lvG3UAzGkQj5icmqRJDZJSaP1o9v.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:25:48', '2023-09-18 10:25:48', NULL),
+(25, 'koolen 04', 'uploads/all/u5qZhD8W1JWAlBsyI4H9mKrFUhHq1zV3A8xNuwb9.jpg', 227, 613805, 'jpg', 'image', '2023-09-18 10:26:21', '2023-09-18 10:26:21', NULL),
+(26, 'koolen 03', 'uploads/all/wVgLhig15gz0KD724aEVvc8l9IsSA9vtFJ9rUh22.jpg', 227, 537307, 'jpg', 'image', '2023-09-18 12:10:41', '2023-09-18 12:10:41', NULL),
+(27, 'koolen 03', 'uploads/all/1BHuZrBihG3ZiZ3NmwejGdc6qiS4Z0xwPqUxsg3O.jpg', 227, 537307, 'jpg', 'image', '2023-09-18 12:11:17', '2023-09-18 12:11:17', NULL),
+(28, 'koolen 02', 'uploads/all/0IZuMRomY5AbxS1ivH3r8lfEKukZwTpvzp4sHAuV.jpg', 227, 584395, 'jpg', 'image', '2023-09-18 12:11:17', '2023-09-18 12:11:17', NULL),
+(29, 'koolen 02', 'uploads/all/72WFpLfcedTkauU2Wi94qyGkRAxmBxuM23yD2SPv.jpg', 227, 584395, 'jpg', 'image', '2023-09-18 12:21:36', '2023-09-18 12:21:36', NULL),
+(30, 'koolen 03', 'uploads/all/emDMM4X97rJh9A8dFhxG6XFvXxAzlMPpA1v0Yk8Z.jpg', 227, 537307, 'jpg', 'image', '2023-09-18 12:49:11', '2023-09-18 12:49:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -4705,6 +4715,12 @@ ALTER TABLE `bundle_courses`
 -- Indexes for table `buses`
 --
 ALTER TABLE `buses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `calenders`
+--
+ALTER TABLE `calenders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -5320,6 +5336,18 @@ ALTER TABLE `student_courses`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student_departments`
+--
+ALTER TABLE `student_departments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_duties`
+--
+ALTER TABLE `student_duties`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student_levels`
 --
 ALTER TABLE `student_levels`
@@ -5597,6 +5625,12 @@ ALTER TABLE `buses`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `calenders`
+--
+ALTER TABLE `calenders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `cart_management`
 --
 ALTER TABLE `cart_management`
@@ -5630,7 +5664,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `class_room`
 --
 ALTER TABLE `class_room`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `client_logos`
@@ -5786,7 +5820,7 @@ ALTER TABLE `faq_questions`
 -- AUTO_INCREMENT for table `financial_accounts`
 --
 ALTER TABLE `financial_accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `followups`
@@ -5918,7 +5952,7 @@ ALTER TABLE `learn_key_points`
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `live_classes`
@@ -5942,7 +5976,7 @@ ALTER TABLE `metas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT for table `notice_boards`
@@ -5954,7 +5988,7 @@ ALTER TABLE `notice_boards`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -5990,7 +6024,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `parent_infos`
 --
 ALTER TABLE `parent_infos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -6002,7 +6036,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -6062,7 +6096,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -6116,7 +6150,7 @@ ALTER TABLE `store_transactions`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT for table `student_buses`
@@ -6137,10 +6171,22 @@ ALTER TABLE `student_courses`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `student_departments`
+--
+ALTER TABLE `student_departments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `student_duties`
+--
+ALTER TABLE `student_duties`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `student_levels`
 --
 ALTER TABLE `student_levels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student_subjects`
@@ -6230,7 +6276,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`

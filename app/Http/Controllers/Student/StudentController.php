@@ -8,9 +8,11 @@ use App\Http\Requests\Student\StudentStoreRequest;
 use App\Models\Branch;
 use App\Models\City;
 use App\Models\ClassRoom;
+use App\Models\Course;
 use App\Models\Department;
 use App\Models\Governorate;
 use App\Models\Instructor;
+use App\Models\Level;
 use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\ParentInfo;
@@ -69,36 +71,79 @@ class StudentController extends Controller
         return view('admin.student.list', $data, compact('students'));
     }
 
+    public function getClasses($id){
+
+        $data['class_rooms'] = ClassRoom::where('status',1)
+                                ->where('level_id',$id)->get();
+        return $data['class_rooms'];
+    }
+
     public function create()
     {
 
         $data['title'] = 'Add Student';
         $data['depts'] = Department::where('status',1)->get();
+        $data['class_rooms'] = ClassRoom::where('status',1)->get();
+        $data['levels'] = Level::where('status',1)->get();
         $branches = Branch::all();
+        $data['appointments'] = Course::whereStatus(1)->get();
         $cities = City::all();
         return view('admin.student.add', $data,compact(['cities','branches']));
     }
 
-    public function store(Request $request)
+    public function view($id)
     {
-       // Carbon::now()
-       // $request->branch_id
-        //count
-        $data = $request->all();
-        $year = Carbon::now()->year;
-        $branch = $request->branch_id;
+        $data['student'] = $this->studentModel->getFirstBy('id', $id);
+        $data['title'] = $data['student']->name . ' Details';
 
-        $lastSequential = Student::orderBy('id','DESC')->first()->id;
+        $allUserOrder = Order::where('user_id', $data['student']->user_id);
+        $paidOrderIds = $allUserOrder->where('payment_status', 'paid')->pluck('id')->toArray();
 
-        $sequential = $lastSequential + 1;
+        $allUserOrder = Order::where('user_id', $data['student']->user_id);
+        $freeOrderIds = $allUserOrder->where('payment_status', 'free')->pluck('id')->toArray();
 
-        $sequentialCode = sprintf("%04d", $sequential);
+        $orderIds = array_merge($paidOrderIds, $freeOrderIds);
 
-        $code =  $year . $branch . $sequentialCode;
+        $data['orderItems'] = Order_item::whereIn('order_id', $orderIds)->latest()->paginate(15);
+
+        return view('admin.student.view', $data);
+    }
+
+    public function edit($id)
+    {
+
+
+        $student= $this->studentModel->getFirstBy('id', $id);
+        $parent = $student->parent;
+        $title  = 'Edit ' . $student->first()->name;
+        $branches= Branch::all();
+        $data['depts'] = Department::where('status',1)->get();
+        $user = User::find($data['student']->user_id??0);
+        $data['class_rooms'] = ClassRoom::where('status',1)->get();
+        $data['levels'] = Level::where('status',1)->get();
+        $branches = Branch::all();
+        $data['appointments'] = Course::whereStatus(1)->get();
+        $cities = City::all();
+        return view('admin.student.edit', $data,
+            compact('branches', 'student','user','cities','title','parent'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $photos = [];
+
+        $guardianRelationships = $request->guardian_relationship;
+
+        $uniqueValues = array_unique($request->guardian_relationship);
+
+        if(count($guardianRelationships) !== count($uniqueValues))
+            return redirect()->back()->with('error','خانة الصلة مكررة');
+
+        $student = Student::find($id);
+
         $student_data = [
             'user_id' => $user->id??null,
             'name' => $request->name, // updated from $request->first_name
-            'code' =>  $code, // updated from $request->first_name
             'email' => $request->email, // updated from $request->first_name
             'address' => $request->address,
             'phone_number' => $request->phone_number,
@@ -114,13 +159,202 @@ class StudentController extends Controller
             'how_did_you_hear_about_us' => $request->how_did_you_hear_about_us, // newly added
             'joining_date' => $request->joining_date, // newly added
             'medical_history' => $request->medical_history, // newly added
-            'derpatment' => $request->derpatment, // newly added
-            'appointment' => $request->appointment, // newly added
-            'classroom' => $request->classroom, // newly added
+            'class_room_id' => $request->classroom, // newly added
             'password' =>  Hash::make($request->password), // newly added
+            'parents_marital_status' => $request->parents_social_status, // newly added
+            'notes' => $request->notes, // newly added
         ];
 
-        $student = $this->studentModel->store($student_data);
+        if($request->password != null)
+        {
+            $student_data['password'] = Hash::make($request->password);
+
+        }
+
+        $student->update($student_data);
+
+        $student->dept()->sync($request->department);
+
+        $student->courses()->sync($request->appointment);
+
+        $student->level()->sync($request->level_id);
+
+        if ($request->hasFile('image')) {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('image')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('image')->store('uploads/all','public');
+
+            $upload->user_id = $student->id;
+            $upload->extension = $request->file('image')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('image')->getSize();
+            $upload->save();
+
+            $student->update([
+                'image' => $upload->id,
+            ]);
+        }
+
+        if ($request->hasFile('parents_card_copy')) {
+            foreach ($request->parents_card_copy as $parents_card_copy)
+            {
+                $upload = new Upload;
+                $upload->file_original_name = null;
+                $arr = explode('.', $parents_card_copy->getClientOriginalName());
+
+
+                for($i=0; $i < count($arr)-1; $i++){
+                    if($i == 0){
+                        $upload->file_original_name .= $arr[$i];
+                    }
+                    else{
+                        $upload->file_original_name .= ".".$arr[$i];
+                    }
+                }
+                $upload->file_name = $parents_card_copy->store('uploads/all','public');
+
+                $upload->user_id = $student->id;
+                $upload->extension = $parents_card_copy->getClientOriginalExtension();
+                $upload->type = 'image';
+                $upload->file_size = $parents_card_copy->getSize();
+                $upload->save();
+
+                array_push($photos,$upload->id);
+
+                $student->update([
+                    'parents_card_copy' => $photos,
+                ]);
+            }
+
+        }
+
+        if ($request->hasFile('birth_certificate')) {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('birth_certificate')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('birth_certificate')->store('uploads/all','public');
+
+            $upload->user_id = $student->id;
+            $upload->extension = $request->file('birth_certificate')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('birth_certificate')->getSize();
+            $upload->save();
+
+            $student->update([
+                'birth_certificate' => $upload->id,
+            ]);
+        }
+
+        if ($request->hasFile('another_file')) {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('another_file')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('another_file')->store('uploads/all','public');
+
+            $upload->user_id = $student->id;
+            $upload->extension = $request->file('another_file')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('another_file')->getSize();
+            $upload->save();
+
+            $student->update([
+                'another_file' => $upload->id,
+            ]);
+        }
+
+        foreach ($student->parent as $key => $parent){
+            $parent->update([
+                'student_id' => $student->id,
+                'name' => $request->guardian_name[$key],
+                'profession' => $request->profession[$key],
+                'relationship' => $request->guardian_relationship[$key],
+                'phone_number' => $request->guardian_phone_number[$key], // newly added
+                'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
+                'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
+                'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
+                'email' => $request->guardian_email[$key], // newly added
+                'national_id' => $request->id_number[$key], // newly added
+            ]);
+        }
+
+        return redirect()->route('student.index')
+            ->with('success', __('تم تحديث بيانات الطالب'));
+    }
+
+
+    public function store(Request $request)
+    {
+        $guardianRelationships = $request->guardian_relationship;
+
+        $uniqueValues = array_unique($request->guardian_relationship);
+
+        if(count($guardianRelationships) !== count($uniqueValues))
+            return redirect()->back()->with('error','خانة صلة القرابة مكررة');
+
+        $code = $this->create_code($request);
+
+        $student_data = [
+            'user_id' => $user->id??null,
+            'name' => $request->name, // updated from $request->first_name
+            'email' => $request->email, // updated from $request->first_name
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'gender' => $request->gender,
+            'about_me' => $request->about_me,
+            'birthdate' => $request->birthdate,
+            'status' => $request->status,
+            'city_id' => $request->city_id, // newly added
+            'branch_id' => $request->branch_id, // newly added
+            'period' => $request->period, // newly added
+            'bus' => $request->bus, // newly added
+            'blood_type' => $request->blood_type, // newly added
+            'how_did_you_hear_about_us' => $request->how_did_you_hear_about_us, // newly added
+            'joining_date' => $request->joining_date, // newly added
+            'medical_history' => $request->medical_history, // newly added
+            'class_room_id' => $request->classroom, // newly added
+            'password' =>  Hash::make($request->password), // newly added
+            'parents_marital_status' => $request->parents_social_status, // newly added
+            'notes' => $request->notes, // newly added
+        ];
+
+        $student = Student::create($student_data);
+
+        $student->dept()->sync($request->department);
+
+        $student->courses()->sync($request->appointment);
+
+        $student->level()->sync($request->level_id);
 
         if ($request->hasFile('image')) {
             $upload = new Upload;
@@ -230,139 +464,24 @@ class StudentController extends Controller
             ]);
         }
 
-        ParentInfo::create([
-            'student_id' => $student->id,
-            'name' => $request->guardian_name,
-            'profession' => $request->profession,
-            'relationship' => $request->guardian_relationship,
-            'phone_number' => $request->guardian_phone_number, // newly added
-            'whatsapp_number' => $request->guardian_whatsapp_number, // newly added
-            'student_pickup_optional' => $request->receiving_officer == 'on'? 1:0, // newly added
-            'follow_up_person' => $request->followup_officer == 'on'? 1:0, // newly added
-            'email' => $request->guardian_email, // newly added
-            'national_id' => $request->id_number, // newly added
-            'parents_marital_status' => $request->parents_social_status, // newly added
-        ]);
-
-
-        return redirect()->route('student.index')->with('success', 'Student created successfully!');
-    }
-
-    public function view($id)
-    {
-        $data['student'] = $this->studentModel->getFirstBy('id', $id);
-        $data['title'] = $data['student']->name . ' Details';
-
-        $allUserOrder = Order::where('user_id', $data['student']->user_id);
-        $paidOrderIds = $allUserOrder->where('payment_status', 'paid')->pluck('id')->toArray();
-
-        $allUserOrder = Order::where('user_id', $data['student']->user_id);
-        $freeOrderIds = $allUserOrder->where('payment_status', 'free')->pluck('id')->toArray();
-
-        $orderIds = array_merge($paidOrderIds, $freeOrderIds);
-
-        $data['orderItems'] = Order_item::whereIn('order_id', $orderIds)->latest()->paginate(15);
-
-        return view('admin.student.view', $data);
-    }
-
-    public function edit($id)
-    {
-
-
-        $student= $this->studentModel->getFirstBy('id', $id);
-        $parent = $student->parent;
-        $title  = 'Edit ' . $student->first()->name;
-        $branches= Branch::all();
-        $user = User::find($data['student']->user_id??0);
-
-        $cities = City::all();
-        return view('admin.student.edit',
-            compact('branches', 'student','user','cities','title','parent'));
-    }
-
-
-    public function update(StudentEditRequest $request, $id)
-    {
-        $student = $this->studentModel->getRecordByid($id);
-
-
-        $student_data = [
-            'user_id' => $user->id??null,
-            'name' => $request->name, // updated from $request->first_name
-            'code' => $request->code, // updated from $request->first_name
-            'email' => $request->email, // updated from $request->first_name
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
-            'gender' => $request->gender,
-            'about_me' => $request->about_me,
-            'birthdate' => $request->birthdate,
-            'status' => $request->status,
-            'city_id' => $request->city_id, // newly added
-            'branch_id' => $request->branch_id, // newly added
-            'period' => $request->period, // newly added
-            'bus' => $request->bus, // newly added
-            'blood_type' => $request->blood_type, // newly added
-            'how_did_you_hear_about_us' => $request->how_did_you_hear_about_us, // newly added
-            'joining_date' => $request->joining_date, // newly added
-            'medical_history' => $request->medical_history, // newly added
-            'derpatment' => $request->derpatment, // newly added
-            'appointment' => $request->appointment, // newly added
-            'classroom' => $request->classroom, // newly added
-
-        ];
-
-        if($request->password != null)
+        foreach($request->guardian_relationship as $key => $guardian)
         {
-            $student_data['password'] = Hash::make($request->password);
+            ParentInfo::create([
+                'student_id' => $student->id,
+                'name' => $request->guardian_name[$key],
+                'profession' => $request->profession[$key],
+                'relationship' => $request->guardian_relationship[$key],
+                'phone_number' => $request->guardian_phone_number[$key], // newly added
+                'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
+                'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
+                'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
+                'email' => $request->guardian_email[$key], // newly added
+                'national_id' => $request->id_number[$key], // newly added
 
-        }
-
-        $this->studentModel->updateByid($student_data, $id);
-
-        if ($request->hasFile('image')) {
-            $upload = new Upload;
-            $upload->file_original_name = null;
-            $arr = explode('.', $request->file('image')->getClientOriginalName());
-
-            for($i=0; $i < count($arr)-1; $i++){
-                if($i == 0){
-                    $upload->file_original_name .= $arr[$i];
-                }
-                else{
-                    $upload->file_original_name .= ".".$arr[$i];
-                }
-            }
-
-            $upload->file_name = $request->file('image')->store('uploads/all','public');
-
-            $upload->user_id = $student->id;
-            $upload->extension = $request->file('image')->getClientOriginalExtension();
-            $upload->type = 'image';
-            $upload->file_size = $request->file('image')->getSize();
-            $upload->save();
-
-            $student->update([
-                'image' => $upload->id,
             ]);
         }
-
-        $student->parent->update([
-            'student_id' => $student->id,
-            'name' => $request->guardian_name,
-            'profession' => $request->profession,
-            'relationship' => $request->guardian_relationship,
-            'phone_number' => $request->guardian_phone_number, // newly added
-            'whatsapp_number' => $request->guardian_whatsapp_number, // newly added
-            'student_pickup_optional' => $request->receiving_officer == 'on'? 1:0, // newly added
-            'follow_up_person' => $request->followup_officer == 'on'? 1:0, // newly added
-            'email' => $request->guardian_email, // newly added
-            'national_id' => $request->id_number, // newly added
-            'parents_marital_status' => $request->parents_social_status, // newly added
-        ]);
-
-        $this->showToastrMessage('success', __('Updated Successfully'));
-        return redirect()->route('student.index');
+        return redirect()->route('student.index')
+            ->with('success', 'تم اضافة بيانات الطالب');
     }
 
     public function delete($id)
@@ -385,7 +504,29 @@ class StudentController extends Controller
         ]);
     }
 
+    protected function create_code($request)
+    {
 
+        $year = Carbon::now()->year;
+        $branch = $request->branch_id;
 
+        $lastSequential = Student::orderBy('id','DESC')->first()->id;
 
+        $sequential = $lastSequential + 1;
+
+        $sequentialCode = sprintf("%04d", $sequential);
+
+        return $year . $branch . $sequentialCode;
+    }
+
+    public function change_status(Request $request, $id)
+    {
+        $student = Student::find($id);
+        if($student->status == 2)
+            $student->update(['status' => 1]);
+        else
+            $student->update(['status' => $request->status]);
+
+        return 'success';
+    }
 }

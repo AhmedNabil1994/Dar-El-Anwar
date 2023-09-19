@@ -126,8 +126,8 @@
                                         <td>{{ $student->branch->name }}</td>
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->birthdate }}</td>
-                                        <td>{{ $student->level }}</td>
-                                        <td>{{ $student->classroom }}</td>
+                                        <td>{{ $student->level->first()?->name }}</td>
+                                        <td>{{ $student->class_room?->name }}</td>
                                         <td>
                                             @if($student->period === 1)
                                                 {{ __('Morning') }}
@@ -137,7 +137,7 @@
                                                 {{ __('Both') }}
                                             @endif
                                         </td>
-                                        <td>{{ $student->phone_number }}</td>
+                                        <td>{{ $student->father()?->phone_number }}</td>
                                         <td>{{ $student->gender === 1 ? trans('website.male') : trans('website.female') }}</td>
 
                                         <td>
@@ -158,32 +158,32 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#">
+                                            <a href="#" class="archeived" data-id="{{$student->id}}">
                                                 <img style="width:50px" src="{{asset('admin/images/students/archived.png')}}" alt="edit">
                                             </a>
                                         </td>
                                         <td>
                                             <a href="#">
-                                                <img style="width:50px" src="{{asset('admin/images/students/under-enrollment.png')}}" alt="edit">
+                                                @if($student->status == 0)
+                                                    <img style="width:50px" src="{{asset('admin/images/students/under-enrollment.png')}}" alt="edit">
+                                                @endif
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{route('subscriptions.index',['child_name',$student->name])}}">
                                                 <img style="width:50px" src="{{asset('admin/images/students/subscription.png')}}" alt="edit">
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="#">
-                                                <img style="width:50px" src="{{asset('admin/images/students/notes.png')}}" alt="edit">
-                                            </a>
+                                            {{$student->notes}}
                                         </td>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{route('admin.assignments.student_duties',$student->id)}}">
                                                 <img style="width:50px" src="{{asset('admin/images/students/meals.png')}}" alt="edit">
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{route('invoices.index',['child_name'=>$student->name])}}">
                                                 <img style="width:50px" src="{{asset('admin/images/students/bills.png')}}" alt="edit">
                                             </a>
                                         </td>
@@ -272,5 +272,19 @@
         document.getElementById('printButton').addEventListener('click', function() {
                 window.print();
         });
+    </script>
+    <script>
+        $('.archeived').on('click',function (){
+            var student_id = $(this).data('id');
+            $.ajax({
+                type: 'GET',
+                url: "{{url('/')}}/admin/student/change_status/" + student_id,
+                data: {"status": 2},
+                success: function (data) {
+
+                }
+            })
+        })
+
     </script>
 @endpush
