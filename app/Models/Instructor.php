@@ -103,4 +103,14 @@ class Instructor extends Authenticatable
         });
     }
 
+    public function upload()
+    {
+        return$this->belongsTo(Upload::class,'image');
+    }
+
+    public function getImg()
+    {
+        return $this->upload?->file_name;
+    }
+
 }

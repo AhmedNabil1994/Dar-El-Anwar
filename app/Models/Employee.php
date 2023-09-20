@@ -24,7 +24,7 @@ class Employee extends Model
         'salary_cycle',
         'hiring_date',
         'work_days',
-        'branch',
+        'branch_id',
         'password',
         'management',
         'departure_time',
@@ -37,7 +37,10 @@ class Employee extends Model
     ];
 
     public function instructor(){
-        return $this->hasMany(Instructor::class,'employee_id');
+        return $this->hasOne(Instructor::class,'employee_id');
+    }
+    public function department(){
+        return $this->belongsTo(Department::class,'department_id');
     }
     public function upload()
     {
@@ -50,7 +53,7 @@ class Employee extends Model
 
     public function salary()
     {
-        return $this->hasOne(Salary::class);
+        return $this->hasOne(Salary::class,'employee_id');
     }
 
     public function attendance_leave()

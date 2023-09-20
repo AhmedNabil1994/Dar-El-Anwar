@@ -116,6 +116,11 @@ class Student extends Authenticatable
         return $this->belongsToMany(Assignment::class,'student_duties');
     }
 
+    public function student_assignment()
+    {
+        return $this->hasMany(StudentDuties::class);
+    }
+
     public function father()
     {
         return $this->parent?->where('relationship',1)->first();
@@ -137,6 +142,11 @@ class Student extends Authenticatable
     public function students_subscriped()
     {
         return $this->hasMany(StudentSubscription::class);
+    }
+
+    public function students_reveiws()
+    {
+        return $this->hasMany(StudentReveiw::class);
     }
 
 

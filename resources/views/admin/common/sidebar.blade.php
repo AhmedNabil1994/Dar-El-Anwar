@@ -642,7 +642,7 @@
 
         @can('manage_level')
             <li class="{{ @$navLevelActiveClass }}">
-                <a class="has-arrow" href="">
+                <a class="has-arrow" href="#">
                     <span class="iconify"></span>
                     <span>{{__('المستويات')}}</span>
                 </a>

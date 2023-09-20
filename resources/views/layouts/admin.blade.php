@@ -41,6 +41,8 @@
     @include('admin.common.sidebar')
 @elseif(\Illuminate\Support\Facades\Auth::guard('students')->check())
     @include('admin.common.student.sidebar')
+@elseif(\Illuminate\Support\Facades\Auth::guard('instructors')->check())
+    @include('admin.common.instructor.sidebar')
 @endif
 
 <!-- Sidebar area end -->

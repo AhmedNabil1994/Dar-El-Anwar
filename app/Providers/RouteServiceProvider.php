@@ -36,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
         $this->mapStudentRoutes();
+        $this->mapInstructorRoutes();
 
         $this->routes(function () {
             Route::prefix('api')
@@ -80,5 +81,15 @@ class RouteServiceProvider extends ServiceProvider
             ->as('student.')
             ->namespace($this->namespace. '\Student')
             ->group(base_path('routes/student.php'));
+    }
+
+
+    protected function mapInstructorRoutes()
+    {
+        Route::middleware(['web', 'auth:instructors'])
+            ->prefix('instructor')
+            ->as('instructor.')
+            ->namespace($this->namespace. '\Instructor')
+            ->group(base_path('routes/instructor.php'));
     }
 }

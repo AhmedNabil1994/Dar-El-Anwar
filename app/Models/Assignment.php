@@ -24,6 +24,11 @@ class Assignment extends Model
         return $this->belongsToMany(Student::class,'student_duties');
     }
 
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class,'subject_id');
+    }
+
 
 //    protected static function boot()
 //    {
