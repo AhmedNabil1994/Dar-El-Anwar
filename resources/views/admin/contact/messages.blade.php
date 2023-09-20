@@ -28,7 +28,7 @@
             </div>
 
               <div class="row messages">
-                <div class="col-md-3">
+                <div class="col-md-3" style ="height:658px">
                   <!-- Start chat sidebar -->
                   <div class="chat__sidebar border px-4">
                     <h6>
@@ -107,6 +107,9 @@
                   </div>
                   <!-- end chat sidebar -->
             </div>
+            <div class="row">
+            <div class="col-md-12">
+            <div class="customers__area bg-style mb-30">
                 <div class="col-md-9">
                 <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
                     @csrf
@@ -173,6 +176,9 @@
                       </div>
                   </div>
               </form>
+            </div>
+            </div>
+            </div>
             </div>
           </div>
         </div>

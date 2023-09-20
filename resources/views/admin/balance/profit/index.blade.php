@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="item-title d-flex justify-content-center">
+            <div class="customers__area bg-style mb-30">
                 <form class="row justify-content-center w-100" action="{{route('profit.index')}}" method="get">
                     <div class="col-md-3">
                         <label class="form-label">الفرع</label>
@@ -88,6 +88,7 @@
                 </table>
                 </div>
             </div>
+            <div class="customers__area bg-style mb-30">
             <div class="row justify-content-center ">
                 <div class="col-md-3">
                     <label class="form-label">الايرادات</label>
@@ -103,6 +104,7 @@
                     <label class="form-label">المصروفات</label>
                     <input disabled class="form-control" value="{{$expenses}}">
                 </div>
+            </div>
             </div>
         </div>
         </div>

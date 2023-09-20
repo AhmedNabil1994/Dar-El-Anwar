@@ -67,6 +67,7 @@
                             </a>
                         </div>
                         <div>
+                            <div class="customers__area bg-style mb-30">
                             <form method="get" action="{{ route('invoices.index') }}" class="row justify-content-start mb-3">
                                 <div class="col-md-3">
                                     <label class="form-label">اسم الطفل</label>
@@ -94,6 +95,7 @@
                                     <button class="btn buttons-style" type="submit">تم</button>
                                 </div>
                             </form>
+                            </div>
                         </div>
                         <div class="customers__table" style = "overflow-x:auto">
                             <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->

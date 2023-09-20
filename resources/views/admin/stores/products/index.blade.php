@@ -27,6 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area bg-style mb-30">
                     <form method="GET" action="{{ route('stores.product.index') }}" class="mb-4">
                         <div class="row">
                             <div class="col-md-3">
@@ -62,6 +63,7 @@
                             </div>
                         </div>
                     </form>
+                </div>
 
                     <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">

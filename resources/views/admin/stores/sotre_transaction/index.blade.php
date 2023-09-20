@@ -31,6 +31,8 @@
                         <i class="fas fa-cash-register"></i>
                     </a>
                 </div>
+                <div class="col-md-12">
+                <div class="customers__area bg-style mb-30">
                 <form action="{{ route('stores.movement.index') }}" method="GET" class="form-group row justify-content-center">
 
                     <div class="form-group col-3">
@@ -58,6 +60,11 @@
                     </button>
                     </div>
                 </form>
+                </div>
+                </div>
+
+                <div class="col-md-12">
+                <div class="customers__area bg-style mb-30">
                 <form action="{{ route('stores.movement.index') }}" method="get" class="form-group row justify-content-center">
                     <div class="col-sm-2 m-3">
                         <label for="filterByJoining">{{trans("website.date_from")}}:</label>
@@ -73,6 +80,8 @@
                         </button>
                     </div>
                 </form>
+            </div>
+            </div>
 
 
             </div>

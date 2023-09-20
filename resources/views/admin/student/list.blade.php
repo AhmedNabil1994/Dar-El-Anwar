@@ -6,23 +6,26 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-{{--                                <h2>{{ trans('website.students') }}</h2>--}}
+                                <h2>{{ __('جميع الطلاب') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-{{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>--}}
-{{--                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.students') }}</li>--}}
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('الطلاب ') }}</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
+            <div class="customers__area bg-style mb-30">
             <form method="get" action="{{route('student.index')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
@@ -95,6 +98,7 @@
                     <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>
             </form>
+        </div>
 
             <div class="row">
                 <div class="col-md-12">
