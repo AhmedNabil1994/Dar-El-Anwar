@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -23,10 +24,13 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>إنشاء فاتورة مبيعات جديدة</h2>
-
+                <div class="customers__area bg-style mb-30">
+                    <div class="item-title d-flex justify-content-between align-items-end">
+                        <h2>إنشاء فاتورة مبيعات جديدة</h2>
+                    </div>
                     <form method="POST" action="{{ route('admin.product.invoices.sales.store') }}">
                         @csrf
                         <div class="row">
@@ -59,8 +63,7 @@
                                 <input type="text" class="form-control" id="supplier_name" name="supplier_name" required>
                             </div>
                         </div>
-                        <div class="row">
-
+                        <div class="row mb-3">
                             <div class="form-group col-md-6">
                                 <label for="store_id">اسم المخزن:</label>
                                <select class="form-select" id="store_name" name="store_name" required>
@@ -74,9 +77,7 @@
                                 <input type="date" class="form-control" id="purchase_date" name="purchase_date" required>
                             </div>
                         </div>
-
-
-                            <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <div class="customers__table ">
                             <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -103,28 +104,19 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="row justify-content-end">
+                            </div>
+                            <div class="row justify-content-center">
                                 <div class="col-md-6">
-                                    <button class="btn buttons-style" type="button" id="addRowBtn">أضف صف</button>
+                                    <button class="btn buttons-style" type="button" id="addRowBtn"> أضف صف</button>
                                     <button class="btn btn-danger" type="button" id="deleteRowBtn">أزل صف</button>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-end">
                                     <button type="submit" class="btn buttons-style">إنشاء فاتورة</button>
                                 </div>
                             </div>
                     </form>
-
-                    <!-- <table class="table table-bordered">
-                        <thead>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table> -->
-                </div>
-                <div class="row">
-                </div>
             </div>
+        </div>
         </div>
     </div>
 @endsection

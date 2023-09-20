@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -23,10 +24,9 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>تقارير المنتجات</h2>
-
                     <form method="GET" action="{{ route('stores.product.index') }}" class="mb-4">
                         <div class="row">
                             <div class="col-md-3">
@@ -63,6 +63,11 @@
                         </div>
                     </form>
 
+                    <div class="col-md-12">
+                    <div class="customers__area bg-style mb-30">
+                        <div class="item-title d-flex justify-content-between align-items-end">
+                            <h2>تقارير المنتجات</h2>
+                        </div>
                     <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                             <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead>
@@ -98,6 +103,8 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                </div>
                 </div>
                 <div class="row">
                     {{$productReports->links()}}

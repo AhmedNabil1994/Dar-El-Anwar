@@ -79,7 +79,9 @@
             <div class="row">
                 <div class="col-md-12">
                 <div class="customers__area bg-style mb-30 ">
-                    <h2>حركات المنتجات</h2>
+                    <div class="item-title d-flex justify-content-between align-items-end">
+                            <h2>حركات المنتجات</h2>
+                        </div>
                 <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                     <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead>
