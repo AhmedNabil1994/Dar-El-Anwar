@@ -365,9 +365,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="row mb-3">
-                                <div class="col-md-12 text-right">
+                            <div class="row mb-3 ">
+                                <div class="col-md-12 text-right d-flex">
                                     <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
+                                    <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -662,6 +663,11 @@
                 }
             }
         }
+    </script>
+    <script>
+        $("#print").on("click",function (){
+            console.log("print clicked")
+        })
     </script>
 
 @endpush

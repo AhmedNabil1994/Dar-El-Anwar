@@ -38,6 +38,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -52,6 +53,7 @@
                                 </ul>
                             </nav>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -89,13 +91,14 @@
                                   </select>
 
                               </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" style = "margin-top:50px;text-align:center">
                                   <button class="btn buttons-style" type="submit">تم</button>
                             </div>
                           </form>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                            <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
+                            <table class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>كود الاشتراك</th>
