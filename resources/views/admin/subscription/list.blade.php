@@ -67,6 +67,9 @@
                             </a>
                         </div>
                         <div>
+                        <div class="row">
+                        <div class="col-md-12">
+                        <div class="customers__area bg-style mb-30">
                           <form method="get" action="{{ route('subscriptions.index') }}" class="row justify-content-start mb-3">
                               <div class="col-md-3">
                                   <label class="form-label">اسم الطفل</label>
@@ -94,7 +97,10 @@
                             <div class="col-md-3" style = "margin-top:50px;text-align:center">
                                   <button class="btn buttons-style" type="submit">تم</button>
                             </div>
-                          </form>
+                        </form>
+                    </div>
+                    </div>
+                    </div>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                             <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
