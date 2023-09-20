@@ -44,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            <div class="customers__area bg-style mb-30">
             <div class="item-title d-flex justify-content-center mx-4">
                 <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>خطة متابعة المعلمين</a>
                 <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القرآن</a>
@@ -99,6 +100,7 @@
                     <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                 </div>
             </form>
+        </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -106,7 +108,7 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table" >
+                        <div class="customers__table" style = "overflow:auto" >
                             <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
                             <table  class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>

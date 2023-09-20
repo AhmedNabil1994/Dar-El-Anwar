@@ -279,6 +279,7 @@ return [
 "manageCourse"=>"   إدارة الدورة   ",
 "subjects"=>"    المواد   ",
 "total"=>"    الإجمالي   ",
+"follow_up_teacher"=>" متابعة المعلم   ",
 
 ];
 

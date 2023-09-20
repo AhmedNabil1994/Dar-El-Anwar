@@ -129,7 +129,7 @@
                                         <!-- ('website.'.$question->questions) -->
                                         <!-- trans('website.Q1') -->
                                         <div class="input__group mb-25">
-                                            <label>@lang("website.$question->questions")
+                                            <label>{{trans("website.$question->questions")}}</label>
                                             <span class="text-danger">*</span></label>
                                             <textarea class="form-text" name="questions[]"></textarea>
                                         </div>
