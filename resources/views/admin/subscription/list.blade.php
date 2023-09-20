@@ -72,7 +72,7 @@
                                           <option value="">اختر اسم الطفل</option>
                                           @foreach($students as $student)
                                                 <option value="{{$student->name}}"
-                                                {{in_array($student->name,request('child_name'))?'selected':''}}
+                                                {{request('child_name')?in_array($student->name,request('child_name'))?'selected':'':''}}
                                                 >{{$student->name}}</option>
                                           @endforeach
                                       </select>

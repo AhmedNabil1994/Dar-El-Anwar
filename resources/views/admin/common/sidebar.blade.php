@@ -642,7 +642,7 @@
 
         @can('manage_level')
             <li class="{{ @$navLevelActiveClass }}">
-                <a class="has-arrow" href="">
+                <a class="has-arrow" href="#">
                     <span class="iconify"></span>
                     <span>{{__('المستويات')}}</span>
                 </a>
@@ -650,7 +650,7 @@
                     <li class="{{ @$navLevelActiveClass }}">
                         <a href="{{route('level.index')}}">
                             <i class="fa fa-circle"></i>
-                            <span>{{__('All Level')}}</span>
+                            <span>{{__('كل المستويات')}}</span>
                         </a>
                     </li>
                 </ul>
