@@ -6,10 +6,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('اضافة شهادة') }}</h2>
+                                <h2>{{ __('إضافة شهادة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -17,19 +18,20 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('لوحة التحكم')}}</a></li>
                                     <li class="breadcrumb-item"><a href="{{route('certificate.index')}}">{{ __('قائمة الشهادات') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __("اضافة شهادة") }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __("إضافة شهادة") }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30 admin-certificate-page">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('اضافة شهادة') }}</h2>
-                            <div><a href="{{route('certificate.index')}}" class="theme-btn theme-button1 green-theme-btn default-hover-btn">{{ __('قائمة الشهادات') }}</a></div>
+                            <h2>{{ __('إضافة شهادة') }}</h2>
+                            <div><a href="{{route('certificate.index')}}" class="theme-btn theme-button1 buttons-style default-hover-btn" style = "border:none">{{ __('قائمة الشهادات') }}</a></div>
                         </div>
 
                         <div class="admin-create-certifiate">
@@ -598,7 +600,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="theme-btn theme-button1 default-hover-btn mt-30">{{ __('Save Certificate') }}</button>
+                                            <button type="submit" class="theme-btn theme-button1 buttons-style default-hover-btn mt-3" style = "border:none">{{ __('احفظ') }}</button>
                                         </div>
                                     </form>
                                 </div>

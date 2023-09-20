@@ -35,10 +35,6 @@ body {
     font-style: normal;
     font-weight: 400;
     background: #f6f8fa;
-<<<<<<< HEAD
-    /* overflow: hidden; */
-=======
-
 }
 
 h1,
@@ -19061,7 +19057,7 @@ p.image-desc {
     margin-left: 20px;
 }
 
-h3{
+h3 {
     font-size: 20px !important;
 }
 .messages textarea {
@@ -19069,4 +19065,8 @@ h3{
 }
 .form-style-container {
     padding: 16px 24px 17px;
+}
+
+.create-certificate-sidebar input[type="radio"]{
+    margin-left: 5px !important;
 }
