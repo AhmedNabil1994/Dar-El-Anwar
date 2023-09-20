@@ -85,6 +85,12 @@ class DashboardController extends Controller
         return view('student.dashboard', $data);
     }
 
+    public function instructor_dashboard(){
+        $data['title'] = 'Dashboard';
+
+        return view('instructor.dashboard', $data);
+    }
+
     public function calender()
     {
         return view('admin.common.apps-calendar');

@@ -36,7 +36,10 @@ function get_notify()
         $notifications = \App\Models\StudentNotification::orderBy('id','DESC')
             ->where('user_id', Auth::guard('students')->id())
             ->where('is_seen','no')->get();
-
+    if(Auth::guard('instructors')->check())
+        $notifications = \App\Models\InstructorNotification::orderBy('id','DESC')
+            ->where('user_id', Auth::guard('instructors')->id())
+            ->where('is_seen','no')->get();
     return $notifications;
 }
 
@@ -193,19 +196,28 @@ function staticMeta($id)
 function active_if_match($path)
 {
     if (class_basename(auth::user()) == 'Admin'){
-        return Request::is($path . '*') ? 'mm-active' : '';
+        return Request::is('*'.$path.'*') ? 'mm-active' : '';
     } else {
-        return Request::is($path . '*') ? 'active' : '';
+        return Request::is('*'.$path.'*') ? 'mm-active' : '';
     }
 
 }
+
+function get_review($student,$question)
+{
+    $students_reveiws = $student->students_reveiws;
+    $answer = $students_reveiws->where('question',$question)->first()?->answer;
+    return $answer;
+
+}
+
 
 function active_if_full_match($path)
 {
     if (class_basename(auth::user()) == 'Admin'){
         return Request::is($path) ? 'mm-active' : '';
     } else {
-        return str_contains(Request::getBasePath(),$path) ? 'active' : '';
+        return Request::is($path) ? 'mm-active' : '';
     }
 
 }

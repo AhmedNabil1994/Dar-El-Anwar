@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\StudentReveiwController;
 use App\Http\Controllers\Admin\ContactUsIssueController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CourseController;
@@ -407,7 +408,7 @@ Route::prefix('course')->group(function () {
         Route::post('store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::get('view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::get('edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit');
-        Route::post('update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
+        Route::post('update/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
         Route::delete('delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
         Route::post('/{id}/update-password',[EmployeeController::class, 'updatePassword'])->name('employees.update-password');
         Route::get('salaries/create', [EmployeeController::class, 'createSalary'])->name('salaries.create');
@@ -419,6 +420,16 @@ Route::prefix('course')->group(function () {
         Route::post('attendance_leave/store', [\App\Http\Controllers\AttendanceLeaveController::class,'store'])->name('attendance_leave.store');
 
 
+    });
+
+        Route::prefix('review')->group(function () {
+        Route::get('/', [StudentReveiwController::class, 'index'])->name('review.index');
+        Route::get('create/{id}', [StudentReveiwController::class, 'create'])->name('review.create');
+        Route::post('store', [StudentReveiwController::class, 'store'])->name('review.store');
+        Route::get('view/{id}', [StudentReveiwController::class, 'view'])->name('review.view');
+        Route::get('edit/{id}', [StudentReveiwController::class, 'edit'])->name('review.edit');
+        Route::post('update/{employee}', [StudentReveiwController::class, 'update'])->name('review.update');
+        Route::delete('delete/{id}', [StudentReveiwController::class, 'delete'])->name('review.delete');
     });
 
 

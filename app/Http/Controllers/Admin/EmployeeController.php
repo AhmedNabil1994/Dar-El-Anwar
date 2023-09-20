@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Instructor;
 use App\Models\Salary;
 use App\Models\Upload;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Tools\Repositories\Crud;
 use Illuminate\Support\Facades\Hash;
@@ -55,14 +57,14 @@ class EmployeeController extends Controller
     public function create()
     {
         $employee = null;
-        return view('admin.employees.add', compact('employee'));
+        $data['departments'] = Department::whereStatus(1)->get();
+        $data['branches'] = Branch::whereStatus(1)->get();
+        return view('admin.employees.add', $data,compact('employee'));
     }
 
     public function store(Request $request)
     {
-
         $validatedData = $request->all();
-
         $validatedData['password'] = Hash::make($validatedData['password']);
         $employee = $this->employeeRepo->create($validatedData);
 
@@ -92,15 +94,25 @@ class EmployeeController extends Controller
                 'image' => $upload->id,
             ]);
         }
-        if($validatedData['job_title'] == 'teacher')
+
+        if($validatedData['job_title'] == 'teacher') {
             $instructor = Instructor::create([
                 'email' => $employee->email,
-                'password'=> $employee->password,
-                'employee_id'=> $employee->id
+                'password' => $employee->password,
+                'employee_id' => $employee->id
             ]);
+
+            $employee->update(['type'=>'instructor']);
+        }
         else if($validatedData['job_title'] == 'driver')
             $employee->update(['type'=>'driver']);
-        return redirect()->route('employees.index')->with('success', 'Employee created successfully');
+
+        Salary::create([
+            'employee_id' => $employee->id,
+            'salary' => $request->input('salary'),
+            'date' => now(), // You can adjust this based on your requirements
+        ]);
+        return redirect()->route('employees.index')->with('success', 'تمت اضافة موطف');
     }
 
     public function edit($id)
@@ -110,13 +122,10 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,Employee $employee)
     {
+        $validatedData = $request->except('password');
 
-
-        $validatedData = $request->all();
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        $employee = $this->employeeRepo->find($id);
         if($request->hasFile('image'))
         {
             $upload = new Upload;
@@ -149,20 +158,35 @@ class EmployeeController extends Controller
             $request['image'] = $employee->image;
         }
 
-        $employee = $this->employeeRepo->update($validatedData, $id);
-        $instructor = $employee->instructor->where('email',$employee->email)->first();
+        $employee = $employee->update($validatedData);
 
-        if($validatedData['job_title'] == 'teacher')
-        {
-            $instructor->email = $employee->email;
-            $instructor->password = $employee->password;
-            $instructor->employee_id = $employee->id;
-            $instructor->save();
+        if($validatedData['job_title'] == 'teacher') {
+            $instructor = Instructor::create([
+                'email' => $employee->email,
+                'password' => $employee->password,
+                'employee_id' => $employee->id
+            ]);
+
+            $employee->update(['type'=>'instructor']);
+        }
+        else if($validatedData['job_title'] == 'driver'){
+            $employee->instructor->delete();
+            $employee->update(['type'=>'driver']);
         }
 
-        else if($validatedData['job_title'] == 'driver')
-            $employee->update(['type'=>'driver']);
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully');
+        if($request['password'])
+        {
+            $password = Hash::make($request['password']);
+
+            $employee = $employee->update(['password'=>$password]);
+        }
+
+        $employee->salary->update([
+            'salary' => $request->input('salary'),
+            'date' => now(), // You can adjust this based on your requirements
+        ]);
+
+        return redirect()->route('employees.index')->with('success', 'تم تعديل بيانات الموظف');
     }
 
     public function delete($id)

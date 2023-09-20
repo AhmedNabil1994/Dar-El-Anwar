@@ -163,18 +163,18 @@ class StudentController extends Controller
             'joining_date' => $request->joining_date, // newly added
             'medical_history' => $request->medical_history, // newly added
             'class_room_id' => $request->classroom, // newly added
-            'password' =>  Hash::make($request->password), // newly added
             'parents_marital_status' => $request->parents_social_status, // newly added
             'notes' => $request->notes, // newly added
         ];
 
-        if($request->password != null)
-        {
-            $student_data['password'] = Hash::make($request->password);
 
-        }
 
         $student->update($student_data);
+        if($request->password != null)
+        {
+            $password = Hash::make($request->password);
+            $student->update(['password'=>$password]);
+        }
 
         $student->dept()->sync($request->department);
 

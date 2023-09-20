@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Salary extends Model
+class StudentReveiw extends Model
 {
     use HasFactory;
-    protected $table = 'salaries';
     protected $guarded = [];
 
-    public function employee()
+    public function student()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Student::class);
     }
-
-
 }

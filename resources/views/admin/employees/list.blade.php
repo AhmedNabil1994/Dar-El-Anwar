@@ -101,6 +101,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach($employees as $employee)
+
                                         <tr>
                                             <td class="text-center">{{ $employee->id }}</td>
                                             <td class="text-center">{{ $employee->name }}</td>

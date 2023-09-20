@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Instrucotr
 {
@@ -21,14 +22,12 @@ class Instrucotr
          * only instructor can access instructor panel
          */
 
-        if (file_exists(storage_path('installed'))) {
-            if (auth()->user()->role == 2 && auth()->user()->instructor->status == 1) {
-                return $next($request);
-            } else {
-                abort('403');
-            }
-        } else {
-            return redirect()->to('/install');
+        if (!Auth::guard('instructors')->user()) {
+
+            return redirect(route('admin.login'));
         }
+
+
+        return $next($request);
     }
 }

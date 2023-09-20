@@ -118,8 +118,6 @@ class LoginController extends Controller
         }
 
 
-
-        dd(Auth::guard('students')->check());
         $this->showToastrMessage('error', __('Ops! You have entered invalid credentials'));
 
         return redirect("login");

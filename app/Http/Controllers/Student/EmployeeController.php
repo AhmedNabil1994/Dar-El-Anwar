@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Instructor;
 use App\Models\Salary;
@@ -54,13 +55,12 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        $employee = null;
-        return view('admin.employees.add', compact('employee'));
+        $data['departments'] = Department::whereStatus(1)->get();
+        return view('admin.employees.add', $data);
     }
 
     public function store(Request $request)
     {
-
         $validatedData = $request->all();
 
         $validatedData['password'] = Hash::make($validatedData['password']);
