@@ -95,9 +95,9 @@
                                 <tbody>
                                 @foreach($subscriptions as $subscription)
                                     <tr>
-                                        <td>{{$subscription->student->name}}</td>
-                                        <td>{{$subscription->subscription->name}}</td>
-                                        <td>{{$subscription->subscription->value}}</td>
+                                        <td>{{$subscription->student?->name}}</td>
+                                        <td>{{$subscription->subscription?->name}}</td>
+                                        <td>{{$subscription->subscription?->value}}</td>
                                         <td>{{$subscription->payment_status}}</td>
                                         <td>
                                             @php
