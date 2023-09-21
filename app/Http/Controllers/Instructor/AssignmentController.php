@@ -112,9 +112,9 @@ class AssignmentController extends Controller
         foreach ($request->checks as $student){
             $assignment->student()->sync($student);
             StudentNotification::create([
-                'user_id' => 1,
+                'user_id' => $student,
                 'text' => 'تم اضافة واجب لك',
-                'sender_id' => $student,
+                'sender_id' => 1,
             ]);
         }
 

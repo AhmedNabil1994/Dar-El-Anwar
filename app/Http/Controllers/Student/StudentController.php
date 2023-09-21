@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\ParentInfo;
 use App\Models\Student;
+use App\Models\StudentNotification;
 use App\Models\Upload;
 use App\Models\User;
 use App\Tools\Repositories\Crud;
@@ -133,21 +134,33 @@ class StudentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $guardianRelationships = $request->guardian_relationship;
+        if($guardianRelationships){
+
+            $uniqueValues = array_unique($request->guardian_relationship);
+
+            if(count($guardianRelationships) !== count($uniqueValues))
+                return redirect()->back()->with('error','خانة الصلة مكررة');
+        }
         $photos = [];
+
 
         $guardianRelationships = $request->guardian_relationship;
 
-        $uniqueValues = array_unique($request->guardian_relationship);
+        if($guardianRelationships){
 
-        if(count($guardianRelationships) !== count($uniqueValues))
-            return redirect()->back()->with('error','خانة الصلة مكررة');
+            $uniqueValues = array_unique($request->guardian_relationship);
 
-        $student = Student::find($id);
+            if(count($guardianRelationships) !== count($uniqueValues))
+                return redirect()->back()->with('error','خانة الصلة مكررة');
+        }
+        $code = $this->create_code($request);
 
         $student_data = [
             'user_id' => $user->id??null,
             'name' => $request->name, // updated from $request->first_name
             'email' => $request->email, // updated from $request->first_name
+            'code' => $code, // updated from $request->first_name
             'address' => $request->address,
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
@@ -163,11 +176,12 @@ class StudentController extends Controller
             'joining_date' => $request->joining_date, // newly added
             'medical_history' => $request->medical_history, // newly added
             'class_room_id' => $request->classroom, // newly added
+            'password' =>  Hash::make($request->password), // newly added
             'parents_marital_status' => $request->parents_social_status, // newly added
             'notes' => $request->notes, // newly added
         ];
 
-
+        $student = Student::find($id);
 
         $student->update($student_data);
         if($request->password != null)
@@ -209,7 +223,7 @@ class StudentController extends Controller
             ]);
         }
 
-        if ($request->hasFile('parents_card_copy')) {
+       if ($request->parents_card_copy) {
             foreach ($request->parents_card_copy as $parents_card_copy)
             {
                 $upload = new Upload;
@@ -502,19 +516,26 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+
+
+
+        $photos = [];
         $guardianRelationships = $request->guardian_relationship;
 
-        $uniqueValues = array_unique($request->guardian_relationship);
+        if($guardianRelationships){
 
-        if(count($guardianRelationships) !== count($uniqueValues))
-            return redirect()->back()->with('error','خانة صلة القرابة مكررة');
+            $uniqueValues = array_unique($request->guardian_relationship);
 
+            if(count($guardianRelationships) !== count($uniqueValues))
+                return redirect()->back()->with('error','خانة الصلة مكررة');
+        }
         $code = $this->create_code($request);
 
         $student_data = [
             'user_id' => $user->id??null,
             'name' => $request->name, // updated from $request->first_name
             'email' => $request->email, // updated from $request->first_name
+            'code' => $code, // updated from $request->first_name
             'address' => $request->address,
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
@@ -570,33 +591,38 @@ class StudentController extends Controller
             ]);
         }
 
-        if ($request->hasFile('parents_card_copy')) {
-            $upload = new Upload;
-            $upload->file_original_name = null;
-            $arr = explode('.', $request->file('parents_card_copy')->getClientOriginalName());
+        if ($request->parents_card_copy) {
+            foreach ($request->parents_card_copy as $parents_card_copy)
+            {
+                $upload = new Upload;
+                $upload->file_original_name = null;
+                $arr = explode('.', $parents_card_copy->getClientOriginalName());
 
-            for($i=0; $i < count($arr)-1; $i++){
-                if($i == 0){
-                    $upload->file_original_name .= $arr[$i];
+
+                for($i=0; $i < count($arr)-1; $i++){
+                    if($i == 0){
+                        $upload->file_original_name .= $arr[$i];
+                    }
+                    else{
+                        $upload->file_original_name .= ".".$arr[$i];
+                    }
                 }
-                else{
-                    $upload->file_original_name .= ".".$arr[$i];
-                }
+                $upload->file_name = $parents_card_copy->store('uploads/all','public');
+
+                $upload->user_id = $student->id;
+                $upload->extension = $parents_card_copy->getClientOriginalExtension();
+                $upload->type = 'image';
+                $upload->file_size = $parents_card_copy->getSize();
+                $upload->save();
+
+                array_push($photos,$upload->id);
+
+                $student->update([
+                    'parents_card_copy' => $photos,
+                ]);
             }
 
-            $upload->file_name = $request->file('parents_card_copy')->store('uploads/all','public');
-
-            $upload->user_id = $student->id;
-            $upload->extension = $request->file('parents_card_copy')->getClientOriginalExtension();
-            $upload->type = 'image';
-            $upload->file_size = $request->file('parents_card_copy')->getSize();
-            $upload->save();
-
-            $student->update([
-                'parents_card_copy' => $upload->id,
-            ]);
         }
-
         if ($request->hasFile('birth_certificate')) {
             $upload = new Upload;
             $upload->file_original_name = null;
@@ -650,23 +676,33 @@ class StudentController extends Controller
                 'another_file' => $upload->id,
             ]);
         }
-
-        foreach($request->guardian_relationship as $key => $guardian)
+        if($guardianRelationships)
         {
-            ParentInfo::create([
-                'student_id' => $student->id,
-                'name' => $request->guardian_name[$key],
-                'profession' => $request->profession[$key],
-                'relationship' => $request->guardian_relationship[$key],
-                'phone_number' => $request->guardian_phone_number[$key], // newly added
-                'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
-                'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
-                'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
-                'email' => $request->guardian_email[$key], // newly added
-                'national_id' => $request->id_number[$key], // newly added
+            foreach($request->guardian_relationship as $key => $guardian)
+            {
+                ParentInfo::create([
+                    'student_id' => $student->id,
+                    'name' => $request->guardian_name[$key],
+                    'profession' => $request->profession[$key],
+                    'relationship' => $request->guardian_relationship[$key],
+                    'phone_number' => $request->guardian_phone_number[$key], // newly added
+                    'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
+                    'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
+                    'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
+                    'email' => $request->guardian_email[$key], // newly added
+                    'national_id' => $request->id_number[$key], // newly added
 
-            ]);
+                ]);
+            }
+
         }
+        StudentNotification::create([
+            'user_id' => $student->id,
+            'text' => get_setting('welcome_text'),
+            'sender_id' => 1,
+        ]);
+
+
         return redirect()->route('student.index')
             ->with('success', 'تم اضافة بيانات الطالب');
     }
