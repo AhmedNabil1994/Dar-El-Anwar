@@ -16,6 +16,12 @@ class ParentInfo extends Authenticatable
     {
         return $this->belongsTo(Student::class,'student_id');
     }
-
-
+    public function upload()
+    {
+        return$this->belongsTo(Upload::class,'image');
+    }
+    public function getImg()
+    {
+        return $this->upload?->file_name;
+    }
 }

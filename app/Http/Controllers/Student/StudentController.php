@@ -82,6 +82,12 @@ class StudentController extends Controller
         return $data['class_rooms'];
     }
 
+    public function archive($id){
+        $student = Student::find($id);
+        $student->update(['status'=>0]);
+        return redirect()->back()->with('success','تمت ارشفة الطالب');
+    }
+
     public function create()
     {
 
@@ -134,6 +140,31 @@ class StudentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $courses = Course::whereIn('id',$request->appointment)->get();
+        $selectedCourses = Course::whereIn('id', $request->appointment)->get();
+
+        $conflictFound = false;
+        foreach ($courses as $course){
+            foreach ($courses as $existingCourse) {
+                // Skip comparing the course against itself
+                if ($course->id == $existingCourse->id) {
+                    continue;
+                }
+
+                // Check if there is a conflict in date or time
+                if (
+                    $course->day == $existingCourse->day // Compare dates
+                    &&
+                    $course->time == $existingCourse->time // Check if end time is after start time
+                ) {
+                    $conflictFound = true;
+                    break 2; // Break both loops if a conflict is found
+                }
+            }
+        }
+        if($conflictFound)
+            return redirect()->back()->with('error','يوجد تعارض في المواعيد');
+
         $guardianRelationships = $request->guardian_relationship;
         if($guardianRelationships){
 
@@ -516,9 +547,30 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        $courses = Course::whereIn('id',$request->appointment)->get();
+        $selectedCourses = Course::whereIn('id', $request->appointment)->get();
 
+        $conflictFound = false;
+        foreach ($courses as $course){
+            foreach ($courses as $existingCourse) {
+                // Skip comparing the course against itself
+                if ($course->id == $existingCourse->id) {
+                    continue;
+                }
 
-
+                // Check if there is a conflict in date or time
+                if (
+                    $course->day == $existingCourse->day // Compare dates
+                    &&
+                    $course->time == $existingCourse->time // Check if end time is after start time
+                ) {
+                    $conflictFound = true;
+                    break 2; // Break both loops if a conflict is found
+                }
+            }
+        }
+        if($conflictFound)
+            return redirect()->back()->with('error','يوجد تعارض في المواعيد');
         $photos = [];
         $guardianRelationships = $request->guardian_relationship;
 

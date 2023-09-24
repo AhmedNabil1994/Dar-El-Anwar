@@ -105,22 +105,24 @@
                                         <td>{{ $followup->instructor?->employee?->name }}</td>
                                         <td>{{ $followup->classroom?->name }}</td>
                                         <td>{{ $followup->subject?->name }}</td>
-                                        <td>{{ $followup->getStatus() }}</td>
-                                        @if($followup->followup_responses->first()?->questions->first()->followup_id == "follow_up_teacher")
+                                        <td><input class="form-check-input toggleButton"
+                                                   data-id="{{$followup->id}}" type="checkbox"
+                                            {{$followup->status == 1 ? 'checked' : '' }}></td>
+                                        @if($followup->type == 1)
                                         <td>
                                             <a href="{{route('admin.followup.editClass', [$followup])}}" class="btn-action" title="Edit">
                                                 <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                             </a>
                                         </td>
-                                        @elseif($followup->followup_responses?->first()?->questions->first()->followup_id == "follow_up_quran")
+                                        @elseif($followup->type == 2)
                                             <td>
-                                                <a href="{{route('admin.followup.editQuran', [$followup])}}" class="btn-action" title="Edit">
+                                                <a href="{{route('admin.followup.editReading', [$followup])}}" class="btn-action" title="Edit">
                                                     <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                                 </a>
                                             </td>
-                                        @elseif($followup->followup_responses?->first()?->questions->first()->followup_id == "follow_up_reading")
+                                        @elseif($followup->type == 3)
                                             <td>
-                                                <a href="{{route('admin.followup.editReading', [$followup])}}" class="btn-action" title="Edit">
+                                                <a href="{{route('admin.followup.editQuran', [$followup])}}" class="btn-action" title="Edit">
                                                     <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                                 </a>
                                             </td>
@@ -217,5 +219,33 @@
         document.getElementById('printButton').addEventListener('click', function() {
                 window.print();
         });
+    </script>
+    <script>
+        $('.toggleButton').on('change',function(){
+            $.ajax({
+                type: "GET",
+                url:  '{{route('admin.followup.change_status')}}',
+                data: {"status": $(this).val(), "followup_id": $(this).data('id')},
+                datatype: "json",
+                success: function (response) {
+                    toastr.options.positionClass = 'toast-bottom-right';
+
+                    if (response.status == 404){
+                        toastr.error(response.msg);
+                    }
+
+                    if (response.status == 200) {
+                        $('.appendAddRemove'+ response.course_id).html(`
+
+                    `)
+                        toastr.info(response.msg);
+                    }
+                },
+                error: function () {
+                    alert("Error!");
+                },
+            });
+        })
+
     </script>
 @endpush

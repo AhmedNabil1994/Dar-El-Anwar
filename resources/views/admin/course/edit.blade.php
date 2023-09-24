@@ -1,188 +1,169 @@
-@extends('layouts.instructor')
-
-@section('breadcrumb')
-    <div class="page-banner-content text-center">
-        <h3 class="page-banner-heading text-white pb-15"> {{__('Upload Course')}} </h3>
-
-        <!-- Breadcrumb Start-->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-                <li class="breadcrumb-item font-14"><a href="{{route('instructor.dashboard')}}">{{__('Dashboard')}}</a></li>
-                <li class="breadcrumb-item font-14"><a href="{{ route('instructor.course') }}">{{__('My Courses')}}</a></li>
-                <li class="breadcrumb-item font-14 active" aria-current="page">{{__('Upload Course')}}</li>
-            </ol>
-        </nav>
-    </div>
-@endsection
+@extends('layouts.admin')
 
 @section('content')
-    <div class="instructor-profile-right-part instructor-upload-course-box-part">
-        <div class="instructor-upload-course-box">
+
+    <div class="page-content">
+
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div id="msform">
-                            <!-- progressbar -->
-                            <ul id="progressbar" class="upload-course-item-block d-flex align-items-center justify-content-center">
-                                <li class="active" id="account"><strong>{{ __('Course Overview') }}</strong></li>
-                                <li id="personal"><strong>{{ __('Upload Video') }}</strong></li>
-                                <li id="confirm"><strong>{{ __('Submit process') }}</strong></li>
-                            </ul>
+                <div class="col-md-12">
+                    <div class="breadcrumb__content">
+                        <div class="breadcrumb__content__left">
+                            <div class="breadcrumb__title">
+                                <h2>{{ trans('تعديل دورة') }}</h2>
+                            </div>
+                        </div>
+                        <div class="breadcrumb__content__right">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                      <li class="breadcrumb-item active" aria-current="page">{{trans('تعديل دورة') }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <!-- Upload Course Step-1 Item Start -->
-                            <div class="upload-course-step-item upload-course-overview-step-item">
 
-                                <!-- Upload Course Overview-1 start -->
-                                <div id="upload-course-overview-1">
-                                    <form method="POST" action="{{route('course.update.overview', [$course->uuid])}}" id="step1" class="row g-3 needs-validation" novalidate>
+            <div class="row">
+                <div class="instructor-upload-course-box">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>{{trans("website.createCourse")}}</h5>
+                                </div>
+                                <div class="ibox-content mt-15">
+
+                                    <form method="post" action="{{route('admin.course.update',$course)}}">
                                         @csrf
-                                        @if(get_option('courseUploadRuleTitle'))
-                                            <div class="upload-course-item-block course-overview-step1 radius-8 mb-30">
-                                                <div class="upload-course-item-block-title mb-3">
-                                                    <h6 class="font-20">{{ __(get_option('courseUploadRuleTitle')) }}</h6>
-                                                </div>
-                                                <ul class="mb-30">
-                                                    @foreach($rules as $rule)
-                                                        <li><span class="iconify" data-icon="akar-icons:arrow-right"></span>{{ $rule->description }}</li>
+                                        <div class="row mb-4">
+                                            <div class="form-group col-md-6">
+                                                <label for="title">{{trans('اسم الدورة')}}</label>
+
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="title"
+                                                       name="title"
+                                                       value="{{$course->title}}"
+                                                       required/>
+
+                                                @error('title')
+                                                <span class="text-danger">{{ $message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="form-group col-md-6">
+                                                <label for="instructor_id">{{trans('المدرب')}}</label>
+                                                <select type="text"
+                                                        class="form-control"
+                                                        id="instructor_id"
+                                                        name="instructor_id"
+                                                        required>
+                                                    <option value="">{{trans("website.selectInstructor")}}</option>
+                                                    @foreach($instructors as $instructor)
+                                                        <option value="{{$instructor->id}}"
+                                                        {{$course->instructor_id == $instructor->id ? "selected" : ""}}
+                                                        >{{$instructor->employee->name}}</option>
                                                     @endforeach
-                                                </ul>
+                                                </select>
 
                                             </div>
-                                        @endif
-                                        <div class="upload-course-item-block course-overview-step1 radius-8">
-                                            <div class="upload-course-item-block-title mb-3">
-                                                <h6 class="font-20">{{ __('Course Details') }}</h6>
+                                            <div class="form-group col-md-6">
+                                                <label for="subject_id">{{trans('website.subject')}}</label>
+
+                                                <select name="subject_id" class="form-control" required>
+                                                    <option value="" selected>{{trans('website.subject')}}</option>
+                                                    @foreach ($subjects as $subject)
+                                                        <option value="{{ $subject->id }}"
+                                                        {{$course->subject_id == $subject->id ? "selected" : ""}}
+                                                        >{{ $subject->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
-                                            <div class="row mb-30">
-                                                <div class="col-md-12">
-                                                    <div class="label-text-title color-heading font-medium font-16 mb-3">{{ __('Course Title') }}
-                                                        <span class="cursor tooltip-show-btn share-referral-big-btn primary-btn get-referral-btn border-0" data-toggle="popover"
-                                                              data-bs-placement="bottom" data-bs-content="Meridian sun strikes upper urface of the impenetrable foliage of my trees">
-                                                                                        !
-                                                                                    </span>
-                                                    </div>
-
-                                                    <input type="text" name="title" value="{{$course->title}}" class="form-control" placeholder="{{ __('Course Title') }}" required>
-                                                    @if ($errors->has('title'))
-                                                        <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('title') }}</span>
-                                                    @endif
-                                                </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="form-group col-md-6">
+                                                <label for="department_id">{{trans('website.department')}}</label>
+                                                <select type="text"
+                                                        class="form-control"
+                                                        id="department_id"
+                                                        name="department_id"
+                                                        required>
+                                                    @foreach($departments as $department)
+                                                        <option value="{{$department->id}}"
+                                                            {{$course->department_id == $department->id ? "selected" : ""}}
+                                                        >{{$department->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <div class="row mb-30">
-                                                <div class="col-md-12">
-                                                    <div class="label-text-title color-heading font-medium font-16 mb-3">{{ __('Course Subtitle') }}
-                                                        <span class="cursor tooltip-show-btn share-referral-big-btn primary-btn get-referral-btn border-0" data-toggle="popover"
-                                                              data-bs-placement="bottom" data-bs-content="Meridian sun strikes upper urface of the impenetrable foliage of my trees">
-                                                                                        !
-                                                                                    </span>
-                                                    </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="content">{{trans('website.content')}}</label>
 
-                                                    <input type="text" name="subtitle" value="{{$course->subtitle}}" class="form-control" placeholder="{{ __('Course Subtitle') }}" required>
-                                                    @if ($errors->has('subtitle'))
-                                                        <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('subtitle') }}</span>
-                                                    @endif
-                                                </div>
+                                                <textarea   class="form-control"
+                                                            id="content"
+                                                            name="content"
+                                                            required>{{$course->content}}</textarea>
                                             </div>
-                                            <div class="row mb-30">
-                                                <div class="col-md-12">
-                                                    <div class="label-text-title color-heading font-medium font-16 mb-3">{{ __('Course Description Key Points') }}
-                                                        <span class="cursor tooltip-show-btn share-referral-big-btn primary-btn get-referral-btn border-0" data-toggle="popover"
-                                                              data-bs-placement="bottom" data-bs-content="Meridian sun strikes upper urface of the impenetrable foliage of my trees">
-                                                                                        !
-                                                            </span>
-                                                    </div>
-                                                    <div id="add_repeater">
-                                                        <div data-repeater-list="key_points" class="">
-                                                            @if($keyPoints->count() > 0)
-                                                            @foreach($keyPoints as $keyPoint)
-                                                                    <label for="name_{{ $keyPoint['id'] }}" class="text-lg-right text-black"> {{ __('Name') }} </label>
-                                                                    <div data-repeater-item="" class="form-group row align-items-center">
-                                                                        <input type="hidden" name="id" value="{{ $keyPoint->id }}">
-                                                                        <div class="custom-form-group mb-3 col-md-10">
-                                                                            <input type="text" name="name" id="name_{{ $keyPoint['id'] }}" value="{{ $keyPoint['name'] }}" class="form-control"
-                                                                                   placeholder="{{ __('Type key point name') }}" required>
-                                                                        </div>
-
-                                                                        <div class="col mb-3">
-                                                                            <a href="javascript:;" data-repeater-delete=""
-                                                                               class="theme-btn theme-button1 default-delete-btn-red default-hover-btnn btn-danger">
-                                                                               <span class="iconify" data-icon="akar-icons:cross"></span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            @else
-                                                                <div data-repeater-item="" class="form-group row align-items-center">
-                                                                    <div class="custom-form-group mb-3 col-md-10">
-                                                                        <label for="name" class="text-lg-right text-black"> {{ __('Name') }} </label>
-                                                                        <input type="text" name="name" id="name" value="" class="form-control" placeholder="{{ __('Type key point name') }}" required>
-                                                                    </div>
-
-                                                                    <div class="col mb-3">
-                                                                        <a href="javascript:;" data-repeater-delete=""
-                                                                           class="theme-btn theme-button1 default-delete-btn-red default-hover-btn btn-danger">
-                                                                           <span class="iconify" data-icon="akar-icons:cross"></span>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="col-lg-2">
-                                                            <a id="add" href="javascript:;" data-repeater-create=""
-                                                               class="theme-btn default-hover-btn theme-button1">
-                                                               <span class="iconify" data-icon="akar-icons:plus"></span> {{ __('Add') }}
-                                                            </a>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="form-group col-md-6">
+                                                <label for="price">{{trans('قيمة الاشتراك')}}</label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       id="price"
+                                                       name="price"
+                                                       value="{{$course->price}}"
+                                                       required/>
                                             </div>
-                                            <div class="row mb-30">
-                                                <div class="col-md-12">
-                                                    <div class="label-text-title color-heading font-medium font-16 mb-3">{{ __('Course Description') }}
-                                                        <span class="cursor tooltip-show-btn share-referral-big-btn primary-btn get-referral-btn border-0" data-toggle="popover"
-                                                              data-bs-placement="bottom" data-bs-content="Meridian sun strikes upper urface of the impenetrable foliage of my trees">
-                                                                                        !
-                                                                                    </span>
-                                                    </div>
-                                                    <textarea class="form-control" name="description" cols="30" rows="10" required
-                                                              placeholder="{{ __('Course description in 250 characters') }}">{{$course->description}}</textarea>
-                                                    @if ($errors->has('description'))
-                                                        <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('description') }}</span>
-                                                    @endif
+                                            <div class="form-group col-md-6">
+                                                <label for="date_to">{{trans('الموعد')}} :</label>
+                                                <input type="time" id="date_time" name="date_time"
+                                                       value="{{$course->time}}"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+
+                                            <div class="form-group col-md-6">
+                                                <label for="date_from">{{trans('website.date')}} :</label>
+                                                <input type="date" id="date" name="date"
+                                                       value="{{$course->date}}"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="status">{{trans('website.status')}}  </label>
+                                                <div class="btn-group-toggle" data-toggle="buttons">
+                                                    <label class="btn btn-danger ">
+                                                        <input type="radio" name="status" id="option1" value="0" autocomplete="off" {{$course->status == 0 ? "checked" : ""}}> متوقف
+                                                    </label>
+                                                    <label class="btn btn-success active">
+                                                        <input type="radio" name="status" id="option2" value="1" autocomplete="off" {{$course->status == 1 ? "checked" : ""}}>   نشط
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="stepper-action-btns">
-                                            <a href="{{route('instructor.course')}}" class="theme-btn theme-button3">{{__('Back')}}</a>
-                                            <button type="submit" class="theme-btn default-hover-btn theme-button1">{{__('Save and continue')}}</button>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>
+                                            <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                         </div>
                                     </form>
+
                                 </div>
-                                <!-- Upload Course Overview-1 end -->
-
                             </div>
-
-                            <!-- Upload Course Step-1 Item End -->
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+        @endsection
 
-@push('style')
-    <link rel="stylesheet" href="{{asset('common/css/select2.css')}}">
-@endpush
-
-@push('script')
-    <script src="{{asset('common/js/select2.min.js')}}"></script>
-    <script src="{{asset('frontend/assets/js/custom/upload-course.js')}}"></script>
-    <script src="{{ asset('common/js/jquery.repeater.min.js') }}"></script>
-    <script src="{{ asset('common/js/add-repeater.js') }}"></script>
-@endpush
+        @push('script')
+            <script src="{{asset('frontend/assets/js/custom/upload-course.js')}}"></script>
+            <script src="{{ asset('common/js/jquery.repeater.min.js') }}"></script>
+            <script src="{{ asset('common/js/add-repeater.js') }}"></script>
+    @endpush

@@ -17,11 +17,13 @@ use App\Models\Order_item;
 use App\Models\Setting;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Subscription;
 use App\Models\User;
 use App\Tools\Repositories\Crud;
 use App\Traits\General;
 use App\Traits\ImageSaveTrait;
 use App\Traits\SendNotification;
+use Carbon\Carbon;
 use Hamcrest\Core\AllOf;
 use Illuminate\Http\Request;
 use Auth;
@@ -43,12 +45,9 @@ class CourseController extends Controller
 
     public function index(Request $request)
     {
-        if (!Auth::user()->can('all_course')) {
-            abort('403');
-        } // end permission checking
 
         $data['title'] = 'All Courses';
-        $data['courses'] = Course::query()->orderBy('id','DESC');
+        $data['courses'] = Course::query()->orderBy('created_at','DESC');
 
         // Filter by code if filterByCode is provided in the request
         if ($request->filterByCode) {
@@ -104,6 +103,7 @@ class CourseController extends Controller
         if ($request->filterByCount) {
             $data['courses']->where('students_count', $request->input('filterByCount'));
         }
+
         $courses = Course::all();
         $data['codes'] = $courses->whereNotNull('code')->pluck('code');
         $data['titles'] = $courses->whereNotNull('title')->pluck('title');
@@ -136,6 +136,20 @@ class CourseController extends Controller
 
         return view('admin.course.create', $data);
     }
+
+
+    public function edit(Request $request, Course $course)
+    {
+        $data['course'] = $course;
+        $data['rules'] = CourseUploadRule::all();
+        $data['departments'] = Department::all();
+        $data['instructors'] = Instructor::all();
+        $data['subjects'] = Subject::all();
+
+        return view('admin.course.edit',$data);
+    }
+
+
 
     public function view($uuid)
     {
@@ -211,57 +225,10 @@ class CourseController extends Controller
 
     }
 
-    public function delete($uuid)
+    public function delete(Course $course)
     {
-        $course = $this->model->getRecordByUuid($uuid);
-        $order_item = Order_item::whereCourseId($course->id)->first();
-
-        if ($order_item)
-        {
-            $this->showToastrMessage('error', __('You can not deleted. Because already student purchased this course!'));
-            return redirect()->back();
-        }
-        //start:: Course lesson delete
-        $lessons = Course_lesson::where('course_id', $course->id)->get();
-        if (count($lessons) > 0)
-        {
-            foreach ($lessons as $lesson)
-            {
-                //start:: lecture delete
-                $lectures = Course_lecture::where('lesson_id', $lesson->id)->get();
-                if (count($lectures) > 0)
-                {
-                    foreach ($lectures as $lecture)
-                    {
-                        $lecture = Course_lecture::find($lecture->id);
-                        if ($lecture)
-                        {
-                            $this->deleteFile($lecture->file_path); // delete file from server
-
-                            if ($lecture->type == 'vimeo')
-                            {
-                                if ($lecture->url_path)
-                                {
-                                    $this->deleteVimeoVideoFile($lecture->url_path);
-                                }
-                            }
-
-                            Course_lecture_views::where('course_lecture_id', $lecture->id)->get()->map(function ($q) {
-                                $q->delete();
-                            });
-
-                            $this->lectureModel->delete($lecture->id); // delete record
-                        }
-                    }
-                }
-                //end:: lecture delete
-                $this->lessonModel->delete($lesson->id);
-            }
-        }
-        //end: lesson delete
-
-        $this->deleteFile($course->image);
-        $this->deleteVideoFile($course->video);
+        $course->subscription?->delete();
+        $course->subscription_courses()->dump();
         $course->delete();
         $this->showToastrMessage('success', __('Course has been deleted.'));
         return redirect()->back();
@@ -276,33 +243,78 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        if (Course::where('slug', Str::slug($request->title))->count() > 0)
-        {
-            $slug = Str::slug($request->title) . '-'. rand(100000, 999999);
-        } else {
-            $slug = Str::slug($request->title);
-        }
+        $carbonDate = Carbon::parse($request->date);
+        // Get the day of the week as a string (e.g., 'Monday', 'Tuesday')
+        $dayOfWeek = $carbonDate->format('l');
 
-        $data = [
-            'code' => $request->code,
+        // Alternatively, you can get the day as a numeric representation (0 = Sunday, 1 = Monday, etc.)
+        $numericDayOfWeek = $carbonDate->dayOfWeek;
+
+        // You can also get the abbreviated day name (e.g., 'Mon', 'Tue')
+        $abbreviatedDayOfWeek = $carbonDate->format('D');
+
+        $course_data = [
+            'code' => 'DA-'.uniqid(),
             'title' => $request->title,
             'instructor_id' => $request->instructor_id,
             'subject_id' => $request->subject_id,
             'department_id' => $request->department_id,
             'content' => $request->content,
             'price' => $request->price,
-            'time' => $request->time,
-            'date_to' => $request->date_to,
-            'date_from' => $request->date_from,
-            'status' => $request->status ? 1 : 0,
+            'time' => $request->date_time,
+            'date' => $request->date,
+            'status' => $request->status == 1 ? 1 : 0,
+            'day' => $abbreviatedDayOfWeek,
         ];
 
+        $course = Course::create($course_data);
 
-        $course = $this->model->create($data);
+        Subscription::create([
+            'name' => $course_data['title'],
+            'course_id' => $course->id,
+            'value' => $course_data['price'],
+            'department_id' => $course_data['department_id'],
+            'subject_id' => $course_data['subject_id'],
+            'start_date' => $course_data['date'],
+            'status' => $course_data['status'],
+        ]);
 
 
-        return redirect(route('admin.course.index', [$course->uuid, 'step=category']));
+
+        return redirect()->route('admin.course.index')->with('success','تمت اضافة الدورة بنجاح');
     }
+
+    public function update(Request $request,Course $course)
+    {
+        $course_data = [
+            'code' => 'DA-'.uniqid(),
+            'title' => $request->title,
+            'instructor_id' => $request->instructor_id,
+            'subject_id' => $request->subject_id,
+            'department_id' => $request->department_id,
+            'content' => $request->content,
+            'price' => $request->price,
+            'time' => $request->date_time,
+            'date' => $request->date,
+            'status' => $request->status == 1 ? 1 : 0,
+        ];
+
+        $course->update($course_data);
+
+        $course->subscription->update([
+            'name' => $course_data['title'],
+            'value' => $course_data['price'],
+            'department_id' => $course_data['department_id'],
+            'subject_id' => $course_data['subject_id'],
+            'start_date' => $course_data['date'],
+            'status' => $course_data['status'],
+        ]);
+
+
+
+        return redirect()->route('admin.course.index')->with('success','تم تعديل الدورة بنجاح');
+    }
+
 
     public function courseUploadRuleStore(Request $request)
     {

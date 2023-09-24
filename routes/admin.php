@@ -148,13 +148,15 @@ Route::group(['prefix' => 'promotions', 'as' => 'promotion.'], function () {
 
 Route::prefix('course')->group(function () {
     Route::get('/', [CourseController::class, 'index'])->name('admin.course.index');
-    Route::get('view/{uuid}', [CourseController::class, 'view'])->name('admin.course.view');
+    Route::get('view/{course}', [CourseController::class, 'view'])->name('admin.course.view');
     Route::get('create', [CourseController::class, 'create'])->name('admin.course.create');
+    Route::get('edit/{course}', [CourseController::class, 'edit'])->name('admin.course.edit');
+    Route::post('update/{course}', [CourseController::class, 'update'])->name('admin.course.update');
     Route::get('approved', [CourseController::class, 'approved'])->name('admin.course.approved');
     Route::get('review-pending', [CourseController::class, 'reviewPending'])->name('admin.course.review_pending');
     Route::get('hold', [CourseController::class, 'hold'])->name('admin.course.hold');
     Route::get('status-change/{uuid}/{status}', [CourseController::class, 'statusChange'])->name('admin.course.status-change');
-    Route::get('delete/{uuid}', [CourseController::class, 'delete'])->name('admin.course.delete');
+    Route::get('delete/{course}', [CourseController::class, 'delete'])->name('admin.course.delete');
     Route::post('store', [CourseController::class, 'store'])->name('admin.course.store');
 });
 
@@ -210,12 +212,22 @@ Route::prefix('course')->group(function () {
         Route::get('edit/{id}', [GoalController::class, 'edit'])->name('admin.goals.edit');
         Route::post('update/{id}', [GoalController::class, 'update'])->name('admin.goals.update');
         Route::get('delete/{id}', [GoalController::class, 'destroy'])->name('admin.goals.delete');
+        Route::get('create/review', [GoalController::class, 'create_review'])->name('admin.goals.create.review');
     });
 
 
     Route::prefix('assignments')->group(function () {
         Route::get('/', [AssignmentController::class, 'index'])->name('admin.assignments.index');
+        Route::get('student', [AssignmentController::class, 'listing'])->name('admin.assignments.student.index');
+        Route::get('assignments', [AssignmentController::class, 'assingments_index'])->name('admin.assignments.assignment.index');
+        Route::get('assignments/edit/{assignment}', [AssignmentController::class, 'assingments_edit'])->name('admin.assignments.assignment.edit');
+        Route::post('assignments/update/{assignment}', [AssignmentController::class, 'assingments_update'])->name('admin.assignments.assignment.update');
+        Route::get('assignments/delete/{assignment}', [AssignmentController::class, 'assingments_delete'])->name('admin.assignments.assignment.delete');
+        Route::post('store_mark', [AssignmentController::class, 'store_mark'])->name('admin.assignments.store_mark');
+        Route::get('student/list', [AssignmentController::class, 'student_list'])->name('admin.assignments.assignment.student.list');
+        Route::post('student/store', [AssignmentController::class, 'student_store'])->name('admin.assignments.assignment.store');
         Route::get('create', [AssignmentController::class, 'create'])->name('admin.assignments.create');
+        Route::get('create_points/{student}/{subject}', [AssignmentController::class, 'create_points'])->name('admin.assignments.create_points');
         Route::post('store', [AssignmentController::class, 'store'])->name('admin.assignments.store');
         Route::get('edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
         Route::post('update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
@@ -238,6 +250,7 @@ Route::prefix('course')->group(function () {
         Route::post('update_quran/{followup}', [FollowupController::class, 'updateQuran'])->name('admin.followup.updateQuran');
         Route::post('update_reading/{followup}', [FollowupController::class, 'updateReading'])->name('admin.followup.updateReading');
         Route::get('delete/{followup}', [FollowupController::class, 'destroy'])->name('admin.followup.delete');
+        Route::get('change_status', [FollowupController::class, 'change_status'])->name('admin.followup.change_status');
     });
 
     Route::get('course-upload-rules', [CourseController::class, 'courseUploadRuleIndex'])->name('course-rules.index');
@@ -273,6 +286,7 @@ Route::prefix('course')->group(function () {
        Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
         Route::post('update/{id}', [StudentController::class, 'update'])->name('student.update');
         Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
+        Route::get('archive/{id}', [StudentController::class, 'archive'])->name('student.archive');
         Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
 
     });
@@ -397,7 +411,7 @@ Route::prefix('course')->group(function () {
     Route::post('/parent_infos', [ParentInfoController::class, 'store'])->name('parent_infos.store');
     Route::get('/parent_infos/{id}', [ParentInfoController::class, 'show'])->name('parent_infos.show');
     Route::get('/parent_infos/{id}/edit', [ParentInfoController::class, 'edit'])->name('parent_infos.edit');
-    Route::post('/parent_infos/{id}', [ParentInfoController::class, 'update'])->name('parent_infos.update');
+    Route::post('/parent_infos/{parent}', [ParentInfoController::class, 'update'])->name('parent_infos.update');
     Route::delete('/parent_infos/{id}', [ParentInfoController::class, 'destroy'])->name('parent_infos.destroy');
 
     Route::prefix('employees')->group(function () {
@@ -445,7 +459,7 @@ Route::prefix('report')->group(function () {
     Route::post('change-consultation-status', [ReportController::class, 'changeConsultationStatus'])->name('report.changeConsultationStatus');
 });
 
-Route::prefix('category')->group(function () {
+Route::prefix('departments')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('category.index');
     Route::get('create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('store', [CategoryController::class, 'store'])->name('category.store');

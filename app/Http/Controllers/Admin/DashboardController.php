@@ -85,6 +85,14 @@ class DashboardController extends Controller
         return view('student.dashboard', $data);
     }
 
+
+    public function parent_dashboard()
+    {
+        $data['title'] = 'Dashboard';
+
+        return view('parent.dashboard', $data);
+    }
+
     public function instructor_dashboard(){
         $data['title'] = 'Dashboard';
 

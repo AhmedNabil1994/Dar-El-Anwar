@@ -165,9 +165,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#" class="archeived" data-id="{{$student->id}}">
+                                            @if($student->status != 0)
+                                            <a href="{{route('student.archive',$student->id)}}" class="archeived" data-id="{{$student->id}}">
                                                 <img style="width:50px" src="{{asset('admin/images/students/archived.png')}}" alt="edit">
                                             </a>
+                                            @endif
                                         </td>
                                         <td>
                                             <a href="#">

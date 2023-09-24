@@ -121,42 +121,86 @@
 
                                 <hr>
 
-                                @foreach($questions as $question)
-                                    <div class="col-md-6">
-                                        <div class="input__group mb-25">
-                                            <!-- <label>{{trans('website.'.$question->questions)}} <span class="text-danger">*</span></label> -->
-                                            <label>متابعة القرآن <span class="text-danger">*</span></label>
-                                            <textarea class="form-text" name="questions[]"></textarea>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-
 
 
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
-                                        <label>{{trans('website.status')}} <span class="text-danger">*</span></label>
-                                        <select name="status" class="form-control" />
-                                            <option value="" selected>{{trans('website.status')}}</option>
-                                            <option value="1" >active</option>
-                                            <option value="0" >inactive</option>
-                                        </select>
+                                        <label>مدى الالتزام بخطة التسميع وكمية المراجعه المقررة بسجلات الطالب
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="adherence_to_the_recitation_plan_and_the_amount_of_review_scheduled_for_the_students_records">
+                                        <textarea class="form-text" style="height: 150px" name="adherence_to_the_recitation_plan_and_the_amount_of_review_scheduled_for_the_students_records"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى الأجادة في الوقوف على أخطاء الطلاب لدى التسميع ومعالجة تلك الأخطاء
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="proficiency_in_identifying_students_errors_during_listening_and_addressing_those_errors">
+                                        <textarea class="form-text" style="height: 150px" name="proficiency_in_identifying_students_errors_during_listening_and_addressing_those_errors"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى متابعه انتظام الطلاب وحضورهم في الوقت المحدد ومتابعة الطلاب الغائبين
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="monitoring_students_regularity_and_attendance_on_time_and_following_up_on_absent_students">
+                                        <textarea class="form-text" style="height: 150px" name="monitoring_students_regularity_and_attendance_on_time_and_following_up_on_absent_students"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى الالتزام بقصر الاسناد على الطلاب المجازين وفى المستويات المقررة للأجازة
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="commitment_to_restricting_grants_to_students_who_are_on_leave_and_at_the_levels_specified_for_the_leave">
+                                        <textarea class="form-text" style="height: 150px" name="commitment_to_restricting_grants_to_students_who_are_on_leave_and_at_the_levels_specified_for_the_leave"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى الاجادة فى بمن لدية ضعف في القراءة والتجويد
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="proficiency_among_those_who_have_weakness_in_reading_and_intonation">
+                                        <textarea class="form-text" style="height: 150px" name="proficiency_among_those_who_have_weakness_in_reading_and_intonation"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى وجود محفوظات خلال اكتر من دورتين لكامل المحفوظ
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="which_archives_exist_for_more_than_two_cycles_for_the_entire_archive">
+                                        <textarea class="form-text" style="height: 150px" name="which_archives_exist_for_more_than_two_cycles_for_the_entire_archive"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>ملاحظات حول مستوى بعض الطلاب ودفاترهم
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="notes_about_the_level_of_some_students_and_their_notebookt">
+                                        <textarea class="form-text" style="height: 150px" name="notes_about_the_level_of_some_students_and_their_notebookt"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>تعقيب المعلم<span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="teachers_comment">
+                                        <textarea class="form-text" style="height: 150px" name="teachers_comment"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
-                                        <label>{{trans('website.type')}} <span class="text-danger">*</span></label>
-                                        <select name="type" class="form-control" />
-                                        <option value="" selected>{{trans('website.type')}}</option>
-                                        <option value="1" >follow up teacher</option>
-                                        <option value="2" >follow up quran</option>
-                                        <option value="3" >follow up reading</option>
-                                        <option value="4" >follow up classroom</option>
-                                        </select>
+                                        <label>توصيات المشرف<span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="supervisor_recommendations">
+                                        <textarea class="form-text" style="height: 150px"  name="supervisor_recommendations"></textarea>
                                     </div>
                                 </div>
+
+
+
+
+
+
+
 
                             <div class="row mb-3">
                                 <div class="col-md-12 text-right">

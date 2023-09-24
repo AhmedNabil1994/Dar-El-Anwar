@@ -10,11 +10,93 @@ use App\Models\Instructor;
 use App\Models\rc;
 use App\Models\Student;
 use App\Models\StudentDuties;
+use App\Models\StudentNotification;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentController extends Controller
 {
+
+    public function student_store(Request $request)
+    {
+        $assignment = Assignment::find($request->assignment_id);
+        foreach ($request->checks as $student){
+            $assignment->student()->sync($student);
+            StudentNotification::create([
+                'user_id' => $student,
+                'text' => 'تم اضافة واجب لك',
+                'sender_id' => 1,
+            ]);
+        }
+
+
+        return redirect()->back()->with('success','تمت اضافة واجب للطالب');
+    }
+
+    public function student_list(Request $request)
+    {
+        $data['all_subjects'] = Subject::query()->orderBy('id','DESC');
+        $data['count'] = Student::count();
+        $data['departments'] = Department::all();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['subjects'] = Subject::all();
+        $data['assignments'] = Assignment::all();
+        $data['filter_students'] = Student::whereStatus(1)->get();
+        $data['instructors'] = Instructor::whereStatus(1)->get();
+        if($request->filterByDept)
+            $data['all_subjects']->where('department_id',$request->filterByDept);
+        if($request->filterByClass)
+            $data['all_subjects']->whereHas('student',function ($q) use($request)
+            {
+                $q->where('class_room_id',$request->filterByClass);
+            });
+        if($request->filterBySubject)
+            $data['all_subjects']->where('id',$request->filterBySubject);
+
+        if($request->filterByStudent)
+            $data['all_subjects']->where('student',$request->filterByStudent);
+        $data['all_subjects'] = $data['all_subjects']->paginate(25);
+        return view('admin.assignment.assignment.index',$data);
+    }
+    public function listing()
+    {
+        $data['assignments'] = Assignment::whereStatus(1)->paginate(25);
+        return view('admin.assignment.student.list',$data);
+    }
+    public function assingments_index(Request $request)
+    {
+        $data['assignments'] = Assignment::whereStatus(1)->orderBy('id','DESC');
+
+        if($request->search){
+            $data['assignments']->where('name','like','%'.$request->search.'%');
+        }
+        $data['assignments'] = $data['assignments']->paginate(25);
+        return view('instructor.assignment.assignments.list',$data);
+    }
+    public function assingments_edit(Request $request,Assignment $assignment)
+    {
+
+        $data['subjects'] = Subject::all();
+        $data['assignment'] = $assignment;
+        return view('admin.assignment.edit',$data);
+    }
+    public function assingments_delete(Request $request,Assignment $assignment)
+    {
+        $assignment->delete();
+        return redirect()->route('admin.assignments.assignment.index')->with('success', 'تم حذف الواجب');
+    }
+
+    public function assingments_update(Request $request,Assignment $assignment)
+    {
+        $subject = Subject::find($request->subject_id);
+        $assignment->update([
+            'name' => $request->name,
+            'subject_id' => $request->subject_id,
+            'instructor_id' => $subject->instructor?->id,
+        ]);
+        return redirect()->route('admin.assignments.assignment.index')->with('success', 'تم تعديل الواجب');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,29 +104,61 @@ class AssignmentController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $data['students'] = Student::query()->whereStatus(1)->paginate(25);
-        $data['count'] = Student::count();
-        $data['departments'] = Department::all();
-        $data['class_rooms'] = ClassRoom::all();
-        $data['subjects'] = Subject::all();
-            $data['filter_students'] = Student::whereStatus(1)->get();
-        $data['instructors'] = Instructor::whereStatus(1)->get();
-        if($request->dateFrom || $request->dateTo)
-            $data['students']->whereBetween('created_at', [$request->dateFrom, $request->dateTo])->get();
-        if($request->filterByDept)
-            $data['students']->where('department',$request->filterByDept);
-        if($request->filterByClass)
-            $data['students']->where('class',$request->filterByClass);
-        if($request->filterBySubject)
-            $data['students']->where('subject_id',$request->filterBySubject);
-        if($request->filterByInst)
-            $data['students']->where('teacher',$request->filterByInst);
+        $data['all_subjects'] = Subject::query()->with('student')->orderBy('id','DESC');
 
-        if($request->filterByStudent)
-            $data['students']->where('student',$request->filterByStudent);
+        if($request->instructor_id)
+            $data['all_subjects']->where('instructor_id',$request->instructor_id);
+        if($request->date_to)
+            $data['all_subjects']->where('created_at','<=',$request->date_to);
+        if($request->date_from)
+            $data['all_subjects']->where('created_at','>=',$request->date_from);
+        if($request->department_id)
+            $data['all_subjects']->where('department_id',$request->department_id);
+         if($request->subject_id)
+            $data['all_subjects']->where('id',$request->subject_id);
+
+
+
+
+        $data['assignment_count'] = Assignment::all();
+        $data['all_subjects'] = $data['all_subjects']->paginate(25);
+        $data['instructors'] = Instructor::whereStatus(1)->get();
+        $data['departments'] = Department::whereStatus(1)->get();
+        $data['classes'] = ClassRoom::whereStatus(1)->get();
+        $data['subjects'] = Subject::all();
+
 
         return view('admin.assignment.list',$data);
+    }
+
+    public function store_mark(Request $request)
+    {
+        //
+        $mark = $request->markInput;
+        $student = $request->student_id;
+        $assignment_id = $request->assignment_id;
+        $assignment = StudentDuties::where('student_id',$student)
+            ->where('assignment_id',$assignment_id)->first();
+
+        $assignment->update([ "marks" =>$mark]);
+
+        return redirect()->back()->with('success','تمت اضافة الدرجة');
+
+    }
+
+    public function create_points(Request $request,Student $student,Subject $subject)
+    {
+        $data['all_subjects'] = Subject::query()
+            ->where('instructor_id',Auth::guard('instructors')->id());
+
+
+        $data['assignments'] = StudentDuties::query()->where('student_id',$student->id)
+            ->whereHas('assignment',function ($q) use ($subject){
+                $q->where('subject_id',$subject->id);
+            });
+        $data['assignments'] = $data['assignments']->paginate(25);
+
+        return view('admin.assignment.student.list',$data);
     }
 
     /**
@@ -70,42 +184,13 @@ class AssignmentController extends Controller
     public function store(Request $request)
     {
         //
-        $mark = $request->markInput;
-        $student = $request->student_id;
-        $assignment_id = $request->assignment_id;
-        $subject = $request->subject_id;
-        $dept = $request->dept_id;
-        $instructor = $request->instructor_id;
-
-        $assignment = Assignment::where('student_id',$student)
-                    ->where('subject_id',$subject)
-                    ->where('instructor_id',$instructor)
-                    ->where('department_id',$dept)->first();
-
-        if(!$assignment) {
-            $marks = [
-                $assignment_id =>  $mark,
-            ];
-            $marks = json_encode($marks);
-
-            $assignment = Assignment::create([
-                "student_id" => $student,
-                "subject_id" => $subject,
-                "department_id" => $dept,
-                "instructor_id" => $instructor,
-                "marks" => $marks,
-            ]);
-        }
-        else {
-            $old_marks = json_decode($assignment->marks);
-
-            $old_marks->$assignment_id = $mark;
-
-            $old_marks = json_encode($old_marks);
-            $assignment->update([ "marks" =>$old_marks]);
-        }
-
-        return redirect()->route('admin.assignments.index');
+        $subject = Subject::find($request->subject_id);
+        $assignment = Assignment::create([
+            'name' => $request->name,
+            'subject_id' => $request->subject_id,
+            'instructor_id' => $subject->instructor?->id,
+        ]);
+        return redirect()->route('admin.assignments.assignment.index')->with('success', 'تم اضافة الواجب');
 
     }
 
@@ -115,9 +200,11 @@ class AssignmentController extends Controller
      * @param  \App\Models\rc  $rc
      * @return \Illuminate\Http\Response
      */
-    public function show(rc $rc)
+
+    public function create()
     {
-        //
+        $data['subjects'] = Subject::all();
+        return view('admin.assignment.create',$data);
     }
 
     /**

@@ -28,6 +28,16 @@ class Course extends Model
         return $this->belongsTo(Instructor::class, 'instructor_id');
     }
 
+    public function subscription_courses()
+    {
+        return $this->belongsToMany(Subscription::class, 'subscription_courses');
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class,'course_id');
+    }
+
 
 
     public function department()

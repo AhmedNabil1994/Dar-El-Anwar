@@ -118,7 +118,7 @@
                                             @foreach($appointments as $appointment)
                                                 <option value="{{$appointment->id}}"
                                                 >
-                                                    {{$appointment->name}} - {{$appointment->day}} - {{$appointment->time_from}} - {{$appointment->time_to}}
+                                                    {{$appointment->title}} - {{trans('website.'.$appointment->day)}} - {{Carbon\Carbon::parse($appointment->time)->format('h:i A')}}
                                                 </option>
                                             @endforeach
                                         </select>

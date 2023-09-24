@@ -40,6 +40,10 @@ function get_notify()
         $notifications = \App\Models\InstructorNotification::orderBy('id','DESC')
             ->where('user_id', Auth::guard('instructors')->id())
             ->where('is_seen','no')->get();
+    if(Auth::guard('parents')->check())
+        $notifications = \App\Models\InstructorNotification::orderBy('id','DESC')
+            ->where('user_id', Auth::guard('parents')->id())
+            ->where('is_seen','no')->get();
     return $notifications;
 }
 
@@ -87,6 +91,14 @@ function get_absence_notify()
                     ]);
             }
     }
+}
+
+function get_follow_up_rsponse($followup_id,$question)
+{
+
+    $response = \App\Models\FollowupResponses::where('followup_id',$followup_id)
+        ->where('question',$question)->first();
+    return $response?->response;
 }
 
 function get_subscription_notify()
