@@ -5,8 +5,8 @@
         <div class="container-fluid">
             <div class="chat" style="min-height: 95vh;height: auto;">
               <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -28,9 +28,9 @@
 
               <div class="row" style="min-height: 95%;height: auto;">
               <!-- Start chat sidebar -->
-              <div class="row">
+              <!-- <div class="row"> -->
+                <div class="customers__area__header bg-style mb-30">  
                 <div class="col-md-12">
-                    <div class="customers__area__header bg-style mb-30">  
               <div class="col-md-12">
                   <div class="chat__content px-3">
                     <div class="chat__filters ">
@@ -69,11 +69,11 @@
                     </div>
                     </div>
                     </div>
-                    </div>
+                    <!-- </div> -->
 
-                    <div class="row">
+                    <!-- <div class="row"> -->
+                      <div class="customers__area bg-style mb-30">
                     <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                       <div class="customers__table" style="overflow: auto">
                           <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
                               <thead >
@@ -99,7 +99,7 @@
                       </div>
                       </div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
           </div>

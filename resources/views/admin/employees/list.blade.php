@@ -134,7 +134,7 @@
                                                 <td class="text-center">{{ $employee->management }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-between">
-                                                    <a href="{{ route('employees.edit', $employee->id)}}" class="btn btn-primary" title="{{ __('Edit Details') }}">
+                                                    <a href="{{ route('employees.edit', $employee->id)}}" class="edit-style btn btn-primary" title="{{ __('Edit Details') }}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-danger ms-2"

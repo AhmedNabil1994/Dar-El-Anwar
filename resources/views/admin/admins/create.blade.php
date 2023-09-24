@@ -5,23 +5,25 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add Admin') }}</h2>
+                                <h2>{{ __(' أضف مسؤول') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('All Admins') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Add Admins') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ __('كل السؤولين') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('كل السؤولين') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
 
@@ -29,10 +31,11 @@
 {{--            @can('create-admins', 'admins')--}}
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>{{__('Create Admin')}}</h5>
+                            <h5>{{__('تعيين مسؤول ')}}</h5>
                         </div>
                         <div class="ibox-content mt-15">
 
@@ -40,7 +43,7 @@
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="form-group col-md-6">
-                                        <label for="name">{{__('Name')}}</label>
+                                        <label for="name">{{__('الاسم')}}</label>
 
                                         <input type="text"
                                                class="form-control"
@@ -53,7 +56,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
 
-                                        <label for="email">{{__('Email')}}</label>
+                                        <label for="email">{{__('البريد الإلكتروني')}}</label>
                                         <input type="email"
                                                class="form-control"
                                                id="email"
@@ -65,7 +68,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="form-group col-md-6">
-                                        <label for="username">{{__('Username')}}</label>
+                                        <label for="username">{{__('اسم المستخدم')}}</label>
                                         <input type="text"
                                                class="form-control"
                                                id="username"
@@ -75,7 +78,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="phone">{{__('Phone')}}</label>
+                                        <label for="phone">{{__('الهاتف')}}</label>
                                         <input type="text"
                                                class="form-control"
                                                id="phone"
@@ -85,7 +88,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-6 mt-5">
-                                        <label for="role">{{__('Role')}}</label>
+                                        <label for="role">{{__('الدور')}}</label>
                                         <select type="text"
                                                class="form-control"
                                                id="role"
@@ -102,7 +105,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="form-group col-md-6">
-                                        <label for="password">{{__('Password')}}</label>
+                                        <label for="password">{{__('كلمة السر')}}</label>
                                         <input type="password"
                                                class="form-control"
                                                id="password"
@@ -113,7 +116,7 @@
                                     </div>
                             <!--  password confirm -->
                                     <div class="form-group col-md-6">
-                                        <label for="password_confirmation">{{__('Confirm Password')}}</label>
+                                        <label for="password_confirmation">{{__('تأكيد كلمة السر')}}</label>
                                         <input type="password"
                                                class="form-control"
                                                id="password_confirmation"
@@ -125,8 +128,8 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn buttons-style">{{__('Save')}}</button>
-                                    <a href="{{route('admins.index')}}" class="btn btn-secondary">{{__('Cancel')}}</a>
+                                    <button type="submit" class="btn buttons-style">{{__('حفظ')}}</button>
+                                    <a href="{{route('admins.index')}}" class="btn btn-secondary">{{__('إلغاء')}}</a>
                                 </div>
                             </form>
 
@@ -138,6 +141,7 @@
 
 
 
+        </div>
         </div>
     </div>
     <!-- Page content area end -->

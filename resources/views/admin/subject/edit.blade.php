@@ -6,6 +6,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -24,6 +25,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -82,7 +84,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-12 text-right">
-                                    <button class="btn btn-primary" type="submit">{{ trans('website.update') }}</button>
+                                    <button class="btn buttons-style" type="submit">{{ trans('website.update') }}</button>
                                 </div>
                             </div>
 

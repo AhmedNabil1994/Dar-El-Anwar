@@ -168,7 +168,7 @@
             <div id="modal" class="modal">
                 <div class="modal-content">
                     <div class="container">
-                        <h2 class="mb-3">اضافة اشتراك</h2>
+                        <h2 class="mb-3">إضافة اشتراك</h2>
                         <form method="POST" id="editForm" action="{{route('subscriptions.store')}}">
                             @csrf
                             <div class="form-group">
@@ -195,8 +195,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">اضافة</button>
-                            <a id="closeModalBtn" class="btn btn-primary">الغاء</a>
+                            <button type="submit" class="btn buttons-style">إضافة</button>
+                            <a id="closeModalBtn" class="btn btn-secondary">الغاء</a>
                         </form>
                     </div>
                 </div>

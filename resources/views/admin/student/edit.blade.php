@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -23,20 +24,21 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-center">
-                            <button class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</button>
-                            <a href="{{route('review.create',$student->id)}}" class="btn mx-3 buttons-style">{{ trans('التقييمات') }}</a>
-                        </div>
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title d-flex justify-content-between align-items-center">
                             <h2>{{ trans('website.add_student') }}</h2>
+                            <div class="item-title">
+                                <button class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</button>
+                                <a href="{{route('review.create',$student->id)}}" class="btn mx-3 buttons-style">{{ trans('التقييمات') }}</a>
+                            </div>
                         </div>
                         <form action="{{route('student.update',$student)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="row">
+                                <div class="row justify-content-evenly">
                                     <div class="col-md-3">
                                         <div class="upload-img-box mb-25">
                                             <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this)">
@@ -50,7 +52,7 @@
                                     @if ($errors->has('image'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('image') }}</span>
                                     @endif
-                                    <p>{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p>
+                                    <!-- <p>{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p> -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">

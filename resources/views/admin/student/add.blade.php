@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Page content area start -->
-    <div class="page-content">
+    <div class="page-content" >
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -25,8 +25,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row" id = "print-form">
+                <div class="col-md-12 ">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.add_student') }}</h2>
@@ -48,7 +48,7 @@
                                     @if ($errors->has('image'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('image') }}</span>
                                     @endif
-                                    <p class = "image-desc">{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p>
+                                    <!-- <p class = "image-desc">{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p> -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
@@ -310,7 +310,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group mt-25 mb-25">
                                         <label for="how_did_you_hear_about_us">{{trans("website.how_know_about_us")}}</label>
-                                        <textarea name="how_did_you_hear_about_us" placeholder='{{trans("website.how_know_about_us")}}' class="form-control"></textarea>
+                                        <textarea style="height:41px;" name="how_did_you_hear_about_us" placeholder='{{trans("website.how_know_about_us")}}' class="form-control"></textarea>
                                         @if ($errors->has('how_did_you_hear_about_us'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('how_did_you_hear_about_us') }}</span>
                                         @endif
@@ -388,6 +388,7 @@
 @push('script')
     <script src="{{asset('admin/js/custom/image-preview.js')}}"></script>
     <script src="{{asset('admin/js/custom/admin-profile.js')}}"></script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#government-select').change(function() {
@@ -665,9 +666,17 @@
         }
     </script>
     <script>
-        $("#print").on("click",function (){
-            console.log("print clicked")
+
+        $(document).ready(function(){
+            $("#print").on("click",function printDiv() {
+            console.log("clicked")
+            $("#print-form").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
         })
+    })
+        
     </script>
 
 @endpush

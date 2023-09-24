@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -24,17 +25,27 @@
                     </div>
                 </div>
             </div>
+            </div>
 
 
             {{--            @can('create-admins', 'admins')--}}
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title row row-cols-6 justify-content-between m-5">
-                            <h5>{{trans('website.editExam')}}</h5>
-                            <button class="btn buttons-style btn-sm" id="addRowBtn">{{trans('website.add_row')}}</button>
+                        <!-- <div class="row"> -->
+                        <!-- <div class="col-md-12"> -->
+                        <div class="ibox-title row row-cols-6 justify-content-between">
+                            <div>
+                                <h5>{{trans('website.editExam')}}</h5>
+                            </div>
+                            <div>
+                                <button class="btn buttons-style btn-sm w-100" id="addRowBtn">{{trans('website.add_row')}}</button>
+                            </div>
                         </div>
+                        <!-- </div> -->
+                        <!-- </div> -->
                         <div class="ibox-content mt-15">
 
                             <form id="exam_form" method="post" action="{{route('admin.exam.update',$exam->id)}}">
@@ -69,8 +80,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <hr>
+                                <!-- <hr> -->
                                 <div class="row mb-4">
+                                    <!-- <div class="customers__area bg-style mb-30"> -->
                                     <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                                         <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
                                             <thead style="background-color: #50bfa5;">
@@ -106,12 +118,14 @@
                                         </div>
 
                                     </div>
+                                <!-- </div> -->
                                 </div>
 
                             </form>
 
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             {{--            @endcan--}}

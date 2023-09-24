@@ -32,10 +32,12 @@
                 </div>
                 <div class="text-end mb-3 d-flex justify-content-start">
                     <button class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
-                    <a class="btn btn-secondary" id="printTable">قم بطباعة الجدول</a>
+                    <button class="btn btn-secondary" id="printTable" type= "button">قم بطباعة الجدول</button>
 
 
                 </div>
+
+                <!-- <div class="form_container"> -->
                 <div class="col-md-3 m-3">
                     <label for="filterByLevel">{{trans("website.level")}}:</label>
                     <select class="form-control" name="filterByLevel">
@@ -97,6 +99,7 @@
                     <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                     <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>
+                <!-- </div> -->
             </form>
         </div>
 
@@ -106,7 +109,7 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table" style="overflow: auto;">
+                        <div class="customers__table print-table" style="overflow: auto;">
                             <table  class="row-border data-table-filter table-style table table-bordered table-striped" >
                                 <thead >
                                 <tr>
@@ -224,6 +227,7 @@
 @push('script')
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
     <script>
         'use strict'
         $(".status").change(function () {
@@ -326,3 +330,16 @@
 
 
 @endpush
+<!-- <script>
+
+        $(document).ready(function(){
+            $("#printButton").on("click",function printDiv() {
+            console.log("clicked")
+            $(".form_container").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
+        })
+    })
+        
+    </script> -->

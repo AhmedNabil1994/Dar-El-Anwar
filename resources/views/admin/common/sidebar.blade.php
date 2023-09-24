@@ -497,7 +497,7 @@
                 <li class="{{ active_if_match('followup/quran') }}">
                     <a href="{{route('admin.followup.quran')}}">
                         
-                        <span>{{ __('تقرير متابعة القران') }}</span>
+                        <span>{{ __('تقرير متابعة القرآن') }}</span>
                     </a>
                 </li>
 

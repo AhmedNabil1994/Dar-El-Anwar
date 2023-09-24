@@ -1,8 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="page-content">
-        <div class="container-fluid">
+<div class="page-content">
+    <div class="container-fluid">
+            <div class="row">    
+                <div class="customers__area bg-style mb-30">    
+                <div class="col-md-12">    
         <h1>إضافة حركة وارد (قبض)</h1>
 
         <form action="{{ route('accounts.updateTransaction',$financialAccount) }}" method="POST">
@@ -25,9 +28,11 @@
                 <textarea name="description" class="form-control">{{$financialAccount->description}}</textarea>
             </div>
 
-
-            <button type="submit" class="btn buttons-style">حفظ</button>
+            <button type="submit" class="btn buttons-style mt-2">حفظ</button>
         </form>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 @endsection
