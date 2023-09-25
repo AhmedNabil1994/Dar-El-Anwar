@@ -91,7 +91,7 @@
                     <select class="form-control" name="filterByBranch">
                         <option value="">{{trans("website.all")}}</option>
                         @foreach($branches as $branch)
-                            <option value="{{$branch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
+                            <option value="{{$bra   nch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
                         @endforeach
                     </select>
                 </div>
