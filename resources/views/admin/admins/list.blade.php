@@ -32,11 +32,13 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title btn-title-container">
                             <h2>{{ trans('website.admin_list') }}</h2>
-                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
-                            </a>
+                           @can('add-admin')
+                                <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
+                                    <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
+                                </a>
+                            @endcan
                         </div>
-                        <div class="row m-3 ">    
+                        <div class="row m-3 ">
                             <form method="GET" class="row align-items-end justify-content-center" action="{{ route('admins.index') }}">
                                 <div class="col-md-3">
                                     <label class="form-label">بحث</label>
@@ -75,19 +77,19 @@
                                         <td>{{ $admin->private_user == 1? 'نعم' : 'لا' }}</td>
                                         <td>
                                             <div class="action__buttons">
-{{--                                                @can('edit-admins', 'admins')--}}
+                                                @can('edit-admins')
 
                                                 <a href="{{ route('admins.edit', $admin) }}" class=" btn-action mr-1 edit" data-toggle="tooltip" title="Edit">
-                                                    <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
+                                                    <i class="fa text-info fa-edit"></i>
                                                 </a>
-{{--                                                @endcan--}}
+                                                @endcan
 
-{{--                                                    @can('delete-admins', 'admins')--}}
 
-                                                <button type="button" class="btn-action delete" data-id="{{ $admin->id }}" title="{{ __('Delete') }}">
-                                                    <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
-                                                </button>
-{{--                                                @endcan--}}
+                                                    @can('delete-admins')
+                                                        <a href="javascript:void(0);" data-url="{{route('admins.delete', $admin)}}" class="btn-action delete" title="Delete">
+                                                        <i class="fa text-danger fa-trash"></i>
+                                                </a>
+                                                @endcan
 
                                             </div>
                                         </td>
@@ -121,29 +123,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).on('click', '.btn-action.delete', function(e) {
-            e.preventDefault();
-            var admin_id = $(this).data('id');
-            var url = "{{ route('admins.delete') }}";
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: { id: admin_id, _token: "{{ csrf_token() }}" },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        alert(response.message);
-                        window.location.reload();
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    // console.log(xhr.responseText);
-                    alert('Error: ' + xhr.responseText);
-                }
-            });
-        });
 
 
 

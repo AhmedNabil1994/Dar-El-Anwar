@@ -30,15 +30,12 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        if (!Auth::user()->can('all_course')) {
-            abort('403');
-        } // end permission checking
-
-        $data['title'] = 'All Subjects';
-        $subjects = $this->model->getOrderById('DESC', 25);
+        $subjects = Subject::query()->orderBy('id','DESC');
+        if($request->search_key)
+            $subjects->where('name','like','%'.$request->search_key.'%');
+        $subjects = $subjects->paginate(25);
         return view('admin.subject.index', compact('subjects'));
     }
 
@@ -123,8 +120,9 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subject $subject)
     {
         //
+        $subject->delete();
     }
 }

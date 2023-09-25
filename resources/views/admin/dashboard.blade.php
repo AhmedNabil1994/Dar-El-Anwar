@@ -40,6 +40,22 @@
                     </div>
                 </div>
 
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students.png" alt="total students">
+                        </div>
+                        <div class="status__box__text">
+
+                            <a href="{{route('student.index')}}">
+                                <h1 class="color-purple">{{$total_joining_students}}</h1>
+                                <h2>{{ trans('قيد الالتحاق') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
@@ -73,7 +89,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/remove-student.png" alt="rejected students">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{route('student.index',['filterByJoining'=>3])}}">
+                            <a href="{{route('student.index',['filterByJoining'=>'3'])}}">
                                 <h1 class="color-green">{{$excluded_students}}</h1>
                                 <h2>{{ trans('website.rejected') }}</h2>
                             </a>
@@ -204,11 +220,11 @@
                     <div class="revenue__chart-v2__area bg-style">
                         <div class="revenue__chart-v2__top">
                             <div class="revenue__chart-v2__top__left">
-                                <a href="{{ route('subscriptions.index') }}">
+
                                     <div class="content-title">
                                         <h2>{{ __('اجمالي المبيعات في المخزن و الكانتين') }}</h2>
                                     </div>
-                                </a>
+
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">

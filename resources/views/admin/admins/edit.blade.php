@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    @can('manage_promotion')
+
     <!-- Page content area start -->
     <div class="page-content">
         <div class="container-fluid">
@@ -18,7 +18,6 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{ trans('website.all_admins') }}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ trans('website.edit_admin') }}</li>
                                 </ul>
                             </nav>
@@ -85,7 +84,9 @@
                                             id="role"
                                             name="role" >
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                            <option value="{{$role->id}}"
+                                            {{$role->id == $admin->roles->first()?->id ? 'selected' : ''}}
+                                            >{{$role->name}}</option>
                                         @endforeach
                                     </select>
 
@@ -107,6 +108,7 @@
                     <div class="col-md-12">
                         <div class="form-wrapper">
                             <form method="POST" action="{{ route('admins.update.password', $admin->id) }}">
+                                @csrf
                     <div class="row mb-4">
                         <div class="form-group col-md-6">
                             <label for="password">{{trans("website.password")}}</label>
@@ -140,7 +142,6 @@
         </div>
         </div>
     </div>
-    @endcan
 
     <!-- Page content area end -->
 @endsection

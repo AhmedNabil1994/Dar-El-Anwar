@@ -128,7 +128,7 @@ class AbsenceController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'department_id' => $student_subject->subject?->department->id,
-            'level_id' => $student_subject->student?->level?->id,
+            'level_id' => $student_subject->student?->level?->first()?->id,
             'instructor_id' => $request->instructor_id,
             'student_subjects_id' => $request->student_subject,
             'student_id' => $student_subject->student?->id,

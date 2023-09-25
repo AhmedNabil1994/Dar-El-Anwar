@@ -38,11 +38,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        get_goals_today();
+        get_calenders_today();
         get_absence_notify();
         get_subscription_notify();
         get_late_subscription_notify();
         get_welcome_notify();
-
         Schema::defaultStringLength(191);
         Paginator::useBootstrapFive();
 

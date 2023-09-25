@@ -9,60 +9,79 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('اهداف الطلاب') }}</h2>
+                                <h2>{{ trans('بيانات الهدف') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{trans('اهداف الطلاب')}}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('بيانات الهدف')}}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="row">
+
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
+                        <div class="row">
+                            <!-- Name Filter -->
+                            <div class="col-md-2 m-3">
+                                <label for="filterByClass">{{trans("website.class")}}:</label>
+                                <input disabled class="form-control" value="{{$goal->class_room?->name}}">
+                            </div>
+
+                            <div class="col-md-2 m-3">
+                                <label for="filterBy{Code">المواعيد:</label>
+                                <input disabled class="form-control" value="{{$goal->course?->title}}">
+                            </div>
+
+                            <!-- Instructor Filter -->
+                            <div class="col-md-2 m-3">
+                                <label for="filterByInstructor">المدرس:</label>
+
+                                <input disabled class="form-control" value="{{$goal->instructor->employee?->name}}">
+                            </div>
+
+                            <div class="col-md-2 m-3">
+                                <label for="filterByDate">تاريخ التقييم :</label>
+                                <input disabled type="date" class="form-control" name="date" value="{{$goal->target_evaluation_date}}">
+                            </div>
+
+                            <!-- Subject Filter -->
+                            <div class="col-md-2 m-3">
+                                <label for="goal_id">الهدف:</label>
+                                <input disabled type="text" class="form-control"  value="{{$goal->name}}">
+                            </div>
+
+                        </div>
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('website.subjectList') }}</h2>
-                            <a href="{{route('admin.subject.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{ trans('website.addSubject') }} </a>
+                            <h2>{{ __('بيانات الهدف') }}</h2>
                         </div>
                         <div class="customers__table">
-                            <table id="customers-table" class="row-border data-table-filter table-style">
+                            <table id="" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('website.sl') }}</th>
-                                    <th>{{ trans('website.subjectName') }}</th>
-                                    <th>{{ trans('website.department') }}</th>
-                                    <th>{{ trans('website.action') }}</th>
+                                    <th>{{ trans('تم تقييمه') }}</th>
+                                    <th>{{ trans('اسماء الطلاب') }}</th>
+                                    <th>{{ trans('احراء') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($subjects as $subject)
+                                @foreach($students as $student)
                                     <tr class="removable-item">
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$subject->name}}</td>
-                                        <td>{{$subject->department?->name}}</td>
-                                        <td>
-                                            <div class="action__buttons">
-                                                <a href="{{route('admin.subject.edit', [$subject->id])}}" class="btn-action" title="Edit">
-                                                    <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
-                                                </a>
-                                                <a href="javascript:void(0);" data-url="{{route('admin.subject.delete', [$subject->id])}}" class="btn-action delete" title="Delete">
-                                                    <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <td><input type="checkbox" class="bx-checkbox"
+                                            {{$student->exam_result->where('goal_id',$goal->id)->count() > 0?'checked':''}}></td>
+                                        <td>{{$student->name}}</td>
+                                        <td><a href="{{ route('admin.goals.create.student.review',[$student,$goal]) }}" class="btn buttons-style">تقييم</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="mt-3">
-                                {{$subjects->links()}}
-                            </div>
                         </div>
                     </div>
                 </div>

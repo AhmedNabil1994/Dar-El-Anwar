@@ -9,4 +9,13 @@ class StudentGoal extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function goal()
+    {
+        return $this->belongsTo(Goal::class);
+    }
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

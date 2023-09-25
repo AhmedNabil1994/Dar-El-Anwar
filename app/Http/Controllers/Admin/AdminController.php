@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Http\Requests\EditAdminRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -100,7 +101,7 @@ class AdminController extends Controller
         return view('admins.search', compact('admins'));
     }
 
-    public function store(CreateAdminRequest $request)
+    public function store(Request $request)
     {
         $admin = new Admin();
         $admin->name = $request->name;
@@ -110,13 +111,12 @@ class AdminController extends Controller
         $admin->password = Hash::make($request->password);
         $admin->hidden = 1;
         $admin->save();
-
-        $admin->roles()->attach(Role::findOrFail($request->role_id));
+        $admin->roles()->attach($request->role_id);
         if($request->role == 1)
             $admin->update(['private_user'=>1]);
         else
             $admin->update(['private_user'=>0]);
-        return redirect()->route('admins.index')->with('success', 'Admin created successfully.');
+        return redirect()->route('admins.index')->with('success', 'تم اضافة مسئول');
     }
 
     public function edit(Request $request ,Admin $admin)
@@ -146,27 +146,24 @@ class AdminController extends Controller
             $admin->update(['private_user'=>1]);
         else
             $admin->update(['private_user'=>0]);
-        return redirect()->route('admins.index')->with('success', 'Admin updated successfully.');
+        return redirect()->route('admins.index')->with('success', 'تم تعديل المسئول.');
     }
 
-    public function delete(Request $request, Admin $admin)
+    public function delete(Request $request,Admin $admin)
     {
-        $this->authorize('delete-admins');
-        $admin = Admin::findOrFail($request->id);
         if ($admin) {
             $admin->delete();
-            return response()->json(['status' => 'success', 'message' => __('Admin :name has been deleted successfully.', ['name' => $admin->name])]);
+            return response()->json(['status' => 'success', 'message' => __('هذا المسئول :name تمت ازالته بنجاح.', ['name' => $admin->name])]);
         } else {
             return response()->json(['status' => 'error', 'message' =>  __('Admin not found.')]);
         }
     }
 
-    public function updatePassword(EditAdminRequest $request, $id, Admin $admin)
+    public function updatePassword(Request $request, Admin $admin)
     {
-        $admin = Admin::find($id);
         $admin->password = Hash::make($request->input('password'));
         $admin->save();
-        return redirect()->route('admins.index')->with('success', 'Admin updated successfully.');
+        return redirect()->route('admins.index')->with('success', 'تم تغيير كلمة المرور.');
     }
 
 }

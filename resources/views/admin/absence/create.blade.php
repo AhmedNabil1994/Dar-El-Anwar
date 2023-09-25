@@ -119,23 +119,23 @@
                                 @foreach($students_subjects as $student_subject)
                                     <form method="GET" action="{{route('absence.store')}}">
                                         <tr class="removable-item">
-                                            <input type="hidden" name="student_subject" value="{{$student_subject->id}}"/>
-                                            <td><input type="date" class="form-control" name="date" value="{{\Carbon\Carbon::now()}}"></td>
+                                            <input  type="hidden" name="student_subject" value="{{$student_subject->id}}"/>
+                                            <td><input type="date" class="form-control" name="date" required value="{{\Carbon\Carbon::now()->toDateString()}}"></td>
                                             <td>{{$student_subject->student?->code}}</td>
                                             <td>{{$student_subject->student?->name}}</td>
                                             <td>{{$student_subject->subject->department?->name}}</td>
                                             <td>{{$student_subject->student?->level?->first()?->name}}</td>
                                             <td>{{$student_subject->subject->name}}</td>
-                                            <td>{{$student_subject->subject->instructor?->name}}</td>
+                                            <td>{{$student_subject->subject->instructor?->employee?->name}}</td>
                                             <td>
-                                                <select class="form-select-sm" name="instructor_id">
+                                                <select required class="form-select-sm" name="instructor_id">
                                                     <option value="">اختر مدرس</option>
                                                     @foreach($instructors as $instructor)
                                                         <option value="{{$instructor->id}}">{{$instructor->employee->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control" name="time" value="{{\Carbon\Carbon::now()->format('H:i:s')}}"></td>
+                                            <td><input type="time" class="form-control" name="time" required value="{{\Carbon\Carbon::now()->format('H:i:s')}}"></td>
 
                                             <td>
                                                 <div class="action__buttons d-flex  justify-content-center">
@@ -171,34 +171,7 @@
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).on('click', '.btn-action.delete', function(e) {
-            e.preventDefault();
-            var admin_id = $(this).data('id');
-            var url = "{{ route('admins.delete') }}";
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: { id: admin_id, _token: "{{ csrf_token() }}" },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        alert(response.message);
-                        window.location.reload();
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    // console.log(xhr.responseText);
-                    alert('Error: ' + xhr.responseText);
-                }
-            });
-        });
-
-
-
-    </script>
     <!-- Ajax Search Script -->
     <script>
         $(function() {

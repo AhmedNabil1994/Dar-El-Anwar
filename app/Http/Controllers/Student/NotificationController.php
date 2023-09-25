@@ -41,7 +41,6 @@ class NotificationController extends Controller
         $data['notification']->update(['is_seen'=>'yes']);
         $data['notifications'] = Notification::orderBy('id','DESC')
             ->where('user_id', Auth::id())
-            ->where('user_type',1)
             ->get();
 
         return view('admin.notifications.show',$data);

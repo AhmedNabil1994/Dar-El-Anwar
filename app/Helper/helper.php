@@ -27,10 +27,10 @@ use Illuminate\Support\Str;
 
 function get_notify()
 {
+
     if(Auth::guard('admins')->check())
         $notifications = \App\Models\Notification::orderBy('id','DESC')
             ->where('user_id', Auth::id())
-            ->where('user_type',1)
             ->where('is_seen','no')->get();
     if(Auth::guard('students')->check())
         $notifications = \App\Models\StudentNotification::orderBy('id','DESC')
@@ -41,10 +41,39 @@ function get_notify()
             ->where('user_id', Auth::guard('instructors')->id())
             ->where('is_seen','no')->get();
     if(Auth::guard('parents')->check())
-        $notifications = \App\Models\InstructorNotification::orderBy('id','DESC')
+        $notifications = \App\Models\ParentNotification::orderBy('id','DESC')
             ->where('user_id', Auth::guard('parents')->id())
             ->where('is_seen','no')->get();
     return $notifications;
+}
+
+
+function get_goals_today()
+{
+    \App\Models\Goal::where('target_evaluation_date',\Carbon\Carbon::now()->toDateString())
+        ->get();
+    $notify = \App\Models\Notification::where('text','يوجد تقييم اليوم')
+        ->where('is_seen','no')->first();
+    if (!$notify)
+        \App\Models\Notification::create([
+            'user_id' => 1,
+            'sender_id' => 1,
+            'text' => 'يوجد تقييم اليوم',
+        ]);
+}
+
+function get_calenders_today()
+{
+    \App\Models\Calender::where('start',\Carbon\Carbon::now()->toDateString())
+        ->get();
+    $notify = \App\Models\Notification::where('text','لديك مهام اليوم')
+        ->where('is_seen','no')->first();
+    if (!$notify)
+        \App\Models\Notification::create([
+            'user_id' => 1,
+            'sender_id' => 1,
+            'text' => 'لديك مهام اليوم',
+        ]);
 }
 
 
@@ -167,19 +196,6 @@ function get_welcome_notify()
     }
 }
 
-//function get_student_notify()
-//{
-//    $today = now()->format('Y-m-d'); // Get today's date in 'Y-m-d' format
-//
-//    $students = \App\Models\Student::whereDate('created_at','>=', $today)->get();
-//
-//    $notify = \App\Models\StudentNotification::where('text',get_setting('welcome_text'))
-//        ->where('user_id', )
-//        ->where('is_seen', 'no')->first();
-//    if ($students->count() > 0 || $notify > 0) {
-//        return $notify;
-//    }
-//}
 
 if (!function_exists('api_asset')) {
     function api_asset($id)

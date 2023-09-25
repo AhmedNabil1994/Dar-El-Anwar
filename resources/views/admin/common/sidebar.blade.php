@@ -103,6 +103,12 @@
                             </a>
                         </li>
                     @endcan
+                        <li class="{{ active_if_full_match('admin/student/reviews') }}">
+                            <a href="{{route('student.review')}}">
+                                <i class="fa fa-circle"></i>
+                                <span>{{ __('تقييمات الطلاب') }}</span>
+                            </a>
+                        </li>
                 </ul>
             </li>
         @endcan
@@ -636,7 +642,7 @@
                     </li>
 
                     <li class="{{ active_if_full_match('admin/goals/create/review') }}">
-                        <a href="{{route('admin.goals.create.review')}}">
+                        <a href="{{route('admin.goals.index.review')}}">
                             <i class="fa fa-circle"></i>
                             <span>{{__('تقييم الاطفال')}}</span>
                         </a>

@@ -43,50 +43,25 @@ File: Calendar init js
         };
       }
     });
-    var defaultEvents = [{
-      title: 'All Day Event',
-      start: new Date(y, m, 1)
-    }, {
-      title: 'Long Event',
-      start: new Date(y, m, d - 5),
-      end: new Date(y, m, d - 2),
-      className: 'bg-warning'
-    }, {
-      id: 999,
-      title: 'Repeating Event',
-      start: new Date(y, m, d - 3, 16, 0),
-      allDay: false,
-      className: 'bg-info'
-    }, {
-      id: 999,
-      title: 'Repeating Event',
-      start: new Date(y, m, d + 4, 16, 0),
-      allDay: false,
-      className: 'bg-primary'
-    }, {
-      title: 'Meeting',
-      start: new Date(y, m, d, 10, 30),
-      allDay: false,
-      className: 'bg-success'
-    }, {
-      title: 'Lunch',
-      start: new Date(y, m, d, 12, 0),
-      end: new Date(y, m, d, 14, 0),
-      allDay: false,
-      className: 'bg-danger'
-    }, {
-      title: 'Birthday Party',
-      start: new Date(y, m, d + 1, 19, 0),
-      end: new Date(y, m, d + 1, 22, 30),
-      allDay: false,
-      className: 'bg-success'
-    }, {
-      title: 'Click for Google',
-      start: new Date(y, m, 28),
-      end: new Date(y, m, 29),
-      url: 'http://google.com/',
-      className: 'bg-dark'
-    }];
+      $.ajax({
+          type: 'get',
+          url: window.location.origin + '/admin/calender/events',
+          success: function(response) {
+              // Handle the success response, e.g., show a success message
+              response.forEach(function(event){
+                 calendar.addEvent({
+                     title: event.title,
+                     start: event.start,
+                 })
+              })
+          },
+          error: function(error) {
+              // Handle errors, e.g., display validation errors
+              console.log(error.responseJSON.errors);
+          }
+      });
+
+
     var draggableEl = document.getElementById('external-events');
     var calendarEl = document.getElementById('calendar');
 
@@ -98,6 +73,7 @@ File: Calendar init js
       modalTitle.text('Add Event');
       console.log('sds')
       newEventData = info;
+
     }
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -105,6 +81,7 @@ File: Calendar init js
       editable: true,
       droppable: true,
       selectable: true,
+        locale: 'ar', // Set the locale to 'ar' for Arabic
       defaultView: 'dayGridMonth',
       themeSystem: 'bootstrap',
       header: {
@@ -126,7 +103,6 @@ File: Calendar init js
         addNewEvent(info);
       },
 
-      events: defaultEvents
     });
     calendar.render();
     /*Add new event*/
@@ -137,7 +113,25 @@ File: Calendar init js
       var inputs = $('#form-event :input');
       var updatedTitle = $("#event-title").val();
       var updatedCategory = $('#event-category').val(); // validation
+        var formData = {
+            'title' : updatedTitle,
+            'start': newEventData.date,
+            'allDay': newEventData.allDay,
+        }
 
+        $.ajax({
+            type: 'get',
+            url: window.location.origin + '/admin/calender/event/store',
+            data: formData,
+            success: function(response) {
+                // Handle the success response, e.g., show a success message
+
+            },
+            error: function(error) {
+                // Handle errors, e.g., display validation errors
+                console.log(error.responseJSON.errors);
+            }
+        });
       if (forms[0].checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();

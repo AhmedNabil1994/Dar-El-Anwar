@@ -9,22 +9,22 @@ trait General
     private function controlRedirection($request, $route, $model){
         switch ($request) {
             case $request->has('save_and_add'):
-                toastrMessage('success', trans('message.created', ['title' => $model]));
+                toastrMessage('success', trans('تمت اضافة', ['title' => $model]));
                 return redirect()->back();
                 break;
 
             case $request->has('save'):
-                toastrMessage('success', trans('message.created', ['title' => $model]));
+                toastrMessage('success', trans('تمت اضافة', ['title' => $model]));
                 return redirect()->route($route.'.index');
                 break;
 
             case $request->has('update'):
-                toastrMessage('success', trans('message.updated', ['title' => $model]));
+                toastrMessage('success', trans('تم تعديل', ['title' => $model]));
                 return redirect()->route($route.'.index');
                 break;
 
             default :
-                toastrMessage('success', trans('message.created', ['title' => $model]));
+                toastrMessage('success', trans('تمت اضافة', ['title' => $model]));
                 return redirect()->route($route.'.index');
         }
     }

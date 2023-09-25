@@ -85,14 +85,14 @@ Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {
 
 // Start:: Admins
     Route::group(['prefix' => 'admins'], function () {
-        Route::get('/', [AdminController::class, 'index'])->name('admins.index');
+        Route::get('', [AdminController::class, 'index'])->name('admins.index');
         Route::get('create', [AdminController::class, 'create'])->name('admins.create');
         Route::post('store', [AdminController::class, 'store'])->name('admins.store');
         Route::get('edit/{admin}', [AdminController::class, 'edit'])->name('admins.edit');
         Route::post('update/{admin}', [AdminController::class, 'update'])->name('admins.update');
-        Route::post('update-password/{admin}', [AdminController::class, 'password'])->name('admins.update.password');
+        Route::post('update-password/{admin}', [AdminController::class, 'updatePassword'])->name('admins.update.password');
         Route::get('search', [AdminController::class, 'search'])->name('admins.search');
-        Route::post('delete', [AdminController::class, 'delete'])->name('admins.delete');
+        Route::get('delete/{admin}', [AdminController::class, 'delete'])->name('admins.delete');
     });
 
 
@@ -182,9 +182,9 @@ Route::prefix('course')->group(function () {
         Route::get('/', [SubjectController::class, 'index'])->name('admin.subject.index');
         Route::get('view/{uuid}', [SubjectController::class, 'view'])->name('admin.subject.view');
         Route::get('create', [SubjectController::class, 'create'])->name('admin.subject.create');
-        Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('admin.subject.edit');
+        Route::get('edit/{subject}', [SubjectController::class, 'edit'])->name('admin.subject.edit');
         Route::post('update/{id}', [SubjectController::class, 'update'])->name('admin.subject.update');
-        Route::get('delete/{uuid}', [SubjectController::class, 'delete'])->name('admin.subject.delete');
+        Route::get('delete/{subject}', [SubjectController::class, 'destroy'])->name('admin.subject.delete');
         Route::post('store', [SubjectController::class, 'store'])->name('admin.subject.store');
     });
 
@@ -212,7 +212,10 @@ Route::prefix('course')->group(function () {
         Route::get('edit/{id}', [GoalController::class, 'edit'])->name('admin.goals.edit');
         Route::post('update/{id}', [GoalController::class, 'update'])->name('admin.goals.update');
         Route::get('delete/{id}', [GoalController::class, 'destroy'])->name('admin.goals.delete');
-        Route::get('create/review', [GoalController::class, 'create_review'])->name('admin.goals.create.review');
+        Route::get('index/review', [GoalController::class, 'index_review'])->name('admin.goals.index.review');
+        Route::get('create/review/{goal}', [GoalController::class, 'create_review'])->name('admin.goals.create.review');
+        Route::get('create/student/review/{student}/{goal}', [GoalController::class, 'create_student_review'])->name('admin.goals.create.student.review');
+        Route::post('store/student/review', [GoalController::class, 'store_student_review'])->name('admin.goals.store.student.review');
     });
 
 
@@ -288,6 +291,8 @@ Route::prefix('course')->group(function () {
         Route::delete('delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
         Route::get('archive/{id}', [StudentController::class, 'archive'])->name('student.archive');
         Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
+        Route::get('review', [StudentController::class, 'student_review'])->name('student.review');
+        Route::get('get_review/{student}/{goal}', [StudentController::class, 'get_review'])->name('student.getReview');
 
     });
 

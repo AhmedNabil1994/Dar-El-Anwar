@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Event;
 use App\Models\Calender;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -30,11 +31,22 @@ class CalenderController extends Controller
 
     public function storeEvent(Request $request)
     {
-        dd($request->all());
+        $dateString = $request->start;
+        $cleanDateString = preg_replace('/\((.*?)\)/', '', $dateString);
+
+
+// Create a DateTime object from the date string
+        $dateTime = Carbon::parse($cleanDateString);
+
+// Format the DateTime object as needed
+        $formattedDate = $dateTime->format('Y-m-d'); // Example format: '2023-09-01'
+
+// You can also convert it to a Carbon instance if you prefer
+        $carbonDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dateTime->format('Y-m-d H:i:s'));
+
         $event = new Calender;
         $event->title = $request->title;
-        $event->start = $request->start??Carbon::today();
-        $event->end = $request->end??Carbon::today();
+        $event->start = $carbonDate??Carbon::today();
         $event->save();
 
         return redirect()->back()->with('success','تمت اضافة تذكير');

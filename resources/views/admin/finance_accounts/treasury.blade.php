@@ -132,8 +132,8 @@
                                         <td>{{$transaction->amount}}</td>
                                         <td>{{$transaction->name}}</td>
                                         <td>{{$transaction->student?->name}}</td>
-                                        <td>{{$transaction->transaction_type == 'income' ? 'income':''}}</td>
-                                        <td>{{$transaction->transaction_type== 'expense' ? 'expense':''}}</td>
+                                        <td>{{$transaction->transaction_type == 'income' ? 'دائن':''}}</td>
+                                        <td>{{$transaction->transaction_type== 'expense' ? 'مدين':''}}</td>
                                         <td>{{$transaction->last_amount}}</td>
                                         <td>{{$transaction->user?->name}}</td>
                                         <td>{{$transaction->description}}</td>

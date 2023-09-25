@@ -12,7 +12,7 @@ class AttendanceLeaveController extends Controller
 
     public function index()
     {
-        $attendances_leaves = AttendanceLeave::all();
+        $attendances_leaves = AttendanceLeave::orderBy('id','desc')->get();
         return view('admin.employees.attendance_leave.list', compact('attendances_leaves'));
     }
 
