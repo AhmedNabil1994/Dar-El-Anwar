@@ -732,7 +732,6 @@ img {
     background-color: #ffffff;
     /* -webkit-transition: all 0.5s ease-in-out; */
     transition: display 0.5s ease-in-out;
-
 }
 .sidebar__area.active {
     /* transition: all 0.5s ease-in-out; */
@@ -9188,7 +9187,7 @@ img {
     justify-content: center;
 }
 .action__buttons a {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .action__buttons a i {
@@ -17604,7 +17603,7 @@ blockquote.right span::before {
 }
 
 .btn.btn-success:hover {
-    background-color: #228322;
+    /* background-color: #228322; */
     color: #ffffff;
 }
 
@@ -19039,11 +19038,57 @@ blockquote.right span::before {
     align-items: end;
 }
 
-p.image-desc {
+/* p.image-desc {
     width: 200px;
     text-align: center;
     border: 1px solid black;
     box-shadow: 1px 1px 14px 0px;
     border-radius: 13px;
     padding: 10px;
+} */
+
+.table-title-container {
+    padding: 20px;
+}
+
+#btn_filter,
+.button-save,
+.button-excel {
+    margin-left: 20px;
+}
+
+h3 {
+    font-size: 20px !important;
+}
+.messages textarea {
+    height: 50px;
+}
+.form-style-container {
+    padding: 16px 24px 17px;
+}
+
+.create-certificate-sidebar input[type="radio"] {
+    margin-left: 5px !important;
+}
+
+@media print {
+    #print-form {
+        direction: rtl;
+    }
+    #print-form button {
+        display: none;
+    }
+    .print-form {
+        direction: rtl;
+    }
+    .print-form button {
+        display: none;
+    }
+}
+
+.edit-style {
+    margin-left: 10px;
+}
+.form-margin {
+    margin: 20px 0;
 }

@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -21,19 +22,24 @@
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
-            <h1> </h1>
 
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title d-flex justify-content-between align-items-end">
                             <h2>{{ trans('قائمة الفصول') }}</h2>
-
+                            <a href="{{ route('class_room.create') }}" class="btn buttons-style btn-sm">
+                                    <i class="fa fa-plus"></i> {{ trans('اضف فصل') }}
+                            </a>
                         </div>
+
+
+
                         <div class="row m-3 justify-content-end">
                             @can('add-class_room')
                             <div class="col-md-3">
@@ -42,6 +48,8 @@
                                 </a>
                             </div>
                             @endcan
+
+                    
                             <form method="GET" class="row align-items-end" action="{{ route('admins.index') }}">
                                 <div class="col-md-3">
                                     <label class="form-label">بحث</label>

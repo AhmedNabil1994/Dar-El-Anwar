@@ -6,10 +6,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('اضافة متابعة') }}</h2>
+
+                                <h2>{{ trans('تقرير متابعة القرآن') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -22,18 +24,20 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('اضافة متابعة') }}</h2>
+
+                            <h2>{{ trans('تقرير متابعة القرآن') }}</h2>
                         </div>
                         <div class="item-title d-flex justify-content-center mx-4">
-                            <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعة المعلمين</i></a>
-                            <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القرآن</i></a>
-                            <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة حصة دراسية</i></a>
-                            <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القراءة</i></a>
+                            <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>خطة متابعة المعلمين</a>
+                            <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القرآن</a>
+                            <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة حصة دراسية</a>
+                            <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القراءة</a>
                         </div>
                         <form action="{{route('admin.followup.storeQuran')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf

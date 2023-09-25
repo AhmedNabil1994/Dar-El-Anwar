@@ -5,14 +5,30 @@
 <div class="page-content">
         <div class="container-fluid">
             <div class="chat chat__wrapper" style="min-height: 95vh;height: auto;">
-              <header class="chat__header">
-                <h2 class="text-center">
-                  قائمة الرسائل
-                </h2>
-              </header>
-
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
+                    <div class="breadcrumb__content">
+                        <div class="breadcrumb__content__left">
+                            <div class="breadcrumb__title">
+                                <h2>{{ __('قائمة الرسائل') }}</h2>
+                            </div>
+                        </div>
+                        <div class="breadcrumb__content__right">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{__('تواصل معنا') }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+              <div class="row messages">
+                <div class="col-md-3" style ="height:658px">
                   <!-- Start chat sidebar -->
                   <div class="chat__sidebar border px-4">
                     <h6>
@@ -70,7 +86,7 @@
                             </div>
                         </div>
                         <div class="row form-group mt-3">
-                            <label class="form-label col-12">طريقة ىالارسال</label>
+                            <label class="form-label col-12">طريقة ىالإرسال</label>
                             <div class="col-sm-12">
                                 <select class="form-control" name="sending_way[]" multiple>
                                     @php
@@ -97,6 +113,9 @@
                   </div>
                   <!-- end chat sidebar -->
             </div>
+            <div class="row">
+            <div class="col-md-12">
+            <div class="customers__area bg-style mb-30">
                 <div class="col-md-9">
                 <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
                     @csrf
@@ -106,9 +125,9 @@
                               @csrf
                               <input type="hidden" value="welcome_text" name="option_key[]">
                               <h3 class="h3 text-dark">رسالة ترحيب</h3>
-                              <textarea class="form-control-lg" name="option_value[]">{{get_setting('welcome_text')}}</textarea>
+                              <textarea style = "width:307px" class="form-control-lg" name="option_value[]">{{get_setting('welcome_text')}}</textarea>
                               <div class="col-md- mt-3">
-                                  <button class="btn btn-primary">ارسال</button>
+                                  <button class="btn buttons-style">إرسال</button>
                               </div>
                           </form>
                       </div>
@@ -119,7 +138,7 @@
                               <h3 class="h3 text-dark">رسالة سداد الاشتراك</h3>
                               <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_subscription_text')}}</textarea>
                               <div class="col-md- mt-3">
-                                  <button class="btn btn-primary">ارسال</button>
+                                  <button class="btn buttons-style">إرسال</button>
                               </div>
                           </form>
                       </div>
@@ -129,7 +148,7 @@
                               <h3 class="h3 text-dark">رسالة التنبيه بالغياب</h3>
                               <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_abscent_text')}}</textarea>
                               <div class="col-md- mt-3">
-                                  <button class="btn btn-primary">ارسال</button>
+                                  <button class="btn buttons-style">إرسال</button>
                               </div>
                           </form>
                       </div>
@@ -140,7 +159,7 @@
                               <h3 class="h3 text-dark">رسالة التأخير عن السداد</h3>
                               <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_late_subscription_text')}}</textarea>
                               <div class="col-md- mt-3">
-                                  <button class="btn btn-primary">ارسال</button>
+                                  <button class="btn buttons-style">إرسال</button>
                               </div>
                           </form>
                       </div>
@@ -151,11 +170,15 @@
                               <h3 class="h3 text-dark">تذكير اوملاحظة</h3>
                               <textarea class="form-control-lg" name="option_value[]">{{get_setting('noting_messages')}}</textarea>
                               <div class="col-md- mt-3">
-                                  <button class="btn btn-primary">ارسال</button>
+                                  <button class="btn buttons-style">إرسال</button>
                               </div>
-                          </form>
+                      </form>
                       </div>
                   </div>
+
+            </div>
+            </div>
+            </div>
             </div>
           </div>
         </div>

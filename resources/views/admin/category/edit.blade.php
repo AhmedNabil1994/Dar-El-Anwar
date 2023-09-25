@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -24,9 +25,10 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
+                <div class="form-vertical__item bg-style">
                 <div class="col-md-12">
-                    <div class="form-vertical__item bg-style">
                         <div class="item-top mb-30">
                             <h2>{{trans('website.editCategory')}}</h2>
                         </div>

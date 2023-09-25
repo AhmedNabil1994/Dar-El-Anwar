@@ -3,11 +3,31 @@
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
-            @include('admin.common.breadcrumbs',['title' => 'قائمة الفواتير'])
-
-
+        <div class="row">
+        <div class="col-md-12">    
+        <div class="customers__area__header bg-style mb-30">
+                    <div class="breadcrumb__content">
+                        <div class="breadcrumb__content__left">
+                            <div class="breadcrumb__title">
+                                <h2>{{ __('أضف صفحة') }}</h2>
+                            </div>
+                        </div>
+                        <div class="breadcrumb__content__right">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('كل الصفحات') }}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('أضف صفحة') }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            <div class="customers__area bg-style mb-30">
             <form method="GET" action="{{route('reports.reportInvoices')}}"
-                  class="customers__area bg-style mb-30 form-container row align-items-end justify-content-center">
+                  class="form-container row align-items-end justify-content-center">
 
                 <div class="form-group col-md-3 m-2">
                     <label for="date_from">تاريخ من</label>
@@ -39,9 +59,11 @@
                 </div>
 
             </form>
+            </div>
 
-            <hr>
             <div class="row">
+            <div class="col-md-12">
+            <div class="customers__area bg-style mb-30">        
                 <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl" style="overflow: auto">
                     <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead >
@@ -83,8 +105,8 @@
                 </div>
 
             </div>
-
-
+            </div>
+            </div>
         </div>
     </div>
 @endsection

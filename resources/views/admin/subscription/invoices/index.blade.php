@@ -38,6 +38,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -55,6 +56,7 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
@@ -65,11 +67,14 @@
                             </a>
                         </div>
                         <div>
+                            <div class="customers__area bg-style mb-30">
                             <form method="get" action="{{ route('invoices.index') }}" class="row justify-content-start mb-3">
                                 <div class="col-md-3">
                                     <label class="form-label">اسم الطفل</label>
                                     <select class="form-select" name="child_name">
-                                        <option value="">__</option>
+
+                                        <option value="">اختر اسم الطفل</option>
+
                                         @foreach($students as $student)
                                             <option value="{{$student->name}}" {{$student->name == request('child_name') ? "selected": ""}}>{{$student->name}}</option>
                                         @endforeach
@@ -83,23 +88,27 @@
                                             <option value="{{$level->id}}">{{$level->name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">الفصل</label>
                                     <select class="form-select" name="class">
-                                        <option value="">__</option>
+
+                                        <option value="">اختر الفصل</option>
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}">{{$class->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 d-flex align-items-center" style = "height:90px">
                                     <button class="btn buttons-style" type="submit">تم</button>
                                 </div>
                             </form>
+                            </div>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                             <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>رقم الايصال</th>

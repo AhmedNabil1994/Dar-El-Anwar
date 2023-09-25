@@ -2,10 +2,11 @@
 
 @section('content')
     <!-- Page content area start -->
-    <div class="page-content">
+    <div class="page-content" >
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -21,10 +22,11 @@
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row" id = "print-form">
+                <div class="col-md-12 ">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.add_student') }}</h2>
@@ -32,7 +34,7 @@
                         <form action="{{route('student.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="row">
+                                <div class="row justify-content-evenly">
                                     <div class="col-md-3">
                                         <div class="upload-img-box mb-25">
                                             <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this)">
@@ -46,7 +48,7 @@
                                     @if ($errors->has('image'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('image') }}</span>
                                     @endif
-                                    <p>{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p>
+                                    <!-- <p class = "image-desc">{{ __('Accepted Image Files') }}: JPEG, JPG, PNG <br> {{ trans('website.accepted_size') }}: 300 x 300 (1MB)</p> -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
@@ -308,7 +310,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group mt-25 mb-25">
                                         <label for="how_did_you_hear_about_us">{{trans("website.how_know_about_us")}}</label>
-                                        <textarea name="how_did_you_hear_about_us" placeholder='{{trans("website.how_know_about_us")}}' class="form-control"></textarea>
+                                        <textarea style="height:41px;" name="how_did_you_hear_about_us" placeholder='{{trans("website.how_know_about_us")}}' class="form-control"></textarea>
                                         @if ($errors->has('how_did_you_hear_about_us'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('how_did_you_hear_about_us') }}</span>
                                         @endif
@@ -363,9 +365,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="row mb-3">
-                                <div class="col-md-12 text-right">
+                            <div class="row mb-3 ">
+                                <div class="col-md-12 text-right d-flex">
                                     <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
+                                    <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -385,6 +388,7 @@
 @push('script')
     <script src="{{asset('admin/js/custom/image-preview.js')}}"></script>
     <script src="{{asset('admin/js/custom/admin-profile.js')}}"></script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#government-select').change(function() {
@@ -660,6 +664,19 @@
                 }
             }
         }
+    </script>
+    <script>
+
+        $(document).ready(function(){
+            $("#print").on("click",function printDiv() {
+            console.log("clicked")
+            $("#print-form").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
+        })
+    })
+        
     </script>
 
 @endpush

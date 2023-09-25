@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -22,6 +23,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
             <h1> </h1>
@@ -85,7 +87,8 @@
 
                         </div>
 
-                        <div class="row mt-5">
+                        <div class="row justify-content-center mb-4">
+
                             <div class="col-sm-2">
                                 <a href="{{route('accounts.createIncomeTransaction')}}" class="btn buttons-style w-100" >قبض</a>
                             </div>
@@ -104,7 +107,9 @@
                         </div>
 
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+
                             <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>#</th>

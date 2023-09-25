@@ -38,6 +38,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -53,6 +54,7 @@
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -66,6 +68,7 @@
                         </div>
                         <div>
                           <form method="get" action="{{ route('subscriptions.index') }}" class="row align-items-end justify-content-start mb-3">
+
                               <div class="col-md-3">
                                   <label class="form-label">اسم الطفل</label>
                                       <select multiple class="form-select" name="child_name[]">
@@ -93,11 +96,16 @@
                                   <button class="btn buttons-style" type="submit">
                                       <i class="fa fa-filter"></i>
                                   </button>
+
                             </div>
-                          </form>
+                        </form>
+                    </div>
+                    </div>
+                    </div>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                             <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>كود الاشتراك</th>
@@ -193,7 +201,7 @@
             <div id="modal" class="modal">
                 <div class="modal-content">
                     <div class="container">
-                        <h2 class="mb-3">اضافة اشتراك</h2>
+                        <h2 class="mb-3">إضافة اشتراك</h2>
                         <form method="POST" id="editForm" action="{{route('subscriptions.store')}}">
                             @csrf
                             <div class="form-group">
@@ -224,8 +232,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">اضافة</button>
-                            <a id="closeModalBtn" class="btn btn-primary">الغاء</a>
+                            <button type="submit" class="btn buttons-style">إضافة</button>
+                            <a id="closeModalBtn" class="btn btn-secondary">الغاء</a>
                         </form>
                     </div>
                 </div>

@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -21,140 +22,142 @@
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('website.all_emplyee') }}</h2>
-                        </div>
-                        <div class="employees mb-4">
-                            <div class="row">
-                                <!-- searching inputs -->
-                                <div class="col-md-6 d-flex align-items-center">
-                                    <form>
-                                        <div class="input-group w-100">
-                                            <input type="text" class="form-control" name='query_search'
-                                                   value="{{isset($query_search)? $query_search : null}}"
-                                                   placeholder="{{trans('website.search')}}">
-                                            <div class="input-group-append">
-                                                <button class="btn buttons-style" type="submit">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
+                        <div class="bg-style mb-30 table-title-container table-title-container " style="overflow-x:auto;">
+                            <div class="item-title d-flex justify-content-between ms-3 my-2">
+                                <h2>{{ trans('website.all_emplyee') }}</h2>
+                            </div>
+                            <!-- searching inputs -->
+                            <div class="employees mb-4">
+                                <div class="customers__area__header form-style-container bg-style mb-30">
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-items-center">
+                                        <form>
+                                            <div class="input-group w-100">
+                                                <input type="text" class="form-control" name='query_search'
+                                                    value="{{isset($query_search)? $query_search : null}}"
+                                                    placeholder="{{trans('website.search')}}">
+                                                <div class="input-group-append">
+                                                    <button class="btn buttons-style" type="submit">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-end employee__filter">
+                                        <div class="filter-item">
+                                            <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/archived.png" alt="archived">
+                                            <a href="{{route('employees.archive')}}">
+                                                {{trans('website.archived')}}
+                                            </a>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-6 d-flex justify-content-end employee__filter">
-                                    <div class="filter-item">
-                                        <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/archived.png" alt="archived">
-                                        <a href="{{route('employees.archive')}}">
-                                            {{trans('website.archived')}}
-                                        </a>
-                                    </div>
-                                    <div class="filter-item">
-                                        <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/current.png" alt="now">
-                                        <a href="{{route('employees.active')}}">
-                                            {{trans('website.current')}}
-                                        </a>
-                                    </div>
-                                    <div class="filter-item">
-                                        <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/attendance.png" alt="now">
-                                        <a href="{{route('attendance_leave.index')}}">
-                                            {{trans('website.attendance_leave')}}
-                                        </a>
-                                    </div>
-                                    <div class="filter-item">
-                                        <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/salary.png" alt="now">
-                                        <a href="{{route('salaries.create')}}">
-                                            {{trans('website.salaries')}}
-                                        </a>
+                                        <div class="filter-item">
+                                            <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/current.png" alt="now">
+                                            <a href="{{route('employees.active')}}">
+                                                {{trans('website.current')}}
+                                            </a>
+                                        </div>
+                                        <div class="filter-item">
+                                            <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/attendance.png" alt="now">
+                                            <a href="{{route('attendance_leave.index')}}">
+                                                {{trans('website.attendance_leave')}}
+                                            </a>
+                                        </div>
+                                        <div class="filter-item">
+                                            <img class="img-responsive w-full" src="{{ asset('admin') }}/images/employee/salary.png" alt="now">
+                                            <a href="{{route('salaries.create')}}">
+                                                {{trans('website.salaries')}}
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="" style="overflow: auto">
-                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
-                                <thead style="background-color: #50bfa5;">
-                                        <tr>
-                                            <th class="text-center" >{{trans("website.code")}}</th>
-                                            <th class="text-center" >{{trans("website.instructor_name")}}</th>
-                                            <th class="text-center" >{{trans("website.birth_date")}}</th>
-                                            <th class="text-center" >{{trans("website.address")}}</th>
-                                            <th class="text-center" >{{trans("website.qualifications")}}</th>
-                                            <th class="text-center" >{{trans("website.phone_number")}}</th>
-                                            <th class="text-center" >{{trans("website.job")}}</th>
-                                            <th class="text-center" >{{trans("website.salary")}}</th>
-                                            <th class="text-center" >{{trans("website.standard")}}</th>
-                                            <th class="text-center" >{{trans("website.branch")}}</th>
-                                            <th class="text-center" >{{trans("website.starting_date")}}</th>
-                                            <th class="text-center" >{{trans("website.nationalId")}}</th>
-                                            <th class="text-center" >{{trans("website.collage")}}</th>
-                                            <th class="text-center" >{{trans("website.email")}}</th>
-                                            <th class="text-center" >{{trans("website.time_of_come")}}</th>
-                                            <th class="text-center" >{{trans("website.time_of_out")}}</th>
-                                            <th class="text-center" >{{trans("website.days_of_working")}}</th>
-                                            <th class="text-center" >{{trans("website.managment")}}</th>
-                                            <th class="text-center" >{{trans("website.actions")}}</th>
+                            </div>
+                            <div class="customers__table" style="overflow: auto;">
+                                <table class="row-border data-table-filter table-style table table-bordered table-striped">
+                                    <thead >
+                                            <tr>
+                                                <th class="text-center" >{{trans("website.code")}}</th>
+                                                <th class="text-center" >{{trans("website.instructor_name")}}</th>
+                                                <th class="text-center" >{{trans("website.birth_date")}}</th>
+                                                <th class="text-center" >{{trans("website.address")}}</th>
+                                                <th class="text-center" >{{trans("website.qualifications")}}</th>
+                                                <th class="text-center" >{{trans("website.phone_number")}}</th>
+                                                <th class="text-center" >{{trans("website.job")}}</th>
+                                                <th class="text-center" >{{trans("website.salary")}}</th>
+                                                <th class="text-center" >{{trans("website.standard")}}</th>
+                                                <th class="text-center" >{{trans("website.branch")}}</th>
+                                                <th class="text-center" >{{trans("website.starting_date")}}</th>
+                                                <th class="text-center" >{{trans("website.nationalId")}}</th>
+                                                <th class="text-center" >{{trans("website.collage")}}</th>
+                                                <th class="text-center" >{{trans("website.email")}}</th>
+                                                <th class="text-center" >{{trans("website.time_of_come")}}</th>
+                                                <th class="text-center" >{{trans("website.time_of_out")}}</th>
+                                                <th class="text-center" >{{trans("website.days_of_working")}}</th>
+                                                <th class="text-center" >{{trans("website.managment")}}</th>
+                                                <th class="text-center" >{{trans("website.actions")}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($employees as $employee)
+                                            <tr>
+                                                <td class="text-center">{{ $employee->id }}</td>
+                                                <td class="text-center">{{ $employee->name }}</td>
+                                                <td class="text-center">{{ $employee->birthdate }}</td>
+                                                <td class="text-center">{{ $employee->address }}</td>
+                                                <td class="text-center">{{ $employee->qualification }}</td>
+                                                <td class="text-center">
+                                                    <a href="tel:{{ $employee->phone }}">
+                                                        {{ $employee->phone }}
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">{{ $employee->job_title }}</td>
+                                                <td class="text-center">{{ $employee->salary?->salary }}</td>
+                                                <td class="text-center">{{ $employee->level }}</td>
+                                                <td class="text-center">{{ $employee->branch }}</td>
+                                                <td class="text-center">{{ $employee->hiring_date }}</td>
+                                                <td class="text-center">{{ $employee->national_id }}</td>
+                                                <td class="text-center">{{ $employee->university }}</td>
+                                                <td class="text-center">
+                                                    <a href="mailto:{{ $employee->email }}">
+                                                        {{ $employee->email }}
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">{{ $employee->attendance_time }}</td>
+                                                <td class="text-center">{{ $employee->departure_time }}</td>
+                                                <td class="text-center">{{ $employee->work_days }}</td>
+                                                <td class="text-center">{{ $employee->management }}</td>
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="{{ route('employees.edit', $employee->id)}}" class="edit-style btn btn-primary" title="{{ __('Edit Details') }}">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-danger ms-2"
+                                                            data-formid="delete_row_form_{{$employee->id}}" title="{{ __('Delete') }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                    <form action="{{ route('employees.delete', $employee->id)}}"
+                                                        method="post" id="delete_row_form_{{$employee->id }}">
+                                                        {{ method_field('DELETE') }}
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($employees as $employee)
+                                    @endforeach
+                                    </tbody>
+                                </table>
 
-                                        <tr>
-                                            <td class="text-center">{{ $employee->id }}</td>
-                                            <td class="text-center">{{ $employee->name }}</td>
-                                            <td class="text-center">{{ $employee->birthdate }}</td>
-                                            <td class="text-center">{{ $employee->address }}</td>
-                                            <td class="text-center">{{ $employee->qualification }}</td>
-                                            <td class="text-center">
-                                                <a href="tel:{{ $employee->phone }}">
-                                                    {{ $employee->phone }}
-                                                </a>
-                                            </td>
-                                            <td class="text-center">{{ $employee->job_title }}</td>
-                                            <td class="text-center">{{ $employee->salary?->salary }}</td>
-                                            <td class="text-center">{{ $employee->level }}</td>
-                                            <td class="text-center">{{ $employee->branch }}</td>
-                                            <td class="text-center">{{ $employee->hiring_date }}</td>
-                                            <td class="text-center">{{ $employee->national_id }}</td>
-                                            <td class="text-center">{{ $employee->university }}</td>
-                                            <td class="text-center">
-                                                <a href="mailto:{{ $employee->email }}">
-                                                    {{ $employee->email }}
-                                                </a>
-                                            </td>
-                                            <td class="text-center">{{ $employee->attendance_time }}</td>
-                                            <td class="text-center">{{ $employee->departure_time }}</td>
-                                            <td class="text-center">{{ $employee->work_days }}</td>
-                                            <td class="text-center">{{ $employee->management }}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
-                                                <a href="{{ route('employees.edit', $employee->id)}}" class="btn btn-primary" title="{{ __('Edit Details') }}">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <button type="button" class="btn btn-danger ms-2"
-                                                        data-formid="delete_row_form_{{$employee->id}}" title="{{ __('Delete') }}">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                                <form action="{{ route('employees.delete', $employee->id)}}"
-                                                      method="post" id="delete_row_form_{{$employee->id }}">
-                                                    {{ method_field('DELETE') }}
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-
-                                        <div class="mt-3">
-                                            {{--    {{$Employees->links()}}--}}
-                                            </div>
+                                            <div class="mt-3">
+                                                {{--    {{$Employees->links()}}--}}
+                                                </div>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
 

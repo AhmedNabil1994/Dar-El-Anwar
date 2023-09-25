@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -15,8 +16,8 @@
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('certificate.index')}}">{{ __('Certificate List') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('certificate.index')}}">{{ __(' قائمة الشهادة') }}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ __(@$title) }}</li>
                                 </ul>
                             </nav>
@@ -24,12 +25,13 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30 admin-certificate-page">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __(@$title) }}</h2>
-                            <div><a href="{{route('certificate.index')}}" class="theme-btn theme-button1 green-theme-btn default-hover-btn">{{ __('Certificate List') }}</a></div>
+                            <div><a href="{{route('certificate.index')}}" class="theme-btn theme-button1 green-theme-btn default-hover-btn">{{ __('قائمة الشهادة') }}</a></div>
                         </div>
 
                         <div class="admin-create-certifiate">
@@ -552,7 +554,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="theme-btn theme-button1 default-hover-btn mt-30">{{ __('Save Certificate') }}</button>
+                                            <button type="submit" class="theme-btn buttons-style default-hover-btn mt-30"style = "border:none;color:#ffffff">{{ __('حفظ') }}</button>
                                         </div>
                                     </form>
                                 </div>

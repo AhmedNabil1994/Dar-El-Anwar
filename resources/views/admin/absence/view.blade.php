@@ -6,25 +6,27 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('website.absence') }}</h2>
+                                <h2>{{ trans('عرض الغياب') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.all_students') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('الغياب') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
-
+            <div class="customers__area bg-style mb-30">
             <form method="get" action="{{route('absence.index')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
@@ -97,6 +99,7 @@
                     <button id="btn_filter" class="btn buttons-style mt-4">{{trans("website.filter")}}</button>
                 </div>
             </form>
+        </div>
 
             <div class="row">
                 <div class="col-md-12">

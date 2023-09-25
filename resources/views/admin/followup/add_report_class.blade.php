@@ -6,34 +6,40 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('اضافة متابعة') }}</h2>
+
+                                <h2>{{ trans('تقرير متابعة حصة دراسية') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('اضافة متابعة') }}</li>
+
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('المتابعات') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('اضافة متابعة') }}</h2>
+
+                            <h2>{{ trans('تقرير متابعة حصة دراسية') }}</h2>
                         </div>
                         <div class="item-title d-flex justify-content-center mx-4">
-                           <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعة المعلمين</i></a>
-                           <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القرآن</i></a>
-                           <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة حصة دراسية</i></a>
-                           <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3">متابعة القراءة</i></a>
+                            <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>خطة متابعة المعلمين</a>
+                            <a href="{{route('admin.followup.quran')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القرآن</a>
+                            <a href="{{route('admin.followup.create')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة حصة دراسية</a>
+                            <a href="{{route('admin.followup.reading')}}" class="icon"><i class="fa fa-paper-plane mx-3"></i>متابعة القراءة</a>
                         </div>
                         <form action="{{route('admin.followup.storeClass')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
@@ -123,6 +129,7 @@
 
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">
+
                                             <label>تنظيم جلوس الطلاب وحقائبهم
                                             <span class="text-danger">*</span></label>
                                             <input type="hidden" name="q[]" value="organizing_students_seating_and_bags">
