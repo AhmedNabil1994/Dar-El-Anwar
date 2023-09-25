@@ -60,11 +60,16 @@
                             <th>منقول من الحضانة الي الهجاء</th>
                         </tr>
                         </thead>
-                        <tbody>x
+                        <tbody>
                             <tr>
                                 <td class="col-md-1">
                                     @foreach($department->classes as $class)
                                        {{ $class->name }} <br>
+                                    @endforeach
+                                </td>
+                                <td class="col-md-1">
+                                    @foreach($department->clases as $class)
+                                        {{ $class->name }} <br>
                                     @endforeach
                                 </td>
                                 <td>

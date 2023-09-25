@@ -46,5 +46,8 @@ class Subscription extends Model
     {
         return $this->belongsToMany(Course::class, 'subscription_courses');
     }
-
+    public function bus()
+    {
+        return $this->hasOne(Bus::class);
+    }
 }

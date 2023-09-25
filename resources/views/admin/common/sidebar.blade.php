@@ -249,11 +249,11 @@
             </li>
         @endcanany
 
-        @canany('manage_bus')
+        @canany('manage-bus')
             <li class="{{ active_if_match('admin/bus') }}">
                 <a class="has-arrow" href="#">
                     <i class="fa fa-bus"></i>
-                    <span>{{__('الحافلات')}}</span>
+                    <span>{{__('الباصات')}}</span>
                 </a>
                 <ul>
                     @can('all-bus')
@@ -265,13 +265,20 @@
                         </li>
                     @endcan
 
-                    @can('all-bus')
+                    @can('add-bus')
                         <li class="{{ active_if_full_match('admin/bus/assign') }}">
                             <a href="{{route('admin.bus.create')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{ __('إضافة حافلة') }}</span>
                             </a>
                         </li>
+
+                            <li class="{{ active_if_full_match('admin/bus/subscription') }}">
+                                <a href="{{route('admin.bus.subscribtion.create')}}">
+                                    <i class="fa fa-circle"></i>
+                                    <span>{{ __('إضافة اشتراك لحافلة') }}</span>
+                                </a>
+                            </li>
 
                     @endcan
                     {{--                    <li class="{{ active_if_match('admins/course/create') }}">--}}

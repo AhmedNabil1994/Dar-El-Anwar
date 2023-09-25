@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-center">
-                            <button class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</button>
+                            <a href="{{route('student.inq')}}" class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</a>
                             <a href="{{route('review.create',$student->id)}}" class="btn mx-3 buttons-style">{{ trans('التقييمات') }}</a>
                         </div>
                         <div class="item-title d-flex justify-content-between">

@@ -195,6 +195,8 @@ Route::prefix('course')->group(function () {
         Route::get('edit/{id}', [BusController::class, 'edit'])->name('admin.bus.edit');
         Route::post('update/{id}', [BusController::class, 'update'])->name('admin.bus.update');
         Route::get('delete/{id}', [BusController::class, 'destroy'])->name('admin.bus.delete');
+        Route::get('subscription', [BusController::class, 'bus_subscription'])->name('admin.bus.subscribtion.create');
+        Route::post('store_bus_subscription', [BusController::class, 'store_bus_subscription'])->name('admin.bus.subscribtion.store');
     });
 
     Route::prefix('contact_us')->group(function () {
@@ -293,6 +295,7 @@ Route::prefix('course')->group(function () {
         Route::post('change-student-status', [StudentController::class, 'changeStudentStatus'])->name('admin.student.changeStudentStatus');
         Route::get('review', [StudentController::class, 'student_review'])->name('student.review');
         Route::get('get_review/{student}/{goal}', [StudentController::class, 'get_review'])->name('student.getReview');
+        Route::get('inq', [StudentController::class, 'inq'])->name('student.inq');
 
     });
 

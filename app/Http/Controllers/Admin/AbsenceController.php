@@ -124,6 +124,14 @@ class AbsenceController extends Controller
             $student_subject->update([
                 'abscence_count' => $student_subject->abscence_count + 1
             ]);
+
+        if($student_subject->abscence_count >= get_setting('validate_abscent_times')){
+            \App\Models\Notification::create([
+                'user_id' => 1,
+                'sender_id' => 1,
+                'text' => 'هذا الطالب لديه غياب متكرر ' . $student_subject->student?->name,
+            ]);
+        }
         $absence = Absence::create([
             'date' => $request->date,
             'time' => $request->time,

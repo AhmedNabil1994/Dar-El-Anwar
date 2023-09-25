@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
 use App\Models\Employee;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -106,6 +107,22 @@ class BusController extends Controller
         $bus = Bus::find($id);
         $bus->delete();
         return redirect()->route('admin.bus.index');
+    }
+
+    public function bus_subscription(Request $request)
+    {
+        $data['subscriptions'] = Subscription::whereStatus(1)->get();
+        $data['buses'] = Bus::all();
+        return view('admin.subscription.bus',$data);
+    }
+
+    public function store_bus_subscription(Request $request)
+    {
+        $bus = Bus::find($request->bus_id);
+        $bus->update([
+            'subscription_id' => $request->subscription_id,
+        ]);
+        return redirect()->back()->with('success','تم اضافة الاشتراك للباص');
     }
 
 
