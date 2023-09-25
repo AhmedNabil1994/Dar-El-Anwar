@@ -26,11 +26,14 @@ class ExamController extends Controller
         $this->questionModel = new Crud($question);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $data['title'] = 'Quiz List';
-        $data['exams'] = $this->model->getOrderById('DESC', 25);
+        $data['exams'] = Exam::query()->orderBy('id','DESC');
         $data['navCourseActiveClass'] = 'active';
+        if($request->search_key)
+            $data['exams']->where('name','like','%'.$request->search_key.'%');
+        $data['exams'] = $data['exams']->paginate(25);
         return view('admin.exam.index', $data);
     }
 
@@ -98,7 +101,7 @@ class ExamController extends Controller
             ];
             Question::create($data_exam);
         }
-        toastrMessage('success', 'Quiz has been updated');
+        toastrMessage('success', 'تم حذف الاختبار');
         return redirect()->route('admin.exam.index');
     }
 
@@ -127,9 +130,8 @@ class ExamController extends Controller
         return redirect()->back();
     }
 
-    public function delete($uuid)
+    public function delete(Exam $exam)
     {
-        $exam = $this->model->getRecordByUuid($uuid);
         foreach ($exam->questions as $question)
         {
             Question_option::where('question_id', $question->id)->delete();
@@ -137,7 +139,7 @@ class ExamController extends Controller
         }
         $exam->delete();
 
-        toastrMessage('error', 'Quiz has been deleted');
+        toastrMessage('error', 'تم ازالة الاختبار');
         return redirect()->back();
     }
 

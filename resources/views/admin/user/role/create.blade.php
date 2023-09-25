@@ -62,7 +62,7 @@
                                            <div class="col-md-4 mb-2">
                                                <div class="form-check mb-0 d-flex align-items-center">
                                                    <input class="form-check-input mx-3" type="checkbox" name="permissions[]" id="permission{{$permission->id}}" value="{{$permission->id}}" >
-                                                   <label class="form-check-label m-lg-1 mb-0 color-heading" for="permission{{$permission->id}}">{{ucwords(str_ireplace("_", " ", $permission->name))}} </label>
+                                                   <label class="form-check-label m-lg-1 mb-0 color-heading" for="permission{{$permission->id}}">@lang('website.'.ucwords(str_ireplace(["-","_"], " ", $permission->name))) </label>
                                                </div>
                                            </div>
                                        @endforeach

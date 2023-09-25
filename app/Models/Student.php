@@ -37,6 +37,11 @@ class Student extends Authenticatable
         return $this->hasMany(Absence::class,'student_id');
     }
 
+    public function students_goals(): HasMany
+    {
+        return $this->hasMany(StudentGoal::class);
+    }
+
     public function dept() : BelongsToMany
     {
         return $this->belongsToMany(Department::class,'student_departments');
@@ -80,6 +85,11 @@ class Student extends Authenticatable
     public function get_parents_card_copy()
     {
         return$this->belongsTo(Upload::class,'parents_card_copy');
+    }
+
+    public function student_report()
+    {
+        return$this->hasOne(StudentReport::class);
     }
 
     public function get_birth_certificate()
@@ -136,6 +146,10 @@ class Student extends Authenticatable
         return $this->belongsToMany(Level::class,'student_levels');
     }
 
+    public function exam_result()
+    {
+        return $this->hasMany(ExamsResult::class);
+    }
 
 
 

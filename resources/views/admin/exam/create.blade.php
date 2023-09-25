@@ -121,9 +121,9 @@
                 columns += `<td><input class="form-control" name="question_name[]" /></td>`;
                 columns += `<td>
                                 <select class="form-select" name="review_type[]">
-                                    <option value="1">yes / No</option>
-                                    <option value="2">Excellent - Good - Average - Poor</option>
-                                    <option value="3">Degree From 0000 to 0000</option>
+                                    <option value="1">نعم / لا</option>
+                                    <option value="2">ممتار - جيد - متوسط - ضعيف</option>
+                                    <option value="3">درجة من 0 الي 100</option>
                                 </select>
                             </td>`;
                 columns += `<td>

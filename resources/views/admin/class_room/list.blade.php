@@ -41,7 +41,15 @@
 
 
                         <div class="row m-3 justify-content-end">
-                            
+                            @can('add-class_room')
+                            <div class="col-md-3">
+                                <a href="{{ route('class_room.create') }}" class="btn buttons-style btn-sm">
+                                    <i class="fa fa-plus"></i> {{ trans('اضف فصل') }}
+                                </a>
+                            </div>
+                            @endcan
+
+                    
                             <form method="GET" class="row align-items-end" action="{{ route('admins.index') }}">
                                 <div class="col-md-3">
                                     <label class="form-label">بحث</label>
@@ -60,10 +68,7 @@
                                     <th>{{ trans('#') }}</th>
                                     <th>{{ trans('website.name') }}</th>
                                     <th>{{ trans('website.level') }}</th>
-                                    <th>{{ trans('website.status') }}</th>
-                                    @can('manage_class_room')
-                                    <th>{{ trans('website.action') }}</th>
-                                    @endcan
+                                     <th>{{ trans('website.action') }}</th>
                                 </tr>
                                 </thead>
 
@@ -73,27 +78,24 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$class->name}}</td>
                                         <td>{{$class->level?->name}}</td>
-                                        <td>{{$class->status == 0 ?'غير نشط' : 'نشط'}}</td>
-                                        @can('manage_class_room')
                                         <td>
                                             <div class="action__buttons">
-                                                {{--                                                @can('edit-admins', 'admins')--}}
+                                                @can('edit-class_room')
 
                                                 <a href="{{ route('class_room.edit', $class) }}" class=" btn-action mr-1 edit" data-toggle="tooltip" title="Edit">
                                                     <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                                 </a>
-                                                {{--                                                @endcan--}}
+                                                                                                @endcan
 
-                                                {{--                                                    @can('delete-admins', 'admins')--}}
+                                                                                                    @can('delete-class_room')
 
                                                 <a href="javascript:void(0);" data-url="{{route('class_room.delete', $class)}}" class="btn-action delete" title="Delete">
                                                     <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">
                                                 </a>
-                                                {{--                                                @endcan--}}
+                                                                                                @endcan
 
                                             </div>
                                         </td>
-                                            @endcan
                                     </tr>
                                 @endforeach
 

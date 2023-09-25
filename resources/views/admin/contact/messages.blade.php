@@ -34,33 +34,35 @@
                     <h6>
                      خيارات
                     </h6>
-                    <div class="chat__list">
+                      <form method="POST" action="{{route('notification.store')}}" enctype="multipart/form-data">
+                          @csrf
+                            <div class="chat__list">
                         <div class="row form-group mt-3">
                             <label class="form-label col-12">التنبيه بالغباب في حالة الغياب عدد ايام</label>
                             <div class="col-sm-12">
                             <input type="number" min="0" class="form-control" name="validate_abscent_times"
-                             value="{{get_setting('validate_abscent_times')}}">
+                             value="{{get_setting('validate_abscent_times')}}"><span class="text-black">دقيقة</span>
                             </div>
                         </div>
                         <div class="row form-group mt-3">
                             <label class="form-label col-12">وقت رسالة الترحيب</label>
                             <div class="col-sm-12">
                                 <input type="number" min="0" class="form-control" name="welcome_time"
-                                       value="{{get_setting('welcome_time')}}">
+                                       value="{{get_setting('welcome_time')}}"><span class="text-black">دقيقة</span>
                             </div>
                         </div>
                         <div class="row form-group mt-3">
                             <label class="form-label col-12">التنبيه عند تأخير السداد بعد يوم</label>
                             <div class="col-sm-12">
                                 <input type="number" min="0" class="form-control" name="warning_late_subscription_time"
-                                       value="{{get_setting('warning_late_subscription_time')}}">
+                                       value="{{get_setting('warning_late_subscription_time')}}"><span class="text-black">دقيقة</span>
                             </div>
                         </div>
                         <div class="row form-group mt-3">
                             <label class="form-label col-12">رسالة بسداد الاشتراك</label>
                             <div class="col-sm-12">
                                 <input type="number" min="0" class="form-control" name="warning_late_subscription_time"
-                                       value="{{get_setting('warning_late_subscription_time')}}">
+                                       value="{{get_setting('warning_late_subscription_time')}}"><span class="text-black">دقيقة</span>
                             </div>
                         </div>
                         <div class="row form-group mt-3">
@@ -88,7 +90,7 @@
                             <div class="col-sm-12">
                                 <select class="form-control" name="sending_way[]" multiple>
                                     @php
-                                        $arr = explode(',',get_setting('sending_way'));
+                                        $arr = json_decode(get_setting('sending_way'));
                                     @endphp
 
                                     <option value="1"
@@ -104,6 +106,10 @@
                             </div>
                         </div>
                     </div>
+
+                          <button type="submit" class="btn btn-primary">حفظ</button>
+
+                      </form>
                   </div>
                   <!-- end chat sidebar -->
             </div>
@@ -137,8 +143,7 @@
                           </form>
                       </div>
                       <div class="col-md-5 m-3 d-flex justify-content-center flex-column ">
-                          <form method="POST" action="{{route('notification.send')}}" enctype="multipart/form-data">
-                              @csrf
+
                               <input type="hidden" value="warning_abscent_text" name="option_key[]">
                               <h3 class="h3 text-dark">رسالة التنبيه بالغياب</h3>
                               <textarea class="form-control-lg" name="option_value[]">{{get_setting('warning_abscent_text')}}</textarea>
@@ -170,12 +175,7 @@
                       </form>
                       </div>
                   </div>
-                  <div class="row justify-content-start">
-                      <div class="col-md-2">
-                      <button style ="width:200px;margin-right:15px" class="btn buttons-style">{{trans('website.save')}}</button>
-                      </div>
-                  </div>
-              </form>
+
             </div>
             </div>
             </div>

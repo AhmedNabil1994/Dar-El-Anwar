@@ -1,12 +1,15 @@
 @extends('layouts.admin')
-@section('title') @lang('translation.Calendars') @endsection
+@section('title')
+    @lang('translation.Calendars')
+@endsection
 @push('style')
     <link href="{{ asset('assets_calender/libs/@fullcalendar/@fullcalendar.min.css') }}" rel="stylesheet">
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('assets_calender/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets_calender/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+          type="text/css"/>
     <!-- Icons Css -->
-    <link href="{{ asset('assets_calender/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets_calender/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
 
 @endpush
 @section('content')
@@ -19,34 +22,21 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-grid">
-                                <button class="btn font-16 btn-primary" id="btn-new-event"><i class="mdi mdi-plus-circle-outline"></i> Create
+                                <button class="btn font-16 btn-primary" id="btn-new-event"><i
+                                        class="mdi mdi-plus-circle-outline"></i> Create
                                     New Event
                                 </button>
                             </div>
 
                             <div id="external-events" class="mt-2">
                                 <br>
-                                <p class="text-muted">Drag and drop your event or click in the calendar</p>
-                                <div class="external-event fc-event text-success bg-soft-success" data-class="bg-success">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>New Event Planning
-                                </div>
-                                <div class="external-event fc-event text-info bg-soft-info" data-class="bg-info">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Meeting
-                                </div>
-                                <div class="external-event fc-event text-warning bg-soft-warning" data-class="bg-warning">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Generating Reports
-                                </div>
-                                <div class="external-event fc-event text-danger bg-soft-danger" data-class="bg-danger">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Create New theme
-                                </div>
-                                <div class="external-event fc-event text-dark bg-soft-dark" data-class="bg-dark">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Team Meeting
-                                </div>
+
                             </div>
 
                             <div class="row justify-content-center mt-5">
                                 <div class="col-lg-12 col-sm-6">
-                                    <img src="{{ asset('assets_calender/images/undraw-calendar.svg') }}" alt="" class="img-fluid d-block">
+                                    <img src="{{ asset('assets_calender/images/undraw-calendar.svg') }}" alt=""
+                                         class="img-fluid d-block">
                                 </div>
                             </div>
 
@@ -84,15 +74,16 @@
                                         <div class="mb-3">
                                             <label class="form-label">Event Name</label>
                                             <input class="form-control" placeholder="Insert Event Name"
-                                                   type="text" name="title" id="event-title" required value="" />
+                                                   type="text" name="title" id="event-title" required value=""/>
                                             <div class="invalid-feedback">Please provide a valid event name</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Category</label>
-                                            <select class="form-control form-select" name="category" id="event-category">
-                                                <option  selected> --Select-- </option>
+                                            <select class="form-control form-select" name="category"
+                                                    id="event-category">
+                                                <option selected> --Select--</option>
                                                 <option value="bg-danger">Danger</option>
                                                 <option value="bg-success">Success</option>
                                                 <option value="bg-primary">Primary</option>
@@ -106,10 +97,12 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-6">
-                                        <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
+                                        <button type="button" class="btn btn-danger" id="btn-delete-event">Delete
+                                        </button>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close
+                                        </button>
                                         <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
                                     </div>
                                 </div>
@@ -134,6 +127,7 @@
     <!-- pace js -->
     <script src="{{ asset('assets_calender/libs/pace-js/pace-js.min.js') }}"></script>
     <script src="{{ asset('/assets_calender/libs/@fullcalendar/@fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('/assets_calender/js/pages/calendar.init.js') }}"></script>
+    <script src="{{ asset('/assets_calender/js/pages/calendar.init.js') }}">
+    </script>
 
 @endpush

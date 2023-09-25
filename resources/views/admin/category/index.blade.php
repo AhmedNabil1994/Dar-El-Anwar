@@ -29,52 +29,48 @@
                     <div class="col-md-12">
                         <div class="customers__area bg-style mb-30">
                             <div class="item-title d-flex justify-content-between">
-                                <h2>{{trans('website.categoryList')}}</h2>
-                                <a href="{{route('category.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('website.add_category')}} </a>
+                                <h2>{{trans('website.categories')}}</h2>
+                                @can('add-department')
+                                <a href="{{route('category.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('اضف قسم')}} </a>
+                                @endcan
                             </div>
+                            <form action="{{ route('category.index') }}" class="row m-3" method="get">
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" name="search_key" value="{{request('search_key')}}">
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn buttons-style"><i class="fa fa-filter"></i></button>
+                                </div>
+                            </form>
                             <div class="customers__table">
-                                <!-- <table id="customers-table" class="row-border data-table-filter table-style"> -->
-                                <table class="row-border data-table-filter table-style">
+                                <table id="" class="row-border data-table-filter table-style">
+
                                     <thead>
                                     <tr>
-                                        <th>{{trans('website.image')}}</th>
                                         <th>{{trans('website.name')}}</th>
-                                        <th>{{trans('website.feature')}}</th>
-                                        <th>{{trans('website.total_Course') }}</th>
                                         <th>{{trans('website.action')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($categories as $category)
                                         <tr class="removable-item">
-                                        <td>
-                                            <div class="user-info">
-                                                <div class="user-info__img">
-                                                    <img src="{{asset($category->getImg())}}" alt="category">
-                                                </div>
-                                            </div>
-                                        </td>
+
                                         <td>
                                             {{$category->name}}
                                         </td>
-                                        <td>
-                                            @if($category->is_feature == 'yes')
-                                                <span class="status active">{{ trans('website.yes') }}</span>
-                                            @else
-                                                <span class="status blocked">{{ trans('website.no') }}</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            {{ @$category->courses->count() }}
-                                        </td>
+
                                         <td>
                                             <div class="action__buttons">
+                                                @can('edit-department')
                                                 <a href="{{route('category.edit', [$category->uuid])}}" class="btn-action" title="Edit">
                                                     <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                                 </a>
+                                                @endcan
+                                                    @can('delete-department')
                                                 <a href="javascript:void(0);" data-url="{{route('category.delete', [$category->uuid])}}" class="btn-action delete" title="Delete">
                                                     <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">
                                                 </a>
+                                                    @endcan
                                             </div>
                                         </td>
                                     </tr>

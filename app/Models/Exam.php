@@ -39,7 +39,10 @@ class Exam extends Model
     {
         return $this->hasMany(Question::class, 'exam_id');
     }
-
+    public function goal()
+    {
+        return $this->hasMany(Goal::class);
+    }
 
     protected static function boot()
     {

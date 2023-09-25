@@ -37,6 +37,7 @@ class InvoiceController extends Controller
         $data['departs'] = Department::where('status',1)->get();
         $data['students'] = \App\Models\Student::where('status',1)->get();
         $data['classes'] = \App\Models\ClassRoom::all();
+        $data['levels'] = \App\Models\Level::all();
         $paidInvoices = $paidInvoices->paginate(25);
         return view('admin.subscription.invoices.index', $data, compact('paidInvoices'));
     }

@@ -18,11 +18,6 @@ class RoleController extends Controller
 
     public function index()
     {
-        if (!auth::guard('admins')->user()->can('user_management')) {
-            abort('403');
-        } // end permission checking
-
-
         $data['title'] = 'Manage Roles';
         $data['roles'] = Role::paginate(25);
         $data['navUserParentActiveClass'] = 'mm-active';

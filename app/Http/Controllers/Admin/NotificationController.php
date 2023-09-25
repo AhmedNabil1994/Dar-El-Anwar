@@ -27,7 +27,6 @@ class NotificationController extends Controller
            Notification::create([
                'user_id' => 1,
                'sender_id' => Auth::id(),
-               'user_type' => get_setting('send_user_type'),
                'text' => $data['option_value'][$key],
            ]);
        }
@@ -43,7 +42,6 @@ class NotificationController extends Controller
             $data['notification']->update(['is_seen'=>'yes']);
             $data['notifications'] = Notification::orderBy('id','DESC')
                 ->where('user_id', Auth::id())
-                ->where('user_type',1)
                 ->get();
         }
 
@@ -71,11 +69,23 @@ class NotificationController extends Controller
         if(Auth::guard('students')->check()){
             $data['notifications'] = StudentNotification::orderBy('id','DESC')
                 ->where('user_id', Auth::id())
-                ->where('user_type',1)
                 ->get();
         }
 
         return view('admin.notifications.show',$data);
+    }
+
+    public function store(Request $request)
+    {
+        foreach($request->except('_token') as $key => $val)
+        {
+            $setting = Setting::where('option_key',$key)->first();
+            $setting->update([
+                'option_value' => $val
+            ]);
+        }
+
+        return redirect()->back()->with('success','تم حفظ التعديلات');
     }
 
 }

@@ -42,4 +42,9 @@ class Subscription extends Model
         return $this->belongsTo(Department::class,'department_id');
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'subscription_courses');
+    }
+
 }

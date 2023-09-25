@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('website.add_student') }}</h2>
+                                <h2>{{ trans('تعديل متابعة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.add_student') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('تعديل متابعة') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('website.add_student') }}</h2>
+                            <h2>{{ trans('تعديل متابعة') }}</h2>
                         </div>
                         <div class="item-title d-flex justify-content-center mx-4">
                            <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعة المعلمين</i></a>
@@ -41,7 +41,7 @@
                                 <div class="col-md-3">
                                     <div class="input__group mb-25">
                                         <label>{{trans('website.followup_date')}} <span class="text-danger">*</span></label>
-                                        <input type="date" name="followup_date" class="form-control" value="{{$followup->followup_date}}"/>
+                                        <input type="date" name="followup_date" class="form-control" value="{{Carbon\Carbon::parse($followup->date)->toDateString()}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -122,14 +122,118 @@
                                 </div>
                                 <hr>
 
-                                @foreach($questions as $question)
-                                    <div class="col-md-6">
-                                        <div class="input__group mb-25">
-                                            <label>{{trans('website.'.$question->questions)}} <span class="text-danger">*</span></label>
-                                            <textarea class="form-text" name="questions[]">{{$followup->followup_responses->where('question_id',$question->id)->first()->response}}</textarea>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>تنظيم جلوس الطلاب وحقائبهم
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="organizing_students_seating_and_bags">
+                                        <textarea class="form-text" style="height: 150px" name="organizing_students_seating_and_bags">{{get_follow_up_rsponse($followup->id,'organizing_students_seating_and_bags')}}</textarea>
                                     </div>
-                                @endforeach
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>العدل في توزيع المشاركات
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="fairness_in_distributing_shares">
+                                        <textarea class="form-text" style="height: 150px" name="fairness_in_distributing_shares">{{get_follow_up_rsponse($followup->id,'fairness_in_distributing_shares')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>جذب انتباه جميع الطلاب
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="attract_the_attention_of_all_students">
+                                        <textarea class="form-text" style="height: 150px" name="attract_the_attention_of_all_students">{{get_follow_up_rsponse($followup->id,'attract_the_attention_of_all_students')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى حسن إدارة الوقت
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="how_well_you_manage_time">
+                                        <textarea class="form-text" style="height: 150px" name="how_well_you_manage_time">{{get_follow_up_rsponse($followup->id,'how_well_you_manage_time')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى حسن استخدام الوسائل
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="how_well_the_means_are_used">
+                                        <textarea class="form-text" style="height: 150px" name="how_well_the_means_are_used">{{get_follow_up_rsponse($followup->id,'how_well_the_means_are_used')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>كيفية إدارة المعلم للتقويم بالمراجعة
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="how_the_teacher_manages_the_evaluation_by_reviewing">
+                                        <textarea class="form-text" style="height: 150px" name="how_the_teacher_manages_the_evaluation_by_reviewing">{{get_follow_up_rsponse($followup->id,'how_the_teacher_manages_the_evaluation_by_reviewing')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>ملاحظات عامة حول مستوى الطلاب بالمراجعة
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="general_comments_about_students_level_of_review">
+                                        <textarea class="form-text" style="height: 150px" name="general_comments_about_students_level_of_review">{{get_follow_up_rsponse($followup->id,'general_comments_about_students_level_of_review')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى الجودة في التمهيد للجديد والربط مع الدروس السابقة
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="how_well_it_introduces_the_new_and_links_with_previous_lessons">
+                                        <textarea class="form-text" style="height: 150px" name="how_well_it_introduces_the_new_and_links_with_previous_lessons">{{get_follow_up_rsponse($followup->id,'how_well_it_introduces_the_new_and_links_with_previous_lessons')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>مدى كفاية شرح الدرس الجديد وتنوع الأمثلة
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="the_adequacy_of_explaining_the_new_lesson_and_the_variety_of_examples">
+                                        <textarea class="form-text" style="height: 150px" name="the_adequacy_of_explaining_the_new_lesson_and_the_variety_of_examples">{{get_follow_up_rsponse($followup->id,'the_adequacy_of_explaining_the_new_lesson_and_the_variety_of_examples')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>كيفية تقويم المعلم لمستوى استيعاب الطلاب للدرس الجديد
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="how_the_teacher_evaluates_the_level_of_students_understanding_of_the_new_lesson">
+                                        <textarea class="form-text" style="height: 150px" name="how_the_teacher_evaluates_the_level_of_students_understanding_of_the_new_lesson">{{get_follow_up_rsponse($followup->id,'how_the_teacher_evaluates_the_level_of_students_understanding_of_the_new_lesson')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>ملاحظات حول استيعاب الطلاب للدرس الجديد
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="feedback_on_students_understanding_of_the_new_lesson">
+                                        <textarea class="form-text" style="height: 150px" name="feedback_on_students_understanding_of_the_new_lesson">{{get_follow_up_rsponse($followup->id,'feedback_on_students_understanding_of_the_new_lesson')}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>ملاحظات حول مستوى بعض الطلاب ودفاترهم
+                                            <span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="notes_about_the_level_of_some_students_and_their_notebooks">
+                                        <textarea class="form-text" style="height: 150px" name="notes_about_the_level_of_some_students_and_their_notebooks">{{get_follow_up_rsponse($followup->id,'notes_about_the_level_of_some_students_and_their_notebooks')}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>تعقيب المعلم<span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="teachers_comment">
+                                        <textarea class="form-text" style="height: 150px" name="teachers_comment">{{get_follow_up_rsponse($followup->id,'teachers_comment')}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input__group mb-25">
+                                        <label>توصيات المشرف<span class="text-danger">*</span></label>
+                                        <input type="hidden" name="q[]" value="supervisor_recommendations">
+                                        <textarea class="form-text" style="height: 150px"  name="supervisor_recommendations">{{get_follow_up_rsponse($followup->id,'supervisor_recommendations')}}</textarea>
+                                    </div>
+                                </div>
 
 
 

@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add ParentInfo') }}</h2>
+                                <h2>{{ __('تعديل بيانات الاباء') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Add ParentInfo') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('لوحة تحكم')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تعديل بيانات الاباء') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -27,288 +27,162 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('Add ParentInfo') }}</h2>
+                            <h2>{{ __('تعديل بيانات الاباء') }}</h2>
                         </div>
 
                         <div class="card-body">
-                            <form method="POST" action="{{ route('parent_infos.update',$parentInfo->id) }}" enctype="multipart/form-data">
+                            <form id="signup-form" method="POST" action="{{ route('parent_infos.update',$parentInfo->id) }}" enctype="multipart/form-data">
                                 @csrf
-
-                                <div class="form-group row">
-                                    <label for="student_id" class="col-md-4 col-form-label text-md-right">{{ __('Student ID') }}<span class="required-star">*</span></label>
-                                    <div class="col-md-6">
-                                        <select id="student_id" class="form-control @error('student_id') is-invalid @enderror" name="student_id"  autocomplete="student_id">
-                                            <option value="" disabled selected>{{ __('Select a Student ID') }}</option>
-                                            @foreach($students as $student)
-                                                <option value="{{$student->id}}">{{$student->code}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('student_id')
-                                        <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label for="father_name" class="col-form-label text-md-right">{{ __('Father Name') }} <span class="required-star">*</span></label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input id="father_name" type="text" class="form-control @error('father_name') is-invalid @enderror" name="father_name" value="{{ old('father_name', $parentInfo->father_name) }}" >
-                                        @error('father_name')
-                                        <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label for="father_occupation" class="col-form-label text-md-right">{{ __('Father Occupation') }} <span class="required-star">*</span></label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input id="father_occupation" type="text" class="form-control @error('father_occupation') is-invalid @enderror" name="father_occupation" value="{{ old('father_occupation', $parentInfo->father_occupation) }}" >
-                                        @error('father_occupation')
-                                        <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <!-- add more fields here as needed -->
-
-                                <div class="form-group row">
-                                    <label for="father_national_id" class="col-md-4 col-form-label text-md-right">{{ __('Father National ID') }} <span class="required-star">*</span></label>
-
-                                    <div class="col-md-6">
-                                        <input id="father_national_id" type="text" class="form-control @error('father_national_id') is-invalid @enderror" name="father_national_id" value="{{ old('father_national_id', $parentInfo->father_national_id) }}" />
-
-                                        @error('father_national_id')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="father_phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Father Phone Number') }} <span class="required-star">*</span></label>
-
-                                    <div class="col-md-6">
-                                        <input id="father_phone_number" type="text" class="form-control @error('father_phone_number') is-invalid @enderror" name="father_phone_number" value="{{ old('father_phone_number', $parentInfo->father_phone_number) }}" />
-
-                                        @error('father_phone_number')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group row">
-                                    <label for="father_whatsapp_number" class="col-md-4 col-form-label text-md-right">{{ __('Father Whatsapp Number') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="father_whatsapp_number" type="text" class="form-control
-                                         @error('father_whatsapp_number') is-invalid
-                                         @enderror" name="father_whatsapp_number"
-                                               value="{{ old('father_whatsapp_number', $parentInfo->father_whatsapp_number)  }} ">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="mother_name" class="col-md-4 col-form-label text-md-right">{{ __('Mother Name') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="mother_name" type="text" class="form-control @error('mother_name') is-invalid @enderror" name="mother_name"
-                                               value="{{ old('mother_name' ,$parentInfo->mother_name) }}"  autocomplete="mother_name" >
-
-                                        @error('mother_name')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="mother_occupation" class="col-md-4 col-form-label text-md-right">{{ __('Mother Occupation') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="mother_occupation" type="text" class="form-control @error('mother_occupation') is-invalid @enderror" name="mother_occupation" value="{{ old('mother_occupation' ,$parentInfo->mother_occupation) }}"  autocomplete="mother_occupation" >
-
-                                        @error('mother_occupation')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="mother_national_id" class="col-md-4 col-form-label text-md-right">{{ __('Mother National ID') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="mother_national_id" type="text" class="form-control @error('mother_national_id') is-invalid @enderror" name="mother_national_id" value="{{ old('mother_national_id' , $parentInfo->mother_national_id) }}"  autocomplete="mother_national_id" >
-
-                                        @error('mother_national_id')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="mother_phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Mother Phone Number') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="mother_phone_number" type="text" class="form-control @error('mother_phone_number') is-invalid @enderror" name="mother_phone_number" value="{{ old('mother_phone_number', $parentInfo->mother_phone_number) }}"  autocomplete="mother_phone_number" >
-
-                                        @error('mother_phone_number')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="mother_whatsapp_number" class="col-md-4 col-form-label text-md-right">{{ __('Mother Whatsapp Number') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="mother_whatsapp_number" type="text" class="form-control
-                                            @error('mother_whatsapp_number') is-invalid
-                                            @enderror" name="mother_whatsapp_number"
-                                               value="{{ old('mother_whatsapp_number', $parentInfo->mother_whatsapp_number) }}">
-                                        @error('mother_whatsapp_number')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="follow_up_person" class="col-md-4 col-form-label text-md-right">{{ __('Follow Up Person') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="follow_up_person" type="text" class="form-control @error('follow_up_person') is-invalid @enderror" name="follow_up_person" value="{{ old('follow_up_person', $parentInfo->follow_up_person) }}" autocomplete="off">
-
-                                        @error('follow_up_person')
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="follow_up_name" class="col-md-4 col-form-label text-md-right">{{ __('Follow Up Name') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="follow_up_name" type="text" class="form-control @error('follow_up_name') is-invalid @enderror" name="follow_up_name" value="{{ old('follow_up_name', $parentInfo->follow_up_name) }}" autocomplete="off">
-
-                                        @error('follow_up_name')
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="follow_up_relationship" class="col-md-4 col-form-label text-md-right">{{ __('Follow Up Relationship') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="follow_up_relationship" type="text" class="form-control @error('follow_up_relationship') is-invalid @enderror" name="follow_up_relationship" value="{{ old('follow_up_relationship', $parentInfo->follow_up_relationship) }}" autocomplete="off">
-
-                                        @error('follow_up_relationship')
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="follow_up_phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Follow Up Phone Number') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="follow_up_phone_number" type="text" class="form-control @error('follow_up_phone_number') is-invalid @enderror" name="follow_up_phone_number" value="{{ old('follow_up_phone_number', $parentInfo->follow_up_phone_number) }}" autocomplete="off">
-
-                                        @error('follow_up_phone_number')
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="follow_up_whatsapp_number" class="col-md-4 col-form-label text-md-right">{{ __('Follow Up Whatsapp Number') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="follow_up_whatsapp_number" type="text" class="form-control @error('follow_up_whatsapp_number') is-invalid @enderror" name="follow_up_whatsapp_number" value="{{ old('follow_up_whatsapp_number',$parentInfo->follow_up_whatsapp_number) }}" autocomplete="off">
-
-                                        @error('follow_up_whatsapp_number')
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="student_pickup_optional" class="col-md-4 col-form-label text-md-right">{{ __('Student Pickup Optional') }}</label>
-                                        <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="student_pickup_optional" name="student_pickup_optional" {{ old('student_pickup_optional') ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="student_pickup_optional">{{ __('Yes, student pickup is optional') }}</label>
-                                            </div>
-                                            @error('student_pickup_optional')
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                            @enderror
+                                <div class="row">
+                                    <div class="col-md-6 mt-2">
+                                        <label for="student_id" class="col-md-6 mt-2 col-form-label text-md-right">{{ __('اسم الطفل') }}</label>
+                                        <div class="col-md-6 mt-2">
+                                            <input type="text" class="form-control" disabled value="{{$parentInfo->student?->name}}">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="parents_marital_status" class="col-md-4 col-form-label text-md-right">{{ __('Parents Marital Status') }}</label>
-                                        <div class="col-md-6">
-                                            <select id="parents_marital_status" class="form-control @error('parents_marital_status') is-invalid @enderror" name="parents_marital_status"  autocomplete="parents_marital_status">
-                                                <option value="" disabled selected>{{ __('Select an option') }}</option>
-                                                <option value="Married" {{ old('parents_marital_status' ,$parentInfo->parents_marital_status) == 'Married' ? 'selected' : '' }}>{{ __('Married') }}</option>
-                                                <option value="Divorced" {{ old('parents_marital_status',$parentInfo->parents_marital_status) == 'Divorced' ? 'selected' : '' }}>{{ __('Divorced') }}</option>
-                                                <option value="Widowed" {{ old('parents_marital_status',$parentInfo->parents_marital_status) == 'Widowed' ? 'selected' : '' }}>{{ __('Widowed') }}</option>
+
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="name" class="col-form-label text-md-right">{{ __('الاسم') }} <span class="required-star">*</span></label>
+                                        <div class="col-md-6 mt-2">
+                                            <input id="father_name" type="text" class="form-control" name="name" value="{{ old('name', $parentInfo->name) }}" >
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="relationship" class="col-md-4 col-form-label text-md-right">{{ __('نوع الصلة') }}</label>
+
+                                        <div class="col-md-6 mt-2">
+                                            <select name="guardian_relationship" placeholder="{{trans('website.guardian_Relationship')}}" class="form-control" >
+                                                <option value="1" @if($parentInfo->relationship == 1) selected @endif>{{trans('website.father')}}</option>
+                                                <option value="2" @if($parentInfo->relationship == 2) selected @endif>{{trans('website.mother')}}</option>
+                                                <option value="3" @if($parentInfo->relationship == 3) selected @endif >{{trans('اخري')}}</option>
                                             </select>
-
-                                            @error('parents_marital_status')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="parents_id_card" class="col-md-4 col-form-label text-md-right">{{ __('Parents ID Card') }}</label>
-                                        <div class="col-md-6">
-                                            <input id="parents_id_card" type="text" class="form-control @error('parents_id_card') is-invalid @enderror" name="parents_id_card" value="{{ old('parents_id_card', $parentInfo->parents_id_card) }}" autocomplete="parents_id_card">
 
-                                            @error('parents_id_card')
-                                            <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
+                                    <div class="col-md-6 mt-2">
+                                        <label for="father_occupation" class="col-form-label text-md-right">{{ __('المهنة') }} <span class="required-star">*</span></label>
+                                        <div class="col-md-6 mt-2">
+                                            <input id="profession" type="text" class="form-control"  name="profession" value="{{ old('profession', $parentInfo->profession) }}" >
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="national_id" class="col-form-label text-md-right">{{ __('الرقم القومي') }} <span class="required-star">*</span></label>
+                                        <div class="col-md-6 mt-2">
+                                            <input id="national_id" type="text" class="form-control"  name="national_id" value="{{ old('national_id', $parentInfo->national_id) }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="national_id" class="col-form-label text-md-right">{{ __('الهاتف') }} <span class="required-star">*</span></label>
+                                        <div class="col-md-6 mt-2">
+                                            <input id="phone_number" type="text" class="form-control"  name="phone_number" value="{{ old('phone_number', $parentInfo->phone_number) }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="whatsapp_number" class="col-md-4 col-form-label text-md-right">{{ __('رقم الواتس اب') }}</label>
+                                        <div class="col-md-6 mt-2">
+                                            <input id="whatsapp_number" type="text" class="form-control" name="whatsapp_number" value="{{ old('whatsapp_number', $parentInfo->whatsapp_number)  }} ">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2 d-flex align-items-center">
+                                        <label for="student_pickup_optional" class="col-md-2 col-form-label text-md-right">{{ __('مسئول استلام') }}</label>
+                                        <input class="form-check-input" type="checkbox" id="student_pickup_optional" name="student_pickup_optional" {{ $parentInfo->student_pickup_optional == 1 ? 'checked' : '' }}>
+
+                                    </div>
+
+                                    <div class="col-md-6 mt-2 d-flex align-items-center">
+                                        <label for="follow_up_person" class="col-md-2 col-form-label text-md-right">{{ __('مسئول متابعة') }}</label>
+                                        <input class="form-check-input" type="checkbox" id="follow_up_person" name="follow_up_person" {{ $parentInfo->follow_up_person == 1 ? 'checked' : '' }}>
+
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="parents_marital_status" class="col-md-4 col-form-label text-md-right">{{ __('Parents Marital Status') }}</label>
+                                        <div class="col-md-6 mt-2">
+                                            <select id="parents_marital_status" class="form-control @error('parents_marital_status') is-invalid @enderror" name="parents_marital_status"  autocomplete="parents_marital_status">
+                                                <option value="1" {{ old('parents_marital_status' ,$parentInfo->studnet?->parents_marital_status) == 1 ? 'selected' : '' }}>{{ __('متزوجين') }}</option>
+                                                <option value="2" {{ old('parents_marital_status',$parentInfo->studnet?->parents_marital_status) == 2 ? 'selected' : '' }}>{{ __('مطلقين') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('الايميل') }}</label>
+                                        <div class="col-md-6 mt-2">
+                                            <input id="email" type="text" class="form-control" name="email" value="{{ old('email', $parentInfo->email)  }} ">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group col-md-3 mb-4">
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('كلمة السر') }}
+                                            <span class="required-star">*</span></label>
+                                        <div class="col-md-12">
+                                            <input required id="password" type="password" class="form-control"
+                                                   name="password" autocomplete="new-password" required>
+
+                                        </div>
+                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تأكيد كلمة السر') }}
+                                            <span class="required-star">*</span></label>
+                                        <div class="col-md-12">
+                                            <input id="confirm-password" type="password"
+                                                   class="form-control"
+                                            name="password_confirmation" autocomplete="new-password" required>
+
+                                        </div>
+                                        <div>
+                                            <p id="message"></p>
+                                        </div>
+                                    </div>
+                                    <h2>{{trans('اﻟﻮﺛﺎﺋﻖ و اﻟﻤﺴﺘﻨﺪات')}}</h2>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="col-md-6 mt-2">
+                                            <div class="form-group mb-25">
+
+                                                <label for="birth_certificate">{{trans("website.birth_certificate")}} <i class="fa fa-file"></i></label>
+                                                <input type="file" name="birth_certificate"  id="imageInput" value="" placeholder='{{trans("website.birth_certificate")}}' class="form-control">
+                                                <img id="imagePreview" src="{{asset($parentInfo->student->get_birth_certificate?->file_name)}}" alt="Image Preview" style="max-width: 150px; height: 200px;">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <div class="form-group mb-25">
+                                                <label for="another_file">{{trans("website.another")}} <i class="fa fa-file"></i></label>
+                                                <input type="file" name="another_file"  id="imageInput2" value="" placeholder="{{trans('')}}" class="form-control">
+                                                <img id="imagePreview2" src="{{asset($parentInfo->student->get_another_file?->file_name)}}" alt="Image Preview" style=" max-width: 150px; height: 200px;">
+                                                @if ($errors->has('another_file'))
+                                                    <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_name') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <div class="form-group mb-25">
+                                                <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i class="fa fa-file"></i></label>
+                                                <input type="file" name="parents_card_copy[]"  multiple id="imageInput3" value="" placeholder="Parents Card Copy" class="form-control">
+                                                <div id="imagePreviews3" style="display: flex; flex-wrap: wrap;">
+                                                    @if($parentInfo->student->parents_card_copy)
+                                                        @foreach(json_decode($parentInfo->student->parents_card_copy) as $photo)
+                                                            <img src="{{api_asset($photo)}}" style=" max-width: 150px; height: 150px;">
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                                     <div class="button-group">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('Submit') }}
+                                            {{ __('تعديل') }}
                                         </button>
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -353,6 +227,117 @@
                             // }
                         });
                     });
+                });
+            </script>
+            <script>
+                $('#imageInput').on('change', function(event) {
+                    const input = event.target;
+                    const $imagePreview = $('#imagePreview');
+
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            // Set the source of the image preview to the selected file
+                            $imagePreview.attr('src', e.target.result);
+                            // Show the image preview
+                            $imagePreview.show();
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // Hide the image preview if no file is selected
+                        $imagePreview.hide();
+                    }
+                });
+
+                $('#imageInput2').on('change', function(event) {
+                    const input = event.target;
+                    const $imagePreview = $('#imagePreview2');
+
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            // Set the source of the image preview to the selected file
+                            $imagePreview.attr('src', e.target.result);
+                            // Show the image preview
+                            $imagePreview.show();
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // Hide the image preview if no file is selected
+                        $imagePreview.hide();
+                    }
+                });
+
+                $('#imageInput3').on('change', function(event) {
+                    const input = event.target;
+                    const $imagePreviews = $('#imagePreviews3');
+                    $imagePreviews.empty(); // Clear previous previews
+
+                    if (input.files && input.files.length > 0) {
+                        for (let i = 0; i < input.files.length; i++) {
+                            const reader = new FileReader();
+                            const file = input.files[i];
+
+                            reader.onload = function(e) {
+                                // Create a new image element for each preview
+                                const $img = $('<img>').attr('src', e.target.result);
+                                $img.css({
+                                    'max-width': '150px', // Example: set width to 100px
+                                    'height': '150px', // Example: maintain aspect ratio
+                                    // Add more styles as needed
+                                });
+                                $imagePreviews.append($img);
+                            };
+
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                });
+            </script>
+            <script>
+                function previewFile(input) {
+                    "use strict";
+
+                    const preview = document.getElementById('upload-img-box-icon');
+                    const file = input.files[0];
+                    const reader = new FileReader();
+
+                    if(input.files[0].size > 1000000){
+                        alert("Maximum file size is 1MB!");
+                    } else {
+                        reader.onload = function() {
+                            console.log(reader)
+                            preview.src =  reader.result;
+                        };
+                        if(file) {
+                            reader.readAsDataURL(file);
+                        }
+                        else {
+                            preview.src = "";
+                        }
+                    }
+                }
+            </script>
+
+            <script>
+                // Get references to the password and confirm password input fields
+                const passwordField = document.getElementById("password");
+                const confirmPasswordField = document.getElementById("confirm-password");
+                const message = document.getElementById("message");
+
+                // Add an event listener to the form
+                document.getElementById("signup-form").addEventListener("submit", function (e) {
+                    if (passwordField.value !== confirmPasswordField.value) {
+                        e.preventDefault(); // Prevent form submission
+                        message.innerText = "Passwords do not match!";
+                        message.style.color = "red";
+                    } else {
+                        message.innerText = ""; // Clear any previous error message
+                    }
                 });
             </script>
     @endpush

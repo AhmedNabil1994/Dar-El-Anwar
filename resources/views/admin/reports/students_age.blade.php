@@ -160,7 +160,7 @@
                                 <td>{{  $years }}</td>
 
                                 <td>
-                                    <a href="{{route('student.edit',$student_age->id)}}" class="btn-action view"  title="{{ __('معايبة') }}">
+                                    <a href="{{route('reports.reportStudent',$student_age->id)}}" class="btn-action view"  title="{{ __('معايبة') }}">
                                        <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

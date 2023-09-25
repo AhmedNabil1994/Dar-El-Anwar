@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Employees') }}</h2>
+                                <h2>{{ __('الموظفين') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('All Parent') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('الحضور والانصراف') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -59,8 +59,8 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center" >{{trans("website.instructor_name")}}</th>
-                                            <th class="text-center" >{{trans("website.starting_date")}}</th>
-                                            <th class="text-center" >{{trans("website.ending_date")}}</th>
+                                            <th class="text-center" >{{trans("تاريخ الحضور")}}</th>
+                                            <th class="text-center" >{{trans("تاريخ الانصراف")}}</th>
                                             <th class="text-center" >{{trans("website.status")}}</th>
                                             <th class="text-center" >{{trans("website.reason")}}</th>
                                         </tr>
@@ -69,9 +69,10 @@
                                     @foreach($attendances_leaves as $attendance_leave)
                                         <tr>
                                             <td class="text-center">{{ $attendance_leave->employee->name }}</td>
-                                            <td class="text-center">{{ $attendance_leave->start_date }}</td>
-                                            <td class="text-center">{{ $attendance_leave->end_date }}</td>
-                                            <td class="text-center">{{ $attendance_leave->status }}</td>
+                                            <td class="text-center">{{ \Carbon\Carbon::parse($attendance_leave->start_date)->format('d/m/y h:i A') }}</td>
+                                            <td class="text-center">{{ $attendance_leave->end_date ? \Carbon\Carbon::parse($attendance_leave->end_date)->format('h:i A') : '' }}</td>
+                                            <td class="text-center">{{ $attendance_leave->status == 'attend'? 'حاضر' : 'غائب' }}</td>
+                                            <td class="text-center">{{ $attendance_leave->reason }}</td>
 
 
                                 @endforeach

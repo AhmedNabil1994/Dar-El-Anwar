@@ -14,6 +14,7 @@ use App\Tools\Repositories\Crud;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Admin\EmployeeRequest;
+use Spatie\Permission\Models\Role;
 
 class EmployeeController extends Controller
 {
@@ -26,7 +27,7 @@ class EmployeeController extends Controller
 
     public function index(Request $request)
     {
-        $employees = Employee::query();
+        $employees = Employee::query()->orderBy('id','desc');
         $query_search = $request->query_search;
         if($query_search)
             $employees->where('name','LIKE','%'.$query_search.'%');
@@ -59,15 +60,89 @@ class EmployeeController extends Controller
         $employee = null;
         $data['departments'] = Department::whereStatus(1)->get();
         $data['branches'] = Branch::whereStatus(1)->get();
+        $data['roles'] = Role::all();
         return view('admin.employees.add', $data,compact('employee'));
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->all();
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        $employee = $this->employeeRepo->create($validatedData);
+        $validatedData = $request->except('password','salary');
+        $password = $request->password;
+        $employee = Employee::create($validatedData);
+        if($password){
+            $password = Hash::make($password);
+            $employee->update([
+                'password' => $password
+            ]);
+        }
+        if($request->hasFile('image')){
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('image')->getClientOriginalName());
 
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('image')->store('uploads/all','public');
+
+            $upload->user_id = $employee->id;
+            $upload->extension = $request->file('image')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('image')->getSize();
+            $upload->save();
+
+            $employee->update([
+                'image' => $upload->id,
+            ]);
+        }
+        $employee->roles()->attach($request->role_id);
+
+        if($validatedData['job_title'] == 'teacher') {
+            $instructor = Instructor::create([
+                'email' => $employee->email,
+                'password' => $employee->password,
+                'employee_id' => $employee->id
+            ]);
+
+            $employee->update(['type'=>'instructor']);
+        }
+        else if($validatedData['job_title'] == 'driver')
+            $employee->update(['type'=>'driver']);
+
+        Salary::create([
+            'employee_id' => $employee->id,
+            'salary' => $request->input('salary'),
+            'date' => now(), // You can adjust this based on your requirements
+        ]);
+        return redirect()->route('employees.index')->with('success', 'تمت اضافة موطف');
+    }
+
+    public function edit($id)
+    {
+        $employee = $this->employeeRepo->find($id);
+        $data['departments'] = Department::whereStatus(1)->get();
+        $data['branches'] = Branch::whereStatus(1)->get();
+        $data['roles'] = Role::all();
+        return view('admin.employees.edit', $data,compact('employee'));
+    }
+
+    public function update(Request $request,Employee $employee)
+    {
+        $validatedData = $request->except('password','salary');
+        $password = $request->password;
+        $employee->update($validatedData);
+        if($password){
+            $password = Hash::make($password);
+            $employee->update([
+                'password' => $password
+            ]);
+        }
         if($request->hasFile('image')){
             $upload = new Upload;
             $upload->file_original_name = null;
@@ -96,91 +171,24 @@ class EmployeeController extends Controller
         }
 
         if($validatedData['job_title'] == 'teacher') {
-            $instructor = Instructor::create([
+
+            $employee->instructor->update([
                 'email' => $employee->email,
-                'password' => $employee->password,
-                'employee_id' => $employee->id
             ]);
-
-            $employee->update(['type'=>'instructor']);
-        }
-        else if($validatedData['job_title'] == 'driver')
-            $employee->update(['type'=>'driver']);
-
-        Salary::create([
-            'employee_id' => $employee->id,
-            'salary' => $request->input('salary'),
-            'date' => now(), // You can adjust this based on your requirements
-        ]);
-        return redirect()->route('employees.index')->with('success', 'تمت اضافة موطف');
-    }
-
-    public function edit($id)
-    {
-        $employee = $this->employeeRepo->find($id);
-
-        return view('admin.employees.edit', compact('employee'));
-    }
-
-    public function update(Request $request,Employee $employee)
-    {
-        $validatedData = $request->except('password');
-
-        if($request->hasFile('image'))
-        {
-            $upload = new Upload;
-            $upload->file_original_name = null;
-            $arr = explode('.', $request->file('image')->getClientOriginalName());
-
-            for($i=0; $i < count($arr)-1; $i++){
-                if($i == 0){
-                    $upload->file_original_name .= $arr[$i];
-                }
-                else{
-                    $upload->file_original_name .= ".".$arr[$i];
-                }
+            if($password){
+                $password = Hash::make($password);
+                $employee->instructor->update([
+                    'password' => $employee->password,
+                ]);
             }
-
-            $upload->file_name = $request->file('image')->store('uploads/all','public');
-
-            $upload->user_id = $employee->id;
-            $upload->extension = $request->file('image')->getClientOriginalExtension();
-            $upload->type = 'image';
-            $upload->file_size = $request->file('image')->getSize();
-            $upload->save();
-
-            $employee->update([
-                'image' => $upload->id,
-            ]);
-        }
-        else
-        {
-            $request['image'] = $employee->image;
-        }
-
-        $employee = $employee->update($validatedData);
-
-        if($validatedData['job_title'] == 'teacher') {
-            $instructor = Instructor::create([
-                'email' => $employee->email,
-                'password' => $employee->password,
-                'employee_id' => $employee->id
-            ]);
-
             $employee->update(['type'=>'instructor']);
         }
         else if($validatedData['job_title'] == 'driver'){
-            $employee->instructor->delete();
+            $employee->instructor?->delete();
             $employee->update(['type'=>'driver']);
         }
 
-        if($request['password'])
-        {
-            $password = Hash::make($request['password']);
-
-            $employee = $employee->update(['password'=>$password]);
-        }
-
+        $employee->roles()->sync(Role::findOrFail($request->role));
         $employee->salary->update([
             'salary' => $request->input('salary'),
             'date' => now(), // You can adjust this based on your requirements

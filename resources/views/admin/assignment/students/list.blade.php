@@ -33,7 +33,6 @@
                             <table id="" class="row-border data-table-filter table-style table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('website.select') }}</th>
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>
                                     <th>{{ trans('website.department') }}</th>

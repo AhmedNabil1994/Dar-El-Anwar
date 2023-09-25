@@ -99,6 +99,13 @@
                                                 <span>{{__('تسجيل الخروج')}}</span>
                                             </a>
                                         </li>
+                                    @elseif(\Illuminate\Support\Facades\Auth::guard('parents')->check())
+                                        <li>
+                                            <a class="dropdown-item" href="{{route('parents.logout')}}">
+                                                <img src="{{asset('admin/images/icons/logout.svg')}}" alt="icon">
+                                                <span>{{__('تسجيل الخروج')}}</span>
+                                            </a>
+                                        </li>
                                     @endif
 
                                 </ul>

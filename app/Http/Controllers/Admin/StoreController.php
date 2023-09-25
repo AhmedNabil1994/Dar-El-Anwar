@@ -207,7 +207,13 @@ class StoreController extends Controller
             'model_id' => $request['store_id']
         ]);
 
-
+//        Invoice::create([
+//            'student_id' => $subscription->student->id,
+//            'amount' => $total,
+//            'subscription_id' => $subscription->id,
+//            'classroom' => $subscription->student->class_room?->id,
+//            'paid_at' => Carbon::now()->format('Y-m-d')
+//        ]);
         // Redirect to a success page or perform any other necessary actions
         return redirect()->back()->with('success', 'تم إنشاء فاتورة المشتريات بنجاح.');
     }

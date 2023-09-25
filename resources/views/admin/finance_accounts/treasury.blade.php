@@ -10,14 +10,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('المشرفون') }}</h2>
+                                <h2>{{ __('الخزينة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{trans('website.allAdmins') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('الخزينة') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -52,17 +52,17 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('website.adminList') }}</h2>
-                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ trans('website.addAdmin') }}
-                            </a>
+                            <h2>{{ trans('الخزينة') }}</h2>
+{{--                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">--}}
+{{--                                <i class="fa fa-plus"></i> {{ trans('website.addAdmin') }}--}}
+{{--                            </a>--}}
                         </div>
 
-                        <div class="item-title d-flex justify-content-center">
-                               <a href="{{ route('balances.openingBalanceForm') }}" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ trans('website.balances') }}
-                            </a>
-                        </div>
+{{--                        <div class="item-title d-flex justify-content-center">--}}
+{{--                               <a href="{{ route('balances.openingBalanceForm') }}" class="btn buttons-style btn-sm">--}}
+{{--                                <i class="fa fa-plus"></i> {{ trans('website.balances') }}--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
 
                         <div class="row mb-5">
                             <div class="col-sm-2 m-3">
@@ -88,6 +88,7 @@
                         </div>
 
                         <div class="row justify-content-center mb-4">
+
                             <div class="col-sm-2">
                                 <a href="{{route('accounts.createIncomeTransaction')}}" class="btn buttons-style w-100" >قبض</a>
                             </div>
@@ -106,8 +107,9 @@
                         </div>
 
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
-                            <table  class="row-border data-table-filter table-style table table-bordered table-striped">
+
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -135,8 +137,8 @@
                                         <td>{{$transaction->amount}}</td>
                                         <td>{{$transaction->name}}</td>
                                         <td>{{$transaction->student?->name}}</td>
-                                        <td>{{$transaction->transaction_type == 'income' ? 'income':''}}</td>
-                                        <td>{{$transaction->transaction_type== 'expense' ? 'expense':''}}</td>
+                                        <td>{{$transaction->transaction_type == 'income' ? 'دائن':''}}</td>
+                                        <td>{{$transaction->transaction_type== 'expense' ? 'مدين':''}}</td>
                                         <td>{{$transaction->last_amount}}</td>
                                         <td>{{$transaction->user?->name}}</td>
                                         <td>{{$transaction->description}}</td>

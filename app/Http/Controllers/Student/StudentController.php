@@ -10,6 +10,8 @@ use App\Models\City;
 use App\Models\ClassRoom;
 use App\Models\Course;
 use App\Models\Department;
+use App\Models\ExamsResult;
+use App\Models\Goal;
 use App\Models\Governorate;
 use App\Models\Instructor;
 use App\Models\Level;
@@ -17,6 +19,7 @@ use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\ParentInfo;
 use App\Models\Student;
+use App\Models\StudentGoal;
 use App\Models\StudentNotification;
 use App\Models\Upload;
 use App\Models\User;
@@ -82,6 +85,12 @@ class StudentController extends Controller
         return $data['class_rooms'];
     }
 
+    public function archive($id){
+        $student = Student::find($id);
+        $student->update(['status'=>0]);
+        return redirect()->back()->with('success','تمت ارشفة الطالب');
+    }
+
     public function create()
     {
 
@@ -134,6 +143,31 @@ class StudentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $courses = Course::whereIn('id',$request->appointment)->get();
+        $selectedCourses = Course::whereIn('id', $request->appointment)->get();
+
+        $conflictFound = false;
+        foreach ($courses as $course){
+            foreach ($courses as $existingCourse) {
+                // Skip comparing the course against itself
+                if ($course->id == $existingCourse->id) {
+                    continue;
+                }
+
+                // Check if there is a conflict in date or time
+                if (
+                    $course->day == $existingCourse->day // Compare dates
+                    &&
+                    $course->time == $existingCourse->time // Check if end time is after start time
+                ) {
+                    $conflictFound = true;
+                    break 2; // Break both loops if a conflict is found
+                }
+            }
+        }
+        if($conflictFound)
+            return redirect()->back()->with('error','يوجد تعارض في المواعيد');
+
         $guardianRelationships = $request->guardian_relationship;
         if($guardianRelationships){
 
@@ -516,9 +550,30 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        $courses = Course::whereIn('id',$request->appointment)->get();
+        $selectedCourses = Course::whereIn('id', $request->appointment)->get();
 
+        $conflictFound = false;
+        foreach ($courses as $course){
+            foreach ($courses as $existingCourse) {
+                // Skip comparing the course against itself
+                if ($course->id == $existingCourse->id) {
+                    continue;
+                }
 
-
+                // Check if there is a conflict in date or time
+                if (
+                    $course->day == $existingCourse->day // Compare dates
+                    &&
+                    $course->time == $existingCourse->time // Check if end time is after start time
+                ) {
+                    $conflictFound = true;
+                    break 2; // Break both loops if a conflict is found
+                }
+            }
+        }
+        if($conflictFound)
+            return redirect()->back()->with('error','يوجد تعارض في المواعيد');
         $photos = [];
         $guardianRelationships = $request->guardian_relationship;
 
@@ -787,5 +842,27 @@ class StudentController extends Controller
         }
 
     }
+
+
+    public function student_review(Request $request)
+    {
+        $data['students'] = Student::query()->orderBy('id','DESC')->get();
+        $data['students_goals'] = StudentGoal::where('status',0)
+            ->where('student_id',$request->student_id)
+            ->get();
+        return view('admin.student.review.list',$data);
+    }
+
+ public function get_review(Request $request,Student $student, Goal $goal)
+    {
+        $data['student'] = $student;
+        $data['exam'] = $goal->exam;
+        $data['questions'] = $data['exam']->questions;
+        $data['goal'] = $goal;
+        $data['exam_results'] = ExamsResult::where('student_id',$student->id)
+            ->where('goal_id',$goal->id)->get();
+        return view('admin.student.review.show', $data);
+    }
+
 
 }

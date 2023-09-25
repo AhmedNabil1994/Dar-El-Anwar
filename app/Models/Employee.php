@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class Employee extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles, HasPermissions;
     protected $fillable = [
         'name',
         'birthdate',
@@ -20,7 +22,7 @@ class Employee extends Model
         'graduation_date',
         'national_id',
         'email',
-        'department',
+        'department_id',
         'salary_cycle',
         'hiring_date',
         'work_days',
@@ -48,7 +50,7 @@ class Employee extends Model
     }
     public function getImg()
     {
-        return $this->upload->file_name;
+        return $this->upload?->file_name;
     }
 
     public function salary()

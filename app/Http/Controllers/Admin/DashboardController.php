@@ -36,6 +36,7 @@ class DashboardController extends Controller
         $data['title'] = 'Dashboard';
         $data['total_students'] = Student::count();
         $data['new_students'] = Student::where('status',1 )->count();
+        $data['total_joining_students'] = Student::where('status',0)->count();
         $data['excluded_students'] = Student::where('status','3')->count();
         $data['converted_students'] = Student::where('status','4')->count();
         $data['absence_students'] = Absence::distinct('student_id')->count();
@@ -83,6 +84,14 @@ class DashboardController extends Controller
         })->whereStatus(1)->count();
 
         return view('student.dashboard', $data);
+    }
+
+
+    public function parent_dashboard()
+    {
+        $data['title'] = 'Dashboard';
+
+        return view('parent.dashboard', $data);
     }
 
     public function instructor_dashboard(){

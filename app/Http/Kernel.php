@@ -9,6 +9,7 @@ use App\Http\Middleware\CourseAccessMiddleware;
 use App\Http\Middleware\Instrucotr;
 use App\Http\Middleware\IsDemo;
 use App\Http\Middleware\LocalizationMiddleware;
+use App\Http\Middleware\Parents;
 use App\Http\Middleware\Student;
 use App\Http\Middleware\VersionUpdate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -76,6 +77,7 @@ class Kernel extends HttpKernel
         'common' => Common::class,
         'student' => Student::class,
         'instructor' => Instrucotr::class,
+        'parents' => Parents::class,
         'affiliate' => Affiliator::class,
         'admin' => Admin::class,
         'isDemo' => IsDemo::class,
@@ -87,6 +89,6 @@ class Kernel extends HttpKernel
         'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
-    
+
     ];
 }

@@ -42,14 +42,16 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('الصفحات') }}</h2>
+                                <h2>{{ __('سداد اشتراك') }}</h2>
+
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('كل الصفحات') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('سداد الاشتراكات') }}</li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -62,26 +64,60 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('الاشتراك') }}</h2>
-                            <a id="openModalBtn" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('أضف صفحة') }}
-                            </a>
+
                         </div>
                         <div>
-                        <div class="row">
-                        <div class="col-md-12">
-                        <div class="customers__area bg-style mb-30">
-                          <form method="get" action="{{ route('subscriptions.index') }}" class="row justify-content-start mb-3 align-items-end">
+                            <form method="post" action="{{ route('subscriptions.students_subscription.store') }}" class="row justify-content-center align-items-end mb-3">
+                                @csrf
+                                <div class="col-md-3">
+                                    <label class="form-label">اسم الطفل</label>
+                                    <select required class="form-control" name="student_id">
+                                        <option value="">__</option>
+                                        @foreach($students as $student)
+                                            <option value="{{$student->id}}">{{$student->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">اسم الاشتراك</label>
+                                    <select required class="form-control"
+                                            name="subscription_id">
+                                        <option value="">اختر الاشتراك</option>
+                                        @foreach($all_subscriptions as $subscription)
+                                            <option value="{{$subscription->id}}"
+                                            >{{$subscription->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn buttons-style" type="submit">اشتراك</button>
+                                </div>
+                            </form>
+                          <form method="get" action="{{ route('subscriptions.students_subscription') }}" class="row justify-content-start align-items-end mb-3">
+
                               <div class="col-md-3">
                                   <label class="form-label">اسم الطفل</label>
-                                  <input multiple class="form-control" name="child_name" value="{{request('child_name')}}"/>
+                                  <select class="form-control" name="student_id">
+                                      <option value="">__</option>
+                                      @foreach($students as $student)
+                                          <option value="{{$student->id}}" {{$student->id == request('student_id') ? 'selected' : ''}}>{{$student->name}}</option>
+                                      @endforeach
+                                  </select>
                               </div>
                               <div class="col-md-3">
                                   <label class="form-label">اسم الاشتراك</label>
-                                  <input multiple class="form-control" name="subscription_name" value="{{request('subscription_name')}}"/>
-
+                                  <select class="form-control"
+                                          name="subscription_id">
+                                      <option value="">اختر الاشتراك</option>
+                                      @foreach($all_subscriptions as $subscription)
+                                          <option value="{{$subscription->id}}"
+                                              {{$subscription->id == request('subscription_id') ? 'selected' : '' }}
+                                          >{{$subscription->name}}</option>
+                                      @endforeach
+                                  </select>
                               </div>
                             <div class="col-md-3">
-                                  <button class="btn buttons-style" type="submit">تم</button>
+                                <button class="btn buttons-style" type="submit"><i class="fa fa-filter"></i></button>
                             </div>
                         </form>
                     </div>
@@ -89,15 +125,17 @@
                     </div>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
-                            <table  class="row-border data-table-filter table-style table table-bordered table-striped">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>اسم الطفل</th>
                                     <th>اسم الاشتراك</th>
                                     <th>المبلغ</th>
-                                    <th>حالة السداد</th>
-                                    <th>نشط/غير نشط</th>
+                                    <th>المدفوع</th>
+                                    <th>الرصيد</th>
+                                    <th>الباقي</th>
+                                   <th>نشط/غير نشط</th>
                                     <th>إجراءات</th>
                                 </tr>
                                 </thead>
@@ -106,8 +144,10 @@
                                     <tr>
                                         <td>{{$subscription->student?->name}}</td>
                                         <td>{{$subscription->subscription?->name}}</td>
-                                        <td>{{$subscription->subscription?->value}}</td>
-                                        <td>{{$subscription->payment_status}}</td>
+                                        <td>{{$subscription->subscription?->value * $subscription->subscription?->batch}}</td>
+                                        <td>{{$subscription->subscription?->value * $subscription->rec_time}}</td>
+                                        <td>{{$subscription->student?->wallet}}</td>
+                                        <td>{{$subscription->subscription?->value * ($subscription->subscription?->batch - $subscription->rec_time)}}</td>
                                         <td>
                                             @php
                                                 $today = now(); // Current date

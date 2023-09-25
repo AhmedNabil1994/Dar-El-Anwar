@@ -42,24 +42,13 @@
                                     @csrf
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="code">{{trans('website.code')}}</label>
-
-                                            <input type="text"
-                                                   class="form-control"
-                                                   id="code"
-                                                   name="code" />
-
-                                            @error('code')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="title">{{trans('website.courseTitle')}}</label>
+                                        <label for="title">{{trans('اسم الدورة')}}</label>
 
                                             <input type="text"
                                                    class="form-control"
                                                    id="title"
-                                                   name="title" />
+                                                   name="title"
+                                                   required/>
 
                                             @error('title')
                                             <span class="text-danger">{{ $message}}</span>
@@ -68,39 +57,30 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="instructor_id">{{trans('website.instructor')}}</label>
-
+                                            <label for="instructor_id">{{trans('المدرب')}}</label>
                                             <select type="text"
                                                    class="form-control"
                                                    id="instructor_id"
-                                                   name="instructor_id" >
+                                                   name="instructor_id"
+                                                    required>
                                                 <option value="">{{trans("website.selectInstructor")}}</option>
                                                 @foreach($instructors as $instructor)
                                                     <option value="{{$instructor->id}}">{{$instructor->employee->name}}</option>
                                                 @endforeach
                                             </select>
 
-                                            @error('instructor_id')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="subject_id">{{trans('website.subject')}}</label>
 
-                                            <select type="text"
-                                                   class="form-control"
-                                                   id="subject_id"
-                                                   name="subject_id" >
-                                                <option value="">{{trans('website.selectSubject')}}</option>
-                                                @foreach($subjects as $subject)
-                                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                            <select name="subject_id" class="form-control" required>
+                                            <option value="" selected>{{trans('website.subject')}}</option>
+                                                @foreach ($subjects as $subject)
+                                                    <option value="{{ $subject->id }}" >{{ $subject->name }}</option>
                                                 @endforeach
                                             </select>
-
-                                            @error('subject_id')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
                                         </div>
+
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
@@ -108,86 +88,60 @@
                                             <select type="text"
                                                    class="form-control"
                                                    id="department_id"
-                                                   name="department_id" >
+                                                   name="department_id"
+                                                    required>
                                                 @foreach($departments as $department)
                                                     <option value="{{$department->id}}">{{$department->name}}</option>
                                                 @endforeach
                                             </select>
-                                            @error('code')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="content">{{trans('website.content')}}</label>
 
-                                            <textarea type=""
-                                                   class="form-control"
-                                                   id="content"
-                                                   name="content"></textarea>
-
-                                            @error('content')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
+                                            <textarea   class="form-control"
+                                                        id="content"
+                                                        name="content"
+                                                        required></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <div class="form-group col-md-6">
-                                            <label for="price">{{trans('website.price')}}</label>
-
+                                            <label for="price">{{trans('قيمة الاشتراك')}}</label>
                                             <input type="number"
                                                     class="form-control"
                                                     id="price"
-                                                    name="price" />
-
-                                            @error('price')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
+                                                    name="price"
+                                                    required/>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="time">{{trans('website.time')}}</label>
-
-                                            <input type="time"
-                                                      class="form-control"
-                                                      id="time"
-                                                      name="time"/>
-                                            @error('time')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
+                                            <label for="date_to">{{trans('الموعد')}} :</label>
+                                            <input type="time" id="date_time" name="date_time"
+                                                   class="form-control">
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <div class="form-group col-md-6">
-                                            <label for="date_to">{{trans('website.dateTo')}} :</label>
-                                            <input type="date" id="date_to" name="date_to"
-                                                   class="form-control">
 
-                                            @error('date_to')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
-                                        </div>
                                         <div class="form-group col-md-6">
-                                            <label for="date_from">{{trans('website.dateFrom')}} :</label>
-                                            <input type="date" id="date_from" name="date_from"
+                                            <label for="date_from">{{trans('website.date')}} :</label>
+                                            <input type="date" id="date" name="date"
                                                    class="form-control">
-
-                                            @error('date_from')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
                                         </div>
-                                    </div>
-                                    <div class="row mb-4">
                                         <div class="form-group col-md-6">
                                             <label for="status">{{trans('website.status')}}  </label>
-                                            <input type="checkbox" name="status"
-                                                   class="input__checkbox">
-
-                                            @error('status')
-                                            <span class="text-danger">{{ $message}}</span>
-                                            @enderror
+                                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-danger ">
+                                                    <input type="radio" name="status" id="option1" value="0" autocomplete="off" checked> متوقف
+                                                </label>
+                                                <label class="btn btn-success active">
+                                                    <input type="radio" name="status" id="option2" value="1" autocomplete="off"> نشط
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="form-group mb-4">
                                         <button type="submit" class="btn buttons-style button-save">{{trans('website.save')}}</button>
+
                                         <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                     </div>
                                 </form>

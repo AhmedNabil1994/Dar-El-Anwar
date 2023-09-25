@@ -18,10 +18,6 @@ class RoleController extends Controller
 
     public function index()
     {
-        if (!auth::guard('admins')->user()->can('user_management')) {
-            abort('403');
-        } // end permission checking
-
 
         $data['title'] = 'Manage Roles';
         $data['roles'] = Role::paginate(25);
@@ -56,10 +52,6 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        if (!auth::guard('admins')->user()->can('user_management')) {
-            abort('403');
-        } // end permission checking
-
         $data['title'] = 'تعديل مجموعة';
         $data['role'] = Role::find($id);
         $data['permissions'] = Permission::all();
@@ -93,10 +85,6 @@ class RoleController extends Controller
 
     public function delete($id)
     {
-        if (!auth::guard('admins')->user()->can('user_management')) {
-            abort('403');
-        } // end permission checking
-
         $role = Role::find($id);
         DB::table('role_has_permissions')->where('role_id', $id)->delete();
         $role->delete();

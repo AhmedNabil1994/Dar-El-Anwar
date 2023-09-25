@@ -114,7 +114,7 @@ class LoginController extends Controller
                     return redirect("login");
                 }
             }
-            return redirect(route('parent.dashboard'));
+            return redirect(route('parents  .dashboard'));
         }
 
 

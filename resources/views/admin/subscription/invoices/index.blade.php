@@ -72,7 +72,9 @@
                                 <div class="col-md-3">
                                     <label class="form-label">اسم الطفل</label>
                                     <select class="form-select" name="child_name">
+
                                         <option value="">اختر اسم الطفل</option>
+
                                         @foreach($students as $student)
                                             <option value="{{$student->name}}" {{$student->name == request('child_name') ? "selected": ""}}>{{$student->name}}</option>
                                         @endforeach
@@ -80,11 +82,18 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">المرحلة</label>
-                                    <input multiple class="form-control" name="subscription_name" value="{{request('subscription_name')}}" placeholder = "اختر المرحلة"/>
+                                    <select class="form-select" name="level_id">
+                                        <option value="">__</option>
+                                        @foreach($levels as $level)
+                                            <option value="{{$level->id}}">{{$level->name}}</option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">الفصل</label>
                                     <select class="form-select" name="class">
+
                                         <option value="">اختر الفصل</option>
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}">{{$class->name}}</option>
@@ -97,9 +106,9 @@
                             </form>
                             </div>
                         </div>
-                        <div class="customers__table" style = "overflow-x:auto">
-                            <!-- <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped"> -->
-                            <table class="row-border data-table-filter table-style table table-bordered table-striped">
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>رقم الايصال</th>
@@ -116,7 +125,7 @@
                                         <td>{{$paidInvoice->id}}</td>
                                         <td>{{\Carbon\Carbon::parse($paidInvoice->paid_at)->format('Y-m-d')}}</td>
                                         <td>{{$paidInvoice->subscription->subscription->name}}</td>
-                                        <td>{{ \Carbon\Carbon::parse($paidInvoice->subscription->created_at)->format('F')}}</td>
+                                        <td> @lang('website.'.\Carbon\Carbon::parse($paidInvoice->subscription->created_at)->format('F'))</td>
                                         <td>
                                             {{ $paidInvoice->note}}
                                         </td>

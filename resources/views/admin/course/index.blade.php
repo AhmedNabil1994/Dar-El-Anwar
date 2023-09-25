@@ -181,8 +181,7 @@
                                     <th>المحتوى</th>
                                     <th>الموعد</th>
                                     <th>قيمة الإشتراك</th>
-                                    <th>التاريخ من</th>
-                                    <th>التاريخ الى</th>
+                                    <th>التاريخ</th>
                                     <th>عدد الطلبة</th>
                                     <th>الحالة</th>
                                     <th>الإجراءات</th>
@@ -194,43 +193,28 @@
                                     <td>{{$course->code}}</td>
                                     <td>{{$course->title}}</td>
                                     <td>{{$course->instructor?->employee?->name}}</td>
-                                    <td>{{$course->subject}}</td>
+                                    <td>{{$course->subject?->name}}</td>
                                     <td>{{$course->department?->name}}</td>
                                     <td>{{$course->content}}</td>
-                                    <td>{{$course->time}}</td>
+                                    <td>{{Carbon\Carbon::parse($course->time)->format('h:i A')}}</td>
                                     <td>{{$course->price}}</td>
-                                    <td>{{$course->date_from}}</td>
-                                    <td>{{$course->date_to}}</td>
+                                    <td>{{$course->date}}</td>
                                     <td>{{$course->students?->count()}}</td>
                                     <td>
                                         @if($course->status == 1)
-                                        <span class="status active">{{ __('Published') }}</span>
-                                        @elseif($course->status == 2)
-                                            <span class="status active">{{ __('Waiting for Review') }}</span>
-                                        @elseif($course->status == 3)
-                                            <span class="status blocked">{{ __('Hold') }}</span>
-                                        @elseif($course->status == 4)
-                                            <span class="status ">{{ __('Draft') }}</span>
+                                        <span class="status active">{{ __('website.active') }}</span>
                                         @else
-                                            <span class="status ">{{ __('Pending') }}</span>
+                                            <span class="status active">{{ __('غير نشط') }}</span>
                                         @endif
                                     </td>
                                     <td>
 
-                                        <div class="action__buttons">
-
-                                            <a href="{{route('admin.course.view', [$course->uuid])}}" class="btn-action mr-30" title="View Details">
-                                                <img src="{{asset('admin/images/icons/eye-2.svg')}}" alt="eye">
+                                            <a href="{{route('admin.course.edit', [$course])}}" class="btn-action mr-30" title="View Details">
+                                                <i class="fa fa-edit"></i>
                                             </a>
-
-                                            <button class="btn-action ms-2 deleteItem" data-formid="delete_row_form_{{$course->uuid}}">
-                                                <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">
-                                            </button>
-
-                                            <form action="{{route('admin.course.delete', [$course->uuid])}}" method="get" id="delete_row_form_{{ $course->uuid }}">
-
-                                            </form>
-                                        </div>
+                                        <a href="javascript:void(0);" data-url="{{route('admin.course.delete', $course)}}" class="btn-action delete" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

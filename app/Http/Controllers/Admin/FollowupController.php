@@ -21,7 +21,7 @@ class FollowupController extends Controller
     public function index(Request $request)
     {
         //.
-        $data['followups'] = Followup::query()->orderBy('created_at',"DESC");
+        $data['followups'] = Followup::query()->orderBy('id',"DESC");
         $data['classes'] = ClassRoom::all();
         $data['instructors'] = Instructor::where('status',1)->get();
         $data['subjects'] = Subject::all();
@@ -86,65 +86,71 @@ class FollowupController extends Controller
     public function storeClass(Request $request)
     {
         //
-        $questions = $request->questions;
+        $questions = $request->q;
         $followup = Followup::create([
             "class_id" => $request->class_id,
             "instructor_id" => $request->teacher_id,
             "subject_id" => $request->subject_id,
-            "status" => $request->status,
-            "type" => $request->type,
             "class_number" => $request->class_number,
             "time_working" => $request->time_working,
             "observer" => $request->observer,
-            "followup_date" => $request->followup_date,
+            "date" => $request->followup_date,
+            "type" => 1,
         ]);
-        foreach($questions as $key => $question)
+        foreach($questions as $question)
             FollowupResponses::create([
-                "folowup_id" => $followup->id,
-                "question_id" =>$key+1,
-                "response" =>$question,
+                "followup_id" =>$followup->id,
+                "question" =>$question,
+                "response" =>$request->$question,
             ]);
-        return redirect()->route('admin.followup.index');
+        return redirect()->route('admin.followup.index')->with('success','تمت اضافة المتابعة');
     }
 
     public function storeReading(Request $request)
     {
         //
-        $questions = $request->questions;
+
+        $questions = $request->q;
         $followup = Followup::create([
             "class_id" => $request->class_id,
             "instructor_id" => $request->teacher_id,
             "subject_id" => $request->subject_id,
-            "status" => $request->status,
-            "type" => $request->type,
+            "class_number" => $request->class_number,
+            "time_working" => $request->time_working,
+            "observer" => $request->observer,
+            "date" => $request->followup_date,
+            "type" => 2,
         ]);
-        foreach($questions as $key => $question)
+        foreach($questions as $question)
             FollowupResponses::create([
-                "folowup_id" => $followup->id,
-                "question_id" =>$key+25,
-                "response" =>$question,
+                "followup_id" =>$followup->id,
+                "question" =>$question,
+                "response" =>$request->$question,
             ]);
-        return redirect()->route('admin.followup.index');
+        return redirect()->route('admin.followup.index')->with('success','تمت اضافة المتابعة');
     }
 
     public function storeQuran(Request $request)
     {
         //
-        $questions = $request->questions;
+        $questions = $request->q;
         $followup = Followup::create([
             "class_id" => $request->class_id,
             "instructor_id" => $request->teacher_id,
             "subject_id" => $request->subject_id,
-            "status" => $request->status,
-            "type" => $request->type,
+            "class_number" => $request->class_number,
+            "time_working" => $request->time_working,
+            "observer" => $request->observer,
+            "date" => $request->followup_date,
+            "type" => 3,
         ]);
-        foreach($questions as $key => $question)
+        foreach($questions as $question)
             FollowupResponses::create([
-                "folowup_id" => $followup->id,
-                "question_id" =>$key+14,
-                "response" =>$question,
+                "followup_id" =>$followup->id,
+                "question" =>$question,
+                "response" =>$request->$question,
             ]);
-        return redirect()->route('admin.followup.index');
+        return redirect()->route('admin.followup.index')->with('success','تمت اضافة المتابعة');
     }
 
     /**
@@ -181,7 +187,6 @@ class FollowupController extends Controller
         $data['classes'] = ClassRoom::all();
         $data['instructors'] = Instructor::where('status',1)->get();
         $data['subjects'] = Subject::all();
-        $data['questions'] = FollowupQuestions::where('followup_id','follow_up_quran')->get();
         $data['followup'] = $followup;
         return view('admin.followup.edit_report_quran',$data);
 
@@ -197,6 +202,15 @@ class FollowupController extends Controller
         $data['followup'] = $followup;
         return view('admin.followup.edit_report_reading',$data);
 
+    }
+
+    public function change_status(Request $request){
+        $followup = Followup::find($request->followup_id);
+        if ($followup->status == 1  )
+            $followup->update(['status' => 0]);
+        else
+            $followup->update(['status' => 1]);
+        return 'success';
     }
 
     /**
