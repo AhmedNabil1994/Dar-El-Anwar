@@ -87,6 +87,11 @@ class Student extends Authenticatable
         return$this->belongsTo(Upload::class,'parents_card_copy');
     }
 
+    public function student_report()
+    {
+        return$this->hasOne(StudentReport::class);
+    }
+
     public function get_birth_certificate()
     {
         return$this->belongsTo(Upload::class,'birth_certificate');

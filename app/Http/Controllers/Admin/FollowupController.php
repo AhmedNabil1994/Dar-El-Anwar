@@ -21,7 +21,7 @@ class FollowupController extends Controller
     public function index(Request $request)
     {
         //.
-        $data['followups'] = Followup::query()->orderBy('created_at',"DESC");
+        $data['followups'] = Followup::query()->orderBy('id',"DESC");
         $data['classes'] = ClassRoom::all();
         $data['instructors'] = Instructor::where('status',1)->get();
         $data['subjects'] = Subject::all();

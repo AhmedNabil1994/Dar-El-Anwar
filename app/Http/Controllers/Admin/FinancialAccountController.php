@@ -81,7 +81,7 @@ class FinancialAccountController extends Controller
             'trans_no'=>rand(0000,9999),
             'date' => $request->date ?? Carbon::now()->format('Y-m-d'),
             'name' => $request->name,
-            'branch_id' => $request->user->branch_id,
+            'branch_id' => Auth::user()->branch_id,
             'amount' => $request->amount,
             'description' => $request->description,
             'user_id' => Auth::user()->id,

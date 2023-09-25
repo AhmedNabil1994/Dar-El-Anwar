@@ -130,9 +130,8 @@ class ExamController extends Controller
         return redirect()->back();
     }
 
-    public function delete($uuid)
+    public function delete(Exam $exam)
     {
-        $exam = $this->model->getRecordByUuid($uuid);
         foreach ($exam->questions as $question)
         {
             Question_option::where('question_id', $question->id)->delete();
@@ -140,7 +139,7 @@ class ExamController extends Controller
         }
         $exam->delete();
 
-        toastrMessage('error', 'Quiz has been deleted');
+        toastrMessage('error', 'تم ازالة الاختبار');
         return redirect()->back();
     }
 

@@ -24,9 +24,6 @@
                 </div>
             </div>
 
-
-            {{--            @can('create-admins', 'admins')--}}
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
@@ -67,18 +64,6 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group col-md-1">
-                                        <label for="name">{{__('website.status')}}</label>
-
-                                        <input type="checkbox"
-                                               class="form-check"
-                                               id="status"
-                                               name="status" />
-
-                                        @error('status')
-                                        <span class="text-danger">{{ $message}}</span>
-                                        @enderror
-                                    </div>
 
                                 </div>
                                 <div class="form-group">
@@ -91,7 +76,6 @@
                     </div>
                 </div>
             </div>
-            {{--            @endcan--}}
 
 
 

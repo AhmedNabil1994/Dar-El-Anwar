@@ -36,6 +36,11 @@ class Goal extends Model
         return $this->belongsTo(Exam::class);
     }
 
+    public function exam_result()
+    {
+        return $this->belongsTo(ExamsResult::class);
+    }
+
     public function class_room()
     {
         return $this->belongsTo(ClassRoom::class,'class_room_id');

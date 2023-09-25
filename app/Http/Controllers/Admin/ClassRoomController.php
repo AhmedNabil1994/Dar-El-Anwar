@@ -18,7 +18,7 @@ class ClassRoomController extends Controller
     public function index()
     {
         //
-        $data['classes'] = ClassRoom::query()->whereStatus(1)->orderBy('id','DESC');
+        $data['classes'] = ClassRoom::query()->orderBy('id','DESC');
 
         $data['classes'] = $data['classes']->paginate(25);
 
@@ -48,7 +48,8 @@ class ClassRoomController extends Controller
         //
         ClassRoom::create([
             'name'=>$request->name,
-            'status'=>$request->status?1:0,
+            'level_id'=>$request->level_id,
+            'status'=>1,
         ]);
         return redirect()->route('class_room.index')->with('success','تم اضافة الفصل');
     }

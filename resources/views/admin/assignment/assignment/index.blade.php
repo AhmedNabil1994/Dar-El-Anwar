@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <form method="get" action="{{route('admin.assignments.assignment.index')}}" class="row">
+            <form method="get" action="{{route('admin.assignments.assignment.student.list')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
                 </div>

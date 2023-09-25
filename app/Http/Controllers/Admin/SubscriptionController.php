@@ -51,30 +51,30 @@ class SubscriptionController extends Controller
 
     public function students_subscription(Request $request)
     {
-        $childName = $request->child_name;
-        $subscriptionName = $request->subscription_name;
+        $childName = $request->student_id;
+        $subscriptionName = $request->subscription_id;
 
-        // استخدم الفلاتر هنا للبحث باسم الطفل واسم الاشتراك
-
-        $subscriptions = StudentSubscription::query()->orderBy('id','DESC')->where(function ($query) use ($childName, $subscriptionName) {
-            // إضافة الشروط هنا للبحث باسم الاشتراك واسم الطفل
-            if (!empty($subscriptionName)) {
+        $subscriptions = StudentSubscription::query()->orderBy('id','DESC')
+            ->where(function ($query) use ($childName, $subscriptionName) {
+           if (!empty($subscriptionName)) {
                 $query->whereHas('subscription', function ($userQuery) use ($subscriptionName) {
-                    $userQuery->where('name', $subscriptionName);
+                    $userQuery->where('subscriptions.id', $subscriptionName);
                 });
             }
             if (!empty($childName)) {
                 $query->whereHas('student', function ($userQuery) use ($childName) {
-                    $userQuery->where('name', $childName);
+                    $userQuery->where('students.id', $childName);
                 });
             }
         })
             ->with('student')
             ->with('subscription')
             ->paginate(25);
+
         $data['subjects'] = Subject::all();
         $data['departs'] = Department::where('status',1)->get();
         $data['students'] = \App\Models\Student::where('status',1)->get();
+        $data['all_subscriptions'] = Subscription::where('status',1)->get();
         $data['subscription_names'] = Subscription::where('status',1)->get();
 
 
@@ -223,8 +223,14 @@ class SubscriptionController extends Controller
                 'classroom' => $subscription->student->class_room?->id,
                 'paid_at' => Carbon::now()->format('Y-m-d')
             ]);
-            $subscription->update(['payment_status' => 'paid']);
+            $subscription->update([
+                'rec_time' => $subscription->rec_time++,
+            ]);
 
+            if($subscription->rec_time == $subscription->subscription->batch)
+                $subscription->update([
+                    'payment_status' => 'paid'
+                ]);
 
 
             return redirect()->back()->with('success', 'Payment Success.');
@@ -234,6 +240,8 @@ class SubscriptionController extends Controller
     }
     public function processPayment(Request $request, StudentSubscription $subscription)
     {
+        if($request->amount < $subscription->subscription->value)
+            return redirect()->back()->with('error', 'فشل الدفع');
         // Retrieve the subscription based on the $subscription_id
 
         // Simulate a successful payment (you would replace this with real payment gateway integration)
@@ -245,6 +253,7 @@ class SubscriptionController extends Controller
             $last_amount = Transaction::query()
                 ->where('date',Carbon::today()->format('Y-m-d'))
                 ->orderBy('id','DESC')->first()?->amount;
+
             $last_amount = $last_amount + $request->amount;
             $data = [
                 'trans_no'=>rand(0000,9999),
@@ -259,6 +268,7 @@ class SubscriptionController extends Controller
             ];
 
             Transaction::create($data);
+
             Invoice::create([
                 'student_id' => $subscription->student->id,
                 'amount' => $subscription->subscription->value,
@@ -266,13 +276,33 @@ class SubscriptionController extends Controller
                 'classroom' => $subscription->student->class_room?->id,
                 'paid_at' => Carbon::now()->format('Y-m-d')
             ]);
-            $subscription->update(['payment_status' => 'paid']);
+
+            $subscription->update([
+                'rec_time' => $subscription->rec_time+1,
+            ]);
+            if($subscription->rec_time == $subscription->subscription->batch)
+                $subscription->update([
+                    'payment_status' => 'paid'
+                ]);
 
 
 
-            return redirect()->back()->with('success', 'Payment Success.');
+            return redirect()->back()->with('success', 'تم الدفع.');
         } else {
-            return redirect()->back()->with('error', 'Payment failed.');
+            return redirect()->back()->with('error', 'فشل الدفع');
         }
+    }
+
+    public function students_subscription_store(Request $request)
+    {
+        $subscription = Subscription::find($request->subscription_id);
+        StudentSubscription::create([
+            'student_id' => $request->student_id,
+            'subscription_id' => $request->subscription_id,
+            'rec_time' => 0,
+            'payment_status' => 'unpaid',
+            'active_days' => 30 * $subscription->batch,
+        ]);
+        return redirect()->back()->with('success','تم الاشتراك');
     }
 }

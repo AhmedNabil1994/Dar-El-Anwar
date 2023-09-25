@@ -57,6 +57,7 @@ class AssignmentController extends Controller
         if($request->filterByStudent)
             $data['all_subjects']->where('student',$request->filterByStudent);
         $data['all_subjects'] = $data['all_subjects']->paginate(25);
+
         return view('admin.assignment.assignment.index',$data);
     }
     public function listing()

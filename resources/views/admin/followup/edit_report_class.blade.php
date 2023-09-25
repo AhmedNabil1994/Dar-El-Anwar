@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('website.add_student') }}</h2>
+                                <h2>{{ trans('تعديل متابعة') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.add_student') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('تعديل متابعة') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('website.add_student') }}</h2>
+                            <h2>{{ trans('تعديل متابعة') }}</h2>
                         </div>
                         <div class="item-title d-flex justify-content-center mx-4">
                            <a href="{{route('admin.followup.index')}}" class="icon"><i class="fa fa-paper-plane mx-3">خطة متابعة المعلمين</i></a>
@@ -41,7 +41,7 @@
                                 <div class="col-md-3">
                                     <div class="input__group mb-25">
                                         <label>{{trans('website.followup_date')}} <span class="text-danger">*</span></label>
-                                        <input type="date" name="followup_date" class="form-control" value="{{$followup->followup_date}}"/>
+                                        <input type="date" name="followup_date" class="form-control" value="{{Carbon\Carbon::parse($followup->date)->toDateString()}}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-3">

@@ -43,7 +43,7 @@
             <hr>
             <div class="row">
                 <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl" style="overflow: auto">
-                    <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                    <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead >
                         <tr>
                             <th>الفصل</th>
@@ -60,7 +60,7 @@
                             <th>منقول من الحضانة الي الهجاء</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody>x
                             <tr>
                                 <td class="col-md-1">
                                     @foreach($department->classes as $class)

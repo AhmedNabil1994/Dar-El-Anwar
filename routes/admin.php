@@ -170,7 +170,7 @@ Route::prefix('course')->group(function () {
         Route::get('review-pending', [ExamController::class, 'reviewPending'])->name('admin.exam.review_pending');
         Route::get('hold', [ExamController::class, 'hold'])->name('admin.exam.hold');
         Route::get('status-change/{uuid}/{status}', [ExamController::class, 'statusChange'])->name('admin.exam.status-change');
-        Route::get('delete/{uuid}', [ExamController::class, 'delete'])->name('admin.exam.delete');
+        Route::get('delete/{exam}', [ExamController::class, 'delete'])->name('admin.exam.delete');
         Route::post('store', [ExamController::class, 'store'])->name('admin.exam.store');
         Route::post('update/{id}', [ExamController::class, 'update'])->name('admin.exam.update');
     });
@@ -321,6 +321,7 @@ Route::prefix('course')->group(function () {
         Route::get('/payment/{subscription}', 'SubscriptionController@processPayment')->name('payment.process');
         Route::get('/payment/wallet/{subscription}', 'SubscriptionController@processPaymentWallet')->name('payment.process.wallet');
         Route::post('store', 'SubscriptionController@store')->name('subscriptions.store');
+        Route::post('students_subscription_store', 'SubscriptionController@students_subscription_store')->name('subscriptions.students_subscription.store');
         Route::delete('delete/{subscription}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
         Route::post('update/{subscription}', 'SubscriptionController@update')->name('subscriptions.update');
     });
@@ -480,6 +481,7 @@ Route::prefix('reports')->as('reports.')->group(function () {
     Route::get('/report_subscribtions', [ReportController::class, 'reportSubscribtions'])->name('reportSubscribtions');
     Route::get('/report_invoices', [ReportController::class, 'reportInvoices'])->name('reportInvoices');
     Route::get('/report_student/{id}', [ReportController::class, 'reportStudent'])->name('reportStudent');
+    Route::post('/store_report_student', [ReportController::class, 'StoreReportStudent'])->name('StoreReportStudent');
     Route::get('/report_buses', [ReportController::class, 'reportBuses'])->name('reportBuses');
     Route::get('/report_count_students', [ReportController::class, 'reportCountStudent'])->name('reportCountStudent');
 });

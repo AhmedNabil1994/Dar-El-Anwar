@@ -41,14 +41,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('الصفحات') }}</h2>
+                                <h2>{{ __('الاشتراكات') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('كل الصفحات') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('الاشتراكات') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -61,11 +61,11 @@
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('الاشتراك') }}</h2>
                             <a id="openModalBtn" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('أضف صفحة') }}
+                                <i class="fa fa-plus"></i> {{ __('أضف اشتراك') }}
                             </a>
                         </div>
                         <div>
-                          <form method="get" action="{{ route('subscriptions.index') }}" class="row justify-content-start mb-3">
+                          <form method="get" action="{{ route('subscriptions.index') }}" class="row align-items-end justify-content-start mb-3">
                               <div class="col-md-3">
                                   <label class="form-label">اسم الطفل</label>
                                       <select multiple class="form-select" name="child_name[]">
@@ -90,12 +90,14 @@
 
                               </div>
                             <div class="col-md-3">
-                                  <button class="btn buttons-style" type="submit">تم</button>
+                                  <button class="btn buttons-style" type="submit">
+                                      <i class="fa fa-filter"></i>
+                                  </button>
                             </div>
                           </form>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>كود الاشتراك</th>
@@ -203,6 +205,10 @@
                                 <input type="number" name="value" id="value" class="form-control" required>
                             </div>
                             <div class="form-group">
+                                <label for="value">الدفعات</label>
+                                <input type="number" name="batch" id="batch" class="form-control" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="department_id">القسم</label>
                                 <select name="department_id" id="department_id" class="form-select" required>
                                     @foreach($departs as $depart)
@@ -246,8 +252,8 @@
 
         // Function to open the modal
         function openModal() {
-            // Update the form's action attribute
-            $('#editForm').attr('action', '{{ route('subscriptions.store') }}');
+                // Update the form's action attribute
+                $('#editForm').attr('action', '{{ route('subscriptions.store') }}');
             modal.style.display = 'block';
         }
 
@@ -315,6 +321,7 @@
                         $('#name').val(data.name);
                         $('#value').val(data.value);
                         $('#department_id').val(data.department_id);
+                        $('#batch').val(data.batch);
                         $('#subject_id').val(data.subject_id);
 
                         // Update the form's action attribute

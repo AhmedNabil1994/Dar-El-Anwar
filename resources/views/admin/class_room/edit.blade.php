@@ -70,20 +70,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group col-md-1">
-                                        <label for="name">{{__('website.status')}}</label>
 
-                                        <input type="checkbox"
-                                               class="form-check"
-                                               id="status"
-                                               name="status"
-                                            {{$class->status == 1 ? 'checked':''}}
-                                        />
-
-                                        @error('status')
-                                        <span class="text-danger">{{ $message}}</span>
-                                        @enderror
-                                    </div>
 
                                 </div>
                                 <div class="form-group">

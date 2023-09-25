@@ -353,6 +353,18 @@ return [
 "Delete Role"=>"حذف المجموعة",
 "Add Role"=>"أضف مجموعة",
 "Edit Role"=>"تحرير المجموعة",
+"January"=>"يناير",
+"February"=>"فبراير",
+"March"=>"مارس",
+"April"=>"ابريل",
+"May"=>"مايو",
+"June"=>"يونيو",
+"July"=>"يوليو",
+"Augast"=>"اغسطس",
+"September"=>"سبتمبر",
+"October"=>"اكتوبر",
+"November"=>"نوفمير",
+"December"=>"ديسمبر",
 
 ];
 

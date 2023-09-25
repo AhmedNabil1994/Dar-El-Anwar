@@ -4,13 +4,12 @@
     <div class="page-content">
         <div class="container-fluid">
         <h1>إضافة حركة وارد (قبض)</h1>
-
         <form action="{{ route('accounts.updateTransaction',$financialAccount) }}" method="POST">
             @csrf
             <input type="hidden" name="transaction_type" value="income">
             <div class="form-group">
                 <label for="date">التاريخ:</label>
-                <input type="datetime-local" name="date" value="{{$financialAccount->date}}" class="form-control">
+                <input type="date" name="date" value="{{\Carbon\Carbon::parse($financialAccount->date)->toDateString()}}" class="form-control">
             </div>
             <div class="form-group">
                 <label for="name">اسم الحركة:</label>

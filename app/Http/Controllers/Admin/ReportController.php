@@ -11,6 +11,8 @@ use App\Models\Level;
 use App\Models\ParentInfo;
 use App\Models\Student;
 use App\Models\StudentBus;
+use App\Models\StudentReport;
+use App\Models\StudentSubject;
 use App\Models\StudentSubscription;
 use App\Models\Subscription;
 use Carbon\Carbon;
@@ -124,9 +126,47 @@ class ReportController extends Controller
     public function reportStudent(Request $request,$id)
     {
         $data['student'] = Student::find($id);
+        $data['student_subject_absence'] = StudentSubject::where('student_id',$data['student']->id)->sum('abscence_count')*100;
+        $data['student_subject_attendance'] = StudentSubject::where('student_id',$data['student']->id)->sum('attendanc_count')*100;
+
         return view('admin.reports.report_student',$data);
     }
-
+    public function  StoreReportStudent(Request $request)
+    {
+        $student = StudentReport::where('student_id',$request->student_id)->first();
+        if(!$student)
+            StudentReport::create([
+                'student_id' => $request->student_id,
+                'date_from' => $request->date_from,
+                'date_to' => $request->date_to,
+                'paper_precent' => $request->paper_precent,
+                'attitude' => $request->attitude,
+                'performance' => $request->performance,
+            ]);
+        else
+            $student->update([
+                'student_id' => $request->student_id,
+                'date_from' => $request->date_from,
+                'date_to' => $request->date_to,
+                'paper_precent' => $request->paper_precent,
+                'attitude' => $request->attitude,
+                'performance' => $request->performance,
+            ]);
+        $data['student'] = Student::find($request->student_id);
+        foreach($request->subject_id as $key => $subject)
+        {
+            $student_subject = StudentSubject::where('student_id',$request->student_id)
+                ->where('subject_id',$subject)->first();
+            $student_subject?->update([
+                'review_date' =>  $request->performance_date[$key],
+                'review_name' =>  $request->review_name[$key],
+                'grade' =>  $request->grade [$key],
+                'precentage' =>  $request->precentage[$key],
+                'notes' => $request->notes[$key],
+            ]);
+        }
+        return redirect()->back()->with('success','تم اضافة التقرير');
+    }
     public function reportBuses(Request $request)
     {
         $data['students_buses'] = StudentBus::query();

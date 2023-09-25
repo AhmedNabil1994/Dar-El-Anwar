@@ -447,7 +447,7 @@
                         </li>
                     @endcan
                     @can('manage-finance_subscriptions')
-                        <li class="{{ active_if_match('admin/subscriptions') }}">
+                        <li class="{{ active_if_full_match('admin/subscriptions') }}">
                             <a href="{{route('subscriptions.index')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{ __('الاشتراكات') }}</span>
@@ -455,7 +455,7 @@
                         </li>
                     @endcan
                     @can('manage-finance_students_subscription')
-                        <li class="{{ active_if_match('admin/students_subscription') }}">
+                        <li class="{{ active_if_full_match('admin/subscriptions/students_subscription') }}">
                             <a href="{{route('subscriptions.students_subscription')}}">
                                 <i class="fa fa-circle"></i>
                                 <span>{{ __('سداد الاشتراكات') }}</span>
