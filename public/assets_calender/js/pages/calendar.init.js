@@ -84,11 +84,7 @@ File: Calendar init js
         locale: 'ar', // Set the locale to 'ar' for Arabic
       defaultView: 'dayGridMonth',
       themeSystem: 'bootstrap',
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-      },
+
       eventClick: function eventClick(info) {
         addEvent.modal('show');
         formEvent[0].reset();

@@ -54,38 +54,70 @@
                     </div>
                 </form>
             </div>
-
-            <div class="col-md-12">
-                <div class="customers__area__header bg-style mb-30 table-title-container">
+            <div class="row customers__area__header bg-style mb-30 table-title-container">
                 <h1 class = "mb-3">صافي الربح</h1>
-                <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                    <table class="row-border data-table-filter table-style table table-bordered table-striped">
-                    <thead>
-                    <tr class="text-center">
-                        <th>#</th>
-                        <th>رقم الحركة</th>
-                        <th>التاريخ</th>
-                        <th>الوقت</th>
-                        <th>المستخدم</th>
-                        <th>المبلغ</th>
-                        <th>الحساب</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($expense_transactions as $transaction)
+                <div class="col-md-6">
+                    <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                        <table class="row-border data-table-filter table-style table table-bordered table-striped">
+                        <thead>
                         <tr class="text-center">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $transaction->trans_no }}</td>
-                            <td>{{ \Carbon\Carbon::parse($transaction->date)->format('Y-m-d') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($transaction->date)->format('h:m:s') }}</td>
-                            <td>{{ $transaction->user->name }}</td>
-                            <td>{{ $transaction->amount }}</td>
-                            <td>{{ $transaction->account }}</td>
-
+                            <th>#</th>
+                            <th>رقم الحركة</th>
+                            <th>التاريخ</th>
+                            <th>الوقت</th>
+                            <th>المستخدم</th>
+                            <th>المبلغ</th>
+                            <th>الحساب</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($expense_transactions as $transaction)
+                            <tr class="text-center">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $transaction->trans_no }}</td>
+                                <td>{{ \Carbon\Carbon::parse($transaction->date)->format('Y-m-d') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($transaction->date)->format('h:m:s') }}</td>
+                                <td>{{ $transaction->user->name }}</td>
+                                <td>{{ $transaction->amount }}</td>
+                                <td>{{ $transaction->account }}</td>
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table class="row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>رقم الحركة</th>
+                                    <th>التاريخ</th>
+                                    <th>الوقت</th>
+                                    <th>المستخدم</th>
+                                    <th>المبلغ</th>
+                                    <th>الحساب</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($income_transactions as $transaction)
+                                    <tr class="text-center">
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $transaction->trans_no }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($transaction->date)->format('Y-m-d') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($transaction->date)->format('h:m:s') }}</td>
+                                        <td>{{ $transaction->user->name }}</td>
+                                        <td>{{ $transaction->amount }}</td>
+                                        <td>{{ $transaction->account }}</td>
+
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                 </div>
             </div>
             <div class="customers__area bg-style mb-30">

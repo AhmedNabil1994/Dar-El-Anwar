@@ -64,7 +64,7 @@ function get_goals_today()
 
 function get_calenders_today()
 {
-    \App\Models\Calender::where('start',\Carbon\Carbon::now()->toDateString())
+   $calender =  \App\Models\Calender::where('start',\Carbon\Carbon::now()->toDateString())
         ->get();
     $notify = \App\Models\Notification::where('text','لديك مهام اليوم')
         ->where('is_seen','no')->first();

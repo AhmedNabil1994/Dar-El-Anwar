@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Event;
 use App\Models\Calender;
+use App\Models\Notification;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -48,6 +49,7 @@ class CalenderController extends Controller
         $event->title = $request->title;
         $event->start = $carbonDate??Carbon::today();
         $event->save();
+
 
         return redirect()->back()->with('success','تمت اضافة تذكير');
     }

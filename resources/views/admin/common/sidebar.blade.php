@@ -496,6 +496,11 @@
                             </a>
                         </li>
                     @endcan
+                        <li class="{{ active_if_match('admin/product/movement') }}">
+                            <a href="{{route('stores.create')}}">
+                                <span>{{ __('اضف منتج') }}</span>
+                            </a>
+                        </li>
                     @can('manage-finance_product_movement')
                         <li class="{{ active_if_match('admin/product/movement') }}">
                             <a href="{{route('stores.product.index')}}">

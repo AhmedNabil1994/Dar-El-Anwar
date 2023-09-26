@@ -35,7 +35,9 @@ class AbsenceController extends Controller
         if ($request->filterByClass)
             $absences->where('level_id', $request->filterByClass);
         if ($request->filterBySubject)
-            $absences->where('subject_id', $request->filterBySubject);
+            $absences->whereHas('student_subject',function ($q) use($request){
+                return $q->where('subject_id',$request->filterBySubject);
+            });
         if ($request->filterByInst)
             $absences->where('instructor_id', $request->filterByInst);
         if ($request->filterByCode)
@@ -43,14 +45,16 @@ class AbsenceController extends Controller
                 $query->where('code', $request->filterByCode);
             });
         if ($request->filterByStudent)
-            $absences->where('student_id', $request->filterByStudent);
+        $absences->whereHas('student_subject',function ($q) use($request){
+            return $q->where('student_id',$request->filterByStudent);
+        });
 
         $instructors = Instructor::whereStatus(1)->get();
         $data['departments'] = Department::all();
         $data['class_rooms'] = ClassRoom::all();
         $data['subjects'] = Subject::all();
-        $data['filter_students'] = Student::whereStatus(1)->get();
-        $data['codes'] = Student::whereStatus(1)->pluck('code');
+        $data['filter_students'] = Student::get();
+        $data['codes'] = Student::all()->pluck('code');
         $absences = $absences->paginate(25);
 
         return view('admin.absence.view', $data, compact('absences', 'instructors'));

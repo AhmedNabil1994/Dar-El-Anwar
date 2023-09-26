@@ -24,9 +24,7 @@ class CertificateController extends Controller
 
     public function index()
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
+
 
         $data['title'] = ' Certificates';
         $data['navCertificateActiveClass'] = "mm-active";
@@ -38,9 +36,6 @@ class CertificateController extends Controller
 
     public function create()
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
 
         $data['title'] = 'Add Certificate';
         $data['courses'] = Course::where('status',1)->get();
@@ -55,9 +50,6 @@ class CertificateController extends Controller
 
     public function store(Request $request)
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
 
         $request->validate([
             'show_number' => 'required',
@@ -116,9 +108,6 @@ class CertificateController extends Controller
 
     public function edit($uuid)
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
 
         $data['courses'] = Course::where('status',1)->get();
         $data['students'] = Student::where('status',1)->get();
@@ -133,9 +122,6 @@ class CertificateController extends Controller
 
     public function update(Request $request, $uuid)
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
 
         $request->validate([
             'show_number' => 'required',
@@ -202,10 +188,6 @@ class CertificateController extends Controller
 
     public function delete($uuid)
     {
-        if (!Auth::user()->can('manage_certificate')) {
-            abort('403');
-        } // end permission checking
-
         $certificate = Certificate::whereUuid($uuid)->first();
         $this->deleteFile($certificate->image);
         $this->deleteFile($certificate->role_1_signature);

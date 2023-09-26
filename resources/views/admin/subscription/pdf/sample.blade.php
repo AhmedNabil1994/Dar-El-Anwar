@@ -24,9 +24,7 @@
                     <p class="tm_m0">رقم الفاتورة : {{$invoice->id}}</p>
                 </div>
                 <div class="tm_grid_row tm_col_4 tm_padd_20 tm_accent_bg tm_mb25 tm_white_color tm_align_center">
-                    <div>
-                        <div class="tm_logo"><img src="{{asset('invoice/img/logo_white.svg')}}" alt="Logo"></div>
-                    </div>
+
                 </div>
                 <div class="tm_invoice_head tm_mb10">
                     <div class="tm_invoice_left">

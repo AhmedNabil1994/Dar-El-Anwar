@@ -61,10 +61,8 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('الاشتراك') }}</h2>
-                            <a id="openModalBtn" class="btn buttons-style btn-sm">
-                                <i class="fa fa-plus"></i> {{ __('أضف صفحة') }}
-                            </a>
+                            <h2>{{ __('الفواتير') }}</h2>
+
                         </div>
                         <div>
                             <div class="customers__area bg-style mb-30">
@@ -80,23 +78,23 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">المرحلة</label>
-                                    <select class="form-select" name="level_id">
-                                        <option value="">__</option>
-                                        @foreach($levels as $level)
-                                            <option value="{{$level->id}}">{{$level->name}}</option>
-                                        @endforeach
-                                    </select>
+{{--                                <div class="col-md-3">--}}
+{{--                                    <label class="form-label">المرحلة</label>--}}
+{{--                                    <select class="form-select" name="level_id">--}}
+{{--                                        <option value="">__</option>--}}
+{{--                                        @foreach($levels as $level)--}}
+{{--                                            <option value="{{$level->id}}">{{$level->name}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
 
-                                </div>
+{{--                                </div>--}}
                                 <div class="col-md-3">
                                     <label class="form-label">الفصل</label>
                                     <select class="form-select" name="class">
 
                                         <option value="">اختر الفصل</option>
                                         @foreach($classes as $class)
-                                            <option value="{{$class->id}}">{{$class->name}}</option>
+                                            <option value="{{$class->id}}"  {{$class->id == request('class') ? "selected": ""}}>{{$class->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

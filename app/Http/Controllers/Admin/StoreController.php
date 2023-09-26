@@ -133,7 +133,7 @@ class StoreController extends Controller
         }
 
 
-        return redirect()->route('stores.index');
+        return redirect()->route('stores.product.index');
     }
 
     public function indexProducts(Request $request)

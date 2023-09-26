@@ -16,15 +16,18 @@ class InvoiceController extends Controller
     {
         $childName = $request->child_name;
         $class = $request->class;
+        $level = $request->level_id;
 
         $paidInvoices = Invoice::query()->orderBy('id','DESC');
 
-        $paidInvoices->where(function ($query) use ($childName,$class) {
+        $paidInvoices->where(function ($query) use ($childName,$class,$level) {
             if (!empty($childName)) {
                 $query->whereHas('student', function ($userQuery) use ($childName) {
                     $userQuery->where('name', $childName);
                 });
             }
+
+
 
             if (!empty($class)) {
                 $query->whereHas('class_room', function ($userQuery) use ($class) {

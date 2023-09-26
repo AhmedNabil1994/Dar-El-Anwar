@@ -210,6 +210,7 @@
                             <span>{{ __('المخازن') }}</span>
                         </a>
                     </li>
+
                     <li class="{{ active_if_match('admin/product/movement') }}">
                         <a href="{{route('stores.product.index')}}">
                             <i class="fa fa-circle"></i>

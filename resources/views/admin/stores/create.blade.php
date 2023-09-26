@@ -8,15 +8,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('Add Page') }}</h2>
+                                <h2>{{ __('اضافة منتج') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('All Pages') }}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('Add Page') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('اضفة منتج') }}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -43,7 +42,7 @@
 
                             <div class="form-group col-6">
                                 <label for="parcode">باركود المنتج:</label>
-                                <input type="text" class="form-control" id="parcode" name="parcodeZ" required>
+                                <input type="text" class="form-control" id="parcode" name="parcode" required>
                             </div>
 
                             <div class="form-group col-6">

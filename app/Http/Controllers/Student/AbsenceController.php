@@ -35,7 +35,9 @@ class AbsenceController extends Controller
         if ($request->filterByClass)
             $absences->where('level_id', $request->filterByClass);
         if ($request->filterBySubject)
-            $absences->where('subject_id', $request->filterBySubject);
+            $absences->whereHas('student_subject',function ($q) use($request){
+                return $q->where('subject_id',$request->filterBySubject);
+            });
         if ($request->filterByInst)
             $absences->where('instructor_id', $request->filterByInst);
         if ($request->filterByCode)
