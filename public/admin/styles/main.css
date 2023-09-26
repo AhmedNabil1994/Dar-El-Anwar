@@ -162,8 +162,8 @@ ul {
     padding: 0;
 }
 
-img {
-    max-width: 100%;
+.all-students img {
+    width: 30px;
 }
 
 .main-content {
