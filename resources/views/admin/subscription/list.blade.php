@@ -128,7 +128,7 @@
                                         </td>
                                         <td>
                                             <div class="action__buttons">
-                                                <a id="openModalBtn2" class="btn-action mr-1 "
+                                                <a class="openModalBtn2" class="btn-action mr-1 "
                                                     data-subscription="{{ $subscription }}">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
@@ -293,7 +293,7 @@
             modal2.style.display = 'none';
         }
         // Event listeners for the button and close button
-        $('#openModalBtn2').on('click',function (){
+        $('.openModalBtn2').on('click',function (){
             $('#data1').empty()
             var subscription = $(this).data('subscription');
             console.log(subscription.students)

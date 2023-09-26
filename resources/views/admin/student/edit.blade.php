@@ -28,12 +28,16 @@
             <div class="row">
                 <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                        <div class="item-title d-flex justify-content-between align-items-center">
-                            <h2>{{ trans('website.add_student') }}</h2>
-                            <div class="item-title">
-                                <button class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</button>
-                                <a href="{{route('review.create',$student->id)}}" class="btn mx-3 buttons-style">{{ trans('التقييمات') }}</a>
-                            </div>
+
+                    <div class="customers__area bg-style mb-30">
+                        <div class="item-title d-flex justify-content-center">
+                            <a href="{{route('student.inq')}}" class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</a>
+                            <a href="{{route('review.create',$student->id)}}" class="btn mx-3 buttons-style">{{ trans('التقييمات') }}</a>
+                        </div>
+                        <div class="item-title d-flex justify-content-between">
+
+
+
                         </div>
                         <form action="{{route('student.update',$student)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             @csrf

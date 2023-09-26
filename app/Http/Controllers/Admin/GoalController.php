@@ -10,6 +10,7 @@ use App\Models\Exam;
 use App\Models\ExamsResult;
 use App\Models\Goal;
 use App\Models\Instructor;
+use App\Models\Notification;
 use App\Models\Student;
 use App\Models\StudentGoal;
 use App\Models\Subject;
@@ -100,6 +101,11 @@ class GoalController extends Controller
                     'notes' => $request->notes[$key],
                 ]);
             }
+            Notification::create([
+                'user_id' => 1,
+                'sender_id' => 1,
+                'text' => 'لديك تقييمات اليوم',
+            ]);;
 
 
         }

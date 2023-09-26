@@ -864,5 +864,10 @@ class StudentController extends Controller
         return view('admin.student.review.show', $data);
     }
 
+    public function inq()
+    {
+        return view('inq');
+    }
+
 
 }

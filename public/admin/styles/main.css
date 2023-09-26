@@ -844,7 +844,7 @@ ul {
 
 .sidebar__menu {
     width: 100%;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 43px);
     overflow-y: auto;
     -ms-overflow-style: none;
     /* Internet Explorer 10+ */
@@ -19147,7 +19147,10 @@ h3 {
 .form-margin {
     margin: 20px 0;
 }
+<<<<<<< HEAD
 .form-content {
     display: none;
 }
 
+=======
+>>>>>>> 7b3a69a816abc31a18dadc5bc6fc9491c6f13548

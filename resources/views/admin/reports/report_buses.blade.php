@@ -99,43 +99,24 @@
                             <th>كود الباص</th>
                             <th>اسم السائق</th>
                             <th>مبلغ الاشتراك</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>10</th>
-                            <th>11</th>
-                            <th>12</th>
                             <th>المتبقي</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($students_buses as $student_bus)
                             <tr>
-                                <td>{{ $students_buses->student?->code }}</td>
-                                <td>{{ $students_buses->student->name }}</td>
-                                <td>{{ $students_buses->bus?->department?->name }}</td>
-                                <td>{{ \Carbon\Carbon::parse($students_buses->created_at)->format('Y/m/d') }}</td>
-                                <td>{{ $students_buses->bus?->code }}</td>
-                                <td>{{ $students_buses->driver->name  }}</td>
-                                <td>{{ $students_buses->bus->subscription->value }}</td>
-                                @for($i = 0; $i < 13; $i++)
-                                    @if($students_buses->bus->subscription->students_subscriped->where('student_id', $students_buses->student->id)->first()->rec_time == $i)
-                                        @if($students_buses->bus->subscription->students_subscriped->where('student_id', $students_buses->student->id)->payment_status == 'upaid' || $students_buses->student->payment_)
-                                            <td>{{$students_buses->bus->subscription->value}}</td>
-                                        @else
-                                            <td>X</td>
-                                        @endif
-                                    @else
-                                        <td>X</td>
-                                    @endif
-                                @endfor
-                                <td>{{$students_buses->bus->subscription->value}}</td>
+                                <td>{{ $student_bus->student?->code }}</td>
+                                <td>{{ $student_bus->student->name }}</td>
+                                <td>{{ $student_bus->bus?->subscription->department?->name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($student_bus->created_at)->format('Y/m/d') }}</td>
+                                <td>{{ $student_bus->bus?->code }}</td>
+                                <td>{{ $student_bus->bus->driver?->name  }}</td>
+                                <td>{{ $student_bus->bus->subscription->value }}</td>
+                                @php
+                                    $s_s = \App\Models\StudentSubscription::where('student_id',$student_bus->student->id)
+                                ->where('subscription_id',$student_bus->bus->subscription->id)->first()
+                                @endphp
+                                <td>{{$student_bus->bus->subscription?->value * ($student_bus->bus->subscription?->batch - $s_s->rec_time)}}</td>
                             </tr>
                         @endforeach
                         </tbody>

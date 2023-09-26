@@ -169,7 +169,7 @@ class ReportController extends Controller
     }
     public function reportBuses(Request $request)
     {
-        $data['students_buses'] = StudentBus::query();
+        $data['students_buses'] = StudentBus::query()->orderBy('id','DESC');
         if($request->bus_id)
             $data['students_buses']->where('bus_id',$request->bus_id);
         if($request->date_from||$request->date_to)

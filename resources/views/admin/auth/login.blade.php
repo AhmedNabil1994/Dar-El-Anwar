@@ -69,7 +69,7 @@
 
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <button type="submit" class="theme-btn theme-button1 theme-button3 font-15 fw-bold w-100">{{__('Sign In')}}</button>
+                                    <button type="submit" class="theme-btn theme-button1 theme-button3 font-15 fw-bold w-100">{{__('تسجيل الدخول')}}</button>
                                 </div>
                             </div>
                         </form>

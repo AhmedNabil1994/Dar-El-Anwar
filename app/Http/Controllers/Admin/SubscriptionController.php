@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Student;
 use App\Models\Department;
+use App\Models\StudentBus;
 use App\Models\Transaction;
 use App\Models\Invoice;
 use App\Models\StudentSubscription;
@@ -303,6 +304,12 @@ class SubscriptionController extends Controller
             'payment_status' => 'unpaid',
             'active_days' => 30 * $subscription->batch,
         ]);
+        if($subscription->bus?->exists()){
+            StudentBus::create([
+                'student_id' => $request->student_id,
+                'bus_id' =>$subscription->bus->id,
+            ]);
+        }
         return redirect()->back()->with('success','تم الاشتراك');
     }
 }
