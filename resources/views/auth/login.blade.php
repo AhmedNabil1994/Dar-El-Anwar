@@ -24,12 +24,12 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
-                            <h5 class="mb-1">{{__('Sign In')}}</h5>
-                            <p class="font-14 mb-30">{{__('New User')}} ? <a href="{{route('sign-up')}}" class="color-hover text-decoration-underline font-medium">{{__('Create an Account')}}</a></p>
+                            <h5 class="mb-1">{{__('تسجيل الدخول')}}</h5>
+
 
                             <div class="row mb-30">
                                 <div class="col-md-12">
-                                    <label class="label-text-title color-heading font-medium font-16 mb-3">{{__('Email')}}</label>
+                                    <label class="label-text-title color-heading font-medium font-16 mb-3">{{__('البريد الالكتروني')}}</label>
                                     <input type="email" name="email" value="{{old('email')}}" class="form-control email" placeholder="{{ __('Type your email') }}">
                                     @if ($errors->has('email'))
                                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('email') }}</span>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="row mb-30">
                                 <div class="col-md-12">
-                                    <label class="label-text-title color-heading font-medium font-16 mb-3">{{__('Password')}}</label>
+                                    <label class="label-text-title color-heading font-medium font-16 mb-3">{{__('كلمة السر')}}</label>
                                     <div class="form-group mb-0 position-relative">
                                         <input class="form-control password" name="password" value="{{old('password')}}" placeholder="*********" type="password">
                                         <span class="toggle cursor fas fa-eye pass-icon"></span>
@@ -51,11 +51,11 @@
                             </div>
 
                             <div class="row mb-30">
-                                <div class="col-md-12"><a href="{{ route('forget-password') }}" class="color-hover text-decoration-underline font-medium">{{__('Forgot Password')}}?</a></div>
+{{--                                <div class="col-md-12"><a href="{{ route('forget-password') }}" class="color-hover text-decoration-underline font-medium">{{__('Forgot Password')}}?</a></div>--}}
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <button type="submit" class="theme-btn theme-button1 theme-button3 font-15 fw-bold w-100">{{__('Sign In')}}</button>
+                                    <button type="submit" class="theme-btn theme-button1 theme-button3 font-15 fw-bold w-100">{{__('تسجيل الدخول')}}</button>
                                 </div>
                             </div>
 

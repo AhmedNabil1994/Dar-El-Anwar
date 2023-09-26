@@ -3,35 +3,35 @@
 @section('content')
 <div class="page-content">
         <div class="container-fluid">
-            <!-- <div class="row">
+            <div class="chat" style="min-height: 95vh;height: auto;">
+              <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                              <h2>{{ trans('website.sent') }}</h2>
+                                <h2>{{ __('صندوق الوارد') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.students') }}</li>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{__('تواصل معنا') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div> -->
-            <div class="chat" style="min-height: 95vh;height: auto;">
-              <header class="chat__header">
-                <h2 class="text-center">
-                  صندوق الوارد
-                </h2>
-              </header>
+            </div>
 
               <div class="row" style="min-height: 95%;height: auto;">
               <!-- Start chat sidebar -->
+              <!-- <div class="row"> -->
+                <div class="customers__area__header bg-style mb-30">  
                 <div class="col-md-12">
+              <div class="col-md-12">
                   <div class="chat__content px-3">
                     <div class="chat__filters ">
                       <form class="row">
@@ -65,9 +65,18 @@
                         </div>
                       </form>
                     </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- </div> -->
+
+                    <!-- <div class="row"> -->
+                      <div class="customers__area bg-style mb-30">
+                    <div class="col-md-12">
                       <div class="customers__table" style="overflow: auto">
                           <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
-                              <thead style="background-color: #50bfa5;">
+                              <thead >
                               <tr>
                                   <th>من</th>
                                   <th>التاريخ</th>
@@ -88,8 +97,9 @@
                               </tbody>
                           </table>
                       </div>
+                      </div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -23,9 +24,10 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.addEmployee') }}</h2>
                         </div>
@@ -43,15 +45,16 @@
                                                     <i class="fa fa-camera"></i>
                                                     <p class="m-0">{{trans('website.image')}}</p>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                <div class="form-group col-md-3  mb-4">
-                                    <label for="name" class="form-label">{{ trans('website.name') }} <span class="required-star">*</span></label>
-                                    <div class="col-md-12">
+
+                                <div class="form-group row mb-4">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans('website.name') }} <span class="required-star">*</span></label>
+                                    <div class="col-md-6">
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                                                value="{{ old('name', $employee?->name) }}"  autocomplete="name" required>
                                         @error('name')
@@ -101,6 +104,7 @@
                                 <div class="form-group col-md-3 mb-4">
                                     <label for="university" class="form-label text-md-right">{{ trans('website.collage') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
+
                                         <input id="university" type="text" class="form-control @error('university') is-invalid @enderror" name="university" value="{{ old('university', $employee?->university) }}"  autocomplete="university" required>
                                         @error('university')
                                         <span class="invalid-feedback" role="alert">
@@ -111,9 +115,10 @@
                                 </div>
 
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="graduation_date" class="form-label text-md-right">{{  trans('website.date_of_graduation') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
-                                        <input id="graduation_date" type="date" class="form-control @error('graduation_date') is-invalid @enderror" name="graduation_date" value="{{ old('graduation_date', $employee?->graduation_date) }}"  autocomplete="graduation_date" required>
+                      <input id="graduation_date" type="date" class="form-control @error('graduation_date') is-invalid @enderror" name="graduation_date" value="{{ old('graduation_date', $employee?->graduation_date) }}"  autocomplete="graduation_date" required>
                                         @error('graduation_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ trans("website.requiredField") }}</strong>
@@ -123,6 +128,7 @@
                                 </div>
 
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="national_id" class="form-label text-md-right">{{ trans('website.nationalId') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
                                         <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ old('national_id', $employee?->national_id) }}"  autocomplete="national_id" required>
@@ -135,6 +141,7 @@
                                 </div>
 
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="email" class="form-label text-md-right">{{ trans('website.email') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
                                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $employee?->email) }}"  autocomplete="email" required>
@@ -147,8 +154,10 @@
                                 </div>
 
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="level" class="form-label text-md-right">{{ trans('website.standard') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
+
                                         <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level', $employee?->level) }}"  autocomplete="level" required>
                                         @error('level')
                                         <span class="invalid-feedback" role="alert">
@@ -161,6 +170,7 @@
                                 <div class="form-group col-md-3 mb-4">
                                     <label for="phone" class="form-label text-md-right">{{ trans("website.phone_number") }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
+
                                         <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $employee?->phone) }}"  autocomplete="phone" required>
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
@@ -170,8 +180,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="birthdate" class="form-label text-md-right">{{ trans('website.birth_date') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
+
                                         <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate', $employee?->birthdate) }}"  autocomplete="birthdate" required>
                                         @error('birthdate')
                                         <span class="invalid-feedback" role="alert">
@@ -186,7 +198,7 @@
                                     <label for="management" class="form-label text-md-right">{{ trans('website.managment') }}
                                         <span class="required-star">*</span>
                                     </label>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <select  id="management" type="text" class="form-control @error('job_title')
                                          is-invalid @enderror" name="management"
                                                  value="{{ old('management', $employee?->management) }}"  autocomplete="management">
@@ -204,6 +216,7 @@
 
 
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="department" class="form-label text-md-right">{{ trans('website.department') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
                                         <select type="text"
@@ -223,6 +236,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="salary" class="form-label text-md-right">{{ trans('website.salary') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
                                         <input required id="salary" type="number" class="form-control @error('salary') is-invalid @enderror" name="salary" value="{{ old('salary', $employee?->salary) }}"  autocomplete="salary">
@@ -234,6 +248,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="salary_cycle" class="form-label text-md-right">{{ trans('website.salary_cycle') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
                                         <select id="salary_cycle" class="form-control @error('salary_cycle') is-invalid @enderror"
@@ -251,6 +266,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mb-4">
+
                                     <label for="hiring_date" class="form-label text-md-right">{{ trans('website.hiring_date') }} <span class="required-star">*</span></label>
                                     <div class="col-md-12">
                                         <input required id="hiring_date" type="date" class="form-control @error('hiring_date') is-invalid @enderror" name="hiring_date" value="{{ old('hiring_date', $employee?->hiring_date) }}"  autocomplete="hiring_date">
@@ -267,8 +283,8 @@
                                         {{ trans('website.departure_date') }}
                                         <span class="required-star">*</span>
                                     </label>
-                                    <div class="col-md-12">
-                                        <input id="hiring_date" type="time" class="form-control @error('departure_time')
+                                    <div class="col-md-6">
+                                        <input id="hiring_date" type="datetime-local" class="form-control @error('departure_time')
                                          is-invalid @enderror" name="departure_time"
                                                value="{{ old('departure_time', $employee?->departure_time) }}"
                                                autocomplete="departure_time" required>
@@ -285,8 +301,8 @@
                                         {{ trans('website.attendance_time') }}
                                         <span class="required-star">*</span>
                                     </label>
-                                    <div class="col-md-12">
-                                        <input required id="attendance_time" type="time" class="form-control @error('attendance_time')
+                                    <div class="col-md-6">
+                                        <input required id="attendance_time" type="datetime-local" class="form-control @error('attendance_time')
                                          is-invalid @enderror" name="attendance_time"
                                                value="{{ old('attendance_time', $employee?->attendance_time) }}"
                                                autocomplete="departure_time">
@@ -302,7 +318,7 @@
                                     <label for="work_days" class="form-label text-md-right">
                                         {{ trans('website.work_days') }} <span class="required-star">*</span>
                                     </label>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <input required id="work_days" type="number" class="form-control
                                         @error('work_days') is-invalid @enderror" name="work_days" value="{{ old('work_days', $employee?->work_days) }}"
                                                 autocomplete="work_days">
@@ -334,13 +350,10 @@
                                 <div class="form-group col-md-3 mb-4">
                                     <label for="branch" class="form-label text-md-right">{{ trans('website.branch') }}
                                         <span class="required-star">*</span></label>
-                                    <div class="col-md-12">
-                                        <select name="branch_id" class="form-control" />
-                                        <option value="" selected>{{trans('website.select_branch')}}</option>
-                                        @foreach ($branches as $branch)
-                                            <option value="{{ $branch->id }}" >{{ $branch->name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-6">
+                                        <input required id="branch" type="text" class="form-control @error('branch')
+                                         is-invalid @enderror" name="branch" value="{{ old('branch', $employee?->branch) }}"
+                                               autocomplete="branch">
                                         @error('branch')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ trans("website.requiredField") }}</strong>
@@ -353,8 +366,10 @@
                                 <div class="form-group col-md-3 mb-4">
                                     <label for="password" class="form-label text-md-right">{{ __('كلمة السر') }}
                                         <span class="required-star">*</span></label>
+
                                     <div class="col-md-12">
                                             <input  id="password" type="password" class="form-control
+
                                             @error('password') is-invalid @enderror"
                                                    name="password" autocomplete="new-password" >
                                             @error('password')

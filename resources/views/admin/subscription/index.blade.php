@@ -38,10 +38,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
                                 <h2>{{ __('سداد اشتراك') }}</h2>
+
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -49,9 +51,11 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('website.dashboard')}}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ __('سداد الاشتراكات') }}</li>
+
                                 </ul>
                             </nav>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -90,6 +94,7 @@
                                 </div>
                             </form>
                           <form method="get" action="{{ route('subscriptions.students_subscription') }}" class="row justify-content-start align-items-end mb-3">
+
                               <div class="col-md-3">
                                   <label class="form-label">اسم الطفل</label>
                                   <select class="form-control" name="student_id">
@@ -114,10 +119,14 @@
                             <div class="col-md-3">
                                 <button class="btn buttons-style" type="submit"><i class="fa fa-filter"></i></button>
                             </div>
-                          </form>
+                        </form>
+                    </div>
+                    </div>
+                    </div>
                         </div>
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                             <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+
                                 <thead>
                                 <tr>
                                     <th>اسم الطفل</th>
@@ -199,7 +208,7 @@
             <div id="modal" class="modal">
                 <div class="modal-content">
                     <div class="container">
-                        <h2 class="mb-3">اضافة اشتراك</h2>
+                        <h2 class="mb-3">إضافة اشتراك</h2>
                         <form method="POST" id="editForm" action="{{route('subscriptions.store')}}">
                             @csrf
                             <div class="form-group">
@@ -226,8 +235,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">اضافة</button>
-                            <a id="closeModalBtn" class="btn btn-primary">الغاء</a>
+                            <button type="submit" class="btn buttons-style">إضافة</button>
+                            <a id="closeModalBtn" class="btn btn-secondary">الغاء</a>
                         </form>
                     </div>
                 </div>

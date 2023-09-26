@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -23,12 +24,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-end">
-                <form id="exam_form" method="get" action="{{route('reports.reportStudentsAge')}}">
+            </div>
+            <div class="customers__area bg-style mb-30">
+                <form id="exam_form" method="get" action="{{route('reports.reportStudentsAge')}}"class="form-container row align-items-end justify-content-center">
                     @csrf
-                    <div class="row mb-4 align-items-center">
-                        <div class="form-group col-sm-2">
-                            <label for="exam_name">عدد الاطفال : </label>
+                    <!-- Test -->
+                    <div class="form-group col-md-4  ">
+                    <label for="exam_name">عدد الأطفال : </label>
                             <span type="text"
                                    class="form-label">
                             {{$count}}
@@ -36,9 +38,10 @@
                             @error('exam_name')
                             {{--                                        <span class="text-danger">{{ $message}}</span>--}}
                             @enderror
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="student_name">بحث باسم الطفل</label>
+                </div>
+
+                <div class="form-group col-md-4  ">
+                    <label for="student_name">بحث باسم الطفل</label>
                             <input type="text"
                                    class="form-control"
                                    name="student_name"
@@ -46,38 +49,34 @@
                             @error('student_name')
                             {{--                                        <span class="text-danger">{{ $message}}</span>--}}
                             @enderror
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="birthdate">بحث في تاريخ الميلاد</label>
+                </div>
+
+                <div class="form-group col-md-4  ">
+                     <label for="birthdate">بحث في تاريخ الميلاد</label>
                             <input type="date"
                                    class="form-control"
                                    name="birthdate"
                                    value="{{request('birthdate')}}"/>
-                        </div>
+                </div>
 
-                        <div class="form-group col-md-3">
-                            <button type="submit"><i class="fa fa-filter"></i></button>
-                        </div>
-
-                    </div>
-                    <div class="row mb-4">
-                        <div class="form-group col-md-3">
-                            <label for="from">بحث في عمر الاطفال من</label>
+                <div class="form-group col-md-4  ">
+                    <label for="from">بحث في عمر الاطفال من</label>
                             <input type="number"
                                    class="form-control"
                                    name="from"
                                    value="{{request('from')}}"/>
-                        </div>
-                        <div class="form-group col-md-3">
+                </div>
 
-                            <label for="to">الي</label>
+                <div class="form-group col-md-4 ">
+                    <label for="to">إلى</label>
                             <input type="number"
                                    class="form-control"
                                    name="to"
                                    value="{{request('to')}}"/>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="studen_name">فترة</label>
+                </div>
+
+                <div class="form-group col-md-4 ">
+                    <label for="studen_name">فترة</label>
                           <select name="period" class="form-select">
                               <option value="">اختر الفترة</option>
                               <option value="1"
@@ -87,17 +86,30 @@
                                   {{request('period') == 2?'selected':''}}
                               >مسائي</option>
                           </select>
-                        </div>
-                    </div>
+                </div>
 
-                    <hr>
+                <div class="form-group col-md-4 d-flex justify-content-center mt-3  ">
+                    <button type="submit" class="btn" style="background-color: #50bfa5;width:100px">
+                                <i class="fa fa-filter"></i>
+                            </button>
+                </div>
+                    <!-- End Test -->
+                    
+                    
+                    
+                    
+                    
+                    </div>
 
                 </form>
 
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>تقرير مفصل عن أعمار الطلبة وتواريخ ميلادهم</h2>
+                    <div class="customers__area bg-style mb-30">
+                        <div class="item-title d-flex justify-content-between align-items-end">
+                            <h2>تقرير مفصل عن أعمار الطلبة وتواريخ ميلادهم</h2>
+                        </div>
                     <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
                     <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead>
@@ -161,6 +173,7 @@
                 <div class="row">
                     {{$students_age->links()}}
                 </div>
+            </div>
             </div>
         </div>
     </div>

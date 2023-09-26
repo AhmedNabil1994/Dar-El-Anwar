@@ -365,6 +365,8 @@ return [
 "October"=>"اكتوبر",
 "November"=>"نوفمير",
 "December"=>"ديسمبر",
+"total"=>"    الإجمالي   ",
+"follow_up_teacher"=>" متابعة المعلم   ",
 
 ];
 

@@ -7,21 +7,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="breadcrumb__content">
                     <div class="breadcrumb__content__left">
                         <div class="breadcrumb__title">
-                            <h2>{{ trans('website.create') }}</h2>
+                            <h2>{{ trans('أضافة دورة') }}</h2>
                         </div>
                     </div>
                     <div class="breadcrumb__content__right">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{trans('website.manageCourse') }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{trans('website.createCourse') }}</li>
+                                <li class="breadcrumb-item"><a href="{{route('admins.index')}}">{{trans('الدورات التدريبية') }}</a></li>
                             </ul>
                         </nav>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -36,7 +37,7 @@
                                 <h5>{{trans("website.createCourse")}}</h5>
                             </div>
                             <div class="ibox-content mt-15">
-
+                                <div class="customers__area bg-style mb-30">
                                 <form method="post" action="{{route('admin.course.store')}}">
                                     @csrf
                                     <div class="row mb-4">
@@ -138,11 +139,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>
+                                    <div class="form-group mb-4">
+                                        <button type="submit" class="btn buttons-style button-save">{{trans('website.save')}}</button>
+
                                         <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans('website.cancel')}}</a>
                                     </div>
                                 </form>
+                            </div>
 
                             </div>
                         </div>

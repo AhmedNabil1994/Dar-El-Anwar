@@ -6,6 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -20,6 +21,7 @@
                                 </ul>
                             </nav>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -159,8 +161,8 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn buttons-style">{{trans("website.save")}}</button>
+                            <div class="form-group mb-4">
+                                <button type="submit" class="btn buttons-style button-save">{{trans("website.save")}}</button>
                                 <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
                             </div>
 
@@ -168,7 +170,7 @@
 
                         <div class="row mb-4">
                         <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <table id="customers-table" class="row-border data-table-filter table-style table table-bordered">
+                            <table  class="row-border data-table-filter table-style table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>كود الدورة</th>
@@ -240,7 +242,7 @@
                                 <input class="form-control" name="student"/>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn buttons-style">{{trans("website.save")}}</button>
+                                <button type="submit" class="btn buttons-style button-save">{{trans("website.save")}}</button>
                                 <a href="{{route('admin.course.index')}}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
                             </div>
                         </form>

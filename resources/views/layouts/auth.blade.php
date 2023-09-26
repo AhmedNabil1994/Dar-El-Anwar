@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@if(@$metaData['title']) {!! $metaData['title']  !!} @else {{ @$pageTitle }} @endif</title>
+    <title>تسحيل الدخول</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Dar-Alanwar">

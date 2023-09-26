@@ -6,33 +6,38 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-{{--                                <h2>{{ trans('website.students') }}</h2>--}}
+                                <h2>{{ __('جميع الطلاب') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-{{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>--}}
-{{--                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.students') }}</li>--}}
+                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
+                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('الطلاب ') }}</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
+            <div class="customers__area bg-style mb-30">
             <form method="get" action="{{route('student.index')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
                 </div>
-                <div class="col-md-3 m-3">
-                    <button class="btn buttons-style" onclick="exportToExcel()">Export to Excel</button>
-                    <a class="btn buttons-style" id="printTable">Print Table</a>
+                <div class="text-end mb-3 d-flex justify-content-start">
+                    <button class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
+                    <button class="btn btn-secondary" id="printTable" type= "button">قم بطباعة الجدول</button>
 
 
                 </div>
+
+                <!-- <div class="form_container"> -->
                 <div class="col-md-3 m-3">
                     <label for="filterByLevel">{{trans("website.level")}}:</label>
                     <select class="form-control" name="filterByLevel">
@@ -90,21 +95,23 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="text-end mb-3 d-flex justify-content-end">
+                <div class="text-end mb-3 d-flex justify-content-start">
                     <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
                     <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
                 </div>
+                <!-- </div> -->
             </form>
+        </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="bg-style mb-30 " style="overflow-x:auto;">
+                    <div class="bg-style mb-30 table-title-container " style="overflow-x:auto;">
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table" style="overflow: auto">
-                            <table id="table1" class="row-border data-table-filter table-style table table-bordered table-striped">
-                                <thead style="background-color: #50bfa5;">
+                        <div class="customers__table print-table" style="overflow: auto;">
+                            <table  class="row-border data-table-filter table-style table table-bordered table-striped" >
+                                <thead >
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>
@@ -222,6 +229,7 @@
 @push('script')
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
     <script>
         'use strict'
         $(".status").change(function () {
@@ -324,3 +332,16 @@
 
 
 @endpush
+<!-- <script>
+
+        $(document).ready(function(){
+            $("#printButton").on("click",function printDiv() {
+            console.log("clicked")
+            $(".form_container").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
+        })
+    })
+        
+    </script> -->

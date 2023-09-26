@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -16,23 +17,25 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('لوحة التحكم')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تعديل مستويs') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تعديل مستوي') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
 
 
             {{--            @can('create-admins', 'admins')--}}
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title">
+                        <!-- <div class="ibox-title">
                             <h5>{{__('تعديل مستوي')}}</h5>
-                        </div>
+                        </div> -->
                         <div class="ibox-content mt-15">
 
                             <form method="post" action="{{route('level.update',$level)}}">
@@ -56,7 +59,7 @@
                                         <label for="name">{{__('website.status')}}</label>
 
                                         <input type="checkbox"
-                                               class="form-check"
+                                               class="form-check mt-2"
                                                id="status"
                                                name="status"
                                             {{$level->status == 1 ? 'checked':''}}
@@ -77,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             {{--            @endcan--}}
 
