@@ -748,8 +748,9 @@ img {
 } */
 .sidebar__brand img {
     display: block;
-    width: 30%;
-    margin: 0px 90px;
+    width: 50%;
+    margin: 0px 60px;
+    height: 100px;
 }
 
 /* .sidebar__area.active .sidebar__brand {
