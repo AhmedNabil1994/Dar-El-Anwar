@@ -58,8 +58,6 @@
                         @endforeach
                     </select>
                 </div>
-
-
                 <div class="col-md-3 my-3 mb-3">
                     <button id="btn_filter" class="btn buttons-style mt-4">{{trans("website.filter")}}</button>
                 </div>
