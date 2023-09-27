@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -23,25 +24,19 @@
                     </div>
                 </div>
             </div>
-
-            <h1> </h1>
-
+            </div>
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title ">
                             <h2>{{ trans('قائمة الواجبات') }}</h2>
-
                         </div>
-                        <div class="row m-3 justify-content-end">
-                            <div class="col-md-3">
-
-                            </div>
+                        <div class="row m-3">
                             <form method="GET" action="{{route('admin.assignments.index')}}"
-                                  class="customers__area bg-style mb-30 form-container row align-items-end justify-content-center">
+                                  class="customers__area bg-style mb-30 form-container row align-items-end">
 
-                                <div class="col-sm-3 m-3">
+                                <div class="col-sm-3 m-2">
                                     <label for="instructor_id">{{trans("معلم")}}:</label>
                                     <select class="form-control" name="instructor_id">
                                         <option value="">{{trans("website.all")}}</option>
