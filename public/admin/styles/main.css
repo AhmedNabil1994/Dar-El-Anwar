@@ -19152,3 +19152,15 @@ h3 {
     display: none;
 }
 
+.instructions h1.first{
+    border-bottom: 2px solid #50bfa5;
+    color: #50bfa5;
+    text-align: center;
+}
+.instructions h1.second{
+    border-bottom: 2px solid red;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    color: red;
+}
