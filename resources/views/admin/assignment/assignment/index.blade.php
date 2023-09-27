@@ -5,25 +5,9 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="breadcrumb__content">
-                        <div class="breadcrumb__content__left">
-                            <div class="breadcrumb__title">
-                                {{--                                <h2>{{ trans('website.students') }}</h2>--}}
-                            </div>
-                        </div>
-                        <div class="breadcrumb__content__right">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    {{--                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>--}}
-                                    {{--                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('website.students') }}</li>--}}
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <form method="get" action="{{route('admin.assignments.assignment.student.list')}}" class="row">
+                <form method="get" action="{{route('admin.assignments.assignment.student.list')}}" class="row">
                 <div class="row">
                     <h1>{{trans("website.filter")}}</h1>
                 </div>
@@ -80,11 +64,13 @@
                     <button id="btn_filter" class="btn buttons-style mt-4">{{trans("website.filter")}}</button>
                 </div>
             </form>
+                </div>
+            </div>
+            </div>
+            
             <div class="row">
-
-
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="bg-style mb-30 " style="overflow-x:auto;">
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
 
