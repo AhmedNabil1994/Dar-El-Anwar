@@ -6,8 +6,8 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -28,7 +28,9 @@
                 </div>
             </div>
 
+            <div class="row">
             <div class="customers__area bg-style mb-30">
+            <div class="col-md-12">
                 <form class="row justify-content-center w-100" action="{{route('profit.index')}}" method="get">
                     <div class="col-md-3">
                         <label class="form-label">الفرع</label>
@@ -53,6 +55,8 @@
                         </button>
                     </div>
                 </form>
+            </div>
+            </div>
             </div>
             <div class="row customers__area__header bg-style mb-30 table-title-container">
                 <h1 class = "mb-3">صافي الربح</h1>
@@ -120,10 +124,12 @@
                         </div>
                 </div>
             </div>
+            <div class="row">
             <div class="customers__area bg-style mb-30">
+            <div class="col-md-12">
             <div class="row justify-content-center ">
                 <div class="col-md-3">
-                    <label class="form-label">الايرادات</label>
+                    <label class="form-label">الإيرادات</label>
                     <input disabled class="form-control" value="{{$incomes}}">
                 </div>
 
@@ -136,6 +142,8 @@
                     <label class="form-label">المصروفات</label>
                     <input disabled class="form-control" value="{{$expenses}}">
                 </div>
+            </div>
+            </div>
             </div>
             </div>
         </div>
