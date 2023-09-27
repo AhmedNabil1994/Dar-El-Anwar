@@ -64,10 +64,9 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('الاشتراك') }}</h2>
-
                         </div>
                         <div>
-                            <form method="post" action="{{ route('subscriptions.students_subscription.store') }}" class="row justify-content-center align-items-end mb-3">
+                            <form method="post" action="{{ route('subscriptions.students_subscription.store') }}" class="row justify-content-start align-items-end mb-3">
                                 @csrf
                                 <div class="col-md-3">
                                     <label class="form-label">اسم الطفل</label>
