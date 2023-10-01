@@ -119,8 +119,8 @@
                 </div>
 
                 <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn buttons-style" id="saveMark">{{ trans('website.ok') }}</button>
+                <div class="modal-footer justify-content-start">
+                    <button type="submit" class="btn buttons-style ms-3" id="saveMark">{{ trans('website.ok') }}</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ trans('website.close') }}</button>
                 </div>
 
