@@ -109,7 +109,7 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table print-table" style="overflow: auto;">
+                        <div class="customers__table print-table all-students" style="overflow: auto;">
                             <table  class="row-border data-table-filter table-style table table-bordered table-striped" >
                                 <thead >
                                 <tr>
