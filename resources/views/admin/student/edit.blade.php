@@ -499,7 +499,7 @@
 
                         <!-- Instructions -->
 
-                <div class="instructions-page-print instructions">
+                <div class="instructions-page-print instructions container-fluid">
                 <div class="row justify-content-center align-items-center instructions">
                 <div class="col-md-4">
                     <h1 class="first" >استمارة التحاق بالدار</h1>

@@ -19146,6 +19146,10 @@ h3 {
     display: none;
 }
 
+.instructions {
+    padding: 30px;
+    border: 2px dashed black;
+}
 .instructions h1.first {
     border-bottom: 2px solid #50bfa5;
     color: #50bfa5;
@@ -19158,6 +19162,9 @@ h3 {
     text-align: center;
     color: red;
 }
+.instructions p {
+    font-size: 24px;
+}
 
 .eval-page-print,
 .instructions-page-print {
@@ -19168,8 +19175,15 @@ h3 {
     .eval-page-print,
     .instructions-page-print {
         display: block;
-        /* page-break-after: always; */
     }
+    
+    .instructions-page-print {
+        border: none;
+    }
+    .instructions-page-print p {
+        font-size: 20px;
+    }
+
     .student-edit-form,
     .eval-page-print {
         page-break-after: always;
