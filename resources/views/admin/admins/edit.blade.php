@@ -7,6 +7,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -25,8 +26,11 @@
                     </div>
                 </div>
             </div>
+            </div>
 
-                <div class="col-md-12">
+            <div class="row">    
+            <div class="customers__area__header bg-style mb-30">    
+            <div class="col-md-12">
                     <div class="form-wrapper">
                             <form method="POST" action="{{ route('admins.update', $admin->id) }}">
                             @csrf
@@ -98,7 +102,7 @@
 
 
 
-                            <button type="submit" class="btn btn-primary">{{trans("website.update")}}</button>
+                            <button type="submit" class="btn buttons-style">{{trans("website.update")}}</button>
                             <a href="{{ route('admins.index') }}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
                         </form>
                     </div>
@@ -129,7 +133,7 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">{{trans("website.update")}}</button>
+                    <button type="submit" class="btn buttons-style">{{trans("website.update")}}</button>
                     <a href="{{ route('admins.index') }}" class="btn btn-secondary">{{trans("website.cancel")}}</a>
 
 
@@ -139,6 +143,8 @@
         </div>
 
 
+        </div>
+        </div>
         </div>
         </div>
     </div>

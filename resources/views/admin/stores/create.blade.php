@@ -4,11 +4,12 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('اضافة منتج') }}</h2>
+                                <h2>{{ __('إضافة منتج') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
@@ -22,8 +23,11 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
-            <div class="card">
+            <div class="customers__area bg-style mb-30">
+            <div class="col-md-12">
+            <div class="">
                     <h2 class="card-header">إضافة منتج جديد</h2>
                     <div class="card-body">
                         <form class="row" method="POST" action="{{ route('stores.store') }}" enctype="multipart/form-data">
@@ -130,11 +134,13 @@
                             </div>--}}
 
                             <div class="form-group mt-4">
-                                <button type="submit" class="btn btn-primary">إضافة المنتج</button>
+                                <button type="submit" class="btn buttons-style">إضافة المنتج</button>
                             </div>
                         </form>
                     </div>
                 </div>
+        </div>
+        </div>
         </div>
         </div>
     </div>

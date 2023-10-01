@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -24,21 +25,46 @@
                     </div>
                 </div>
             </div>
+            </div>
+            
 
-            <div class="row">
+            <div class="row" id ="print-form-eval">
 
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('التقييم') }}</h2>
                         </div>
+                        <div class ="form-content">
+                        <div class = "data">
+                                <img src="{{asset('admin/images/icons/dar-elanwar-logo.png')}}" alt="logo">
+                            <div class = "">
+                                <h1>تقرير تقييم الطالب</h1>
+                                <div class ="one">
+                                    <span>الطالب:</span>
+                                    <span>{{$student->name}}</span>
+                                </div>
+                                <div class ="two">
+                                    <span>تاريخ التقييم:</span>
+                                    <span>{{\Carbon\Carbon::parse($goal->date)->format('d/m/Y')}}</span>
+                                    <span>المادة:</span>
+                                    <span>{{$goal->subject?->name}}</span>
+                                </div>
+                                <div class ="three">
+                                    <span>الهدف:</span>
+                                    <span>{{$goal->name}}</span>
+                                </div>
+                            </div>
+                        </div>
+            </div>
                         <form method="post" action="{{route('admin.goals.store.student.review')}}"
-                              class="customers__table">
+                              class="customers__table" >
                             @csrf
                             <input type="hidden" name="student" value="{{$student->id}}">
                             <input type="hidden" name="exam" value="{{$exam->id}}">
                             <input type="hidden" name="goal" value="{{$goal->id}}">
-                            <table id="" class="row-border data-table-filter table-style">
+                            <!-- <div class="customers__table "> -->
+                            <table  class="row-border data-table-filter table-style table table-bordered ">
                                 <thead>
                                 <tr>
                                     <th>{{ trans('التقييم') }}</th>
@@ -84,8 +110,10 @@
                                 </tbody>
                             </table>
                         </form>
+                        <button id = "print" class="btn btn-secondary me-3 mt-3" type="button">{{ trans('طباعة') }}</button>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -100,4 +128,20 @@
 @push('script')
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
+    <script>
+
+        $(document).ready(function(){
+            $("#print").on("click",function printDiv() {
+            console.log("clicked")
+            $("#print-form-eval").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
+        })
+    })
+        
+    </script>
 @endpush
+
+

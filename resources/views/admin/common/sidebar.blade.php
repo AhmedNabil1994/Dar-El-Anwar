@@ -6,13 +6,16 @@
     </div>
 
     <div class="sidebar__brand">
-        <a href="{{ route('admin.dashboard') }}">
-            @if(get_option('app_logo') != '')
-{{--                <img src="{{getImageFile(get_option('app_logo'))}}" alt="">--}}
-            @else
-{{--                <img src="" alt="">--}}
-            @endif
-        </a>
+        <div>
+            <a href="{{ route('admin.dashboard') }}">
+                @if(get_option('app_logo') != '')
+                    <!-- <img src="{{getImageFile(get_option('app_logo'))}}" alt=""> -->
+                    <img src="{{ asset('admin/images/icons/dar-elanwar-logo.png') }}" alt="logo">
+                @else
+                    <img src="" alt="">
+                @endif
+            </a>
+        </div>
     </div>
 
     <ul id="sidebar-menu" class="sidebar__menu">
