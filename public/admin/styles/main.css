@@ -19087,60 +19087,54 @@ h3 {
     }
     #print-form-eval {
         border: 1px solid black;
-        direction:rtl
+        direction: rtl;
     }
     #print-form-eval .form-content {
-        display:block;
-
+        display: block;
     }
-    #print-form-eval h2  {
-        display:none; 
-
+    #print-form-eval h2 {
+        display: none;
     }
-    #print-form-eval .data  {
-    display: flex;
-    justify-content: space-between;
-    color: #000000;
-    font-weight: bold;
-    direction: rtl;
-}
-    #print-form-eval .data h1  {
+    #print-form-eval .data {
+        display: flex;
+        justify-content: space-between;
+        color: #000000;
+        font-weight: bold;
+        direction: rtl;
+    }
+    #print-form-eval .data h1 {
         text-align: center;
         margin: 0 -115px 20px 0;
     }
 
     #print-form-eval .data .one span:nth-of-type(2),
-    #print-form-eval .data .three span:nth-of-type(2)  {
+    #print-form-eval .data .three span:nth-of-type(2) {
         /* margin-left: 185px; */
         background-color: #8080804d !important;
-        -webkit-print-color-adjust: exact; 
+        -webkit-print-color-adjust: exact;
         width: 500px;
         display: inline-block;
         text-align: center;
     }
-    #print-form-eval .data .three span:nth-of-type(2)  {
-    margin-right: 6px;
+    #print-form-eval .data .three span:nth-of-type(2) {
+        margin-right: 6px;
     }
     #print-form-eval .data .two span:nth-of-type(2),
-    #print-form-eval .data .two span:nth-of-type(4)  {
+    #print-form-eval .data .two span:nth-of-type(4) {
         background-color: #8080804d;
         width: 100px;
         display: inline-block;
         text-align: center;
     }
-    #print-form-eval .data .two span  {
+    #print-form-eval .data .two span {
         margin-left: 70px;
     }
     #print-form-eval .data .one,
     #print-form-eval .data .two,
-    #print-form-eval .data .three  {
+    #print-form-eval .data .three {
         margin-bottom: 10px;
     }
-
-
 }
-
-
 
 .edit-style {
     margin-left: 10px;
@@ -19152,15 +19146,36 @@ h3 {
     display: none;
 }
 
-.instructions h1.first{
+.instructions h1.first {
     border-bottom: 2px solid #50bfa5;
     color: #50bfa5;
     text-align: center;
 }
-.instructions h1.second{
+.instructions h1.second {
     border-bottom: 2px solid red;
     width: 300px;
     margin: auto;
     text-align: center;
     color: red;
+}
+
+.eval-page-print,
+.instructions-page-print {
+    display: none;
+}
+
+@media print {
+    .eval-page-print,
+    .instructions-page-print {
+        display: block;
+        /* page-break-after: always; */
+    }
+    .student-edit-form,
+    .eval-page-print {
+        page-break-after: always;
+    }
+    .print-form a,
+    .print-form button {
+        display: none;
+    }
 }

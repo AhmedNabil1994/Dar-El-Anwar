@@ -26,9 +26,6 @@
                 </div>
             </div>
 
-            <h1> </h1>
-
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
