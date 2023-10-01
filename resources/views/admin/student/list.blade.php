@@ -105,7 +105,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="bg-style mb-30 table-title-container " style="overflow-x:auto;">
+                    <div class="all-students bg-style mb-30 table-title-container " style="overflow-x:auto;">
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
@@ -159,11 +159,13 @@
                                                 {{--<a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}
                                                 {{--<i class="fa fa-eye"></i> View--}}
                                                 {{--</a>--}}
-                                                <a  href="{{route('student.edit', [$student->id])}}" class="btn btn-primary me-2" title="Edit Details">
-                                                    <i class="fa fa-edit"></i>
+                                                <a  href="{{route('student.edit', [$student->id])}}" class="btn  me-2" title="Edit Details">
+                                                    <!-- <i class="fa fa-edit"></i> -->
+                                                    <img src="{{ asset('admin/images/icons/edit-2.svg') }}" alt="{{ __('edit') }}">
                                                 </a>
-                                                <button type="button" class="btn btn-danger deleteItem" data-formid="delete_row_form_{{$student->id}}" title="Delete">
-                                                    <i class="fa fa-trash"></i>
+                                                <button type="button" class="btn  deleteItem" data-formid="delete_row_form_{{$student->id}}" title="Delete">
+                                                    <!-- <i class="fa fa-trash"></i> -->
+                                                    <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
                                                 </button>
                                                 <form action="{{route('student.delete', [$student->id])}}" method="post" id="delete_row_form_{{ $student->id }}">
                                                     {{ method_field('DELETE') }}
@@ -172,35 +174,33 @@
                                             </div>
                                         </td>
                                         <td>
-                                            @if($student->status != 0)
-                                            <a href="{{route('student.archive',$student->id)}}" class="archeived" data-id="{{$student->id}}">
-                                                <img style="width:50px" src="{{asset('admin/images/students/archived.png')}}" alt="edit">
+                                            <a href="#" class="archeived image-container" data-id="{{$student->id}}">
+                                                <img  src="{{asset('admin/images/students/archived.png')}}" alt="edit">
                                             </a>
-                                            @endif
                                         </td>
                                         <td>
-                                            <a href="#">
+                                            <a href="#" class="image-container">
                                                 @if($student->status == 0)
-                                                    <img style="width:50px" src="{{asset('admin/images/students/under-enrollment.png')}}" alt="edit">
+                                                    <img  src="{{asset('admin/images/students/under-enrollment.png')}}" alt="edit">
                                                 @endif
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('subscriptions.index',['child_name'=>[$student->name]])}}">
-                                                <img style="width:50px" src="{{asset('admin/images/students/subscription.png')}}" alt="edit">
+                                            <a href="{{route('subscriptions.index',['child_name'=>[$student->name]])}}" class ="image-container">
+                                                <img  src="{{asset('admin/images/students/subscription.png')}}" alt="edit">
                                             </a>
                                         </td>
                                         <td>
                                             {{$student->notes}}
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.assignments.student_duties',$student->id)}}">
-                                                <img style="width:50px" src="{{asset('admin/images/students/meals.png')}}" alt="edit">
+                                            <a href="{{route('admin.assignments.student_duties',$student->id)}}" class="image-container">
+                                                <img  src="{{asset('admin/images/students/meals.png')}}" alt="edit">
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('invoices.index',['child_name'=>$student->name])}}">
-                                                <img style="width:50px" src="{{asset('admin/images/students/bills.png')}}" alt="edit">
+                                            <a href="{{route('invoices.index',['child_name'=>$student->name])}}" class="image-container">
+                                                <img  src="{{asset('admin/images/students/bills.png')}}" alt="edit">
                                             </a>
                                         </td>
                                     </tr>
@@ -332,16 +332,3 @@
 
 
 @endpush
-<!-- <script>
-
-        $(document).ready(function(){
-            $("#printButton").on("click",function printDiv() {
-            console.log("clicked")
-            $(".form_container").printThis({
-                importStyle: true, 
-                loadCSS: "./main.css",
-            })
-        })
-    })
-        
-    </script> -->

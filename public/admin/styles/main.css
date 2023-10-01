@@ -1091,7 +1091,7 @@ img {
 }
 
 .header__menu li .user-profile img {
-    width: 40px;
+    width: 32px;
     height: 25px;
     border-radius: 50%;
 }
@@ -19084,7 +19084,61 @@ h3 {
     .print-form button {
         display: none;
     }
+    #print-form-eval {
+        border: 1px solid black;
+        direction:rtl
+    }
+    #print-form-eval .form-content {
+        display:block;
+
+    }
+    #print-form-eval h2  {
+        display:none;
+
+    }
+    #print-form-eval .data  {
+    display: flex;
+    justify-content: space-around;
+    color: #000000;
+    font-weight: bold;
+    direction: rtl;
 }
+#print-form-eval .data h1  {
+    text-align: center;
+    margin: 0 -115px 20px 0;
+
+}
+#print-form-eval .data .one span:nth-of-type(2),
+#print-form-eval .data .three span:nth-of-type(2)  {
+    margin-left: 185px;
+    background-color: #8080804d !important;
+    width: 500px;
+    display: inline-block;
+    text-align: center;
+}
+#print-form-eval .data .three span:nth-of-type(2)  {
+   margin-right: 6px;
+}
+#print-form-eval .data .two span:nth-of-type(2),
+#print-form-eval .data .two span:nth-of-type(4)  {
+    background-color: #8080804d;
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+}
+#print-form-eval .data .two span  {
+    margin-left: 70px;
+}
+#print-form-eval .data .one,
+#print-form-eval .data .two,
+#print-form-eval .data .three  {
+    margin-bottom: 10px;
+}
+
+
+}
+
+
 
 .edit-style {
     margin-left: 10px;
@@ -19092,3 +19146,7 @@ h3 {
 .form-margin {
     margin: 20px 0;
 }
+.form-content {
+    display: none;
+}
+
