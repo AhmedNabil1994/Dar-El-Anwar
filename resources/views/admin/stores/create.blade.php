@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            public/admin/images/icons/dar-elanwar-logo.png
             <div class="card">
                     <h2 class="card-header">إضافة منتج جديد</h2>
                     <div class="card-body">
