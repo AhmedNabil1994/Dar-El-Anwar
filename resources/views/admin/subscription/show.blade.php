@@ -116,17 +116,14 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="container">
-                <h2 class="mb-3">اضافة اشتراك</h2>
+                <h2 class="mb-3">إضافة اشتراك</h2>
                 <form method="get" id="editForm" action="{{route('payment.process',$subscription)}}">
-
-
-                    <div class="form-group m-5">
+                    <div class="form-group mb-4">
                         <label for="value">المبلغ</label>
                         <input type="number" name="amount" id="amount" class="form-control" required>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">اضافة</button>
-                    <a id="closeModalBtn" class="btn btn-primary">الغاء</a>
+                    <button type="submit" class="btn print-button buttons-style">إضافة</button>
+                    <a id="closeModalBtn" class="btn print-button buttons-style">الغاء</a>
                 </form>
             </div>
         </div>
