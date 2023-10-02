@@ -19193,3 +19193,21 @@ h3 {
         display: none;
     }
 }
+
+.print-button {
+    width: 100px;
+}
+@media print {
+    .print-table {
+        direction: rtl;
+        border: 1px solid black !important;
+    }
+    .print-table thead th:last-child {
+        /* direction: rtl; */
+        display: none;
+    }
+    .print-table tbody td:last-child {
+        display: none;
+    }
+}
+
