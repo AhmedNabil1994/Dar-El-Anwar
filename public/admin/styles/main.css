@@ -19319,3 +19319,28 @@ h3 {
     color: black;
     font-size: 17px;
 }
+
+@media print {
+    .student-report {
+        direction: rtl;
+    }
+    .student-report .report-buttons{
+        display: none;
+    }
+    .student-report .info div{
+        width: 25%;
+    }
+    .student-report .subjects{
+        width: 10%;
+    }
+    .student-report .Table{
+        width: 90%;
+    }
+}
+.student-report input::placeholder{
+    text-align: right;
+}
+.student-report input{
+    /* text-align: right; */
+    height: 59px;
+}
