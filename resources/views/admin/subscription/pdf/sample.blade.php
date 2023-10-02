@@ -10,69 +10,83 @@
     <meta name="author" content="Laralink">
 
     <!-- Site Title -->
-    <title>دار الانوار</title>
+    <title>دار الأنوار</title>
     <link rel="stylesheet" href="{{asset('invoice/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/styles/main.css')}}">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
 </head>
 <body>
-<div class="tm_container">
+<div class="tm_container" id = "invoice">
     <div class="tm_invoice_wrap">
         <div class="tm_invoice tm_style1 tm_radius_0" id="tm_download_section">
             <div class="tm_invoice_in">
-                <div class="tm_flex tm_flex_column_sm tm_justify_between tm_align_center tm_align_start_sm tm_f14 tm_primary_color tm_medium tm_mb5">
-                    <p class="tm_m0 tm_f18 tm_bold">{{$title}}</p>
-                    <p class="tm_m0">التاريخ : {{\Carbon\Carbon::today()->format('Y-m-d-F')}}</p>
-                    <p class="tm_m0">رقم الفاتورة : {{$invoice->id}}</p>
+                <div class="invoice-header">
+                    <p>إيصال استلام نقدية</p>
+                    <img src="{{asset('admin/images/icons/dar-elanwar-logo.png')}}" alt="logo">
                 </div>
-                <div class="tm_grid_row tm_col_4 tm_padd_20 tm_accent_bg tm_mb25 tm_white_color tm_align_center">
-
+                <!-- <div class="tm_grid_row tm_col_4 tm_padd_20 tm_accent_bg tm_mb25 tm_white_color tm_align_center">
+                </div> -->
+                <span class="invoice-amount">
+                    <span>{{$invoice->amount}}</span>
+                    <span>جنيه</span>
+                </span>
+                <hr class="mb" style = "margin:20px 0">
+                  <div class="date-num">
+                        <span class="parent">
+                            <span>{{\Carbon\Carbon::today()->format('Y-m-d-F')}}</span>
+                            <span>التاريخ</span>
+                        </span>
+                        <span class="parent">
+                            <span>{{$invoice->id}}</span>
+                            <span>رقم الفاتورة</span>
+                        </span>
                 </div>
-                <div class="tm_invoice_head tm_mb10">
-                    <div class="tm_invoice_left">
-                        <p>
-                            استلمنا من ولي امر الطفل / الطفلة {{$invoice->student->name}} <br>
-                        </p>
+                <div class="">
+                     <div class="details">
+                        <span> استلمنا من ولي أمر الطفل / الطفلة  </span>
+                        <span>{{$invoice->student->name}}</span>
                     </div>
-                    <div class="tm_invoice_right tm_text_center">
-                        <p class="tm_mb3"><b class="tm_primary_color">مبلغ</b></p>
-                        <div class="tm_f30 tm_bold tm_accent_color tm_padd_15 tm_accent_bg_10 tm_border_1 tm_accent_border_20 tm_mb5">
-                            {{$invoice->amount}}
-                        </div>
-                        <p class="tm_mb0"><i>وذلك مقابل اشتراك شهر {{\Carbon\Carbon::parse($invoice->subscription->created_at)->format('F')}}</i></p>
+                    <div class="details">
+                        <span> مبلغاً وقدره </span>
+                        <span>{{$invoice->amount}}</span>
+                    </div>
+                    <div class="details">
+                        <span> وذلك مقابل اشتراك شهر  </span>
+                        <span>{{\Carbon\Carbon::parse($invoice->subscription->created_at)->format('F')}}</span>
                     </div>
                 </div>
                 <div class="tm_table tm_style1 tm_mb40">
                     <div class="tm_round_border tm_radius_0">
-                        <div class="tm_table_responsive">
-                            <table>
+                        <div class="tm_table_responsive customers__table invoice-table">
+                            <table >
                                 <thead>
                                 <tr>
-                                    <th class="tm_width_3 tm_semi_bold tm_primary_color">الاشتراك</th>
-                                    <th class="tm_width_4 tm_semi_bold tm_primary_color tm_border_left">المبلغ</th>
-                                     </tr>
+                                    <th class="tm_width_3 tm_semi_bold tm_primary_color text-center">الاشتراك</th>
+                                    <th class="tm_width_4 tm_semi_bold tm_primary_color text-center tm_border_left">المبلغ</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr class = "text-center">
                                     <td class="tm_width_3">{{$invoice->subscription->subscription->name}}</td>
-                                    <td class="tm_width_2 tm_border_left tm_text_right">{{$invoice->amount}}</td>
+                                    <td class="tm_width_2 tm_border_left ">{{$invoice->amount}}</td>
                                 </tr>
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="tm_invoice_footer">
+                    <hr class="mb" style = "margin:20px 0">
+                    <div class="">
                         <div class="tm_left_footer tm_mobile_hide">
                         </div>
 
-                        <div class="row">
-
-                        <div class="row">
-                            <p> الملاحظات : {{$invoice->note}}</p>
-                        </div>
-                        <div class="row">
-                            <p> المستخدم : {{Auth::user()->name}}</p>
-                        </div>
-                        </div>
+                            <div class="notes">
+                                <span> ملاحظات  </span>
+                                <span>{{$invoice->note}}</span>
+                            </div>
+                            <div class="user">
+                                <span> المستخدم </span>
+                                <span>{{Auth::user()->name}}</span>
+                            </div>
                     </div>
                 </div>
             <hr class="mb">
@@ -81,11 +95,13 @@
                         <div class="row">
                             <p></p>
                         </div>
-                        <div class="row">
+                        <div class="row invoice-info">
                             <p> العنوان : {{get_setting('app_location')}}</p>
                             <p> رقم الهاتف : {{get_setting('app_contact_number')}}</p>
-                            <p> طباعة بتاريخ : {{\Carbon\Carbon::today()->format('d,F,Y')}}</p>
-                            <p> في وقت : {{\Carbon\Carbon::today()->format('h:m:s')}}</p>
+                            <div style = "display:flex; justify-content:space-between">
+                                <span> طباعة بتاريخ : {{\Carbon\Carbon::today()->format('d,F,Y')}}</span>
+                                <span> في وقت : {{\Carbon\Carbon::today()->format('h:m:s')}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

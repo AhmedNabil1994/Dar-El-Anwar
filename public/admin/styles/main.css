@@ -19212,3 +19212,110 @@ h3 {
     }
 }
 
+.invoice-table thead th {
+    text-align: center !important;
+}
+.invoice-info span {
+    color: #596680 !important;
+}
+.invoice-table thead {
+    background-color: white !important;
+}
+.invoice-table table, 
+.invoice-table th, 
+.invoice-table td {
+    border: 3px solid #a13538;
+}
+
+#invoice hr {
+    margin: 20px 0;
+    color: #a13538;
+    border-top: 2px dashed;
+    background-color: transparent;
+}
+#invoice .notes,
+#invoice .user,
+#invoice .details,
+#invoice .date-num {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+#invoice .user, 
+#invoice .details:nth-child(2),
+#invoice .details:nth-child(3) {
+    margin-top: 10px;
+}
+#invoice .details:nth-child(3),
+#invoice .date-num {
+    margin-bottom: 10px;
+}
+#invoice .notes span:first-child,
+#invoice .user span:first-child,
+#invoice .details span:first-child {
+    color: #596680;    
+}
+#invoice .notes span:last-child,
+#invoice .user span:last-child,
+#invoice .details span:last-child,
+#invoice .date-num span.parent,
+#invoice .invoice-amount {
+    color: #596680;    
+    width: 430px;
+    display: inline-block;
+    border: 3px solid #a13538;
+    height: 30px;
+    text-align: center;
+}
+#invoice .date-num span.parent span:first-child,
+#invoice .invoice-amount span:first-child {
+    margin: auto;
+}
+
+#invoice .invoice-amount span:first-child {
+    font-weight: bold;
+    font-size: 20px;
+
+}
+#invoice .date-num span.parent:last-child,
+#invoice .invoice-amount span:last-child {
+    margin-right: 10px;
+}
+#invoice .date-num span.parent,
+#invoice .invoice-amount {
+    display: flex;
+    justify-content: space-between;
+}
+
+#invoice .invoice-amount {
+    display: flex;
+    justify-content: space-between;
+    width: 370px !important;
+}
+#invoice .date-num span.parent span:last-child,
+#invoice .invoice-amount span:last-child {
+    width: 25%;
+    display: inline-block;
+    background-color: #fac7ca;
+    font-weight: bold;
+    color: black;
+}
+#invoice .date-num span.parent {
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.invoice-header p {
+    color: black;
+    font-size: 17px;
+}
+.invoice-header img {
+    color: black;
+    font-size: 17px;
+}
