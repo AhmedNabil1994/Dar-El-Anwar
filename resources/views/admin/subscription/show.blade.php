@@ -37,6 +37,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -55,15 +56,16 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
-                        <div class="item-title d-flex justify-content-between">
+                        <div class="item-title">
                             <h2>{{ __('تفاصيل الاشتراك') }}</h2>
                         </div>
                         <form  action="{{route('subscriptions.update', $subscription)}}" method="post" class="row m-3">
                             @csrf
-                            <h1 class="h3 mb-5">تفاصيل اشتراك: {{ $subscription->subscription->name }}</h1>
+                            <h1 class="h3 mb-5" style = "margin-right:-30px">تفاصيل اشتراك: {{ $subscription->subscription->name }}</h1>
 
                             <div class="form-group col-md-3">
                                 <label for="subscription_name"><strong>اسم الاشتراك:</strong></label>
@@ -94,12 +96,12 @@
                                 <label for="subscription_expiration"><strong>الطالب المسجل في هذا الاشتراك:</strong></label>
                                 <input class="form-control m-3" disabled value="{{ $student->name }}"/>
                             </div>
-                                <div class="row justify-content-start">
-                                    <div class="col-md-6">
-{{--                                        href="{{ route('payment.process', $subscription) }}"--}}
-                                        <label for="subscription_expiration"><strong>خيارات السداد:</strong></label>
-                                        <a id="openModalBtn" class="btn btn-primary">الدفع الآن</a>
-                                        <a id="openModalBtn2" class="btn btn-success">المبلغ من الرصيد</a>
+                                <div class="d-flex justify-content-between align-items-end">
+                                    {{--                                        href="{{ route('payment.process', $subscription) }}"--}}
+                                    <label for="subscription_expiration"><strong style = "font-size:20px">خيارات السداد:</strong></label>
+                                    <div >
+                                        <a id="openModalBtn" class="btn buttons-style pay-buttons">الدفع الآن</a>
+                                        <a id="openModalBtn2" class="btn buttons-style ">المبلغ من الرصيد</a>
                                     </div>
                                 </div>
                         </form>

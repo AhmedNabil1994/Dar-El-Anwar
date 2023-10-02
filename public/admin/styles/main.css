@@ -19194,7 +19194,8 @@ h3 {
     }
 }
 
-.print-button {
+.print-button,
+.pay-buttons{
     width: 100px;
 }
 @media print {
