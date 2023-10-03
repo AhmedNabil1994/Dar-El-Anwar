@@ -206,7 +206,7 @@
             <li class="{{ active_if_match('admin/departments') }}">
                 <a class="has-arrow" href="#">
 {{--                    <span class="iconify" data-icon="codicon:references"></span>--}}
-                    <span>{{__('الاقسام')}}</span>
+                    <span>{{__('الأقسام')}}</span>
                 </a>
                 <ul>
                     @can('all-department')
@@ -256,7 +256,7 @@
             <li class="{{ active_if_match('admin/bus') }}">
                 <a class="has-arrow" href="#">
 {{--                    <i class="fa fa-bus"></i>--}}
-                    <span>{{__('الباصات')}}</span>
+                    <span>{{__('الحافلات')}}</span>
                 </a>
                 <ul>
                     @can('all-bus')
@@ -279,7 +279,7 @@
                             <li class="{{ active_if_full_match('admin/bus/subscription') }}">
                                 <a href="{{route('admin.bus.subscribtion.create')}}">
 {{--                                    <i class="fa fa-circle"></i>--}}
-                                    <span>{{ __('إضافة اشتراك لحافلة') }}</span>
+                                    <span>{{ __('إضافة اشتراك الحافلة') }}</span>
                                 </a>
                             </li>
 
@@ -432,7 +432,7 @@
                         <li class="{{ active_if_match('followup/quran') }}">
                             <a href="{{route('admin.followup.quran')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
-                                <span>{{ __('تقرير متابعة القران') }}</span>
+                                <span>{{ __('تقرير متابعة القرآن') }}</span>
                             </a>
                         </li>
                     @endcan
@@ -501,7 +501,7 @@
                     @endcan
                         <li class="{{ active_if_match('admin/product/movement') }}">
                             <a href="{{route('stores.create')}}">
-                                <span>{{ __('اضف منتج') }}</span>
+                                <span>{{ __('أضف منتج') }}</span>
                             </a>
                         </li>
                     @can('manage-finance_product_movement')
@@ -569,7 +569,7 @@
                         <li class="{{ active_if_match('reports/report_students_ages') }}">
                             <a href="{{route('reports.reportStudentsAge')}}">
 {{--                                <i class="fa fa-money"></i>--}}
-                                <span>{{__('تقارير اعمار الطلاب')}}</span>
+                                <span>{{__('تقارير أعمار الطلاب')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -577,7 +577,7 @@
                         <li class="{{ active_if_match('reports/report_parents') }}">
                             <a href="{{route('reports.reportParents')}}">
 {{--                                <i class="fa fa-money"></i>--}}
-                                <span>{{__('تقرير بيانات الاباء')}}</span>
+                                <span>{{__('تقرير بيانات الآباء')}}</span>
                             </a>
                         </li>
                     @endcan
@@ -630,7 +630,7 @@
             <li class="{{ active_if_match('admin/parent_infos') }}">
                 <a class="" href="{{route('parent_infos.index')}}">
 {{--                    <span class="iconify"></span>--}}
-                    <span>{{__('الاباء')}}</span>
+                    <span>{{__('الآباء')}}</span>
                 </a>
             </li>
         @endcan
@@ -640,26 +640,26 @@
             <li class="{{ active_if_match('admin/goals') }}">
                 <a class="has-arrow" href="#">
 {{--                    <span class="iconify"></span>--}}
-                    <span>{{__('الاهداف')}}</span>
+                    <span>{{__('الأهداف')}}</span>
                 </a>
                 <ul>
 {{--                    <li class="{{ active_if_match('admin/goals') }}">--}}
 {{--                        <a href="{{route('admin.goals.index')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
-{{--                            <span>{{__('جميع الاهداف')}}</span>--}}
+{{--                            <span>{{__('جميع الأهداف')}}</span>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
                     <li class="{{ active_if_full_match('admin/goals/create') }}">
                         <a href="{{route('admin.goals.create')}}">
 {{--                            <i class="fa fa-circle"></i>--}}
-                            <span>{{__('اضافة هدف')}}</span>
+                            <span>{{__('إضافة هدف')}}</span>
                         </a>
                     </li>
 
                     <li class="{{ active_if_full_match('admin/goals/create/review') }}">
                         <a href="{{route('admin.goals.index.review')}}">
 {{--                            <i class="fa fa-circle"></i>--}}
-                            <span>{{__('تقييم الاطفال')}}</span>
+                            <span>{{__('تقييم الأطفال')}}</span>
                         </a>
                     </li>
 

@@ -29,7 +29,7 @@ CSS table of content
 }
 
 body {
-    color: #6c5ce7;
+    /* color: #6c5ce7; */
     font-family: "Inter", sans-serif;
     font-size: 14px;
     font-style: normal;
@@ -732,6 +732,7 @@ ul {
     background-color: #ffffff;
     /* -webkit-transition: all 0.5s ease-in-out; */
     transition: display 0.5s ease-in-out;
+    overflow-y: auto;
 }
 .sidebar__area.active {
     /* transition: all 0.5s ease-in-out; */
@@ -19344,3 +19345,6 @@ h3 {
     /* text-align: right; */
     height: 59px;
 }
+
+
+
