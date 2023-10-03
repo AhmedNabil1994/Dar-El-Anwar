@@ -25,21 +25,16 @@
                 </div>
             </div>
             </div>
-            <div class="row">
+            
+            <div class="row print-form">
                 <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-center">
                             <a href="{{route('student.inq')}}" class="btn mx-3 buttons-style">{{ trans('التعليمات') }}</a>
                             <a href="{{route('review.create',$student->id)}}" class="btn mx-3 buttons-style">{{ trans('التقييمات') }}</a>
                         </div>
-                        <div class="item-title d-flex justify-content-between">
-
-
-
-                        </div>
-                        <form action="{{route('student.update',$student)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        <form action="{{route('student.update',$student)}}" method="post" class="form-horizontal student-edit-form" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="row justify-content-evenly">
@@ -390,18 +385,168 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12 text-right">
-                                        <button class="btn buttons-style" type="submit">{{ trans('website.save') }}</button>
+                                        <button class="btn buttons-style "style="width:100px;" type="submit">{{ trans('website.save') }}</button>
+                                        <button id = "print" class="btn btn-secondary me-3 "style="width:100px;" type="button">{{ 'طباعة' }}</button>
                                     </div>
                                 </div>
                         </form>
-                    </div>
+                        <!-- evaluation -->
+
+                        <div class="row eval-page-print">
+                        <div class="item-title ">
+                            <h2>{{ trans('إضافة تقييم') }}</h2>
+                        </div>
+                        <form action="{{route('review.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            @csrf
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div class="">
+                                    <h3 class="h2 text-dark">اسم الطفل : <span class="text-danger">{{$student->name}}</span></h3>
+                                    <input type="hidden" name="student_id" value="{{$student->id}}">
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn buttons-style">حفظ</button>
+                                    <a href="{{route('student.edit',$student->id)}}" class="btn btn-danger">الغاء</a>
+                                        <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
+                                </div>
+                            </div>
+                            <div class="row m-5">
+                                <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                    <h2 class="mb-3">اضطرابات النطق</h2>
+                                  <!-- </div> -->
+                                <div class="col-md-6" >
+                                    <input type="hidden" name="question[]" value="speech_disorders">
+                                    <textarea style="height: 50px" class="form-control" name="speech_disorders">{{get_review($student,'speech_disorders')}}</textarea>
+                                </div>
+                            </div>
+                            <div class="row m-5">
+                                <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                    <h2>للملتحقين بقسم القرآن</h2>
+                                <!-- </div> -->
+
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">القرآن حفظاً</label>
+                                    <input type="hidden" name="question[]" value="quran_memorization">
+                                    <textarea style="height: 50px" class="form-control" name="quran_memorization">{{get_review($student,'quran_memorization')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">تلاوة معرفياً</label>
+                                    <textarea style="height: 50px" class="form-control" name="cognitive_recitation">{{get_review($student,'cognitive_recitation')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">تلاوة تطبيقياً</label>
+                                    <input type="hidden" name="question[]" value="practical_recitation">
+                                    <textarea style="height: 50px" class="form-control" name="practical_recitation">{{get_review($student,'practical_recitation')}}<</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">علوم الشريعة</label>
+                                    <input type="hidden" name="question[]" value="sharia_sciences">
+                                    <textarea style="height: 50px" class="form-control" name="sharia_sciences">{{get_review($student,'sharia_sciences')}}<</textarea>
+                                </div>
+                            </div>
+                            <div class="row m-5 align-items-end">
+                                <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                        <h2>للملتحقين بمواد تعليمية أخرى</h2>
+                                <!-- </div> -->
+                                @foreach(\App\Models\Subject::all() as $subject)
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">{{$subject->name}}</label>
+                                        <input type="hidden" name="question[]" value="{{str_replace(' ', '-', strtolower($subject->name))}}">
+                                        <textarea style="height: 50px" class="form-control" name="{{str_replace(' ', '-', strtolower($subject->name))}}">{{get_review($student,str_replace(' ', '-', strtolower($subject->name)))}}</textarea>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="row m-5 align-items-center">
+                                    <h2>للملتحقين بقسم تعليم التلاوة</h2>
+                                <div class="col-md-6" >
+                                    <label class="form-label" >تمكين الحروف</label>
+                                    <input type="hidden" name="question[]" value="enable_letters">
+                                    <textarea style="height: 50px" class="form-control" name="enable_letters">{{get_review($student,'enable_letters')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">قراءة بنية الكلمات</label>
+                                    <input type="hidden" name="question[]" value="Reading_the_structure_of_words">
+                                    <textarea style="height: 50px" class="form-control" name="Reading_the_structure_of_words">{{get_review($student,'Reading_the_structure_of_words')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">تجميع الجمل</label>
+                                    <input type="hidden" name="question[]" value="assembly_of_sentences">
+                                    <textarea style="height: 50px" class="form-control" name="assembly_of_sentences">{{get_review($student,'assembly_of_sentences')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">إملاء</label>
+                                    <input type="hidden" name="question[]" value="filling">
+                                    <textarea style="height: 50px" class="form-control" name="filling">{{get_review($student,'filling')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">القرآن بدون تشكيل</label>
+                                    <input type="hidden" name="question[]" value="quran_diacritics">
+                                    <textarea style="height: 50px" class="form-control" name="quran_diacritics">{{get_review($student,'quran_diacritics')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">القرآن في المصحف</label>
+                                    <input type="hidden" name="question[]" value="quran_in_quran">
+                                    <textarea style="height: 50px" class="form-control" name="quran_in_quran">{{get_review($student,'quran_in_quran')}}</textarea>
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="form-label form-margin ">آداب إسلامية</label>
+                                    <input type="hidden" name="question[]" value="islamic_etiquette">
+                                    <textarea style="height: 50px" class="form-control" name="islamic_etiquette">{{get_review($student,'islamic_etiquette')}}</textarea>
+                                </div>
+                                
+                            </div>
+                        </form>
+                        </div>
+
+                        <!-- Instructions -->
+
+                <div class="instructions-page-print instructions container-fluid">
+                <div class="row justify-content-center align-items-center instructions">
+                <div class="col-md-4">
+                    <h1 class="first" >استمارة التحاق بالدار</h1>
+                </div>
+                <div >
+                    <h1 class=" second" >تعليمات عامة</h1>
+                </div>
+                    <p class="text-black fw-bold text-end">-العمل تدار متواصل على مدار العام، ويوميا دا يوم الجمعة.</p>
+                    <p class="text-black fw-bold text-end">- لا تقبل إدارة الدار المتاقشة في الأمور الفتية الخاصة ب كدراسة يالدار سواء من تاحية التصاب المقرر من الحصص الدراسية</p>
+                    <p class="text-black fw-bold text-end">أو المستوى المقرر التدق الطالب يه، أو ماهية المقررات الدراسية و ما يتطليه تحقيق أعداف تلك المقررات من إعداد و تحضير و طرائق تدريس و</p>
+                    <p class="text-black fw-bold text-end">أسكيب تقويم و اختيارات و تصحيح و تشاط داخل الفصل و خارجه، و تحديد مطم أو معلمة دون أحرى .</p>
+                    <p class="text-black fw-bold text-end">- يسدد الاشتراك شهريا والذي يطد تيعا لتقدم مستوى الفلب وعد الساعت الدراسية التي يقضيها الطالب لدار يداية كل شهر ميلادى ولن يقيل</p>
+                    <p class="text-black fw-bold text-end">تواجد الطالب يأتدار للشهر التالي يدون سداد إلا في حالات معيتة تقيلها إدارة الطالب وفى السوم لن يقيل تواجد الطتب أكثرمن شهرين يدون سداد</p>
+                    <p class="text-black fw-bold text-end">الاشتراك مهما كاتت الأسبب</p>
+                    <p class="text-black fw-bold text-end">- الدار غر مشولة عن أي غيب للطلب خلال الشهر و لن يعوض يقيمة مالية الا في حكة الاتقطاع التام.</p>
+                    <p class="text-black fw-bold text-end">- لا تقيل إدارة الدار المتاقشة في توعية و مستوى الكتب الدراسية المستخدمة، و يلتزم ولي الأمر يسداد شمن الكتب الدراسية التي ترى الإدارة</p>
+                    <p class="text-black fw-bold text-end">اضفتها تدشا لما سيق إقراره خلال " IO " أيام من تأريغ المطئية بالحضور لاستلام الكتب الدراسية المضافة، هذا و لا تد الدا مسئولة عن</p>
+                    <p class="text-black fw-bold text-end">ضيع الكتب الدراسية من الطالب لأي سبب كان سواء أخبر الطلب عن مكان احتمال ضياعه منه أو لم يخبر، كما لا يقل اليتة تواجد الطلب فى الدار</p>
+                    <p class="text-black fw-bold text-end">بغير الكتب الدراسية الخصة يه أو التواجد يكتب دراسية تتفة.</p>
+                    <p class="text-black fw-bold text-end">- الالتزام يالحضور في الوقت المحدد للطتب ، و في حلة التأخير لأي سيب كان يحق لإدارة الدار رفض التحاق الطالب يمجموعته الدراسية ذلك</p>
+                    <p class="text-black fw-bold text-end">اليوم دون أدتى مسئولية عليها شي عدم دخول الطالب لمقر الدار ، إلا شي الحلات التي تقبلها إدارة الدار</p>
+                    <p class="text-black fw-bold text-end">، كما لا يقل الاتصراف قيل تهاية وفت المدارسة المحدد، إلا شي الحالات التي تقيلها دارة الدار .</p>
+                    <p class="text-black fw-bold text-end">- لا يقيل اليتة الغيب يدون إنن معتمد من المشرفة المختصة، و لا يسمح يتكرار الغيب سواء يلنن أو يدون إذن يشكل يؤشر على مستوى الطالب.</p>
+                    <p class="text-black fw-bold text-end">- يلتزم ولي الأمر يمتايعة واجبك الطالب، ومعاونة الدار في ضيط سلو كيات الطالب داخل الدار و خارجها..</p>
+                    <p class="text-black fw-bold text-end">يحدد ولي الأمر طريقة اتصراف الطلب من الدار يذتاه و لا تد الدار مسئولة اليتة ع الطالب خارج اركاتها .</p>
+                    <p class="text-black fw-bold text-end">- فى حالة احتيا الطلب لدروات خاصة فى التخاطب أو صعويات التعلم يلزم الضلب يهذه الدورات كشرط أساسي للتواحد يالدار .وذلك من خلا</p>
+                    <p class="text-black fw-bold text-end">أخصانى تخطب متخصص وتتايع التتنج مع إدارة الدار .</p>
+                    <p class="text-black fw-bold text-end">- يلتزم ولي الأمر شي يداية كل عام ميلادى يسداد قيمة لاشتراك المقررة وذك تظير الاشتراك كبرتامج والموقع الالكتروتي الدار لما يأن المبلغ لا</p>
+                    <p class="text-black fw-bold text-end">يسترد يأي حل.</p>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
 
         </div>
-    </div>
+        
+
+   
     <!-- Page content area end -->
+
+
+
+    
 @endsection
+
 
 @push('style')
     <link rel="stylesheet" href="{{asset('admin/css/custom/image-preview.css')}}">
@@ -410,6 +555,7 @@
 @push('script')
     <script src="{{asset('admin/js/custom/image-preview.js')}}"></script>
     <script src="{{asset('admin/js/custom/admin-profile.js')}}"></script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#government-select').change(function() {
@@ -430,7 +576,7 @@
 
                         // alert(response);
                         $('#city-select').html(options);
-                    },
+        @ends            },
                     // error: function(xhr, textStatus, errorThrown) {
                     //     console.log(xhr.responseText);
                     //     alert('Error: ' + xhr.responseText);
@@ -713,5 +859,18 @@
                 }
             }
         }
+    </script>
+     </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#print").on("click",function printDiv() {
+            console.log("clicked")
+            $(".print-form").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
+        })
+    })   
     </script>
 @endpush

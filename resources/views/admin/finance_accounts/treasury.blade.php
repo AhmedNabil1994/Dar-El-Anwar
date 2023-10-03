@@ -26,7 +26,6 @@
             </div>
             </div>
 
-            <h1> </h1>
 
 
 
@@ -53,9 +52,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('الخزينة') }}</h2>
-{{--                            <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">--}}
-{{--                                <i class="fa fa-plus"></i> {{ trans('website.addAdmin') }}--}}
-{{--                            </a>--}}
+                            <button id = "print" class="btn btn-secondary print-button" type="button">{{ trans('طباعة') }}</button>
                         </div>
 
 {{--                        <div class="item-title d-flex justify-content-center">--}}
@@ -106,10 +103,8 @@
                             </div>
                         </div>
 
-                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-
-                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
-
+                        <div class=" customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                            <table class="print-table row-border data-table-filter table-style table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -124,7 +119,7 @@
                                     <th>المستخدم</th>
                                     <th>بيان</th>
                                     <th>فرع</th>
-                                    <th>{{ __('اجارءات') }}</th>
+                                    <th>{{ __('إجراءات') }}</th>
                                 </tr>
                                 </thead>
 
@@ -192,13 +187,8 @@
     <script src="{{asset('admin/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/custom/data-table-page.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-
-
-
-
-    </script>
+    <script src="{{asset('admin/js/jasonday-printThis-23be1f8/printThis.js')}}"></script>
+    
     <!-- Ajax Search Script -->
     <script>
         $(function() {
@@ -217,5 +207,17 @@
                 });
             });
         });
+    </script>
+    <!-- Printing -->
+    <script>
+    $(document).ready(function(){
+            $("#print").on("click",function printDiv() {
+            console.log("clicked")
+            $(".print-table").printThis({
+                importStyle: true, 
+                loadCSS: "./main.css",
+            })
+        })
+    })    
     </script>
 @endpush

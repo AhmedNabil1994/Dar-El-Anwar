@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -23,13 +24,12 @@
                     </div>
                 </div>
             </div>
-
-            <h1> </h1>
+            </div>
 
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('قائمة الواجبات') }}</h2>
 
@@ -119,8 +119,8 @@
                 </div>
 
                 <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn buttons-style" id="saveMark">{{ trans('website.ok') }}</button>
+                <div class="modal-footer justify-content-start">
+                    <button type="submit" class="btn buttons-style ms-3" id="saveMark">{{ trans('website.ok') }}</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ trans('website.close') }}</button>
                 </div>
 

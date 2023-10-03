@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -24,11 +25,11 @@
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="row">
-
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('التقييم') }}</h2>
                         </div>
@@ -41,7 +42,7 @@
                             <table id="" class="row-border data-table-filter table-style">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('اسئلة الاختبار') }}</th>
+                                    <th>{{ trans('أسئلة الاختبار') }}</th>
                                     <th>{{ trans('نوع التقييم') }}</th>
                                     <th>{{ trans('ملاحظات') }}</th>
                                 </tr>
@@ -78,13 +79,12 @@
                                         </td>
                                         <td><textarea name="notes[]" class="form-control"
                                                       style="height: 50px;">{{$exam_results->where('question_id',$question->id)->first()?->notes}}</textarea></td>
-
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="col-md-1 mt-3">
-                                <button class="btn buttons-style">save</button>
+                            <div class="col-md-1 mt-3 d-flex">
+                                <button class="btn buttons-style">حفظ</button>
                             </div>
                         </form>
                     </div>

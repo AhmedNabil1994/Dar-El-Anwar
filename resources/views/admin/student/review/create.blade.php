@@ -41,7 +41,7 @@
                                 <div class="">
                                     <button type="submit" class="btn buttons-style">حفظ</button>
                                     <a href="{{route('student.edit',$student->id)}}" class="btn btn-danger">الغاء</a>
-                                        <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
+                                    <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
                                 </div>
                             </div>
                             <div class="row m-5">
@@ -429,7 +429,7 @@
             }
         }
     </script>
-        <script>
+    <script>
 
         $(document).ready(function(){
             $("#print").on("click",function printDiv() {
