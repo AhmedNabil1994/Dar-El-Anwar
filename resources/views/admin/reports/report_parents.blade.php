@@ -61,10 +61,14 @@
             </div>
 
             <div class="row">
+
             <div class="col-md-12">
+
                 <div class="customers__area bg-style mb-30">
-                <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                    <table id="customers-table" class="row-border data-table-filter table-style table table-bordered table-striped">
+                    <button type="button" class="btn m-3 buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
+
+                    <div class="col-md-12 customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
+                    <table  id="table1" class="row-border data-table-filter table-style table table-bordered table-striped">
                         <thead style="background-color: #50bfa5;">
                         <tr>
                             <th>اسم الطفل</th>
@@ -139,5 +143,16 @@
                 }
             })
         });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <script>
+        // Function to export the HTML table to an Excel file
+        function exportToExcel() {
+            const table = document.getElementById('table1'); // Replace with your table ID
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
+            XLSX.writeFile(wb, 'exported-data.xlsx');
+        }
+
+        // Function to print the Excel file
     </script>
 @endpush
