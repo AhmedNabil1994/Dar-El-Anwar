@@ -5,29 +5,31 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('تعديل بيانات الاباء') }}</h2>
+                                <h2>{{ __('تعديل بيانات الآباء') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('لوحة تحكم')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تعديل بيانات الاباء') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('تعديل بيانات الآباء') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('تعديل بيانات الاباء') }}</h2>
+                            <h2>{{ __('تعديل بيانات الآباء') }}</h2>
                         </div>
 
                         <div class="card-body">
@@ -179,7 +181,7 @@
 
                                 </div>
                                     <div class="button-group">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn buttons-style">
                                             {{ __('تعديل') }}
                                         </button>
                                     </div>
