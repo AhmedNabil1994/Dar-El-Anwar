@@ -64,7 +64,7 @@
                                 <thead>
                                 <tr>
                                     <th>{{ trans('تم تقييمه') }}</th>
-                                    <th>{{ trans('اسماء الطلاب') }}</th>
+                                    <th>{{ trans('أسماء الطلاب') }}</th>
                                     <th>{{ trans('احراء') }}</th>
                                 </tr>
                                 </thead>
