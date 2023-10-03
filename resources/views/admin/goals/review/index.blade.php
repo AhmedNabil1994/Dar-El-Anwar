@@ -5,29 +5,30 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('اهداف الطلاب') }}</h2>
+                                <h2>{{ trans('أهداف الطلاب') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{trans('اهداف الطلاب')}}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('أهداف الطلاب')}}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="row">
-
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <form method="get" action="{{route('admin.goals.index.review')}}" class="row">
                             <div class="row">
                                 <h1>{{trans("website.filter")}}</h1>
@@ -88,9 +89,6 @@
                             </div>
 
                         </form>
-                        <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('اهداف الطلاب') }}</h2>
-                        </div>
                         <div class="customers__table">
                             <table id="" class="row-border data-table-filter table-style">
                                 <thead>
