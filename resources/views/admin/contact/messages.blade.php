@@ -106,9 +106,7 @@
                             </div>
                         </div>
                     </div>
-
-                          <button type="submit" class="btn btn-primary">حفظ</button>
-
+                          <button type="submit" class="btn buttons-style mt-3">حفظ</button>
                       </form>
                   </div>
                   <!-- end chat sidebar -->
