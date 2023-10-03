@@ -5,31 +5,32 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ __('الاباء') }}</h2>
+                                <h2>{{ __('الآباء') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('لوحة التحكم')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('جميع الاباء') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ __('جميع الآباء') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('جميع الاباء') }}</h2>
+                            <h2>{{ __('جميع الآباء') }}</h2>
                         </div>
                         <div class="row">
                             <form class="row justify-content-center align-items-center" method="get" action="{{ route('parent_infos.index') }}">
