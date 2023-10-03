@@ -31,7 +31,7 @@
                     <h1>{{trans("website.filter")}}</h1>
                 </div>
                 <div class="text-end mb-3 d-flex justify-content-start">
-                    <button class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
+                    <button type="button" class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
                     <button class="btn btn-secondary" id="printTable" type= "button">قم بطباعة الجدول</button>
 
 
@@ -110,7 +110,7 @@
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
                         <div class="customers__table print-table all-students" style="overflow: auto;">
-                            <table  class="row-border data-table-filter table-style table table-bordered table-striped" >
+                            <table  id="table1" class="row-border data-table-filter table-style table table-bordered table-striped" >
                                 <thead >
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>

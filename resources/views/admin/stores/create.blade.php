@@ -23,6 +23,8 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card">
             </div>
             <div class="row">
             <div class="customers__area bg-style mb-30">
