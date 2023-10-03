@@ -84,9 +84,9 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-2 m-3">
+                            <div class="col-sm-2 mb-3">
                                 <button type="submit" class="btn buttons-style">
-                                    اضافة
+                                    إضافة
                                 </button>
                             </div>
                             <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
