@@ -275,7 +275,7 @@ return [
 "instructors"=>"  المعلمون   ",
 "approvedInstructors"=>"   المعلمون المعتمدون   ",
 "create"=>"   إنشاء    ",
-"createCourse"=>"   إنشاء مجموعةة   ",
+"createCourse"=>"   إنشاء مجموعة   ",
 "manageCourse"=>"   إدارة المجموعةة   ",
 "subjects"=>"    المواد   ",
 "Sun"=>"الاحد",
