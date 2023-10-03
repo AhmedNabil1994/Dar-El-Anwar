@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -23,11 +24,11 @@
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="row">
-
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="row">
                             <!-- Name Filter -->
                             <div class="col-md-2 m-3">
@@ -57,10 +58,6 @@
                                 <label for="goal_id">الهدف:</label>
                                 <input disabled type="text" class="form-control"  value="{{$goal->name}}">
                             </div>
-
-                        </div>
-                        <div class="item-title d-flex justify-content-between">
-                            <h2>{{ __('بيانات الهدف') }}</h2>
                         </div>
                         <div class="customers__table">
                             <table id="" class="row-border data-table-filter table-style">
