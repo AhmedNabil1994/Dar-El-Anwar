@@ -5,29 +5,31 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="customers__area__header bg-style mb-30">
+                <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{ trans('اضف هدف') }}</h2>
+                                <h2>{{ trans('أضف هدف') }}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('اضف هدف') }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ trans('أضف هدف') }}</li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans('اضف هدف') }}</h2>
+                            <h2>{{ trans('أضف هدف') }}</h2>
                         </div>
                         <form method="get" action="{{route('admin.goals.create')}}" class="row">
                             <div class="row">
@@ -119,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn buttons-style">{{trans("عرض")}}</button>
+                                <button type="submit" class="btn buttons-style mb-3">{{trans("عرض")}}</button>
                             </div>
 
                         </form>
