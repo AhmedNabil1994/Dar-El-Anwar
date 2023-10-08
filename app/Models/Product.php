@@ -45,4 +45,20 @@ class Product extends Model
     }
 
 
+    public function upload()
+    {
+        return$this->belongsTo(Upload::class,'image');
+    }
+
+    public function stock()
+    {
+        return$this->hasOne(Stoke::class)->orderBy('id','DESC')
+            ->where('quantity', '>', 0);
+    }
+
+    public function getImg()
+    {
+        return $this->upload?->file_name;
+    }
+
 }

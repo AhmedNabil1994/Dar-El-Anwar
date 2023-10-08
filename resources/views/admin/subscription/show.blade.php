@@ -111,16 +111,42 @@
 
         </div>
     </div>
-
+    @php
+        $currentMonth = now()->format('n'); // Get the current month as a number (1-12)
+        $months = [
+            '1' => 'January',
+            '2' => 'February',
+            '3' => 'March',
+            '4' => 'April',
+            '5' => 'May',
+            '6' => 'June',
+            '7' => 'July',
+            '8' => 'August',
+            '9' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
+        ];
+    @endphp
 
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="container">
-                <h2 class="mb-3">إضافة اشتراك</h2>
+                <h2 class="mb-3">سداد الاشتراك</h2>
                 <form method="get" id="editForm" action="{{route('payment.process',$subscription)}}">
                     <div class="form-group mb-4">
                         <label for="value">المبلغ</label>
                         <input type="number" name="amount" id="amount" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="value">دفعة عن شهر</label>
+                        <select name="month" id="month" class="form-control">
+                            @foreach ($months as $monthNumber => $monthName)
+                                <option value="{{ $monthNumber }}" {{ $currentMonth == $monthNumber ? 'selected' : '' }}>
+                                    @lang('website.'.$monthName)
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn print-button buttons-style">إضافة</button>
                     <a id="closeModalBtn" class="btn print-button buttons-style">الغاء</a>

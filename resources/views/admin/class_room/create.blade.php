@@ -49,20 +49,37 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="level_id">{{__('المستوي')}}</label>
+                                        <label for="dept_id">{{__('القسم')}}</label>
 
                                         <select class="form-select"
-                                               id="level_id"
-                                               name="level_id" >
-                                        <option value="">اختر مستوي</option>
-                                            @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->name}}</option>
+                                               id="dept_id"
+                                               name="dept_id" >
+                                            @foreach($departs as $depart)
+                                                <option value="{{$depart->id}}">{{$depart->name}}</option>
                                             @endforeach
                                         </select>
-                                        @error('level_id')
+                                        @error('dept_id')
                                         <span class="text-danger">{{ $message}}</span>
                                         @enderror
                                     </div>
+
+                                    <div class="row">
+                                        <label for="subject_id">{{__('المواد')}}</label>
+
+                                        <select class="form-select"
+                                                id="subject_id"
+                                                multiple="multiple"
+                                                name="subject_id[]" >
+                                            @foreach($subjects as $subject)
+                                                <option value="{{$subject->id}}"
+                                                >{{$subject->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('subject_id')
+                                        <span class="text-danger">{{ $message}}</span>
+                                        @enderror
+                                    </div>
+
 
 
                                 </div>

@@ -103,6 +103,7 @@ class SubscriptionController extends Controller
     {
         //
         $data = $request->all();
+        $data['code'] = 'DA-'.uniqid();
         Subscription::create($data);
 
         return redirect()->route('subscriptions.index')->with('success', 'Subscription created successfully');
@@ -169,14 +170,13 @@ class SubscriptionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(Subscription $subscription)
     {
         //
-
         $subscription->delete();
-        return redirect()->route('subscriptions.index')->with('success', 'Subscription created successfully');
+        return redirect()->back()->with('success', 'Subscription created successfully');
 
     }
 
@@ -205,7 +205,7 @@ class SubscriptionController extends Controller
             $last_amount = $last_amount + $request->amount;
             $data = [
                 'trans_no'=>rand(0000,9999),
-                'date' => $request->date ?? Carbon::now()->format('Y-m-d'),
+                'date' => $request->date ?? Carbon::now()->format('Y-m-d h:i A'),
                 'name' => $subscription->student->name,
                 'amount' => $subscription->subscription->value,
                 'description' => 'دفع الاشتراك',
@@ -221,6 +221,7 @@ class SubscriptionController extends Controller
                 'student_id' => $subscription->student->id,
                 'amount' => $subscription->subscription->value,
                 'subscription_id' => $subscription->id,
+                'month' => $request->month,
                 'classroom' => $subscription->student->class_room?->id,
                 'paid_at' => Carbon::now()->format('Y-m-d')
             ]);
@@ -258,7 +259,7 @@ class SubscriptionController extends Controller
             $last_amount = $last_amount + $request->amount;
             $data = [
                 'trans_no'=>rand(0000,9999),
-                'date' => Carbon::now()->format('Y-m-d'),
+                'date' => Carbon::now()->format('Y-m-d h:i A'),
                 'name' => $subscription->student->name,
                 'amount' => $subscription->subscription->value,
                 'description' => 'دفع الاشتراك',
@@ -274,6 +275,7 @@ class SubscriptionController extends Controller
                 'student_id' => $subscription->student->id,
                 'amount' => $subscription->subscription->value,
                 'subscription_id' => $subscription->id,
+                'month' => $request->month,
                 'classroom' => $subscription->student->class_room?->id,
                 'paid_at' => Carbon::now()->format('Y-m-d')
             ]);

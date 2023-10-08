@@ -126,6 +126,20 @@
             </li>
         @endcan
 
+            <li class="aiz-side-nav-item">
+                <a href="{{ route('student.chats.index') }}"
+                   class="aiz-side-nav-link {{ active_if_match('student.chats.index') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <g id="Group_8863" data-name="Group 8863" transform="translate(-4 -4)">
+                            <path id="Path_18925" data-name="Path 18925"
+                                  d="M18.4,4H5.6A1.593,1.593,0,0,0,4.008,5.6L4,20l3.2-3.2H18.4A1.6,1.6,0,0,0,20,15.2V5.6A1.6,1.6,0,0,0,18.4,4ZM7.2,9.6h9.6v1.6H7.2Zm6.4,4H7.2V12h6.4Zm3.2-4.8H7.2V7.2h9.6Z"
+                                  fill="#707070" />
+                        </g>
+                    </svg>
+                    <span class="aiz-side-nav-text">{{ __('المراسلة') }}</span>
+                </a>
+            </li>
+
         {{-- @canany(['manage_instructor', 'all_instructor'])
              <li>
                  <a class="has-arrow" href="#">
@@ -137,137 +151,137 @@
                          <li class="{{ active_if_match('admins/instructor/pending') }}">
                              <a href="{{route('instructor.pending')}}">
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('Pending Instructor')}}</span>
-                             </a>
-                         </li>
-                     @endcan
+{{--                                 <span>{{__('Pending Instructor')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
 
-                     @can('approved_instructor')
-                         <li class="{{ active_if_match('admins/instructor/approved') }}">
-                             <a href="{{route('instructor.approved')}}">
+{{--                     @can('approved_instructor')--}}
+{{--                         <li class="{{ active_if_match('admins/instructor/approved') }}">--}}
+{{--                             <a href="{{route('instructor.approved')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('Approved Instructors')}}</span>
-                             </a>
-                         </li>
-                     @endcan
-                     @can('approved_instructor')
-                         <li class="{{ active_if_match('admins/instructor/blocked') }}">
-                             <a href="{{route('instructor.blocked')}}">
+{{--                                 <span>{{__('Approved Instructors')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
+{{--                     @can('approved_instructor')--}}
+{{--                         <li class="{{ active_if_match('admins/instructor/blocked') }}">--}}
+{{--                             <a href="{{route('instructor.blocked')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('Blocked Instructors')}}</span>
-                             </a>
-                         </li>
-                     @endcan
+{{--                                 <span>{{__('Blocked Instructors')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
 
-                     @can('add_instructor')
-                         <li class="{{ active_if_match('admins/instructor/create') }}">
-                             <a href="{{route('instructor.create')}}">
+{{--                     @can('add_instructor')--}}
+{{--                         <li class="{{ active_if_match('admins/instructor/create') }}">--}}
+{{--                             <a href="{{route('instructor.create')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{ __('Add Instructor') }}</span>
-                             </a>
-                         </li>
-                     @endcan
-                     -->
+{{--                                 <span>{{ __('Add Instructor') }}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
+{{--                     -->--}}
 
-                     @can('all_instructor')
+{{--                     @can('all_instructor')--}}
 
-                         <li class="
-                         {{ active_if_match('admins/instructor') }}
-                         {{ active_if_match('admins/instructor/view/*') }}
-                     ">
-                             <a href="{{route('instructor.index')}}">
+{{--                         <li class="--}}
+{{--                         {{ active_if_match('admins/instructor') }}--}}
+{{--                         {{ active_if_match('admins/instructor/view/*') }}--}}
+{{--                     ">--}}
+{{--                             <a href="{{route('instructor.index')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('All Instructors')}}</span>
-                             </a>
-                         </li>
-                     @endcan
-                 </ul>
-             </li>
-         @endcanany--}}
+{{--                                 <span>{{__('All Instructors')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
+{{--                 </ul>--}}
+{{--             </li>--}}
+{{--         @endcanany--}}
 
-        @can('manage_absence')
-            <li class=" {{ active_if_match('admins/absence') }} ">
-                <a class="has-arrow" href="#">
-                    <span class="iconify" data-icon="ph:student"></span>
-                    <span>{{__('الغياب')}}</span>
-                </a>
-                <ul>
-                    <li class="{{ active_if_match('admins/absence') }}">
-                        <a href="{{route('absence.index')}}">
+{{--        @can('manage_absence')--}}
+{{--            <li class=" {{ active_if_match('admins/absence') }} ">--}}
+{{--                <a class="has-arrow" href="#">--}}
+{{--                    <span class="iconify" data-icon="ph:student"></span>--}}
+{{--                    <span>{{__('الغياب')}}</span>--}}
+{{--                </a>--}}
+{{--                <ul>--}}
+{{--                    <li class="{{ active_if_match('admins/absence') }}">--}}
+{{--                        <a href="{{route('absence.index')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
-                            <span>{{ __('عرض الغياب') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_if_match('admins/absence/create') }}">
-                        <a href="{{route('absence.create')}}">
+{{--                            <span>{{ __('عرض الغياب') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="{{ active_if_match('admins/absence/create') }}">--}}
+{{--                        <a href="{{route('absence.create')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
-                            <span>{{ __('إضافة غياب') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endcan
+{{--                            <span>{{ __('إضافة غياب') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
+{{--        @endcan--}}
 
-        @can(['manage_course'])
-            <li>
-                <a class="has-arrow" href="#">
-                    <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>
-                    <span>{{__('الدورات التدريبية')}}</span>
-                </a>
-                <ul>
-                    {{-- @can('pending_course')
-                         <li class="{{ active_if_match('admins/course/review-pending') }}">
-                             <a href="{{route('admin.course.review_pending')}}">
+{{--        @can(['manage_course'])--}}
+{{--            <li>--}}
+{{--                <a class="has-arrow" href="#">--}}
+{{--                    <span class="iconify" data-icon="dashicons:welcome-learn-more"></span>--}}
+{{--                    <span>{{__('الدورات التدريبية')}}</span>--}}
+{{--                </a>--}}
+{{--                <ul>--}}
+{{--                    --}}{{-- @can('pending_course')--}}
+{{--                         <li class="{{ active_if_match('admins/course/review-pending') }}">--}}
+{{--                             <a href="{{route('admin.course.review_pending')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('Review Pending')}}</span>
-                             </a>
-                         </li>
-                     @endcan
-                     @can('hold_course')
-                         <li class="{{ active_if_match('admins/course/hold') }}">
-                             <a href="{{route('admin.course.hold')}}">
+{{--                                 <span>{{__('Review Pending')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
+{{--                     @can('hold_course')--}}
+{{--                         <li class="{{ active_if_match('admins/course/hold') }}">--}}
+{{--                             <a href="{{route('admin.course.hold')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('Hold')}}</span>
-                             </a>
-                         </li>
-                     @endcan
-                     @can('approved_course')
+{{--                                 <span>{{__('Hold')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
+{{--                     @can('approved_course')--}}
 
-                         <li class="{{ active_if_match('admins/course/approved') }}">
-                             <a href="{{route('admin.course.approved')}}">
+{{--                         <li class="{{ active_if_match('admins/course/approved') }}">--}}
+{{--                             <a href="{{route('admin.course.approved')}}">--}}
 {{--                                 <i class="fa fa-circle"></i>--}}
-                                 <span>{{__('Approved')}}</span>
-                             </a>
-                         </li>
-                     @endcan
- --}}
-                    @can('all_course')
-                        <li class="{{ active_if_match('admins/course') }}">
-                            <a href="{{route('admin.course.index')}}">
+{{--                                 <span>{{__('Approved')}}</span>--}}
+{{--                             </a>--}}
+{{--                         </li>--}}
+{{--                     @endcan--}}
+{{-- --}}
+{{--                    @can('all_course')--}}
+{{--                        <li class="{{ active_if_match('admins/course') }}">--}}
+{{--                            <a href="{{route('admin.course.index')}}">--}}
 {{--                                <i class="fa fa-circle"></i>--}}
-                                <span>{{__('جميع الدورات')}}</span>
-                            </a>
-                        </li>
-                    @endcan
+{{--                                <span>{{__('جميع الدورات')}}</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endcan--}}
 
-                    {{--<li class="{{ active_if_match('admins/course/enroll') }}">
-                        <a href="{{route('admin.course.enroll')}}">
+{{--                    --}}{{--<li class="{{ active_if_match('admins/course/enroll') }}">--}}
+{{--                        <a href="{{route('admin.course.enroll')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
-                            <span>{{ __('Enroll In Course') }}</span>
-                        </a>
-                    </li>--}}
+{{--                            <span>{{ __('Enroll In Course') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="{{ active_if_match('admins/course/create') }}">
-                        <a href="{{route('admin.course.create')}}">
+{{--                    <li class="{{ active_if_match('admins/course/create') }}">--}}
+{{--                        <a href="{{route('admin.course.create')}}">--}}
 {{--                            <i class="fa fa-circle"></i>--}}
-                            <span>{{ __('إضافة دورة') }}</span>
-                        </a>
-                    </li>
+{{--                            <span>{{ __('إضافة دورة') }}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
 
-                </ul>
-            </li>
-        @endcan
+{{--                </ul>--}}
+{{--            </li>--}}
+{{--        @endcan--}}
 
         @canany(['manage_subject'])
             <li>

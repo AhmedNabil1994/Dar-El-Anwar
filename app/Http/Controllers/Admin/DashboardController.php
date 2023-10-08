@@ -20,6 +20,7 @@ use App\Models\Subject;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Withdraw;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,12 +35,17 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $data['title'] = 'Dashboard';
-        $data['total_students'] = Student::count();
-        $data['new_students'] = Student::where('status',1 )->count();
-        $data['total_joining_students'] = Student::where('status',0)->count();
+        $data['total_students'] = Student::whereStatus(1)->orWhere('status',4)->count();
+        $data['new_students'] = Student::where('status',1 )
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)->count();
+
+        $data['total_joining_students'] = Student::where('status',5)->count();
         $data['excluded_students'] = Student::where('status','3')->count();
         $data['converted_students'] = Student::where('status','4')->count();
-        $data['absence_students'] = Absence::distinct('student_id')->count();
+        $data['absence_students'] = Absence::distinct('student_id')
+                                    ->where('date',Carbon::today())
+                                    ->count();
         $data['total_employees'] = Employee::where('status',1)->count();
         $data['total_courses'] = Course::where('status',1)->count();
         $data['total_best_courses'] = Course::with(['reviews' => function ($query) {
@@ -56,14 +62,16 @@ class DashboardController extends Controller
             ->select('date',\DB::raw('sum(amount) as count'))
             ->groupBy('date')->where('transaction_type','expense')
             ->whereNotNull('product_id')->get();
-        $data['total_get_money']  = 0;
-        $total_data = StudentSubscription::where('payment_status','paid')->get();
-        foreach ($total_data as $item){
-            $data['total_get_money'] += $item->rec_time * $item->subscription->value;
-        }
-        $data['percentage_of_students'] = Student::query()->select('status',\DB::raw('count(*) as count'))
+        $data['totalCredit'] =  Transaction::where('transaction_type', 'income')->sum('amount');
+        $data['totalDebit'] = Transaction::where('transaction_type', 'expense')->sum('amount');
+        $data['total_get_money']  = $data['totalCredit'] + $data['totalDebit'];
+
+        $data['percentage_of_students'] = Student::query()
+            ->select('status',\DB::raw('count(*) as count'))
             ->where('status','!=',2)
+            ->where('status','!=',5)
             ->groupBy('status')->get();
+
         return view('admin.dashboard', $data);
     }
 

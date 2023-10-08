@@ -55,11 +55,13 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $data['title'] = 'All Student';
-        $students = Student::query()->orderBy('id','DESC');
+        $students = Student::query()->whereStatus(1)->orWhere('status',4)->orderBy('id','DESC');
         if($request->filterByBranch)
             $students->where('branch_id',$request->filterByBranch);
         if($request->filterByLevel)
-            $students->where('level',$request->filterByLevel);
+            $students->whereHas('dept',function ($q) use($request){
+                $q->where('departments.id',$request->filterByLevel);
+            });
         if($request->filterByClass)
             $students->where('classroom',$request->filterByClass);
         if($request->filterByPeriod)
@@ -71,17 +73,109 @@ class StudentController extends Controller
 
         $data['branches'] = Branch::whereStatus(1)->get();
         $data['class_rooms'] = ClassRoom::all();
-        $data['count'] = Student::count();
-        $data['levels'] = Level::all();
+        $data['count'] = Student::whereStatus(1)->orWhere('status',4)->count();
+        $data['departs'] = Department::all();
+
+        $students = $students->paginate(50);
+        return view('admin.student.list', $data, compact('students'));
+    }
+
+    public function JoiningIndex(Request $request)
+    {
+        $data['title'] = 'All Student';
+        $students = Student::query()->whereStatus(5)->orderBy('id','DESC');
+        if($request->filterByBranch)
+            $students->where('branch_id',$request->filterByBranch);
+        if($request->filterByLevel)
+            $students->whereHas('dept',function ($q) use($request){
+                $q->where('departments.id',$request->filterByLevel);
+            });
+        if($request->filterByClass)
+            $students->where('classroom',$request->filterByClass);
+        if($request->filterByPeriod)
+            $students->where('period',$request->filterByPeriod);
+        if($request->filterByGender)
+            $students->where('gender',$request->filterByGender);
+        if($request->filterByJoining)
+            $students->where('status',$request->filterByJoining);
+
+        $data['branches'] = Branch::whereStatus(1)->get();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['count'] = Student::whereStatus(5)->count();
+        $data['departs'] = Department::all();
+
+        $students = $students->paginate(50);
+        return view('admin.student.list', $data, compact('students'));
+    }
+
+    public function NewsIndex(Request $request)
+    {
+        $data['title'] = 'All Student';
+
+        $students = Student::query()
+            ->whereStatus(1)
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)->orderBy('id','DESC');
+        if($request->filterByBranch)
+            $students->where('branch_id',$request->filterByBranch);
+        if($request->filterByLevel)
+            $students->whereHas('dept',function ($q) use($request){
+                $q->where('departments.id',$request->filterByLevel);
+            });
+        if($request->filterByClass)
+            $students->where('classroom',$request->filterByClass);
+        if($request->filterByPeriod)
+            $students->where('period',$request->filterByPeriod);
+        if($request->filterByGender)
+            $students->where('gender',$request->filterByGender);
+        if($request->filterByJoining)
+            $students->where('status',$request->filterByJoining);
+
+        $data['branches'] = Branch::whereStatus(1)->get();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['count'] = Student::whereStatus(1)
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)->count();
+        $data['departs'] = Department::all();
+
+        $students = $students->paginate(50);
+        return view('admin.student.list', $data, compact('students'));
+    }
+
+    public function ExecludedIndex(Request $request)
+    {
+        $data['title'] = 'All Student';
+
+        $students = Student::query()
+            ->whereStatus(3)->orderBy('id','DESC');
+        if($request->filterByBranch)
+            $students->where('branch_id',$request->filterByBranch);
+        if($request->filterByLevel)
+            $students->whereHas('dept',function ($q) use($request){
+                $q->where('departments.id',$request->filterByLevel);
+            });
+        if($request->filterByClass)
+            $students->where('classroom',$request->filterByClass);
+        if($request->filterByPeriod)
+            $students->where('period',$request->filterByPeriod);
+        if($request->filterByGender)
+            $students->where('gender',$request->filterByGender);
+        if($request->filterByJoining)
+            $students->where('status',$request->filterByJoining);
+
+        $data['branches'] = Branch::whereStatus(1)->get();
+        $data['class_rooms'] = ClassRoom::all();
+        $data['count'] = Student::whereStatus(3)->count();
+        $data['departs'] = Department::all();
 
         $students = $students->paginate(50);
         return view('admin.student.list', $data, compact('students'));
     }
 
     public function getClasses($id){
-
+        $ids = explode(',',$id);
         $data['class_rooms'] = ClassRoom::where('status',1)
-            ->where('level_id',$id)->get();
+            ->whereIN('department_id',$ids)->get();
         return $data['class_rooms'];
     }
 
@@ -143,31 +237,37 @@ class StudentController extends Controller
 
     public function update(Request $request, $id)
     {
-        $courses = Course::whereIn('id',$request->appointment)->get();
-        $selectedCourses = Course::whereIn('id', $request->appointment)->get();
+        $request->validate([
+            'gender' => 'required',
+        ]);
+        if($request->appointment || $request->appointment > 0){
 
+            $courses = Course::whereIn('id',$request->appointment)->get();
+            $selectedCourses = Course::whereIn('id', $request->appointment)->get();
         $conflictFound = false;
-        foreach ($courses as $course){
-            foreach ($courses as $existingCourse) {
-                // Skip comparing the course against itself
-                if ($course->id == $existingCourse->id) {
-                    continue;
-                }
+            foreach ($courses as $course){
+                foreach ($courses as $existingCourse) {
+                    // Skip comparing the course against itself
+                    if ($course->id == $existingCourse->id) {
+                        continue;
+                    }
 
-                // Check if there is a conflict in date or time
-                if (
-                    $course->day == $existingCourse->day // Compare dates
-                    &&
-                    $course->time == $existingCourse->time // Check if end time is after start time
-                ) {
-                    $conflictFound = true;
-                    break 2; // Break both loops if a conflict is found
+                    // Check if there is a conflict in date or time
+                    if (
+                        $course->day == $existingCourse->day // Compare dates
+                        &&
+                        $course->time == $existingCourse->time // Check if end time is after start time
+                    ) {
+                        $conflictFound = true;
+                        break 2; // Break both loops if a conflict is found
+                    }
                 }
             }
-        }
-        if($conflictFound)
-            return redirect()->back()->with('error','يوجد تعارض في المواعيد');
+            if($conflictFound)
+                return redirect()->back()->with('error','يوجد تعارض في المواعيد');
 
+
+        }
         $guardianRelationships = $request->guardian_relationship;
         if($guardianRelationships){
 
@@ -178,23 +278,10 @@ class StudentController extends Controller
         }
         $photos = [];
 
-
-        $guardianRelationships = $request->guardian_relationship;
-
-        if($guardianRelationships){
-
-            $uniqueValues = array_unique($request->guardian_relationship);
-
-            if(count($guardianRelationships) !== count($uniqueValues))
-                return redirect()->back()->with('error','خانة الصلة مكررة');
-        }
-        $code = $this->create_code($request);
-
         $student_data = [
             'user_id' => $user->id??null,
             'name' => $request->name, // updated from $request->first_name
             'email' => $request->email, // updated from $request->first_name
-            'code' => $code, // updated from $request->first_name
             'address' => $request->address,
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
@@ -218,6 +305,7 @@ class StudentController extends Controller
         $student = Student::find($id);
 
         $student->update($student_data);
+
         if($request->password != null)
         {
             $password = Hash::make($request->password);
@@ -225,10 +313,8 @@ class StudentController extends Controller
         }
 
         $student->dept()->sync($request->department);
-
         $student->courses()->sync($request->appointment);
-
-        $student->level()->sync($request->level_id);
+        $student->class_room()->sync($request->classroom);
 
         if ($request->hasFile('image')) {
             $upload = new Upload;
@@ -357,7 +443,14 @@ class StudentController extends Controller
                 'email' => $request->guardian_email[$key], // newly added
                 'national_id' => $request->id_number[$key], // newly added
             ]);
+            if($request->guardian_password[$key] != null)
+            {
+                $password = Hash::make($request->guardian_password[$key]);
+                $parent->update(['password'=>$password]);
+            }
         }
+
+
 
         return redirect()->route('student.index')
             ->with('success', __('تم تحديث بيانات الطالب'));
@@ -550,33 +643,37 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $courses = Course::whereIn('id',$request->appointment)->get();
-        $selectedCourses = Course::whereIn('id', $request->appointment)->get();
+        $request->validate([
+            'gender' => 'required',
+        ]);
+        if($request->appointment || $request->appointment > 0){
 
+            $courses = Course::whereIn('id',$request->appointment)->get();
+            $selectedCourses = Course::whereIn('id', $request->appointment)->get();
         $conflictFound = false;
-        foreach ($courses as $course){
-            foreach ($courses as $existingCourse) {
-                // Skip comparing the course against itself
-                if ($course->id == $existingCourse->id) {
-                    continue;
-                }
+            foreach ($courses as $course){
+                foreach ($courses as $existingCourse) {
+                    // Skip comparing the course against itself
+                    if ($course->id == $existingCourse->id) {
+                        continue;
+                    }
 
-                // Check if there is a conflict in date or time
-                if (
-                    $course->day == $existingCourse->day // Compare dates
-                    &&
-                    $course->time == $existingCourse->time // Check if end time is after start time
-                ) {
-                    $conflictFound = true;
-                    break 2; // Break both loops if a conflict is found
+                    // Check if there is a conflict in date or time
+                    if (
+                        $course->day == $existingCourse->day // Compare dates
+                        &&
+                        $course->time == $existingCourse->time // Check if end time is after start time
+                    ) {
+                        $conflictFound = true;
+                        break 2; // Break both loops if a conflict is found
+                    }
                 }
             }
+            if($conflictFound)
+                return redirect()->back()->with('error','يوجد تعارض في المواعيد');
         }
-        if($conflictFound)
-            return redirect()->back()->with('error','يوجد تعارض في المواعيد');
         $photos = [];
         $guardianRelationships = $request->guardian_relationship;
-
         if($guardianRelationships){
 
             $uniqueValues = array_unique($request->guardian_relationship);
@@ -604,20 +701,20 @@ class StudentController extends Controller
             'blood_type' => $request->blood_type, // newly added
             'how_did_you_hear_about_us' => $request->how_did_you_hear_about_us, // newly added
             'joining_date' => $request->joining_date, // newly added
-            'medical_history' => $request->medical_history, // newly added
-            'class_room_id' => $request->classroom, // newly added
+            'medical_history' => $request->medical_history, // newly addedx
             'password' =>  Hash::make($request->password), // newly added
             'parents_marital_status' => $request->parents_social_status, // newly added
             'notes' => $request->notes, // newly added
         ];
 
+
         $student = Student::create($student_data);
 
+
         $student->dept()->sync($request->department);
-
         $student->courses()->sync($request->appointment);
+        $student->class_room()->sync($request->classroom);
 
-        $student->level()->sync($request->level_id);
 
         if ($request->hasFile('image')) {
             $upload = new Upload;
@@ -645,7 +742,6 @@ class StudentController extends Controller
                 'image' => $upload->id,
             ]);
         }
-
         if ($request->parents_card_copy) {
             foreach ($request->parents_card_copy as $parents_card_copy)
             {
@@ -704,7 +800,6 @@ class StudentController extends Controller
                 'birth_certificate' => $upload->id,
             ]);
         }
-
         if ($request->hasFile('another_file')) {
             $upload = new Upload;
             $upload->file_original_name = null;
@@ -740,11 +835,13 @@ class StudentController extends Controller
                     'name' => $request->guardian_name[$key],
                     'profession' => $request->profession[$key],
                     'relationship' => $request->guardian_relationship[$key],
+                    'relationship_type' => $request->guardian_relationship_type[$key],
                     'phone_number' => $request->guardian_phone_number[$key], // newly added
                     'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
                     'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
                     'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
                     'email' => $request->guardian_email[$key], // newly added
+                    'password' => Hash::make($request->guardian_password[$key]), // newly added
                     'national_id' => $request->id_number[$key], // newly added
 
                 ]);
@@ -771,7 +868,7 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
-    public function changeStudentStatus(Request $request)
+        public function changeStudentStatus(Request $request)
     {
         $student = $this->studentModel->getRecordByid($request->id);
         $student->status = $request->status;
@@ -786,26 +883,24 @@ class StudentController extends Controller
     {
 
         $year = Carbon::now()->year;
-        $branch = $request->branch_id;
+//        $branch = $request->branch_id;
 
         $lastSequential = Student::orderBy('id','DESC')->first()->id;
 
         $sequential = $lastSequential + 1;
 
-        $sequentialCode = sprintf("%04d", $sequential);
+        $sequentialCode = sprintf("%05d", $sequential);
 
-        return $year . $branch . $sequentialCode;
+        return $year . $sequentialCode;
     }
 
     public function change_status(Request $request, $id)
     {
         $student = Student::find($id);
-        if($student->status == 2)
-            $student->update(['status' => 1]);
-        else
-            $student->update(['status' => $request->status]);
 
-        return 'success';
+        $student->update(['status' => $request->status]);
+
+        return redirect()->back();
     }
 
     public function profile(Request $request)

@@ -16,6 +16,9 @@
     <!-- All CSS files included here -->
     <link rel="stylesheet" href="{{asset('admin/css/all.min.css')}}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link href="{{ asset('admin/js/select2/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{asset('common/css/select2.css')}}" rel="stylesheet">
+
     @stack('style')
     <link rel="stylesheet" href="{{asset('admin/css/metisMenu.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/styles/main.css')}}">
@@ -23,7 +26,6 @@
     <link rel="stylesheet" href="{{asset('admin/css/modules/employee.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/modules/chat.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link href="{{asset('common/css/select2.css')}}" rel="stylesheet">
 </head>
 <body dir="rtl">
 
@@ -103,14 +105,29 @@
 <script src="{{asset('admin/sweetalert2/sweetalert2.all.js')}}"></script>
 <script src="{{ asset('common/js/iconify.min.js') }}"></script>
 
-@stack('script')
 <script src="{{asset('admin/js/admin-custom.js')}}"></script>
 <script src="{{asset('admin/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('admin/js/main.js')}}"></script>
 <script src="{{asset('common/js/select2.min.js')}}"></script>
+<script src="{{ asset('admin/js/select2/select2.min.js') }}"></script>
+<script src="{{ asset('admin/js/select2.js') }}"></script>
+<script>
 
+    $('textarea').each(function(index) {
+        $(this).attr('id', 'tinymceExample')
+    });
+    $('select').each(function(index) {
+        if($(this).attr('multiple'))
+            $(this).addClass('js-example-basic-multiple')
+        else
+            $(this).addClass('js-example-basic-single')
+    });
+</script>
+
+@stack('script')
 <!-- All Javascript files included here -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <script>
     $(document).ready(function() {
         // Initialize Toastr

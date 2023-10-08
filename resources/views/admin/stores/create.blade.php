@@ -58,7 +58,7 @@
 
                             <div class="form-group col-6">
                                 <label for="price">meta address:</label>
-                                <input type="text" class="form-control" id="price" name="price"  required>
+                                <input type="text" class="form-control" id="meta_address" name="meta_address"  required>
                             </div>
 
                             <div class="form-group col-6">
@@ -109,7 +109,7 @@
 
                             <div class="form-group col-6">
                                 <label for="rating">السعر:</label>
-                                <input type="number" class="form-control" id="price" name="price" min="1" max="5">
+                                <input type="number" class="form-control" id="price" name="price" min="1">
                             </div>
 
                             <div class="form-group col-6">

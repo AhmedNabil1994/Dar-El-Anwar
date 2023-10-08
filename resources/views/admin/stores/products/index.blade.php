@@ -85,11 +85,12 @@
                             <th>أخر سعر بيع</th>
                             <th>أخر سعر شراء</th>
                             <th>الرصيد الحالي</th>
+                            <th>الاجراءات</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($productReports as $report)
-                            <tr>
+                            <tr class="removable-item">
                                 <td>{{ $report->sku }}</td>
                                 <td>{{ $report->department?->name }}</td>
                                 <td>{{ $report->unit }}</td>
@@ -101,6 +102,17 @@
                                 <td>{{ $report->last_sell_price }}</td>
                                 <td>{{ $report->last_purchase_price }}</td>
                                 <td>{{ $report->current_balance }}</td>
+                                <td>
+                                <div class="action__buttons">
+                                        <a href="{{ route('stores.product.edit', $report) }}" class=" btn-action mr-1 edit" data-toggle="tooltip" title="Edit">
+                                            <i class="fa text-info fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" data-url="{{route('stores.product.delete', $report)}}" class="btn-action delete" title="Delete">
+                                            <i class="fa text-danger fa-trash"></i>
+                                        </a>
+
+                                </div>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

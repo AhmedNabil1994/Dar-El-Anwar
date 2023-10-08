@@ -41,7 +41,7 @@
     <div class="col-md-6">
         <div class="form-group mb-25">
             <label for="id_number">{{trans("website.id_number")}}</label>
-            <input type="number" name="id_number[]" value="{{$parent->national_id}}" placeholder="{{trans('website.id_number')}}" class="form-control"/>
+            <input type="number" name="id_number[]" min="1" max="99999999999999" value="{{$parent->national_id}}" placeholder="{{trans('website.id_number')}}" class="form-control"/>
             @if ($errors->has('id_number'))
                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('id_number') }}</span>
             @endif
@@ -56,15 +56,7 @@
             @endif
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="input__group mb-25">
-            <label>{{trans('website.guardian_email')}} <span class="text-danger">*</span></label>
-            <input type="email" name="guardian_email[]" value="{{$parent->email}}" placeholder="{{ trans('website.guardian_email') }}" class="form-control" />
-            @if ($errors->has('guardian_email'))
-                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_email') }}</span>
-            @endif
-        </div>
-    </div>
+
     <div class="col-md-6">
         <label>{{trans('website.receiving_officer')}} <span class="text-danger">* </span></label>
         <input type="checkbox" name="receiving_officer[]" placeholder="{{ trans('website.receiving_officer') }}" class="input__checkbox" {{$parent->student_pickup_optional ? 'checked' : ''}}/>
@@ -74,10 +66,14 @@
     </div>
     <div class="col-md-6">
         <label>{{trans('website.followup_officer')}} <span class="text-danger">* </span></label>
-        <input type="checkbox" name="followup_officer[]"  placeholder="{{ trans('website.followup_officer') }}" class="input__checkbox" {{$parent->follow_up_person ? 'checked' : ''}}/>
+        <input type="checkbox" name="followup_officer[]"  placeholder="{{ trans('website.followup_officer') }}" data-email="{{$parent->email}}" class="input__checkbox followup_officer" {{$parent->follow_up_person ? 'checked' : ''}}/>
         @if ($errors->has('followup_officer'))
             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('followup_officer') }}</span>
         @endif
+    </div>
+
+    <div class="parent_credintials">
+
     </div>
 
 </div>

@@ -1056,7 +1056,7 @@ ul {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    width: 110px;
+    width: 220px;
     justify-content: space-between;
 }
 
@@ -19177,7 +19177,7 @@ h3 {
     .instructions-page-print {
         display: block;
     }
-    
+
     .instructions-page-print {
         border: none;
     }
@@ -19222,8 +19222,8 @@ h3 {
 .invoice-table thead {
     background-color: white !important;
 }
-.invoice-table table, 
-.invoice-table th, 
+.invoice-table table,
+.invoice-table th,
 .invoice-table td {
     border: 3px solid #a13538;
 }
@@ -19243,7 +19243,7 @@ h3 {
     align-items: end;
 }
 
-#invoice .user, 
+#invoice .user,
 #invoice .details:nth-child(2),
 #invoice .details:nth-child(3) {
     margin-top: 10px;
@@ -19255,14 +19255,14 @@ h3 {
 #invoice .notes span:first-child,
 #invoice .user span:first-child,
 #invoice .details span:first-child {
-    color: #596680;    
+    color: #596680;
 }
 #invoice .notes span:last-child,
 #invoice .user span:last-child,
 #invoice .details span:last-child,
 #invoice .date-num span.parent,
 #invoice .invoice-amount {
-    color: #596680;    
+    color: #596680;
     width: 430px;
     display: inline-block;
     border: 3px solid #a13538;
