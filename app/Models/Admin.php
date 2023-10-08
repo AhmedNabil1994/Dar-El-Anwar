@@ -35,8 +35,11 @@ class Admin extends  Authenticatable
 
     public function rol()
     {
-        $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class);
     }
-
+    public function my_settings()
+    {
+        return $this->hasMany(AdminSetting::class,'user_id');
+    }
 
 }

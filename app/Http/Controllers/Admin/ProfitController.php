@@ -32,7 +32,7 @@ class ProfitController extends Controller
 
         $data['incomes'] = Transaction::where('transaction_type','income')->sum('amount');
         $data['expenses'] = Transaction::where('transaction_type','expense')->sum('amount');
-        $data['profit'] = $data['incomes'] - $data['expenses'];
+        $data['profit'] = $data['incomes'] + $data['expenses'];
         $data['book_sales'] = Transaction::where('transaction_type','income')
                             ->where('product_type','book')->sum('amount');
         $data['subscription_income'] = Transaction::where('transaction_type','income')

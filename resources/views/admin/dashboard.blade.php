@@ -27,6 +27,72 @@
             </div>
             <div class="row">
 
+               <div class="row justify-content-center">
+
+                   @if(get_my_option('absence_icon'))
+                   <div class="col-lg-3 col-md-6 col-sm-6" >
+                       <div class="status__box status__box__v3 bg-style" style="
+                    @if(get_absence_notify() > 0)
+                    box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
+                    @endif
+                    ">
+                           <div class="status__box__img">
+                               <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students.png" alt="total students">
+                           </div>
+                           <div class="status__box__text">
+
+                               <a href="{{ route('absence.index') }}">
+                                   <h1 class="color-purple">{{get_absence_notify()}}</h1>
+                                   <h2>{{ trans('الغياب') }}</h2>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+                   @endif
+                   @if(get_my_option('subs_icon'))
+
+                   <div class="col-lg-3 col-md-6 col-sm-6">
+                       <div class="status__box status__box__v3 bg-style" style="
+                         @if(get_subscription_notify() > 0)
+                             box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
+                        @endif">
+                           <div class="status__box__img">
+                               <img src="{{ asset('admin') }}/images/admin-dashboard-icons/revenue.png" alt="total income">
+                           </div>
+                           <div class="status__box__text">
+
+                               <a href="{{ route('absence.index') }}">
+                                   <h1 class="color-purple">{{get_subscription_notify()}}</h1>
+                                   <h2>{{ trans('الطلبة غير المسددين') }}</h2>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+                       @endif
+                   @if(get_my_option('goals_icon'))
+
+                   <div class="col-lg-3 col-md-6 col-sm-6">
+                       <div class="status__box status__box__v3 bg-style" style="
+                         @if(get_goals_today() > 0)
+                             box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
+                        @endif">
+                           <div class="status__box__img">
+                               <img src="{{ asset('admin') }}/images/admin-dashboard-icons/courses.png" alt="courses">
+                           </div>
+                           <div class="status__box__text">
+
+                               <a href="{{ route('absence.index') }}">
+                                   <h1 class="color-purple">{{get_goals_today()}}</h1>
+                                   <h2>{{ trans('تقييمات اليوم') }}</h2>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+                @endif
+
+                @if(get_my_option('total_students'))
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
@@ -41,7 +107,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
+                @if(get_my_option('total_joining_students'))
 
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
@@ -50,13 +118,79 @@
                         </div>
                         <div class="status__box__text">
 
-                            <a href="{{route('student.index')}}">
+                            <a href="{{route('student.JoiningIndex')}}">
                                 <h1 class="color-purple">{{$total_joining_students}}</h1>
                                 <h2>{{ trans('قيد الالتحاق') }}</h2>
                             </a>
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(get_my_option('new_students'))
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/add-student.png" alt="students per month">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="{{route('student.NewsIndex')}}">
+                                <h1 class="color-blue">{{$new_students}}</h1>
+                                <h2>{{ trans('website.new_students_month') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(get_my_option('excluded_students'))
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/remove-student.png" alt="rejected students">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="{{route('student.ExecludedIndex')}}">
+                                <h1 class="color-green">{{$excluded_students}}</h1>
+                                <h2>{{ trans('website.rejected') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(get_my_option('converted_students'))
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students_trans.png" alt="students transactions">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="{{route('student.index',['filterByJoining'=>4])}}">
+                                <h1 class="color-green">{{$converted_students}}</h1>
+                                <h2>{{ trans('website.students_trans') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(get_my_option('absence_students'))
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="status__box status__box__v3 bg-style">
+                        <div class="status__box__img">
+                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/absent.png" alt="revenue">
+                        </div>
+                        <div class="status__box__text">
+                            <a href="{{route('absence.index')}}">
+                                <h1 class="color-yellow">{{$absence_students}}</h1>
+                                <h2>{{ trans('website.absent_students') }}</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(get_my_option('total_employee'))
 
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
@@ -71,47 +205,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/add-student.png" alt="students per month">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="{{route('student.index',['filterByJoining'=>1])}}">
-                                <h1 class="color-blue">{{$new_students}}</h1>
-                                <h2>{{ trans('website.new_students_month') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endif
+                @if(get_my_option('total_courses'))
 
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/remove-student.png" alt="rejected students">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="{{route('student.index',['filterByJoining'=>'3'])}}">
-                                <h1 class="color-green">{{$excluded_students}}</h1>
-                                <h2>{{ trans('website.rejected') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-{{--                <div class="col-lg-3 col-md-6 col-sm-6">--}}
-{{--                    <div class="status__box status__box__v3 bg-style">--}}
-
-{{--                        <div class="status__box__img">--}}
-{{--                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/instructors.png" alt="instructors">--}}
-{{--                        </div>--}}
-{{--                        <div class="status__box__text">--}}
-{{--                            <a href="{{route('instructor.index')}}">--}}
-{{--                                <h1 class="color-blue">{{$excluded_students}}</h1>--}}
-{{--                                <h2>{{ trans('website.total_instructors') }}</h2>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
@@ -125,6 +221,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(get_my_option('total_best_courses'))
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
                         <div class="status__box__img">
@@ -138,21 +237,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students_trans.png" alt="students transactions">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="{{route('student.index',['filterByJoining'=>4])}}">
-                                <h1 class="color-green">{{$converted_students}}</h1>
-                                <h2>{{ trans('website.students_trans') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endif
 
 
+
+                @if(get_my_option('total_get_money'))
 
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="status__box status__box__v3 bg-style">
@@ -160,7 +249,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/revenue.png" alt="total income">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{ route('subscriptions.students_subscription') }}">
+                            <a href="{{ route('accounts.treasury') }}">
                                 <h1 class="color-yellow"></h1>
                                 <h1 class="color-yellow">{{$total_get_money}}</h1>
                                 <h2>{{ trans('website.total_income') }}</h2>
@@ -168,34 +257,31 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @if(get_my_option('calender'))
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
-                        <div class="status__box__img">
-                            <img src="{{ asset('admin') }}/images/admin-dashboard-icons/absent.png" alt="revenue">
-                        </div>
-                        <div class="status__box__text">
-                            <a href="{{route('absence.index')}}">
-                                <h1 class="color-yellow">{{$absence_students}}</h1>
-                                <h2>{{ trans('website.absent_students') }}</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="status__box status__box__v3 bg-style">
+                    <div class="status__box status__box__v3 bg-style"style="
+                    @if(get_calenders_today() > 0)
+                             box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
+                    @endif
+                    ">
                         <div class="status__box__img">
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/calendar.png" alt="icon">
                         </div>
                         <div class="status__box__text">
                             <a href="{{ route('calender.index') }}">
                                 <h1 class="color-yellow"></h1>
+                                <h1 class="color-yellow">{{get_calenders_today()}}</h1>
                                 <h2>{{ trans('website.calendar') }}</h2>
                             </a>
                         </div>
                     </div>
                 </div>
-
+                @endif
             </div>
+
+            @if(get_my_option('treasury'))
             <div class="row">
                 <div class="col-md-12">
                     <div class="revenue__chart-v2__area bg-style">
@@ -217,6 +303,9 @@
                     </div>
                 </div>
             </div>
+            @endif
+            @if(get_my_option('total_sales'))
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="revenue__chart-v2__area bg-style">
@@ -235,7 +324,8 @@
                     </div>
                 </div>
             </div>
-
+            @endif
+                @if(get_my_option('percentage_of_students'))
             <div class="row">
                 <div class="col-md-12">
                     <div class="revenue__chart-v2__area bg-style">
@@ -252,6 +342,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 
@@ -327,7 +418,7 @@
         // Month
         var options = {
             series: [{
-                name: 'المصروفات',
+                name: 'الايرادات',
                 data: []
             }],
             chart: {
@@ -365,7 +456,7 @@
         // Year
         var options = {
             series: [{
-                name: 'الايرادات',
+                name: 'المصروفات',
                 data: []
             }],
             chart: {
@@ -445,7 +536,7 @@
             }],
             chart: {
                 height: 350,
-                type: 'area'
+                type: 'bar'
             },
             dataLabels: {
                 enabled: true

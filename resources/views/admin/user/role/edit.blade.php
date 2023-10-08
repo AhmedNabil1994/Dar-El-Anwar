@@ -63,12 +63,33 @@
                                 <div class="col-lg-9">
                                     <div class="row text-black">
                                         @foreach($permissions as $permission)
-                                            <div class="col-md-4 mb-2">
-                                                <div class="form-check mb-0 d-flex align-items-center">
-                                                    <input class="form-check-input mx-3" type="checkbox" name="permissions[]" id="permission{{$permission->id}}" value="{{$permission->id}}" @if(in_array($permission->id, $selected_permissions)) checked @endif >
-                                                    <label class="form-check-label m-lg-1 mb-0 color-heading" for="permission{{$permission->id}}">@lang('website.'.ucwords(str_ireplace(["-","_"], " ", $permission->name))) </label>
+
+                                            @if(explode('-',$permission->name)[0] == 'manage')
+                                                <hr>
+                                                <div class="row my-3">
+                                                    <div class="form-check mb-0 d-flex align-items-center">
+                                                        <input class="form-check-input mx-3 collect_permissions"
+                                                               data-name="{{explode('-',$permission->name)[1]}}"
+                                                               type="checkbox" value="{{$permission->id}}"
+                                                               @if(in_array($permission->id, $selected_permissions)) checked @endif>
+                                                        <label class="form-check-label m-lg-1 mb-0 color-heading"
+                                                               for="permission{{$permission->id}}">@lang('website.'.ucwords(str_ireplace(["-","_"], " ", $permission->name))) </label>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <hr>
+                                            @else
+                                                <div class="col-md-5 mb-2">
+                                                    <div class="form-check mb-0 d-flex align-items-center">
+                                                        <input
+                                                            class="form-check-input mx-3 {{explode('-',$permission->name)[1]}}"
+                                                            type="checkbox" name="permissions[]"
+                                                            value="{{$permission->id}}"
+                                                            @if(in_array($permission->id, $selected_permissions)) checked @endif>
+                                                        <label class="form-check-label m-lg-1 mb-0 color-heading"
+                                                               for="permission{{$permission->id}}">@lang('website.'.ucwords(str_ireplace(["-","_"], " ", $permission->name))) </label>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                     @if ($errors->has('permissions'))

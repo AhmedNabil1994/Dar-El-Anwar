@@ -466,7 +466,13 @@
                     type: 'GET',
                     url: $(this).data("url"),
                     success: function (data) {
-                        location.reload();
+                        selector.closest('.removable-item').fadeOut('fast');
+                        Swal.fire({
+                            title: 'Deleted',
+                            html: ' <span style="color:red">Item has been deleted</span> ',
+                            timer: 2000,
+                            icon: 'success'
+                        })
                     }
                 })
             }

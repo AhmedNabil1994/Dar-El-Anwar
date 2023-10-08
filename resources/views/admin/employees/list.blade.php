@@ -153,9 +153,9 @@
                                     </tbody>
                                 </table>
 
-                                            <div class="mt-3">
-                                                {{--    {{$Employees->links()}}--}}
-                                                </div>
+                                <div class="mt-3">
+                                    {{$employees->links()}}
+                                </div>
                             </div>
                         </div>
                 </div>

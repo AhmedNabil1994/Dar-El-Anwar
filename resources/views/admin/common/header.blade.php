@@ -10,7 +10,12 @@
                     </div>
                     <div class="header__navbar__right">
                         <ul class="header__menu">
+                            <li>
+                                <a href="#" class="btn btn-dropdown site-language mx-3" style="width: 100px;color: white" id="dropdownNotification" data-bs-toggle="dropdown" aria-expanded="false">
+                                    زيارة الموقع
+                                </a>
 
+                            </li>
                             <li class="admin-notification-menu position-relative">
                                 <a href="#" class="btn btn-dropdown site-language" id="dropdownNotification" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="position-absolute top-0 start-100 translate-middle
@@ -110,6 +115,8 @@
 
                                 </ul>
                             </li>
+
+
                         </ul>
                     </div>
                 </div>

@@ -40,9 +40,9 @@ class NotificationController extends Controller
         if(Auth::guard('admins')->check()){
             $data['notification'] = Notification::find($id);
             $data['notification']->update(['is_seen'=>'yes']);
-            $data['notifications'] = Notification::orderBy('id','DESC')
+            $data['notifications'] = Notification::orderBy('created_at','DESC')
                 ->where('user_id', Auth::id())
-                ->get();
+                ->limit(5)->get();
         }
 
         if(Auth::guard('students')->check()){

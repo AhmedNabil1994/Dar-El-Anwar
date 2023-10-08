@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClassRoom;
+use App\Models\Department;
 use App\Models\Level;
+use App\Models\Subject;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 
@@ -33,7 +35,8 @@ class ClassRoomController extends Controller
     public function create()
     {
         //
-        $data['levels'] = Level::whereStatus(1)->get();
+        $data['departs'] = Department::whereStatus(1)->get();
+        $data['subjects'] = Subject::all();
         return view('admin.class_room.create',$data);
     }
 
@@ -48,7 +51,7 @@ class ClassRoomController extends Controller
         //
         ClassRoom::create([
             'name'=>$request->name,
-            'level_id'=>$request->level_id,
+            'department_id'=>$request->dept_id,
             'status'=>1,
         ]);
         return redirect()->route('class_room.index')->with('success','تم اضافة الفصل');
@@ -74,7 +77,8 @@ class ClassRoomController extends Controller
     public function edit(ClassRoom $class)
     {
         //
-        $data['levels'] = Level::whereStatus(1)->get();
+        $data['departs'] = Department::whereStatus(1)->get();
+        $data['subjects'] = Subject::all();
         return view('admin.class_room.edit',compact('class'),$data);
     }
 
@@ -90,8 +94,10 @@ class ClassRoomController extends Controller
         //
         $class->update([
             'name'=>$request->name,
+            'department_id'=>$request->dept_id,
             'status'=>$request->status?1:0,
         ]);
+        $class->class_subjects()->sync($request->subject_id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     );
         return redirect()->route('class_room.index')->with('success','تم تعديل الفصل');
     }
 

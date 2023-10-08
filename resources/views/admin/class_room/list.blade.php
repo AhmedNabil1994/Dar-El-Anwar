@@ -34,15 +34,18 @@
                         @can('add-class_room')
                         <div class="item-title d-flex justify-content-between align-items-end">
                             <h2>{{ trans('قائمة الفصول') }}</h2>
-                            <a href="{{ route('class_room.create') }}" class="btn buttons-style btn-sm">
+                            @can('add-class_room')
+                                <a href="{{ route('class_room.create') }}" class="btn buttons-style btn-sm">
                                     <i class="fa fa-plus"></i> {{ trans('اضف فصل') }}
-                            </a>
+                                </a>
+                            @endcan
                         </div>
                         @endcan
 
 
 
                         <div class="row m-3 justify-content-end">
+
                             <!-- @can('add-class_room')
                             <div class="col-md-3">
                                 <a href="{{ route('class_room.create') }}" class="btn buttons-style btn-sm">
@@ -51,7 +54,8 @@
                             </div>
                             @endcan -->
 
-                    
+
+
                             <form method="GET" class="row align-items-end" action="{{ route('admins.index') }}">
                                 <div class="col-md-3">
                                     <label class="form-label">بحث</label>
@@ -79,7 +83,7 @@
                                     <tr class="removable-item">
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$class->name}}</td>
-                                        <td>{{$class->level?->name}}</td>
+                                        <td>{{$class->department?->name}}</td>
                                         <td>
                                             <div class="action__buttons">
                                                 @can('edit-class_room')

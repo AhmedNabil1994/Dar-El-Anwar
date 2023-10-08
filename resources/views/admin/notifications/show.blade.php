@@ -33,7 +33,7 @@
                                                             </div>
 
 
-                                                            <div class="flex-grow-1 ms-2"  style="text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden">
+                                                            <div class="flex-grow-1 ms-2"  style="text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;width: 20px">
                                                                <p class="font-13 mb-0">{{ __($notify->text) }}</p>
                                                                 <div class="font-11 color-gray mt-1">{{$notify->created_at->diffForHumans()}}</div>
                                                             </div>

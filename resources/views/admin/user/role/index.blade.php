@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="customers__area__header bg-style mb-30"> 
+                    <div class="customers__area__header bg-style mb-30">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
@@ -30,7 +30,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title btn-title-container">
                             <h2>{{trans('website.roles')}}</h2>
-                            @can('add-role')
+                            @can('create-role')
                                 <a href="{{route('role.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('website.addRole')}} </a>
                             @endcanany
                         </div>

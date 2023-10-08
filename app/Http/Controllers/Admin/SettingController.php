@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\TestMail;
+use App\Models\AdminSetting;
 use App\Models\Currency;
 use App\Models\FaqQuestion;
 use App\Models\InstructorFeature;
@@ -35,13 +36,9 @@ class SettingController extends Controller
         $this->metaModel = new Crud($meta);
     }
 
-    public function GeneralSetting()
+    public function index()
     {
-        if (!Auth::user()->can('global_setting')) {
-            abort('403');
-        } // end permission checking
-
-        $data['title'] = 'General Setting';
+        $data['title'] = 'الاعدادات';
         $data['navApplicationSettingParentActiveClass'] = 'mm-active';
         $data['subNavGlobalSettingsActiveClass'] = 'mm-active';
         $data['generalSettingsActiveClass'] = 'active';
@@ -51,6 +48,24 @@ class SettingController extends Controller
         $data['default_language'] = Language::where('default_language', 'on')->first();
 
         return view('admin.application_settings.general.general-settings', $data);
+    }
+
+    public function icons_update(Request $request)
+    {
+        foreach ($request->type as $type) {
+            $setting = Auth::user()->my_settings?->where('type',$type)?->first();
+            if($setting)
+                $setting->update([
+                    'value' => $request->$type,
+                ]);
+            else
+                AdminSetting::create([
+                    'user_id' => Auth::id(),
+                    'type' => $type,
+                    'value' => $request->$type,
+                ]);
+        }
+        return redirect()->back();
     }
 
         public function GeneralSettingUpdate(Request $request)
@@ -236,7 +251,11 @@ class SettingController extends Controller
         Artisan::call('optimize:clear');
         return redirect()->back();
     }
+    public function icons_index(Request $request)
+    {
 
+        return view('admin.application_settings.general.icons');
+    }
     public function siteShareContent()
     {
         $data['title'] = 'Site Share Content Setting';

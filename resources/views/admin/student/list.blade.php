@@ -1,4 +1,13 @@
 @extends('layouts.admin')
+@push('style')
+    <style>
+        @media print {
+            .notprint {
+                display: none;
+            }
+        }
+    </style>
+@endpush
 
 @section('content')
     <!-- Page content area start -->
@@ -7,101 +16,118 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area__header bg-style mb-30">
-                    <div class="breadcrumb__content">
-                        <div class="breadcrumb__content__left">
-                            <div class="breadcrumb__title">
-                                <h2>{{ __('جميع الطلاب') }}</h2>
+                        <div class="breadcrumb__content">
+                            <div class="breadcrumb__content__left">
+                                <div class="breadcrumb__title">
+                                    <h2>{{ __('جميع الطلاب') }}</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="breadcrumb__content__right">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item"><a href="{{route('page.index')}}">{{ __('الطلاب ') }}</a></li>
-                                </ul>
-                            </nav>
+                            <div class="breadcrumb__content__right">
+                                <nav aria-label="breadcrumb">
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a
+                                                href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a
+                                                href="{{route('page.index')}}">{{ __('الطلاب ') }}</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
             <div class="customers__area bg-style mb-30">
-            <form method="get" action="{{route('student.index')}}" class="row">
-                <div class="row">
-                    <h1>{{trans("website.filter")}}</h1>
-                </div>
-                <div class="text-end mb-3 d-flex justify-content-start">
-                    <button type="button" class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل لملف إكسيل</button>
-                    <button class="btn btn-secondary" id="printTable" type= "button">قم بطباعة الجدول</button>
+                <form method="get" action="{{route('student.index')}}" class="row">
+
+                    <div class="text-end mb-3 d-flex justify-content-start">
+                        <button type="button" class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل
+                            لملف إكسيل
+                        </button>
+                        <button class="btn btn-secondary" id="printTable" type="button">قم بطباعة الجدول</button>
 
 
-                </div>
+                    </div>
+                    <div class="row">
+                        <h1>{{trans("website.filter")}}</h1>
+                    </div>
+                    <!-- <div class="form_container"> -->
+                    <div class="col-md-3 m-3">
+                        <label for="filterByLevel">{{trans("website.department")}}:</label>
+                        <select class="form-control" name="filterByLevel">
+                            <option value="">{{trans("website.all")}}</option>
+                            @foreach($departs as $depart)
+                                <option value="{{$depart->id}}"
+                                    {{request('filterByLevel') == $depart->id? 'selected' : ''}}
+                                >{{$depart->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @if(request()->routeIs('student.index'))
+                        <div class="col-md-3 m-3">
+                            <label for="filterByJoining">{{trans("website.status")}}:</label>
+                            <select class="form-control" name="filterByJoining">
+                                <option value="">{{trans("website.all")}}</option>
+                                <option
+                                    value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>{{trans("website.active")}}</option>
+                                <option
+                                    value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>{{trans("website.converted")}}</option>
+                            </select>
+                        </div>
+                    @endif
 
-                <!-- <div class="form_container"> -->
-                <div class="col-md-3 m-3">
-                    <label for="filterByLevel">{{trans("website.level")}}:</label>
-                    <select class="form-control" name="filterByLevel">
-                        <option value="">{{trans("website.all")}}</option>
-                        @foreach($levels as $level)
-                            <option value="{{$level->id}}">{{$level->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-3 m-3">
-                    <label for="filterByJoining">{{trans("website.status")}}:</label>
-                    <select class="form-control" name="filterByJoining">
-                        <option value="">{{trans("website.all")}}</option>
-                        <option value="1" {{request('filterByJoining') == 1? 'selected' : ''}}>{{trans("website.active")}}</option>
-                        <option value="0" {{request('filterByJoining') === '0'? 'selected' : ''}}>{{trans("website.suspend")}}</option>
-                        <option value="3" {{request('filterByJoining') == 3? 'selected' : ''}}>{{trans("website.excluded")}}</option>
-                        <option value="4" {{request('filterByJoining') == 4? 'selected' : ''}}>{{trans("website.converted")}}</option>
-                    </select>
-                </div>
-                <div class="col-md-3 m-3">
-                    <label for="filterByGender">{{trans("website.gender")}}:</label>
-                    <select class="form-control" name="filterByGender">
-                        <option value="">{{trans("website.both")}}</option>
-                        <option value="1" {{request('filterByGender') == 1? 'selected' : ''}}>{{trans("website.male")}}</option>
-                        <option value="2" {{request('filterByGender') == 2? 'selected' : ''}}>{{trans("website.female")}}</option>
-                    </select>
-                </div>
-                <div class="col-md-1 m-3">
-                    <label for="filterByGender">{{trans("website.count")}} : </label>
-                    <input class="form-control" value="{{$count}}" disabled>
-                </div>
-                <div class="col-md-3 m-3">
-                    <label for="filterByPeriod">{{trans("website.period")}}:</label>
-                    <select class="form-control" name="filterByPeriod">
-                        <option value="">{{trans("website.both")}}</option>
-                        <option value="1" {{request('filterByPeriod') == 1? 'selected' : ''}}>{{trans('website.morning')}}</option>
-                        <option value="2" {{request('filterByPeriod') == 2? 'selected' : ''}}>{{trans('website.evining')}}</option>
-                    </select>
-                </div>
-                <div class="col-md-3 m-3">
-                    <label for="filterByClass">{{trans("website.class")}}:</label>
-                    <select class="form-control" name="filterByClass">
-                        <option value="">{{trans("website.all")}}</option>
-                        @foreach($class_rooms as $class_room)
-                            <option value="{{$class_room->id}}" {{$class_room->id == request('filterByClass')? 'selected' : ''}}>{{$class_room->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-3 m-3">
-                    <label for="filterByBranch">{{trans("website.branch")}}:</label>
-                    <select class="form-control" name="filterByBranch">
-                        <option value="">{{trans("website.all")}}</option>
-                        @foreach($branches as $branch)
-                            <option value="{{$branch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="text-end mb-3 d-flex justify-content-start">
-                    <button type="submit" id="btn_filter" class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
-                    <button class="btn btn-secondary btn-sm ms-3" id="printButton">{{trans("website.print")}}</button>
-                </div>
-                <!-- </div> -->
-            </form>
-        </div>
+                    <div class="col-md-3 m-3">
+                        <label for="filterByGender">{{trans("website.gender")}}:</label>
+                        <select class="form-control" name="filterByGender">
+                            <option value="">{{trans("website.both")}}</option>
+                            <option
+                                value="1" {{request('filterByGender') == 1? 'selected' : ''}}>{{trans("website.male")}}</option>
+                            <option
+                                value="2" {{request('filterByGender') == 2? 'selected' : ''}}>{{trans("website.female")}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 m-3">
+                        <label for="filterByGender">{{trans("website.count")}} : </label>
+                        <input class="form-control" value="{{$count}}" disabled>
+                    </div>
+                    <div class="col-md-3 m-3">
+                        <label for="filterByPeriod">{{trans("website.period")}}:</label>
+                        <select class="form-control" name="filterByPeriod">
+                            <option value="">{{trans("website.both")}}</option>
+                            <option
+                                value="1" {{request('filterByPeriod') == 1? 'selected' : ''}}>{{trans('website.morning')}}</option>
+                            <option
+                                value="2" {{request('filterByPeriod') == 2? 'selected' : ''}}>{{trans('website.evining')}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 m-3">
+                        <label for="filterByClass">{{trans("website.class")}}:</label>
+                        <select class="form-control" name="filterByClass">
+                            <option value="">{{trans("website.all")}}</option>
+                            @foreach($class_rooms as $class_room)
+                                <option
+                                    value="{{$class_room->id}}" {{$class_room->id == request('filterByClass')? 'selected' : ''}}>{{$class_room->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3 m-3">
+                        <label for="filterByBranch">{{trans("website.branch")}}:</label>
+                        <select class="form-control" name="filterByBranch">
+                            <option value="">{{trans("website.all")}}</option>
+                            @foreach($branches as $branch)
+                                <option
+                                    value="{{$branch->id}}" {{$branch->id == request('filterByBranch')? 'selected' : ''}}>{{$branch->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="text-end mb-3 d-flex justify-content-start">
+                        <button type="submit" id="btn_filter"
+                                class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
+
+                    </div>
+                    <!-- </div> -->
+                </form>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -109,9 +135,10 @@
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
                         </div>
-                        <div class="customers__table print-table all-students" style="overflow: auto;">
-                            <table  id="table1" class="row-border data-table-filter table-style table table-bordered table-striped" >
-                                <thead >
+                        <div class="customers__table  all-students" style="overflow: auto;">
+                            <table id="table1"
+                                   class="print-table row-border data-table-filter table-style table table-bordered table-striped">
+                                <thead>
                                 <tr>
                                     <th>{{ trans('website.code') }}</th>
                                     <th>{{ trans('website.name') }}</th>
@@ -124,12 +151,11 @@
                                     <th>{{ trans('website.phone_number') }}</th>
                                     <th>{{ trans('website.gender') }}</th>
                                     <th>{{ trans('website.actions') }}</th>
-                                    <th>{{ trans('website.archived') }}</th>
-                                    <th>{{ trans('website.under_enrollment') }}</th>
-                                    <th>{{ trans('website.subscription') }}</th>
-                                    <th>{{ trans('website.notes') }}</th>
-                                    <th>{{ trans('website.meals') }}</th>
-                                    <th>{{ trans('website.bills') }}</th>
+                                    <th class="notprint">{{ trans('الحالة') }}</th>
+                                    <th class="notprint">{{ trans('website.subscription') }}</th>
+                                    <th class="notprint">{{ trans('website.notes') }}</th>
+                                    <th class="notprint">{{ trans('website.meals') }}</th>
+                                    <th class="notprint">{{ trans('website.bills') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -140,67 +166,81 @@
                                         <td>{{ $student->branch->name }}</td>
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->birthdate }}</td>
-                                        <td>{{ $student->level->first()?->name }}</td>
-                                        <td>{{ $student->class_room?->name }}</td>
+                                        <td> @foreach($student->dept as $dept)
+                                                {{ $dept->name }}
+                                            @endforeach
+                                            </td>
+                                        <td>
+                                            @foreach($student->class_room as $classroom)
+                                                {{ $classroom->name }}
+                                            @endforeach
+                                        </td>
                                         <td>
                                             @if($student->period === 1)
-                                                {{ __('Morning') }}
+                                                {{ __('صباحي') }}
                                             @elseif($student->period === 2)
-                                                {{ __('Evening') }}
+                                                {{ __('مسائي') }}
                                             @else
-                                                {{ __('Both') }}
+                                                {{ __('كلاهما') }}
                                             @endif
                                         </td>
                                         <td>{{ $student->father()?->phone_number }}</td>
                                         <td>{{ $student->gender === 1 ? trans('website.male') : trans('website.female') }}</td>
 
-                                        <td>
+                                        <td class="notprint">
                                             <div class="action__buttons">
                                                 {{--<a href="{{route('student.view', [$student->id])}}" class="btn btn-info" title="View Details">--}}
                                                 {{--<i class="fa fa-eye"></i> View--}}
                                                 {{--</a>--}}
-                                                <a  href="{{route('student.edit', [$student->id])}}" class="btn  me-2" title="Edit Details">
+                                                <a href="{{route('student.edit', [$student->id])}}" class="btn  me-2"
+                                                   title="Edit Details">
                                                     <!-- <i class="fa fa-edit"></i> -->
-                                                    <img src="{{ asset('admin/images/icons/edit-2.svg') }}" alt="{{ __('edit') }}">
+                                                    <img src="{{ asset('admin/images/icons/edit-2.svg') }}"
+                                                         alt="{{ __('edit') }}">
                                                 </a>
-                                                <button type="button" class="btn  deleteItem" data-formid="delete_row_form_{{$student->id}}" title="Delete">
+                                                <button type="button" class="btn  deleteItem"
+                                                        data-formid="delete_row_form_{{$student->id}}" title="Delete">
                                                     <!-- <i class="fa fa-trash"></i> -->
-                                                    <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
+                                                    <img src="{{ asset('admin/images/icons/trash-2.svg') }}"
+                                                         alt="{{ __('Delete') }}">
                                                 </button>
-                                                <form action="{{route('student.delete', [$student->id])}}" method="post" id="delete_row_form_{{ $student->id }}">
+                                                <form action="{{route('student.delete', [$student->id])}}" method="post"
+                                                      id="delete_row_form_{{ $student->id }}">
                                                     {{ method_field('DELETE') }}
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 </form>
                                             </div>
                                         </td>
-                                        <td>
-                                            <a href="#" class="archeived image-container" data-id="{{$student->id}}">
-                                                <img  src="{{asset('admin/images/students/archived.png')}}" alt="edit">
-                                            </a>
+                                        <td class="notprint">
+                                            <select class="student_status" data-url="{{route('student.change_status',$student->id)}}">
+                                                <option value="1" @if($student->status == 1) selected @endif>نشط
+                                                </option>
+                                                <option value="3" @if($student->status == 3) selected @endif>مستبعد
+                                                </option>
+                                                <option value="4" @if($student->status == 4) selected @endif>محول
+                                                </option>
+                                            </select>
                                         </td>
-                                        <td>
-                                            <a href="#" class="image-container">
-                                                @if($student->status == 0)
-                                                    <img  src="{{asset('admin/images/students/under-enrollment.png')}}" alt="edit">
-                                                @endif
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{route('subscriptions.index',['child_name'=>[$student->name]])}}" class ="image-container">
-                                                <img  src="{{asset('admin/images/students/subscription.png')}}" alt="edit">
+                                        <td class="notprint">
+                                            <a href="{{route('subscriptions.index',['child_name'=>[$student->name]])}}"
+                                               class="image-container">
+                                                <img src="{{asset('admin/images/students/subscription.png')}}"
+                                                     alt="edit">
                                             </a>
                                         </td>
                                         <td>
                                             {{$student->notes}}
                                         </td>
-                                        <td>
-                                            <a href="{{route('admin.assignments.student_duties',$student->id)}}" class="image-container">
-                                                <img  src="{{asset('admin/images/students/meals.png')}}" alt="edit">
+                                        <td class="notprint">
+                                            <a href="{{route('admin.assignments.student_duties',$student->id)}}"
+                                               class="image-container">
+                                                <img src="{{asset('admin/images/students/meals.png')}}" alt="edit">
                                             </a>
                                         </td>
-                                        <td>
-                                            <a href="{{route('invoices.index',['child_name'=>$student->name])}}" class="image-container">
-                                                <img  src="{{asset('admin/images/students/bills.png')}}" alt="edit">
+                                        <td class="notprint">
+                                            <a href="{{route('invoices.index',['child_name'=>$student->name])}}"
+                                               class="image-container">
+                                                <img src="{{asset('admin/images/students/bills.png')}}" alt="edit">
                                             </a>
                                         </td>
                                     </tr>
@@ -210,7 +250,7 @@
                             </table>
 
                             <div class="mt-3">
-{{--                                {{$students->links()}}--}}
+                                {{--                                {{$students->links()}}--}}
                             </div>
                         </div>
                     </div>
@@ -286,12 +326,12 @@
 
     </script>
     <script>
-        document.getElementById('printButton').addEventListener('click', function() {
-                window.print();
+        document.getElementById('printButton').addEventListener('click', function () {
+            window.print();
         });
     </script>
     <script>
-        $('.archeived').on('click',function (){
+        $('.archeived').on('click', function () {
             var student_id = $(this).data('id');
             $.ajax({
                 type: 'GET',
@@ -309,26 +349,92 @@
         // Function to export the HTML table to an Excel file
         function exportToExcel() {
             const table = document.getElementById('table1'); // Replace with your table ID
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
+            const wb = XLSX.utils.table_to_book(table, {sheet: "Sheet 1"});
             XLSX.writeFile(wb, 'exported-data.xlsx');
         }
 
         // Function to print the Excel file
     </script>
     <script>
-        $('#printTable').on('click', function() {
-            console.log('test')
-            const table = document.getElementById('table1'); // Replace with your table ID
-            const newWin = window.open('','_blank');
+        $(document).ready(function () {
+            $("#printTable").on("click", function printDiv() {
+                console.log("clicked")
+                $(".print-table").printThis({
+                    importStyle: true,
+                    loadCSS: "./main.css",
+                })
+            })
+        })
+    </script>
+    <script>
+        $('.student_status').on('change', function(){
+            const selector = $(this);
+            if (selector.val() == 3)
+            {
+                Swal.fire({
+                    title: 'هل متأكد من استبعاد هذا الطالب',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'نعم استبعده!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: $(this).data("url"),
+                            data: {
+                                status: selector.val(),
+                            },
+                            success: function (data) {
+                                selector.closest('.removable-item').fadeOut('fast');
+                                Swal.fire({
+                                    title: 'تم استبعاده',
+                                    html: ' <span style="color:red">تم استبعاده</span> ',
+                                    timer: 2000,
+                                    icon: 'success'
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+            else if(selector.val() == 4){
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).data("url"),
+                    data: {
+                        status: selector.val(),
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            title: 'تم نقله',
+                            html: ' <span style="color:green">تم نقله</span> ',
+                            timer: 2000,
+                            icon: 'success'
+                        })
+                    }
+                })
+            }
+            else if(selector.val() == 1){
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).data("url"),
+                    data: {
+                        status: selector.val(),
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            title: 'تم تنشيطه',
+                            html: ' <span style="color:green">تم تنشيطه</span> ',
+                            timer: 2000,
+                            icon: 'success'
+                        })
+                    }
+                })
+            }
 
-            newWin.document.write(table.outerHTML);
-            newWin.document.close();
-            newWin.print();
-            newWin.onafterprint = function() {
-                newWin.close();
-            };
         });
     </script>
-
 
 @endpush

@@ -99,10 +99,17 @@ class StoreController extends Controller
         return view('admin.stores.create',$data);
     }
 
+    public function edit(Request $request,Product $product)
+    {
+        $data['departs'] = Department::where('status',1)->get();
+        return view('admin.stores.edit',$data,compact('product'));
+    }
+
     public function store(Request $request)
     {
         $data = $request->except(['_token','image']);
         $data['user_id'] = Auth::user()->id;
+
         $product = Product::create($data);
         if($request->hasFile('image'))
         {
@@ -136,6 +143,46 @@ class StoreController extends Controller
         return redirect()->route('stores.product.index');
     }
 
+
+    public function update(Request $request,Product $product)
+    {
+        $data = $request->except(['_token','image']);
+        $data['user_id'] = Auth::user()->id;
+
+        $product->update($data);
+        if($request->hasFile('image'))
+        {
+            $upload = new Upload;
+            $upload->file_original_name = null;
+            $arr = explode('.', $request->file('image')->getClientOriginalName());
+
+            for($i=0; $i < count($arr)-1; $i++){
+                if($i == 0){
+                    $upload->file_original_name .= $arr[$i];
+                }
+                else{
+                    $upload->file_original_name .= ".".$arr[$i];
+                }
+            }
+
+            $upload->file_name = $request->file('image')->store('uploads/products','public');
+
+            $upload->user_id = $product->id;
+            $upload->extension = $request->file('image')->getClientOriginalExtension();
+            $upload->type = 'image';
+            $upload->file_size = $request->file('image')->getSize();
+            $upload->save();
+
+            $product->update([
+                'image' => $upload->id,
+            ]);
+        }
+
+
+        return redirect()->route('stores.product.index');
+    }
+
+
     public function indexProducts(Request $request)
     {
         $date_to = $request->dateTo;
@@ -157,7 +204,7 @@ class StoreController extends Controller
     }
     public function invoiceSalesProduct(Request $request)
     {
-        $data['products'] = Product::where('status',1)->get();
+        $data['products'] = Product::has('stock')->where('status',1)->get();
         return view('admin.stores.products.inovices.sales',$data);
     }
 
@@ -192,10 +239,10 @@ class StoreController extends Controller
 
 
         Transaction::create([
-            'transaction_type' => 'expense',
+            'transaction_type' => 'income',
             'trans_no' => rand(0000,9999),
             'branch_id' => Auth::user()->branch_id,
-            'date' => Carbon::today(),
+            'date' => Carbon::now(),
             'account' => $request['supplier_name'],
             'last_amount' => $last_amount,
             'amount' => $total,
@@ -259,13 +306,13 @@ class StoreController extends Controller
         $last_amount = Transaction::orderBy('id','DESC')->first()->last_amount;
 
         Transaction::create([
-            'transaction_type' => 'income',
+            'transaction_type' => 'expense',
             'trans_no' => rand(0000,9999),
             'branch_id' => Auth::user()->branch_id,
-            'date' => Carbon::today(),
+            'date' => Carbon::now(),
             'account' => $student->name ?? $request->client_name,
             'last_amount' => $last_amount,
-            'amount' => $total,
+            'amount' => -$total,
             'user_id' => Auth::user()->id,
             'description' => 'بيع منتجات',
             'name' => 'بيع منتجات',
@@ -276,6 +323,12 @@ class StoreController extends Controller
 
         // Redirect to a success page or perform any other necessary actions
         return redirect()->back()->with('success', 'تم إنشاء فاتورة مبيعات بنجاح.');
+    }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+        return redirect()->back();
     }
 
 

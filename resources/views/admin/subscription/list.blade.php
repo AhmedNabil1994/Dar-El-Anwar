@@ -39,21 +39,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area__header bg-style mb-30">
-                    <div class="breadcrumb__content">
-                        <div class="breadcrumb__content__left">
-                            <div class="breadcrumb__title">
-                                <h2>{{ __('الاشتراكات') }}</h2>
+                        <div class="breadcrumb__content">
+                            <div class="breadcrumb__content__left">
+                                <div class="breadcrumb__title">
+                                    <h2>{{ __('الاشتراكات') }}</h2>
+                                </div>
+                            </div>
+                            <div class="breadcrumb__content__right">
+                                <nav aria-label="breadcrumb">
+                                    <ul class="breadcrumb">
+                                        <li class="breadcrumb-item"><a
+                                                href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a>
+                                        </li>
+                                        <li class="breadcrumb-item active"
+                                            aria-current="page">{{ __('الاشتراكات') }}</li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
-                        <div class="breadcrumb__content__right">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ __('الاشتراكات') }}</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -67,178 +70,169 @@
                             </a>
                         </div>
                         <div>
-                          <form method="get" action="{{ route('subscriptions.index') }}" class="row align-items-end justify-content-start mb-3">
+                            <form method="get" action="{{ route('subscriptions.index') }}"
+                                  class="row align-items-end justify-content-start mb-3">
 
-                              <div class="col-md-3">
-                                  <label class="form-label">اسم الطفل</label>
-                                      <select multiple class="form-select" name="child_name[]">
-                                          <option value="">اختر اسم الطفل</option>
-                                          @foreach($students as $student)
-                                                <option value="{{$student->name}}"
+                                <div class="col-md-3">
+                                    <label class="form-label">اسم الطفل</label>
+                                    <select multiple class="form-select" name="child_name[]">
+                                        @foreach($students as $student)
+                                            <option value="{{$student->name}}"
                                                 {{request('child_name')?in_array($student->name,request('child_name'))?'selected':'':''}}
-                                                >{{$student->name}}</option>
-                                          @endforeach
-                                      </select>
-                              </div>
-                              <div class="col-md-3">
-                                  <label class="form-label">اسم الاشتراك</label>
-                                  <select multiple class="form-select" name="subscription_name[]">
-                                      <option value="">اختر اشتراك</option>
-                                      @foreach($subscription_names as $subscription_name)
+                                            >{{$student->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">اسم الاشتراك</label>
+                                    <select multiple class="form-select" name="subscription_name[]">
+                                        @foreach($subscription_names as $subscription_name)
                                             <option value="{{$subscription_name->name}}"
-                                            {{request('subscription_name')?in_array($subscription_name->name,request('subscription_name'))?'selected':'':''}}
+                                                {{request('subscription_name')?in_array($subscription_name->name,request('subscription_name'))?'selected':'':''}}
                                             >{{$subscription_name->name}}</option>
-                                      @endforeach
-                                  </select>
+                                        @endforeach
+                                    </select>
 
-                              </div>
-                            <div class="col-md-3">
-                                  <button class="btn buttons-style" type="submit">
-                                      <i class="fa fa-filter"></i>
-                                  </button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn buttons-style" type="submit">
+                                        <i class="fa fa-filter"></i>
+                                    </button>
 
-                            </div>
-                        </form>
-                    </div>
-                    </div>
-                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="customers__table table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl table-responsive-xxl">
-                            <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
-
-                                <thead>
-                                <tr>
-                                    <th>كود الاشتراك</th>
-                                    <th>اسم الاشتراك</th>
-                                    <th>قيمة الاشتراك</th>
-                                    <th>العدد</th>
-                                    <th>الطلبة المسجلين</th>
-                                    <th>الإجراءات</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($subscriptions as $subscription)
-                                    <tr>
-                                        <td>{{$subscription->id}}</td>
-                                        <td>{{$subscription->name}}</td>
-                                        <td>{{$subscription->value}}</td>
-                                        <td>
-                                            <!-- Add subscription-related actions/buttons here -->
-                                            {{$subscription?->students->count()}}
-                                        </td>
-                                        <td>
-                                            <div class="action__buttons">
-                                                <a class="openModalBtn2" class="btn-action mr-1 "
-                                                    data-subscription="{{ $subscription }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="action__buttons">
-                                                {{--                                                @can('edit-admins', 'admins')--}}
-
-                                                <a class="btn-action mr-1 edit" data-toggle="tooltip" title="Edit" data-subscription="{{ $subscription }}">
-                                                    <img src="{{ asset('admin/images/icons/edit-2.svg') }}" alt="edit">
-                                                </a>
-                                                {{--                                                @endcan--}}
-
-                                                {{--                                                    @can('delete-admins', 'admins')--}}
-                                                <form action="{{ route('subscriptions.destroy',$subscription) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-action delete"  title="{{ __('Delete') }}">
-                                                        <img src="{{ asset('admin/images/icons/trash-2.svg') }}" alt="{{ __('Delete') }}">
-                                                    </button>
-                                                </form>
-                                                {{--                                                @endcan--}}
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal to display registered student names -->
-                                    <div class="modal fade" id="studentNamesModal{{$subscription->id}}" tabindex="-1" role="dialog"
-                                         aria-labelledby="studentNamesModalLabel{{$subscription->id}}" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="studentNamesModalLabel{{$subscription->id}}">Registered Students</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="customers__table" style="overflow: auto">
+                <table id="" class="row-border data-table-filter table-style table table-bordered table-striped">
+                    <thead style="background-color: #50bfa5;">
+                    <tr>
+                        <th>كود الاشتراك</th>
+                        <th>اسم الاشتراك</th>
+                        <th>قيمة الاشتراك</th>
+                        <th>العدد</th>
+                        <th>الطلبة المسجلين</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($subscriptions as $subscription)
+                        <tr class="removable-item">
+                            <td>{{$subscription->code}}</td>
+                            <td>{{$subscription->name}}</td>
+                            <td>{{$subscription->value}}</td>
+                            <td>
+                                <!-- Add subscription-related actions/buttons here -->
+                                {{$subscription?->students->count()}}
+                            </td>
+                            <td>
+                                <div class="action__buttons">
+                                    <a class="openModalBtn2" class="btn-action mr-1"
+                                       data-subscription="{{ $subscription }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action__buttons">
+                                <a class="btn-action mr-1 edit" data-toggle="tooltip" title="Edit"
+                                   data-subscription="{{ $subscription }}">
+                                    <img src="{{ asset('admin/images/icons/edit-2.svg') }}" alt="edit">
+                                </a>
+                                <a href="javascript:void(0);" class="btn-action delete"
+                                   data-url="{{ route('subscriptions.destroy',$subscription) }}" title="Delete">
+                                    <i class="text-danger fa fa-trash"></i>
+                                </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Modal to display registered student names -->
+                        <div class="modal fade" id="studentNamesModal{{$subscription->id}}" tabindex="-1" role="dialog"
+                             aria-labelledby="studentNamesModalLabel{{$subscription->id}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="studentNamesModalLabel{{$subscription->id}}">
+                                            Registered Students</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="mt-3">
-                                {{$subscriptions->links()}}
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div id="modal2" class="modal2">
-                <div class="modal-content">
-                    <!-- Content of the modal goes here -->
-                    <div class="container">
-                        <h2 class="mb-3">الطلبة المسجلين</h2>
-                        <div class="row justify-content-content" id="data1">
-
-                        </div>
-
-                            <a id="closeModalBtn2" class="btn btn-primary">الغاء</a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <div class="container">
-                        <h2 class="mb-3">إضافة اشتراك</h2>
-                        <form method="POST" id="editForm" action="{{route('subscriptions.store')}}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">اسم الاشتراك</label>
-                                <input type="text" name="name" id="name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="value">القيمة</label>
-                                <input type="number" name="value" id="value" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="value">الدفعات</label>
-                                <input type="number" name="batch" id="batch" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="department_id">القسم</label>
-                                <select name="department_id" id="department_id" class="form-select" required>
-                                    @foreach($departs as $depart)
-                                        <option value="{{$depart->id}}">{{$depart->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="subject_id">المادة</label>
-                                <select name="subject_id" id="subject_id" class="form-select" required>
-                                    @foreach($subjects as $subject)
-                                        <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn buttons-style">إضافة</button>
-                            <a id="closeModalBtn" class="btn btn-secondary">الغاء</a>
-                        </form>
-                    </div>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="mt-3">
+                    {{$subscriptions->links()}}
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+
+
+
+    <div id="modal2" class="modal2">
+        <div class="modal-content">
+            <!-- Content of the modal goes here -->
+            <div class="container">
+                <h2 class="mb-3">الطلبة المسجلين</h2>
+                <div class="row justify-content-content" id="data1">
+
+                </div>
+
+                <a id="closeModalBtn2" class="btn btn-primary">الغاء</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="container">
+                <h2 class="mb-3">إضافة اشتراك</h2>
+                <form method="POST" id="editForm" action="{{route('subscriptions.store')}}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="department_id">القسم</label>
+                        <select name="department_id" id="department_id" class="form-select" required>
+                            @foreach($departs as $depart)
+                                <option value="{{$depart->id}}">{{$depart->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="subject_id">المادة</label>
+                        <select name="subject_id" id="subject_id" class="form-select" required>
+                            @foreach($subjects as $subject)
+                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">اسم الاشتراك</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="value">القيمة</label>
+                        <input type="number" name="value" id="value" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="value">الدفعات</label>
+                        <input type="number" name="batch" id="batch" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn buttons-style">إضافة</button>
+                    <a id="closeModalBtn" class="btn btn-secondary">الغاء</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
     <!-- Page content area end -->
 
@@ -260,8 +254,11 @@
 
         // Function to open the modal
         function openModal() {
-                // Update the form's action attribute
-                $('#editForm').attr('action', '{{ route('subscriptions.store') }}');
+            // Update the form's action attribute
+            $('#editForm').attr('action', '{{ route('subscriptions.store') }}');
+            $('#name').val('');
+            $('#value').val('');
+            $('#batch').val('');
             modal.style.display = 'block';
         }
 
@@ -292,11 +289,11 @@
         function closeModal2() {
             modal2.style.display = 'none';
         }
+
         // Event listeners for the button and close button
-        $('.openModalBtn2').on('click',function (){
+        $('.openModalBtn2').on('click', function () {
             $('#data1').empty()
             var subscription = $(this).data('subscription');
-            console.log(subscription.students)
             subscription.students.forEach(function (student) {
                 $('#data1').append(`<label class="form-label mx-3">${student.name}</label>`)
             });
@@ -320,7 +317,6 @@
 
                 // Get the subscription ID from the data attribute
                 var subscription = $(this).data('subscription');
-                console.log(subscription.id)
                 // Send an AJAX request to the edit route
                 $.ajax({
                     type: 'GET',
@@ -328,12 +324,12 @@
                     success: function (data) {
                         $('#name').val(data.name);
                         $('#value').val(data.value);
-                        $('#department_id').val(data.department_id);
+                        $('#department_id').val(data.department_id).trigger("change");
                         $('#batch').val(data.batch);
-                        $('#subject_id').val(data.subject_id);
+                        $('#subject_id').val(data.subject_id).trigger("change");
 
                         // Update the form's action attribute
-                            $('#editForm').attr('action', 'subscriptions/update/' + subscription.id );
+                        $('#editForm').attr('action', 'subscriptions/update/' + subscription.id);
 
                         // Show the modal
                         $('#modal').show();
@@ -346,6 +342,5 @@
             });
         });
     </script>
-
 
 @endpush

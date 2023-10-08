@@ -29,7 +29,7 @@ class Student extends Authenticatable
 
     public function class_room()
     {
-        return $this->belongsTo(ClassRoom::class,'class_room_id');
+        return $this->belongsToMany(ClassRoom::class,'student_class_rooms');
     }
 
     public function absences(): HasMany
@@ -125,6 +125,7 @@ class Student extends Authenticatable
     {
         return $this->belongsToMany(Assignment::class,'student_duties');
     }
+
 
     public function student_assignment()
     {
