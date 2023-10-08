@@ -9068,9 +9068,14 @@ ul {
 .customers__table {
     width: 100%;
     text-align: center;
+    height: 400px;
+    overflow-y: auto;
 }
 .customers__table thead {
     background-color: #50bfa5;
+    position: sticky;
+    top: 0;
+
 }
 
 .customers__table table {

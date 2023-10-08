@@ -6,12 +6,12 @@
 
     <div class="container-fluid">
         <div class="row">
+            <div class="customers__area__header bg-style mb-30">
             <div class="col-md-12">
-                <div class="customers__area__header bg-style mb-30">
                 <div class="breadcrumb__content">
                     <div class="breadcrumb__content__left">
                         <div class="breadcrumb__title">
-                            <h2>{{ trans('أضافة دورة') }}</h2>
+                            <h2>{{ trans('إضافة دورة') }}</h2>
                         </div>
                     </div>
                     <div class="breadcrumb__content__right">
@@ -29,15 +29,15 @@
 
 
         <div class="row">
+            <div class="customers__area bg-style mb-30">
+                <div class="col-lg-12">
             <div class="instructor-upload-course-box">
-                <div class="row">
-                    <div class="col-lg-12">
+                <!-- <div class="row"> -->
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>{{trans("website.createCourse")}}</h5>
                             </div>
                             <div class="ibox-content mt-15">
-                                <div class="customers__area bg-style mb-30">
                                 <form method="post" action="{{route('admin.course.store')}}">
                                     @csrf
                                     <div class="row mb-4">
@@ -150,9 +150,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

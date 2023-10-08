@@ -28,8 +28,8 @@
             </div>
             </div>
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-md-12">
-                    <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.editSubject') }}</h2>
                         </div>

@@ -1,11 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="page-content">
-
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -24,9 +23,11 @@
                     </div>
                 </div>
             </div>
-
-
+            </div>
+            
             <div class="row">
+            <div class="customers__area bg-style mb-30">
+            <div class="col-md-12">
                 <div class="instructor-upload-course-box">
                     <div class="row">
                         <div class="col-lg-12">
@@ -159,6 +160,9 @@
                     </div>
                 </div>
             </div>
+            </div>
+            </div>
+        </div>
         </div>
         @endsection
 
@@ -166,4 +170,4 @@
             <script src="{{asset('frontend/assets/js/custom/upload-course.js')}}"></script>
             <script src="{{ asset('common/js/jquery.repeater.min.js') }}"></script>
             <script src="{{ asset('common/js/add-repeater.js') }}"></script>
-    @endpush
+        @endpush

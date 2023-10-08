@@ -5,6 +5,7 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                <div class="customers__area__header bg-style mb-30">
                 <div class="col-md-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
@@ -23,13 +24,15 @@
                     </div>
                 </div>
             </div>
+            </div>
 
             <div class="row">
+                <div class="customers__area bg-style mb-30">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title">
+                        <!-- <div class="ibox-title">
                             <h5>{{__('اضف فصل')}}</h5>
-                        </div>
+                        </div> -->
                         <div class="ibox-content mt-15">
 
                             <form method="post" action="{{route('class_room.store')}}">
@@ -84,14 +87,15 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn buttons-style">{{__('website.save')}}</button>
-                                    <a href="{{route('class_room.index')}}" class="btn btn-secondary">{{__('website.cancel')}}</a>
+                                    <button type="submit" class="btn buttons-style print-button">{{__('website.save')}}</button>
+                                    <a href="{{route('class_room.index')}}" class="btn btn-secondary print-button">{{__('website.cancel')}}</a>
                                 </div>
                             </form>
 
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
 
