@@ -72,6 +72,14 @@
                             </div>
 
                             <div class="form-group col-6">
+                                <label for="type">نوع المنتج:</label>
+                                <select class="form-select" id="type" name="type" required>
+                                    <option value="1">كتب</option>
+                                    <option value="2">اخر</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-6">
                                 <label for="quantity">description :</label>
                                 <input type="text" class="form-control" id="meta_description" name="meta_description" required>
                             </div>

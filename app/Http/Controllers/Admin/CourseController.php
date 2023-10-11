@@ -104,6 +104,11 @@ class CourseController extends Controller
             $data['courses']->where('students_count', $request->input('filterByCount'));
         }
 
+        if ($request->is_best) {
+            $data['courses']->where('students_count', '>',10);
+
+        }
+
         $courses = Course::all();
         $data['codes'] = $courses->whereNotNull('code')->pluck('code');
         $data['titles'] = $courses->whereNotNull('title')->pluck('title');
@@ -264,6 +269,7 @@ class CourseController extends Controller
             'time' => $request->date_time,
             'date' => $request->date,
             'status' => $request->status == 1 ? 1 : 0,
+            'type' => $request->type,
             'day' => $abbreviatedDayOfWeek,
         ];
 
@@ -297,18 +303,33 @@ class CourseController extends Controller
             'time' => $request->date_time,
             'date' => $request->date,
             'status' => $request->status == 1 ? 1 : 0,
+            'type' => $request->type,
         ];
 
         $course->update($course_data);
+        if($course->subscription){
+            $course->subscription->update([
+                'name' => $course_data['title'],
+                'value' => $course_data['price'],
+                'department_id' => $course_data['department_id'],
+                'subject_id' => $course_data['subject_id'],
+                'start_date' => $course_data['date'],
+                'status' => $course_data['status'],
+            ]);
+        }
+        else{
+            Subscription::create([
+                'name' => $course_data['title'],
+                'course_id' => $course->id,
+                'value' => $course_data['price'],
+                'department_id' => $course_data['department_id'],
+                'subject_id' => $course_data['subject_id'],
+                'start_date' => $course_data['date'],
+                'status' => $course_data['status'],
+            ]);
 
-        $course->subscription->update([
-            'name' => $course_data['title'],
-            'value' => $course_data['price'],
-            'department_id' => $course_data['department_id'],
-            'subject_id' => $course_data['subject_id'],
-            'start_date' => $course_data['date'],
-            'status' => $course_data['status'],
-        ]);
+        }
+
 
 
 

@@ -138,5 +138,14 @@
         };
     });
 </script>
+<script src="{{ asset('admin/js/tinymce/tinymce.min.js') }}"></script>
+
+<script src="{{ asset('/admin/js/tinymce.js') }}"></script>
+<script>
+
+    $('textarea').each(function(index) {
+        $(this).attr('id', 'tinymceExample')
+    });
+</script>
 </body>
 </html>

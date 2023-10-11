@@ -30,62 +30,56 @@
                <div class="row justify-content-center">
 
                    @if(get_my_option('absence_icon'))
-                   <div class="col-lg-3 col-md-6 col-sm-6" >
-                       <div class="status__box status__box__v3 bg-style" style="
-                    @if(get_absence_notify() > 0)
+                   <div class="col-lg-1 col-md-1 col-sm-1" >
+                       <div class="status__box status__box__v3 " style="
+                    ">
+                           <div class="status__box__img" style="@if(get_absence_notify() > 0)
                     box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
                     @endif
                     ">
-                           <div class="status__box__img">
                                <img src="{{ asset('admin') }}/images/admin-dashboard-icons/students.png" alt="total students">
                            </div>
-                           <div class="status__box__text">
 
-                               <a href="{{ route('absence.index') }}">
-                                   <h1 class="color-purple">{{get_absence_notify()}}</h1>
-                                   <h2>{{ trans('الغياب') }}</h2>
+                               <a href="{{route('absence.index')}}">
+                                  {{-- <h1 class="color-purple">{{get_absence_notify()}}</h1>
+                                   <h2>{{ trans('الغياب') }}</h2>--}}
                                </a>
-                           </div>
                        </div>
                    </div>
                    @endif
                    @if(get_my_option('subs_icon'))
 
                    <div class="col-lg-3 col-md-6 col-sm-6">
-                       <div class="status__box status__box__v3 bg-style" style="
-                         @if(get_subscription_notify() > 0)
-                             box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
-                        @endif">
-                           <div class="status__box__img">
+                       <div class="status__box status__box__v3 " style="">
+                           <div @if(get_subscription_notify() > 0)
+                                    box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
+                                @endif
+                                class="status__box__img">
                                <img src="{{ asset('admin') }}/images/admin-dashboard-icons/revenue.png" alt="total income">
                            </div>
-                           <div class="status__box__text">
 
-                               <a href="{{ route('absence.index') }}">
-                                   <h1 class="color-purple">{{get_subscription_notify()}}</h1>
-                                   <h2>{{ trans('الطلبة غير المسددين') }}</h2>
+                               <a href="{{route('subscriptions.students_subscription')}}">
+                                   {{--<h1 class="color-purple">{{get_subscription_notify()}}</h1>
+                                   <h2>{{ trans('الطلبة غير المسددين') }}</h2>--}}
                                </a>
-                           </div>
                        </div>
                    </div>
                        @endif
                    @if(get_my_option('goals_icon'))
 
                    <div class="col-lg-3 col-md-6 col-sm-6">
-                       <div class="status__box status__box__v3 bg-style" style="
+                       <div class="status__box status__box__v3 " >
+                           <div style="
                          @if(get_goals_today() > 0)
                              box-shadow: 0px 0px 12px 12px rgba(80,191,165,0.33);
-                        @endif">
-                           <div class="status__box__img">
+                        @endif" class="status__box__img">
                                <img src="{{ asset('admin') }}/images/admin-dashboard-icons/courses.png" alt="courses">
                            </div>
-                           <div class="status__box__text">
 
-                               <a href="{{ route('absence.index') }}">
-                                   <h1 class="color-purple">{{get_goals_today()}}</h1>
-                                   <h2>{{ trans('تقييمات اليوم') }}</h2>
+                               <a href="{{route('admin.goals.index.review')}}">
+                                   {{--<h1 class="color-purple">{{get_goals_today()}}</h1>
+                                   <h2>{{ trans('تقييمات اليوم') }}</h2>--}}
                                </a>
-                           </div>
                        </div>
                    </div>
                </div>
@@ -230,7 +224,7 @@
                             <img src="{{ asset('admin') }}/images/admin-dashboard-icons/best-courses.png" alt="best-courses">
                         </div>
                         <div class="status__box__text">
-                            <a href="{{route('admin.course.index')}}">
+                            <a href="{{route('admin.course.index',['is_best' => true])}}">
                                 <h1 class="color-purple">{{$total_best_courses}}</h1>
                                 <h2>{{ trans('website.best_courses') }}</h2>
                             </a>

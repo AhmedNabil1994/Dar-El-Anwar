@@ -44,8 +44,10 @@
                         <button type="button" class="btn buttons-style button-excel" onclick="exportToExcel()">تحويل
                             لملف إكسيل
                         </button>
-                        <button class="btn btn-secondary" id="printTable" type="button">قم بطباعة الجدول</button>
-
+                        <button class="btn btn-secondary " id="printTable" type="button">قم بطباعة الجدول</button>
+                        <a href="{{route('student.create')}}" class="btn buttons-style btn-sm mx-3">
+                            <span>{{ __('إضافة طالب') }}</span>
+                        </a>
 
                     </div>
                     <div class="row">
@@ -120,6 +122,10 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="col-md-3 m-3">
+                        <label for="filterByBranch">{{trans("website.search")}}:</label>
+                        <input class="form-control" type="text" value="{{request('search_key')}}" name="search_key">
+                    </div>
                     <div class="text-end mb-3 d-flex justify-content-start">
                         <button type="submit" id="btn_filter"
                                 class="btn buttons-style btn-sm">{{trans("website.filter")}}</button>
@@ -134,6 +140,7 @@
                     <div class="all-students bg-style mb-30 table-title-container " style="overflow-x:auto;">
                         <div class="item-title d-flex justify-content-between ms-3 my-2">
                             <h2>{{ trans('website.students') }}</h2>
+
                         </div>
                         <div class="customers__table  all-students" style="overflow: auto;">
                             <table id="table1"
@@ -146,7 +153,7 @@
                                     <th>{{ trans('website.address') }}</th>
                                     <th>{{ trans('website.birth_date') }}</th>
                                     <th>{{ trans('website.level') }}</th>
-                                    <th>{{ trans('website.class_name') }}</th>
+                                    <th >{{ trans('website.class_name') }}</th>
                                     <th>{{ trans('website.period') }}</th>
                                     <th>{{ trans('website.phone_number') }}</th>
                                     <th>{{ trans('website.gender') }}</th>
@@ -166,13 +173,14 @@
                                         <td>{{ $student->branch->name }}</td>
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->birthdate }}</td>
-                                        <td> @foreach($student->dept as $dept)
-                                                {{ $dept->name }}
-                                            @endforeach
-                                            </td>
                                         <td>
+                                            @foreach($student->dept as $dept)
+                                                /{{ $dept->name }}/ <br/>
+                                            @endforeach
+                                        </td>
+                                        <td >
                                             @foreach($student->class_room as $classroom)
-                                                {{ $classroom->name }}
+                                                /{{ $classroom->name }}/ <br/>
                                             @endforeach
                                         </td>
                                         <td>

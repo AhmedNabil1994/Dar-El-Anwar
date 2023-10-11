@@ -138,10 +138,10 @@ class AbsenceController extends Controller
         }
         $absence = Absence::create([
             'date' => $request->date,
-            'time' => $request->time,
+            'time' => \Carbon\Carbon::now()->format('H:i:s'),
             'department_id' => $student_subject->subject?->department->id,
             'level_id' => $student_subject->student?->level?->first()?->id,
-            'instructor_id' => $request->instructor_id,
+            'instructor_id' => \Auth::id(),
             'student_subjects_id' => $request->student_subject,
             'student_id' => $student_subject->student?->id,
         ]);
