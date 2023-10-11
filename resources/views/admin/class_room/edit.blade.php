@@ -71,16 +71,16 @@
                                         <span class="text-danger">{{ $message}}</span>
                                         @enderror
                                     </div>
-
                                     <div class="row">
                                         <label for="subject_id">{{__('المواد')}}</label>
-
                                         <select class="form-select"
                                                 id="subject_id"
                                                 multiple="multiple"
                                                 name="subject_id[]" >
                                             @foreach($subjects as $subject)
-                                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                                <option value="{{$subject->id}}"
+                                                    {{in_array($subject->id,$class->class_subjects->pluck('id')->toArray()) ? "selected" : ""}}
+                                                 >   {{$subject->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('subject_id')

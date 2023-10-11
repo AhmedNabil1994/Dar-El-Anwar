@@ -109,8 +109,16 @@ class StoreController extends Controller
     {
         $data = $request->except(['_token','image']);
         $data['user_id'] = Auth::user()->id;
-
         $product = Product::create($data);
+        Stoke::create([
+            'product_id' => $product->id,
+            'price' => $product['price'],
+            'quantity' => $product?->quantity,
+            'total' => $product['quantity']*$product['price'],
+            'description' => $product['description'],
+            'branch_id' =>  Auth::user()->branch_id,
+            'trans_type' => 'income',
+        ]);
         if($request->hasFile('image'))
         {
             $upload = new Upload;
@@ -150,6 +158,15 @@ class StoreController extends Controller
         $data['user_id'] = Auth::user()->id;
 
         $product->update($data);
+        Stoke::create([
+            'product_id' => $product->id,
+            'price' => $product['price'],
+            'quantity' => $product?->quantity,
+            'total' => $product['quantity']*$product['price'],
+            'description' => $product['description'],
+            'branch_id' =>  Auth::user()->branch_id,
+            'trans_type' => 'income',
+        ]);
         if($request->hasFile('image'))
         {
             $upload = new Upload;
@@ -236,10 +253,22 @@ class StoreController extends Controller
         $total = array_sum($total);
 
         $last_amount = Transaction::orderBy('id','DESC')->first()->last_amount;
+        $products = Product::whereIn('id',$request['product_ids'])->get();
 
+        foreach ($products as $product)
+        {
+            if($product->type == 1)
+            {
+                array_push($type,3);
+            }
+            else{
 
+                array_push($type,2);
+            }
+        }
+        $type = array_unique($type);
         Transaction::create([
-            'transaction_type' => 'income',
+            'transaction_type' => 'expense',
             'trans_no' => rand(0000,9999),
             'branch_id' => Auth::user()->branch_id,
             'date' => Carbon::now(),
@@ -251,7 +280,8 @@ class StoreController extends Controller
             'name' => 'شراء منتجات',
             'created_at'=> $request['date'],
             'product_id' => json_encode($request['product_ids']),
-            'model_id' => $request['store_id']
+            'model_id' => $request['store_id'],
+            'type' => json_encode($type)
         ]);
 
 //        Invoice::create([
@@ -266,7 +296,6 @@ class StoreController extends Controller
     }
     public function storeInvoiceSalesProduct(Request $request)
     {
-
         // Create a new PurchaseInvoice instance and fill it with the form data
         $student = Student::where('code',$request->client_code)->first();
 
@@ -304,9 +333,22 @@ class StoreController extends Controller
         $total = array_sum($total);
 
         $last_amount = Transaction::orderBy('id','DESC')->first()->last_amount;
+        $products = Product::whereIn('id',$request['product_ids'])->get();
+        $type = [];
+        foreach ($products as $product)
+        {
+            if($product->type == 1)
+            {
+                array_push($type,3);
+            }
+            else{
 
+                array_push($type,2);
+            }
+        }
+        $type = array_unique($type);
         Transaction::create([
-            'transaction_type' => 'expense',
+            'transaction_type' => 'income',
             'trans_no' => rand(0000,9999),
             'branch_id' => Auth::user()->branch_id,
             'date' => Carbon::now(),
@@ -318,7 +360,8 @@ class StoreController extends Controller
             'name' => 'بيع منتجات',
             'created_at'=> $request['date'],
             'product_id' => json_encode($request['product_ids']),
-            'model_id' => $request['store_id']
+            'model_id' => $request['store_id'],
+            'type' => json_encode($type)
         ]);
 
         // Redirect to a success page or perform any other necessary actions

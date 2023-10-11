@@ -95,7 +95,7 @@ class FollowupController extends Controller
             "time_working" => $request->time_working,
             "observer" => $request->observer,
             "date" => $request->followup_date,
-            "type" => 1,
+            "type" => '[1]',
         ]);
         foreach($questions as $question)
             FollowupResponses::create([
@@ -119,7 +119,7 @@ class FollowupController extends Controller
             "time_working" => $request->time_working,
             "observer" => $request->observer,
             "date" => $request->followup_date,
-            "type" => 2,
+            "type" => '[2]',
         ]);
         foreach($questions as $question)
             FollowupResponses::create([
@@ -142,7 +142,7 @@ class FollowupController extends Controller
             "time_working" => $request->time_working,
             "observer" => $request->observer,
             "date" => $request->followup_date,
-            "type" => 3,
+            "type" => '[3]',
         ]);
         foreach($questions as $question)
             FollowupResponses::create([

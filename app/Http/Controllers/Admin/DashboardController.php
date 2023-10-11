@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\Order_item;
 use App\Models\StudentSubscription;
 use App\Models\Subject;
+use App\Models\Subscription;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Withdraw;
@@ -48,9 +49,11 @@ class DashboardController extends Controller
                                     ->count();
         $data['total_employees'] = Employee::where('status',1)->count();
         $data['total_courses'] = Course::where('status',1)->count();
-        $data['total_best_courses'] = Course::with(['reviews' => function ($query) {
-            $query->orderBy('rating', '>' ,'3');
-        }])->where('status',1)->count();
+        $data['total_best_courses'] = Subscription::whereHas('course',function ($q){
+            $q->where('status',1);
+        })->withCount('students')
+            ->having('students_count', '>', 10)
+            ->count();
         $data['total_admins'] = Users::where('status',1)->count();
         $data['total_incomes_month'] = Transaction::query()
                                         ->select('date',\DB::raw('sum(amount) as count'))

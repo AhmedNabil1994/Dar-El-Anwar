@@ -110,6 +110,7 @@
                                             <option value="option2">موعد</option>
                                         </select>
                                     </div>
+
                                 </div>
                                 <div class="col-md-6" id="class" style="display: none;">
                                     <div class="input__group mb-25">
@@ -120,6 +121,9 @@
                                             <option value="">اختر فصل</option>
                                         </select>
                                     </div>
+                                    @if ($errors->has('classroom'))
+                                        <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('classroom') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-6" id="appointment" style="display: none;">
                                     <div class="input__group mb-25">
@@ -131,16 +135,18 @@
                                                 <option value="{{$appointment->id}}"
                                                 >
                                                     {{$appointment->title}} - {{trans('website.'.$appointment->day)}}
-                                                    - {{Carbon\Carbon::parse($appointment->time)->format('h:i A')}}
+                                                    - {{Carbon\Carbon::parse($appointment->time)->format('h:i A')}} - {{$appointment->type == 1 ? 'اونلاين' : 'حضوري' }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    @if ($errors->has('appointment'))
+                                        <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('appointment') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
-                                        <label>{{trans("website.medical_history")}}<span
-                                                class="text-danger">*</span></label>
+                                        <label>{{trans("website.medical_history")}}</label>
                                         <textarea name="medical_history" class="form-control"></textarea>
                                         @if ($errors->has('medical_history'))
                                             <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('medical_history') }}</span>
@@ -271,7 +277,6 @@
                                             <label>{{trans("website.gender")}} <span
                                                     class="text-danger">*</span></label>
                                             <select name="gender" class="form-control"/>
-                                            <option value="0">{{trans("website.select_gender")}}</option>
                                             <option value="1">{{trans("website.male")}}</option>
                                             <option value="2">{{trans("website.female")}}</option>
                                             </select>
@@ -288,7 +293,6 @@
                                             <label>{{trans('website.status')}} <span
                                                     class="text-danger">*</span></label>
                                             <select name="status" id="status" class="form-control"/>
-                                            <option value="" selected>{{trans('website.select_status')}}</option>
                                             <option value="0">{{trans('website.pending')}}</option>
                                             <option value="1">{{trans('website.approved')}}</option>
                                             <option value="3">{{trans('website.excluded')}}</option>
@@ -308,7 +312,6 @@
                                             <label>{{ trans('website.parents_social_status') }} <span
                                                     class="text-danger">*</span></label>
                                             <select class="form-select" name="parents_social_status">
-                                                <option value="">اختر الحالة</option>
                                                 <option value="1">متزوجين</option>
                                                 <option value="2">منفصلين</option>
                                             </select>
@@ -318,13 +321,24 @@
                                         <div class="form-group mt-25 mb-25">
                                             <label
                                                 for="how_did_you_hear_about_us">{{trans("website.how_know_about_us")}}</label>
-                                            <textarea style="height:41px;" name="how_did_you_hear_about_us"
+                                            <select style="height:41px;" name="how_did_you_hear_about_us"
                                                       placeholder='{{trans("website.how_know_about_us")}}'
-                                                      class="form-control"></textarea>
-                                            @if ($errors->has('how_did_you_hear_about_us'))
-                                                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('how_did_you_hear_about_us') }}</span>
-                                            @endif
+                                                      class="form-control how_did_you_hear_about_us">
+                                                <option value="2">عن طريق الأصدقاء</option>
+                                                <option value="3">عن طريق مواقع التواصل الاجتماعي</option>
+                                                <option value="4">الدار متواجدة بمكان سكنى</option>
+                                                <option value="5">من أبناء العاملين بالدار</option>
+                                                <option value="6">حملات الدعايا بالشارع</option>
+                                                <option value="7">قناة الدار على اليوتيوب</option>
+                                                <option value="8">عن طريق الأقارب</option>
+                                                <option value="9">تواجد الأخوة بالدار</option>
+                                                <option value="10">كان متواجد سابقا بالدار</option>
+                                                <option value="1">اخري</option>
+                                            </select>
                                         </div>
+                                        @if ($errors->has('how_did_you_hear_about_us'))
+                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('how_did_you_hear_about_us') }}</span>
+                                        @endif
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -344,7 +358,7 @@
                                                     <label>{{trans('website.guardian_Relationship')}} <span
                                                             class="text-danger">*</span></label>
                                                     <select name="guardian_relationship[]" id="guardian_relationship"
-                                                            class="form-control guardian_relationship">
+                                                            class="form-control guardian_relationship" required>
                                                         <option value="1">{{trans('website.father')}}</option>
                                                         <option value="2">{{trans('website.mother')}}</option>
                                                         <option value="3">{{trans('اخري')}}</option>
@@ -354,13 +368,13 @@
                                             <div class="col-md-6" style="display: none">
                                                 <div class="form-group mb-25">
                                                     <label
-                                                        for="guardian_relationship">{{trans("نوع الصلة")}}</label>
-                                                    <input type="text" name="guardian_relationship[]" value="" id="guardian_relationship"
+                                                        for="guardian_relationship_type">{{trans("نوع الصلة")}}</label>
+                                                    <input type="text" name="guardian_relationship_type[]" value="" id="guardian_relationship_type"
                                                            placeholder='{{trans("نوع الصلة")}}'
                                                            class="form-control">
-                                                    @if ($errors->has('guardian_relationship'))
+                                                    @if ($errors->has('guardian_relationship_type'))
                                                         <span class="text-danger"><i
-                                                                class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_relationship') }}</span>
+                                                                class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_relationship_type') }}</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -372,7 +386,7 @@
                                                 <div class="form-group mb-25">
                                                     <label
                                                         for="guardian_name">{{trans("website.guardian_name")}}</label>
-                                                    <input type="text" name="guardian_name[]" value="" id="parentName"
+                                                    <input type="text" name="guardian_name[]" value="" id="parentName" required
                                                            placeholder='{{trans("website.guardian_name")}}'
                                                            class="form-control">
                                                     @if ($errors->has('guardian_name'))
@@ -385,7 +399,7 @@
                                                 <div class="form-group mb-25">
                                                     <label
                                                         for="guardian_phone_number">{{trans("website.guardian_phone_number")}}</label>
-                                                    <input type="text" name="guardian_phone_number[]" value=""
+                                                    <input type="text" name="guardian_phone_number[]" value="" required
                                                            placeholder="{{trans('website.guardian_phone_number')}}"
                                                            class="form-control">
                                                     @if ($errors->has('guardian_phone_number'))
@@ -395,6 +409,21 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
+                                                <div class="form-group mb-25">
+                                                    <label
+                                                        for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
+                                                    <select type="text" name="guardian_whatsapp_number_check[]"
+                                                           class="form-control guardian_whatsapp_number_check">
+                                                        <option value="1">نفس رقم الهاتف</option>
+                                                        <option value="0">اخر</option>
+                                                    </select>
+                                                    @if ($errors->has('guardian_whatsapp_number'))
+                                                        <span class="text-danger"><i
+                                                                class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_whatsapp_number') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="display: none">
                                                 <div class="form-group mb-25">
                                                     <label
                                                         for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
@@ -411,7 +440,7 @@
                                                 <div class="form-group mb-25">
                                                     <label for="id_number">{{trans("website.id_number")}}</label>
                                                     <input type="number" name="id_number[]" value=""
-                                                           placeholder="{{trans('website.id_number')}}"
+                                                           placeholder="{{trans('website.id_number')}}" required
                                                            class="form-control"/>
                                                     @if ($errors->has('id_number'))
                                                         <span class="text-danger"><i
@@ -422,7 +451,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group mb-25">
                                                     <label for="profession">{{trans('website.profession')}}</label>
-                                                    <input type="text" name="profession[]" value=""
+                                                    <input type="text" name="profession[]" value="" required
                                                            placeholder="{{trans('website.profession')}}"
                                                            class="form-control"/>
                                                     @if ($errors->has('profession'))
@@ -458,6 +487,19 @@
 
                                         </div>
 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-25">
+                                            <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i
+                                                    class="fa fa-file"></i></label>
+                                            <input type="file" name="parents_card_copy[]" multiple id="imageInput3"
+                                                   placeholder="Parents Card Copy" class="form-control">
+                                            <div id="imagePreviews3" style="display: flex; flex-wrap: wrap;">
+                                            </div>
+                                            @if ($errors->has('parents_card_copy'))
+                                                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_name') }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">
@@ -498,19 +540,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-25">
-                                            <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i
-                                                    class="fa fa-file"></i></label>
-                                            <input type="file" name="parents_card_copy[]" multiple id="imageInput3"
-                                                   placeholder="Parents Card Copy" class="form-control">
-                                            <div id="imagePreviews3" style="display: flex; flex-wrap: wrap;">
-                                            </div>
-                                            @if ($errors->has('parents_card_copy'))
-                                                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_name') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="row mb-3 ">
                                     <div class="col-md-12 text-right d-flex">
@@ -682,6 +712,41 @@
             }
         });
     </script>
+
+    <script>
+
+        $('.guardian_whatsapp_number_check').on('change', function () {
+            if ($(this).val() == 0)
+            {
+                console.log($(this).val())
+                $(this).parent().parent().next('.col-md-6').css('display', 'block');
+            }
+            else
+            {
+                $(this).parent().parent().next('.col-md-6').css('display', 'none');
+            }
+        });
+    </script>
+    <script>
+
+        $('.how_did_you_hear_about_us').on('change', function () {
+            if ($(this).val() == 1) {
+                $(this).parent().find('select').removeAttr("name");
+                $(this).parent().append('<input type="text" name="how_did_you_hear_about_us" class="form-control my-3 how_did_you_hear_about_us">')
+            }else{
+
+                $(this).parent().find('input').remove()
+                if(!$(this).parent().find('select'))
+                {
+
+                    $(this).parent().find('select').attr("name",'how_did_you_hear_about_us');
+
+                }
+
+            }
+        });
+    </script>
+
     <script>
         const joining_date = document.getElementById('joining_date');
 
@@ -728,13 +793,13 @@
                                             <div class="col-md-6" style="display: none">
                                                 <div class="form-group mb-25">
                                                     <label
-                                                        for="guardian_relationship">{{trans("نوع الصلة")}}</label>
-                                                    <input type="text" name="guardian_relationship[]" value="" id="guardian_relationship"
+                                                        for="guardian_relationship_type">{{trans("نوع الصلة")}}</label>
+                                                    <input type="text" name="guardian_relationship_type[]" value="" id="guardian_relationship_type"
                                                            placeholder='{{trans("نوع الصلة")}}'
                                                            class="form-control">
-                                                    @if ($errors->has('guardian_relationship'))
+                                                    @if ($errors->has('guardian_relationship_type'))
                 <span class="text-danger"><i
-                        class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_relationship') }}</span>
+                        class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_relationship_type') }}</span>
                                                     @endif
                 </div>
             </div>
@@ -758,9 +823,24 @@
             @endif
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group mb-25">
-                    <label for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
+             <div class="col-md-6">
+                                                <div class="form-group mb-25">
+                                                    <label
+                                                        for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
+                                                    <select type="text" name="guardian_whatsapp_number_check[]"
+                                                           class="form-control guardian_whatsapp_number_check">
+                                                        <option value="1">نفس رقم الهاتف</option>
+                                                        <option value="0">اخر</option>
+                                                    </select>
+                                                    @if ($errors->has('guardian_whatsapp_number'))
+                <span class="text-danger"><i
+                        class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_whatsapp_number') }}</span>
+                                                    @endif
+                </div>
+            </div>
+<div class="col-md-6" style="display: none">
+<div class="form-group mb-25">
+<label for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
             <input type="text" name="guardian_whatsapp_number[]" value="" placeholder='{{trans("website.guardian_whatsapp_number")}}' class="form-control">
             @if ($errors->has('guardian_whatsapp_number'))
                 <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_whatsapp_number') }}</span>
@@ -824,11 +904,11 @@
                         <div class="row mb-3" id="credits">
                             <div class="col-md-6">
                                 <label>البريد الالكتروني</label>
-                                <input type="email" name="guardian_email[]" class="form-control">
+                                <input type="email" required name="guardian_email[]" class="form-control">
                             </div>
                             <div class="col-md-6">
                                 <label>كلمة السر</label>
-                                <input type="password" name="guardian_password[]" class="form-control">
+                                <input type="password" required name="guardian_password[]" class="form-control">
                             </div>
                         </div>
 `)
@@ -843,6 +923,17 @@
             $('.guardian_relationship').on('change', function () {
                 if ($(this).val() == 3)
                 {
+                    $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                }
+                else
+                {
+                    $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                }
+            });
+            $('.guardian_whatsapp_number_check').on('change', function () {
+                if ($(this).val() == 0)
+                {
+                    console.log($(this).val())
                     $(this).parent().parent().next('.col-md-6').css('display', 'block');
                 }
                 else
@@ -1014,11 +1105,11 @@
                         <div class="row mb-3" id="credits">
                             <div class="col-md-6">
                                 <label>البريد الالكتروني</label>
-                                <input type="email" name="guardian_email[]" class="form-control">
+                                <input type="email" required name="guardian_email[]" class="form-control">
                             </div>
                             <div class="col-md-6">
                                 <label>كلمة السر</label>
-                                <input type="password" name="guardian_password[]" class="form-control">
+                                <input type="password" required name="guardian_password[]" class="form-control">
                             </div>
                         </div>
 `)

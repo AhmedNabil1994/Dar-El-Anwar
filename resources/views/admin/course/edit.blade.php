@@ -24,7 +24,7 @@
                 </div>
             </div>
             </div>
-            
+
             <div class="row">
             <div class="customers__area bg-style mb-30">
             <div class="col-md-12">
@@ -147,6 +147,18 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row mb-4">
+
+
+                                            <div class="form-group col-md-6">
+                                                <label for="status">{{trans('النوع')}}  </label>
+                                                <select name="type" id="type" class="form-control">
+                                                    <option value="0"{{$course->type == 0? 'selected' : ''}}>حضوري</option>
+                                                    <option value="1"{{$course->type == 1? 'selected' : ''}}>اونلاين</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
 
                                         <div class="form-group">
                                             <button type="submit" class="btn buttons-style">{{trans('website.save')}}</button>

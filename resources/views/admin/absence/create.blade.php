@@ -131,14 +131,10 @@
                                             <td>{{$student_subject->subject->name}}</td>
                                             <td>{{$student_subject->subject->instructor?->employee?->name}}</td>
                                             <td>
-                                                <select required class="form-select-sm" name="instructor_id">
-                                                    <option value="">اختر مدرس</option>
-                                                    @foreach($instructors as $instructor)
-                                                        <option value="{{$instructor->id}}">{{$instructor->employee->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                             {{Auth::user()->name}}
+
                                             </td>
-                                            <td><input type="time" class="form-control" name="time" required value="{{\Carbon\Carbon::now()->format('H:i:s')}}"></td>
+                                            <td><input type="time" disabled class="form-control" name="time"  value="{{\Carbon\Carbon::now()->format('H:i:s')}}"></td>
 
                                             <td>
                                                 <div class="action__buttons d-flex  justify-content-center">

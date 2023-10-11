@@ -429,6 +429,8 @@ Route::prefix('branches')->group(function () {
          Route::post('update/{id}', [StoreController::class, 'update'])->name('stores.update');
     });
     Route::prefix('settings')->as('settings.')->group(function () {
+        Route::get('store/inq', [SettingController::class, 'inq_update'])->name('inq.update');
+
         Route::get('', [SettingController::class, 'index'])->name('index');
         Route::get('icons', [SettingController::class, 'icons_index'])->name('icons.index');
         Route::post('icons_update', [SettingController::class, 'icons_update'])->name('icons.update');
@@ -827,6 +829,7 @@ Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
         Route::get('about-us-client', [AboutUsController::class, 'client'])->name('client');
         Route::post('about-us-client', [AboutUsController::class, 'clientUpdate'])->name('client.update');
     });
+
     // End:: About Us
     Route::group(['prefix' => 'locations', 'as' => 'location.'], function () {
         Route::get('country', [LocationController::class, 'countryIndex'])->name('country.index');

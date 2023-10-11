@@ -55,7 +55,7 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $data['title'] = 'All Student';
-        $students = Student::query()->whereStatus(1)->orWhere('status',4)->orderBy('id','DESC');
+        $students = Student::query()->whereStatus(1)->orderBy('id','DESC');
         if($request->filterByBranch)
             $students->where('branch_id',$request->filterByBranch);
         if($request->filterByLevel)
@@ -70,13 +70,25 @@ class StudentController extends Controller
             $students->where('gender',$request->filterByGender);
         if($request->filterByJoining)
             $students->where('status',$request->filterByJoining);
-
+        if($request->search_key){
+            $students->whereHas('branch',function ($q) use ($request){
+                $q->where('name','like','%'.$request->search_key.'%');
+            })->orWhereHas('dept',function ($q) use ($request){
+                $q->where('name','like','%'.$request->search_key.'%');
+            })->orWhereHas('class_room',function ($q) use ($request){
+                $q->where('name','like','%'.$request->search_key.'%');
+            })->orWhere('code','like','%'.$request->search_key.'%')
+                ->orWhere('name','like','%'.$request->search_key.'%')
+                ->orWhere('address','like','%'.$request->search_key.'%')
+                ->orWhere('birthdate','like','%'.$request->search_key.'%')
+                ->orWhere('phone_number','like','%'.$request->search_key.'%');
+        }
         $data['branches'] = Branch::whereStatus(1)->get();
         $data['class_rooms'] = ClassRoom::all();
         $data['count'] = Student::whereStatus(1)->orWhere('status',4)->count();
         $data['departs'] = Department::all();
 
-        $students = $students->paginate(50);
+        $students = $students->orWhere('status',4)->paginate(50);
         return view('admin.student.list', $data, compact('students'));
     }
 
@@ -237,9 +249,29 @@ class StudentController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'gender' => 'required',
-        ]);
+        $rules = [
+            'name' => 'required|string',
+            'city_id' => 'required|numeric',
+            'department' => 'required|array',
+            'classroom' => 'array|nullable',
+            'medical_history' => 'string|nullable',
+            'birthdate' => 'required|date',
+            'branch_id' => 'required|numeric',
+            'bus' => 'required|boolean',
+            'email' => 'required|email',
+            'blood_type' => 'string',
+            'period' => 'required|numeric',
+            'address' => 'required|string',
+            'joining_date' => 'required|date',
+            'gender' => 'required|in:1,2', // Assuming 1 for male, 2 for female
+            'parents_social_status' => 'required|numeric',
+            'how_did_you_hear_about_us' => 'required',
+            'notes' => 'nullable',
+            'image' => 'nullable|image',
+            'parents_card_copy' => 'nullable|image',
+            'birth_certificate' => 'nullable|image',
+        ];
+        $request->validate($rules);
         if($request->appointment || $request->appointment > 0){
 
             $courses = Course::whereIn('id',$request->appointment)->get();
@@ -429,15 +461,23 @@ class StudentController extends Controller
                 'another_file' => $upload->id,
             ]);
         }
-
         foreach ($student->parent as $key => $parent){
+            if($request->guardian_whatsapp_number_check[$key] == 1)
+            {
+                $guardian_whatsapp_number = $request->guardian_phone_number[$key];
+            }
+            else{
+                $guardian_whatsapp_number = $request->guardian_whatsapp_number[$key];
+            }
             $parent->update([
                 'student_id' => $student->id,
                 'name' => $request->guardian_name[$key],
                 'profession' => $request->profession[$key],
                 'relationship' => $request->guardian_relationship[$key],
+                'relationship_type' => $request->guardian_relationship_type[$key],
                 'phone_number' => $request->guardian_phone_number[$key], // newly added
-                'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
+                'whatsapp_number' => $guardian_whatsapp_number, // newly added
+                'whatsapp_number_check' => $request->guardian_whatsapp_number_check[$key] , // newly added
                 'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
                 'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
                 'email' => $request->guardian_email[$key], // newly added
@@ -643,9 +683,30 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'gender' => 'required',
-        ]);
+        $rules = [
+            'name' => 'required|string',
+            'city_id' => 'required|numeric',
+            'department' => 'required|array',
+            'classroom' => 'array|nullable',
+            'medical_history' => 'string|nullable',
+            'birthdate' => 'required|date',
+            'branch_id' => 'required|numeric',
+            'bus' => 'required|boolean',
+            'email' => 'required|email',
+            'blood_type' => 'string',
+            'password' => 'required|min:6',
+            'period' => 'required|numeric',
+            'address' => 'required|string',
+            'joining_date' => 'required|date',
+            'gender' => 'required|in:1,2', // Assuming 1 for male, 2 for female
+            'parents_social_status' => 'required|numeric',
+            'how_did_you_hear_about_us' => 'required',
+            'notes' => 'nullable',
+            'image' => 'nullable|image',
+            'parents_card_copy' => 'nullable|image',
+            'birth_certificate' => 'nullable|image',
+        ];
+        $request->validate($rules);
         if($request->appointment || $request->appointment > 0){
 
             $courses = Course::whereIn('id',$request->appointment)->get();
@@ -682,7 +743,6 @@ class StudentController extends Controller
                 return redirect()->back()->with('error','خانة الصلة مكررة');
         }
         $code = $this->create_code($request);
-
         $student_data = [
             'user_id' => $user->id??null,
             'name' => $request->name, // updated from $request->first_name
@@ -830,6 +890,13 @@ class StudentController extends Controller
         {
             foreach($request->guardian_relationship as $key => $guardian)
             {
+                if($request->guardian_whatsapp_number_check[$key] == 1)
+                {
+                    $guardian_whatsapp_number = $request->guardian_phone_number[$key];
+                }
+                else{
+                    $guardian_whatsapp_number = $request->guardian_whatsapp_number[$key];
+                }
                 ParentInfo::create([
                     'student_id' => $student->id,
                     'name' => $request->guardian_name[$key],
@@ -837,11 +904,12 @@ class StudentController extends Controller
                     'relationship' => $request->guardian_relationship[$key],
                     'relationship_type' => $request->guardian_relationship_type[$key],
                     'phone_number' => $request->guardian_phone_number[$key], // newly added
-                    'whatsapp_number' => $request->guardian_whatsapp_number[$key], // newly added
+                    'whatsapp_number' => $guardian_whatsapp_number, // newly added
+                    'whatsapp_number_check' => $request->guardian_whatsapp_number_check[$key], // newly added
                     'student_pickup_optional' => @$request->receiving_officer[$key] == 'on'? 1:0, // newly added
                     'follow_up_person' => @$request->followup_officer[$key] == 'on'? 1:0, // newly added
-                    'email' => $request->guardian_email[$key], // newly added
-                    'password' => Hash::make($request->guardian_password[$key]), // newly added
+                    'email' => !$request->guardian_email??$request->guardian_email[$key], // newly added
+                    'password' => !$request->guardian_password ?? Hash::make($request->guardian_password[$key]), // newly added
                     'national_id' => $request->id_number[$key], // newly added
 
                 ]);

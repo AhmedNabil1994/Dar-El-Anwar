@@ -213,6 +213,7 @@ class SubscriptionController extends Controller
                 'branch_id' => $subscription->student->branch_id,
                 'student_id' => $subscription->student->id,
                 'transaction_type' => 'income',
+                'type' => 1,
                 'last_amount' => $last_amount,
             ];
 
@@ -267,6 +268,7 @@ class SubscriptionController extends Controller
                 'user_id' => Auth::user()->id,
                 'transaction_type' => 'income',
                 'last_amount' => $last_amount,
+                'type' => 1,
             ];
 
             Transaction::create($data);

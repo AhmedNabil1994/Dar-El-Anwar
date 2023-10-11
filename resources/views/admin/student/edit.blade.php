@@ -147,7 +147,7 @@
                                                         {{in_array($appointment->id, $student->courses->pluck('id')->toArray())? 'selected' : ''}}
                                                     >
                                                         {{$appointment->name}} - {{$appointment->day}}
-                                                        - {{$appointment->time_from}} - {{$appointment->time_to}}
+                                                        - {{$appointment->time_from}} - {{$appointment->time_to}} - {{$appointment->type == 1 ? 'اونلاين' : 'حضوري' }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -232,8 +232,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input__group mb-25">
-                                            <label>{{trans("website.password")}} <span
-                                                    class="text-danger">*</span></label>
+                                            <label>{{trans("website.password")}} </label>
                                             <input type="password" name="password" value=""
                                                    placeholder="{{ trans('website.password') }}" class="form-control"/>
                                             @if ($errors->has('password'))
@@ -353,12 +352,40 @@
                                         <div class="form-group mt-25 mb-25">
                                             <label
                                                 for="how_did_you_hear_about_us">{{trans("website.how_know_about_us")}}</label>
-                                            <textarea name="how_did_you_hear_about_us"
-                                                      placeholder='{{trans("website.how_know_about_us")}}'
-                                                      class="form-control">{{$student->how_did_you_hear_about_us}}</textarea>
-                                            @if ($errors->has('how_did_you_hear_about_us'))
-                                                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> @lang( $errors->first('how_did_you_hear_about_us') )</span>
-                                            @endif
+                                            @if(!is_int($student->how_did_you_hear_about_us))
+                                                <select style="height:41px;"
+                                                        placeholder='{{trans("website.how_know_about_us")}}'
+                                                        class="form-control how_did_you_hear_about_us">
+                                                    <option value="2" {{2 == $student->how_did_you_hear_about_us ? "selected" : ""}}>عن طريق الأصدقاء</option>
+                                                    <option value="3" {{3 == $student->how_did_you_hear_about_us ? "selected" : ""}}>عن طريق مواقع التواصل الاجتماعي</option>
+                                                    <option value="4" {{4 == $student->how_did_you_hear_about_us ? "selected" : ""}}>الدار متواجدة بمكان سكنى</option>
+                                                    <option value="5" {{5 == $student->how_did_you_hear_about_us ? "selected" : ""}}>من أبناء العاملين بالدار</option>
+                                                    <option value="6" {{6 == $student->how_did_you_hear_about_us ? "selected" : ""}}>حملات الدعايا بالشارع</option>
+                                                    <option value="7" {{7 == $student->how_did_you_hear_about_us ? "selected" : ""}}>قناة الدار على اليوتيوب</option>
+                                                    <option value="8" {{8 == $student->how_did_you_hear_about_us ? "selected" : ""}}>عن طريق الأقارب</option>
+                                                    <option value="9" {{9 == $student->how_did_you_hear_about_us ? "selected" : ""}}>تواجد الأخوة بالدار</option>
+                                                    <option value="10" {{10 == $student->how_did_you_hear_about_us ? "selected" : ""}}>كان متواجد سابقا بالدار</option>
+                                                    <option value="1" selected>اخري</option>
+                                                </select>
+                                                <input type="text" name="how_did_you_hear_about_us"
+                                                       class="form-control my-3 how_did_you_hear_about_us"
+                                                value="{{$student->how_did_you_hear_about_us}}">
+                                            @else
+                                                <select style="height:41px;" name="how_did_you_hear_about_us"
+                                                        placeholder='{{trans("website.how_know_about_us")}}'
+                                                        class="form-control how_did_you_hear_about_us">
+                                                    <option {{2 == $student->how_did_you_hear_about_us ? "selected" : ""}}>عن طريق الأصدقاء</option>
+                                                    <option {{3 == $student->how_did_you_hear_about_us ? "selected" : ""}}>عن طريق مواقع التواصل الاجتماعي</option>
+                                                    <option {{4 == $student->how_did_you_hear_about_us ? "selected" : ""}}>الدار متواجدة بمكان سكنى</option>
+                                                    <option {{5 == $student->how_did_you_hear_about_us ? "selected" : ""}}>من أبناء العاملين بالدار</option>
+                                                    <option {{6 == $student->how_did_you_hear_about_us ? "selected" : ""}}>حملات الدعايا بالشارع</option>
+                                                    <option {{7 == $student->how_did_you_hear_about_us ? "selected" : ""}}>قناة الدار على اليوتيوب</option>
+                                                    <option {{8 == $student->how_did_you_hear_about_us ? "selected" : ""}}>عن طريق الأقارب</option>
+                                                    <option {{9 == $student->how_did_you_hear_about_us ? "selected" : ""}}>تواجد الأخوة بالدار</option>
+                                                    <option {{10 == $student->how_did_you_hear_about_us ? "selected" : ""}}>كان متواجد سابقا بالدار</option>
+                                                    <option value="1">اخري</option>
+                                                </select>
+                                             @endif
                                         </div>
                                     </div>
                                 </div>
@@ -377,6 +404,23 @@
                                             @include('admin.student.parent.add',['parent'=>$parent])
                                         @endforeach
                                     @endif
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-25">
+                                        <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i
+                                                class="fa fa-file"></i></label>
+                                        <input type="file" name="parents_card_copy[]" multiple id="imageInput3"
+                                               value="" placeholder="Parents Card Copy" class="form-control">
+                                        <div id="imagePreviews3" style="display: flex; flex-wrap: wrap;">
+                                            @if($student->parents_card_copy)
+                                                @foreach(json_decode($student->parents_card_copy) as $photo)
+                                                    <img src="{{api_asset($photo)}}"
+                                                         style=" max-width: 150px; height: 150px;">
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input__group mb-25">
@@ -415,22 +459,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-25">
-                                            <label for="parents_card_copy">{{trans("website.parentsCardsCopy")}} <i
-                                                    class="fa fa-file"></i></label>
-                                            <input type="file" name="parents_card_copy[]" multiple id="imageInput3"
-                                                   value="" placeholder="Parents Card Copy" class="form-control">
-                                            <div id="imagePreviews3" style="display: flex; flex-wrap: wrap;">
-                                                @if($student->parents_card_copy)
-                                                    @foreach(json_decode($student->parents_card_copy) as $photo)
-                                                        <img src="{{api_asset($photo)}}"
-                                                             style=" max-width: 150px; height: 150px;">
-                                                    @endforeach
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12 text-right">
@@ -680,14 +709,14 @@
                     }
                 });
             </script>
-        <script>
+            <script>
 
                 $('#classroom').empty()
                 classes = @json($student->class_room->pluck('id'));
 
                 $.ajax({
                     type: 'GET',
-                    url: '{{url('/')}}/admin/student/getClasses/' +$('#department').val(),
+                    url: '{{url('/')}}/admin/student/getClasses/' + $('#department').val(),
                     success: function (data) {
                         data.forEach(function (e) {
                             var isSelected = classes.includes(e.id);
@@ -699,8 +728,8 @@
                             $('#classroom').append(option)
                         })
                     }
-                    })
-                </script>
+                })
+            </script>
             <script>
                 $('#department').on('change', function () {
 
@@ -716,6 +745,26 @@
                         }
                     })
                 });
+            </script>
+            <script>
+
+                $('.how_did_you_hear_about_us').on('change', function () {
+                    if ($(this).val() == 1) {
+                        $(this).parent().find('select').removeAttr("name");
+                        $(this).parent().append('<input type="text" name="how_did_you_hear_about_us" class="form-control my-3 how_did_you_hear_about_us">')
+                    }else{
+
+                        $(this).parent().find('input').remove()
+                        if(!$(this).parent().find('select'))
+                        {
+
+                            $(this).parent().find('select').attr("name",'how_did_you_hear_about_us');
+
+                        }
+
+                    }
+                });
+
             </script>
             <script>
                 $('#status').on('change', function () {
@@ -745,16 +794,33 @@
                     if (count < 3)
                         $('#parent_info').append(`<h2>{{trans("website.parents_information")}}</h2>
 <br>
+<div class="row">
 <div class="col-md-6">
-    <div class="input__group mb-25">
-        <label>{{trans('website.guardian_Relationship')}} <span class="text-danger">*</span></label>
-        <select name="guardian_relationship[]"  class="form-control" >
+<div class="input__group mb-25">
+<label>{{trans('website.guardian_Relationship')}} <span class="text-danger">*</span></label>
+        <select name="guardian_relationship[]"  class="form-control guardian_relationship" >
             <option value="1">{{trans('website.father')}}</option>
             <option value="2">{{trans('website.mother')}}</option>
             <option value="3">{{trans('اخري')}}</option>
         </select>
     </div>
 </div>
+
+<div class="col-md-6" style="display: none">
+                                                <div class="form-group mb-25">
+                                                    <label
+                                                        for="guardian_relationship_type">{{trans("نوع الصلة")}}</label>
+                                                    <input type="text" name="guardian_relationship_type[]" value="" id="guardian_relationship_type"
+                                                           placeholder='{{trans("نوع الصلة")}}'
+                                                           class="form-control">
+                                                    @if ($errors->has('guardian_relationship_type'))
+                        <span class="text-danger"><i
+                                class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_relationship_type') }}</span>
+                                                    @endif
+                        </div>
+                    </div>
+</div>
+
 <div class="row">
     <div class="col-md-6">
         <div class="form-group mb-25">
@@ -775,8 +841,23 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group mb-25">
-                            <label for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
+                                                <div class="form-group mb-25">
+                                                    <label
+                                                        for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
+                                                    <select type="text" name="guardian_whatsapp_number_check[]"
+                                                           class="form-control guardian_whatsapp_number_check">
+                                                        <option value="1">نفس رقم الهاتف</option>
+                                                        <option value="0">اخر</option>
+                                                    </select>
+                                                    @if ($errors->has('guardian_whatsapp_number'))
+                        <span class="text-danger"><i
+                                class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_whatsapp_number') }}</span>
+                                                    @endif
+                        </div>
+                    </div>
+                            <div class="col-md-6" style="display: none">
+                                <div class="form-group mb-25">
+                                    <label for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
             <input type="text" name="guardian_whatsapp_number[]" value="" placeholder='{{trans("website.guardian_whatsapp_number")}}' class="form-control">
             @if ($errors->has('guardian_whatsapp_number'))
                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> @lang( $errors->first('guardian_whatsapp_number') )</span>
@@ -801,15 +882,7 @@
             @endif
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="input__group mb-25">
-                            <label>{{trans('website.guardian_email')}} <span class="text-danger">*</span></label>
-            <input type="email" name="guardian_email[]" value="{{old('guardian_email')}}" placeholder="{{ trans('website.guardian_email') }}" class="form-control" />
-            @if ($errors->has('guardian_email'))
-                        <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> @lang($errors->first('guardian_email') )</span>
-            @endif
-                        </div>
-                    </div>
+
                     <div class="col-md-6">
                         <label>{{trans('website.receiving_officer')}} <span class="text-danger">* </span></label>
         <input type="checkbox" name="receiving_officer[]" placeholder="{{ trans('website.receiving_officer') }}" class="input__checkbox" />
@@ -858,10 +931,53 @@
                             $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
                         }
                     })
-
+                    $('.guardian_relationship').on('change', function () {
+                        if ($(this).val() == 3) {
+                            $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                        } else {
+                            $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                        }
+                    });
+                    $('.guardian_whatsapp_number_check').on('change', function () {
+                        if ($(this).val() == 0)
+                        {
+                            console.log($(this).val())
+                            $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                        }
+                        else
+                        {
+                            $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                        }
+                    });
                 });
             </script>
 
+
+            <script>
+                $('.guardian_whatsapp_number_check').each(function () {
+                    if ($(this).val() == 0)
+                    {
+                        console.log($(this).val())
+                        $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                    }
+                    else
+                    {
+                        $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                    }
+                });
+
+                $('.guardian_whatsapp_number_check').on('change', function () {
+                    if ($(this).val() == 0)
+                    {
+                        console.log($(this).val())
+                        $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                    }
+                    else
+                    {
+                        $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                    }
+                });
+            </script>
 
             <script>
                 $('#imageInput').on('change', function (event) {
@@ -974,6 +1090,7 @@
 
                     if ($(this).prop('checked')) {
 
+<<<<<<< HEAD
     <script>
         $(document).ready(function(){
             $("#print").on("click",function printDiv() {
@@ -986,3 +1103,62 @@
     </script>
     
 @endpush
+=======
+                        $(this).parent().next('.parent_credintials').append(`
+                        <div class="row mb-3" id="credits">
+                            <div class="col-md-6">
+                                <label>البريد الالكتروني</label>
+                                <input type="email" name="guardian_email[]" class="form-control" value="${email}">
+                            </div>
+                            <div class="col-md-6">
+                                <label>كلمة السر</label>
+                                <input type="password" name="guardian_password[]" class="form-control">
+                            </div>
+                        </div>
+`)
+                    } else {
+                        $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
+                    }
+                })
+                $('.followup_officer').on('click', function () {
+                    if ($(this).prop('checked')) {
+                        $(this).parent().next('.parent_credintials').append(`
+                        <div class="row mb-3" id="credits">
+                            <div class="col-md-6">
+                                <label>البريد الالكتروني</label>
+                                <input type="email" name="guardian_email[]" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label>كلمة السر</label>
+                                <input type="password" name="guardian_password[]" class="form-control">
+                            </div>
+                        </div>
+`)
+                    } else {
+                        $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
+                    }
+                })
+
+
+            </script>
+            <script>
+
+                $('.guardian_relationship').on('change', function () {
+                    if ($(this).val() == 3) {
+                        console.log($(this).val())
+                        $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                    } else {
+                        $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                    }
+                });
+                $('.guardian_relationship').each(function () {
+                    if ($(this).val() == 3) {
+                        console.log($(this).val())
+                        $(this).parent().parent().next('.col-md-6').css('display', 'block');
+                    } else {
+                        $(this).parent().parent().next('.col-md-6').css('display', 'none');
+                    }
+                });
+            </script>
+    @endpush
+>>>>>>> 6494593714017f30d07ec226e98325a0af6885f0

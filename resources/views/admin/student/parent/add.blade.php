@@ -1,15 +1,31 @@
 <h2>{{trans("website.parents_information")}}</h2>
 <br>
+<div class="row">
 <div class="col-md-6">
     <div class="input__group mb-25">
         <label>{{trans('website.guardian_Relationship')}} <span class="text-danger">*</span></label>
-        <select name="guardian_relationship[]"  class="form-control" >
+        <select name="guardian_relationship[]"  class="form-control guardian_relationship" >
             <option value="1" {{$parent->relationship == 1? 'selected' : ''}}>{{trans('website.father')}}</option>
             <option value="2" {{$parent->relationship == 2? 'selected' : ''}}>{{trans('website.mother')}}</option>
             <option value="3" {{$parent->relationship == 3? 'selected' : ''}}>{{trans('اخري')}}</option>
         </select>
     </div>
 </div>
+<div class="col-md-6" style="display: none">
+    <div class="form-group mb-25">
+        <label
+            for="guardian_relationship">{{trans("نوع الصلة")}}</label>
+        <input type="text" name="guardian_relationship_type[]" value="{{$parent->relationship_type}}" id="guardian_relationship"
+               placeholder='{{trans("نوع الصلة")}}'
+               class="form-control">
+        @if ($errors->has('guardian_relationship'))
+            <span class="text-danger"><i
+                    class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_relationship') }}</span>
+        @endif
+    </div>
+</div>
+</div>
+
 <div class="row">
     <div class="col-md-6">
         <div class="form-group mb-25">
@@ -30,6 +46,21 @@
         </div>
     </div>
     <div class="col-md-6">
+        <div class="form-group mb-25">
+            <label
+                for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
+            <select type="text" name="guardian_whatsapp_number_check[]"
+                    class="form-control guardian_whatsapp_number_check">
+                <option value="1" {{$parent->whatsapp_number_check == 1 ? 'selected' : ''}}>نفس رقم الهاتف</option>
+                <option value="0"  {{$parent->whatsapp_number_check == 0 ? 'selected' : ''}}>اخر</option>
+            </select>
+            @if ($errors->has('guardian_whatsapp_number'))
+                <span class="text-danger"><i
+                        class="fas fa-exclamation-triangle"></i> {{ $errors->first('guardian_whatsapp_number') }}</span>
+            @endif
+        </div>
+    </div>
+    <div class="col-md-6" style="display: none">
         <div class="form-group mb-25">
             <label for="guardian_whatsapp_number">{{trans("website.guardian_whatsapp_number")}}</label>
             <input type="text" name="guardian_whatsapp_number[]" value="{{$parent->whatsapp_number}}" placeholder='{{trans("website.guardian_whatsapp_number")}}' class="form-control">

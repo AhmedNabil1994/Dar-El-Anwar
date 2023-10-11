@@ -186,11 +186,11 @@
                                     @foreach($goals as $goal)
                                         <tr class="removable-item">
                                             <td>{{$goal->code}}</td>
-                                            <td>{{$course->title}}</td>
-                                            <td>{{$course->instructor?->employee?->name}}</td>
-                                            <td>{{$course->subject?->name}}</td>
-                                            <td>{{$course->department?->name}}</td>
-                                            <td>{{$course->content}}</td>
+                                            <td>{{$goal->title}}</td>
+                                            <td>{{$goal->instructor?->employee?->name}}</td>
+                                            <td>{{$goal->subject?->name}}</td>
+                                            <td>{{$goal->department?->name}}</td>
+                                            <td>{{$goal->content}}</td>
                                             <td>{{Carbon\Carbon::parse($course->time)->format('h:i A')}}</td>
                                             <td>{{$course->price}}</td>
                                             <td>{{$course->date}}</td>

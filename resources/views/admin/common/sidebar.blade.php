@@ -44,7 +44,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('manage-roles')
+                    @can('manage-role')
                         <li class="{{ active_if_full_match('admin/role') }}">
                             <a href="{{route('role.index')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -448,7 +448,7 @@
                     <span>{{__('الحسابات')}}</span>
                 </a>
                 <ul>
-                    @can('manage-finance_treasury')
+                    @can('all-finance-treasury')
                         <li class="{{ active_if_match('accounts/treasury') }}">
                             <a href="{{route('accounts.treasury')}}">
 {{--                                <i class="fa fa-money"></i>--}}
@@ -456,7 +456,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('manage-finance_subscriptions')
+                    @can('all-finance-subscriptions')
                         <li class="{{ active_if_full_match('admin/subscriptions') }}">
                             <a href="{{route('subscriptions.index')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -464,7 +464,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('manage-finance_students_subscription')
+                    @can('all-finance-students_subscription')
                         <li class="{{ active_if_full_match('admin/subscriptions/students_subscription') }}">
                             <a href="{{route('subscriptions.students_subscription')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -473,7 +473,7 @@
                         </li>
                     @endcan
 
-                    @can('manage-finance_invoices')
+                    @can('all-finance-invoices')
                         <li class="{{ active_if_match('admin/invoices') }}">
                             <a href="{{route('invoices.index')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -482,7 +482,7 @@
                         </li>
                     @endcan
 
-                    @can('manage-finance_profit')
+                    @can('all-finance-profit')
                         <li class="{{ active_if_match('admin/profit') }}">
                             <a href="{{route('profit.index')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -491,7 +491,7 @@
                         </li>
                     @endcan
 
-                    @can('manage-finance_stores_movement')
+                    @can('all-finance-stores_movement')
                         <li class="{{ active_if_match('admin/stores/movement') }}">
                             <a href="{{route('stores.movement.index')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -504,7 +504,7 @@
                                 <span>{{ __('أضف منتج') }}</span>
                             </a>
                         </li>
-                    @can('manage-finance_product_movement')
+                    @can('all-finance-product_movement')
                         <li class="{{ active_if_match('admin/product/movement') }}">
                             <a href="{{route('stores.product.index')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -512,7 +512,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('manage-finance_product_invoice_purchases')
+                    @can('all-finance-product_invoice_purchases')
                         <li class="{{ active_if_match('admin/product/invoice') }}">
                             <a href="{{route('stores.product.invoice.purchases')}}">
 {{--                                <i class="fa fa-circle"></i>--}}
@@ -520,7 +520,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('manage-finance_product_invoice_sales')
+                    @can('all-finance-product_invoice_sales')
                         <li class="{{ active_if_match('admin/product/invoice') }}">
                             <a href="{{route('stores.product.invoice.sales')}}">
 {{--                                <i class="fa fa-circle"></i>--}}

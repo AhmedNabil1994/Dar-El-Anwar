@@ -46,7 +46,18 @@ class FinancialAccountController extends Controller
             $data['transactions']->where('date', '>',$request->dateFrom)->get();
          if ($request->dateTo)
                     $data['transactions']->where('date','<',  $request->dateTo)->get();
-
+        if(!$request->dateFrom && !$request->dateTo)
+            $data['transactions']->whereMonth('date', Carbon::now()->month)->get();
+        if ($request->subscription)
+            $data['transactions']->where('type','[1]');
+        if ($request->another)
+            $data['transactions']->where('type','[2,3]')
+                ->orWhere('type','[3]')
+                ->orWhere('type','[3,2]');
+        if ($request->book)
+            $data['transactions']->where('type','[2,3]')
+                ->orWhere('type','[2]')
+                ->orWhere('type','[3,2]');
         $data['transactions'] = $data['transactions']->paginate(25);
         return view('admin.finance_accounts.treasury',$data);
 
@@ -89,6 +100,7 @@ class FinancialAccountController extends Controller
             'user_id' => Auth::user()->id,
             'transaction_type' => $request->transaction_type,
             'last_amount' => $last_amount,
+            'type' => 4,
         ];
 
         Transaction::create($data);

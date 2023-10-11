@@ -79,6 +79,18 @@
                         </div>
 
                         <div class="row justify-content-center mb-4">
+                            <div class="col-sm-2">
+                                <a href="{{route('accounts.treasury',['subscription'=>true])}}" class="btn buttons-style w-100">الاشتراكات</a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="{{route('accounts.treasury',['another'=>true])}}" class="btn buttons-style w-100">مبيعات المخزن والكانتين</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="{{route('accounts.treasury',['book'=>true])}}" class="btn buttons-style w-100">مبيعات الكتب</a>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mb-4">
 
                             <div class="col-sm-2">
                                 <a class="btn incomeBtn buttons-style w-100">قبض</a>

@@ -50,6 +50,20 @@ class SettingController extends Controller
         return view('admin.application_settings.general.general-settings', $data);
     }
 
+    public function inq_update(Request $request)
+    {
+        $setting = Setting::where('option_key','inq')->first();
+
+        if($setting)
+            $setting->update(['option_value'=> $request['value']]);
+        else
+            Setting::create([
+                'option_key'=>'inq',
+                'option_value'=> $request['value']
+            ]);
+        return redirect()->back()->with('success', 'تم التعديل');
+
+    }
     public function icons_update(Request $request)
     {
         foreach ($request->type as $type) {

@@ -138,6 +138,17 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row mb-4">
+
+
+                                        <div class="form-group col-md-6">
+                                            <label for="status">{{trans('النوع')}}  </label>
+                                            <select name="type" id="type" class="form-control">
+                                                <option value="0">حضوري</option>
+                                                <option value="1">اونلاين</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group mb-4">
                                         <button type="submit" class="btn buttons-style button-save">{{trans('website.save')}}</button>
