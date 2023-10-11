@@ -558,7 +558,23 @@
                 </ul>
             </li>
         @endcan
-        @can('manage-report')
+        @can('manage-chats')
+            <li class="aiz-side-nav-item">
+                <a href="{{ route('chats.index') }}"
+                   class="aiz-side-nav-link {{ active_if_match('chats.index') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <g id="Group_8863" data-name="Group 8863" transform="translate(-4 -4)">
+                            <path id="Path_18925" data-name="Path 18925"
+                                  d="M18.4,4H5.6A1.593,1.593,0,0,0,4.008,5.6L4,20l3.2-3.2H18.4A1.6,1.6,0,0,0,20,15.2V5.6A1.6,1.6,0,0,0,18.4,4ZM7.2,9.6h9.6v1.6H7.2Zm6.4,4H7.2V12h6.4Zm3.2-4.8H7.2V7.2h9.6Z"
+                                  fill="#707070" />
+                        </g>
+                    </svg>
+                    <span class="aiz-side-nav-text">{{ __('المراسلة') }}</span>
+                </a>
+            </li>
+        @endcan
+
+    @can('manage-report')
             <li class="{{ active_if_match('/reports/report_students_ages') }}">
                 <a class="has-arrow" href="#">
 {{--                    <i class="fa fa-paper-plane"></i>--}}
@@ -635,6 +651,15 @@
             </li>
         @endcan
 
+        @can('manage-branch')
+            <li class="{{ active_if_match('admin/branches') }}">
+                <a class="" href="{{route('branches.index')}}">
+                    {{--                    <span class="iconify"></span>--}}
+                    <span>{{__('الفروع')}}</span>
+                </a>
+            </li>
+        @endcan
+
 
         @can('manage-goals')
             <li class="{{ active_if_match('admin/goals') }}">
@@ -666,6 +691,12 @@
                 </ul>
             </li>
         @endcan
+        <li class="aiz-side-nav-item">
+            <a href="{{ route('settings.index') }}"
+               class="aiz-side-nav-link {{ active_if_match('instructor.chats.index') }}">
+                <span class="aiz-side-nav-text">{{ __('الاعدادات') }}</span>
+            </a>
+        </li>
     </ul>
 </div>
 

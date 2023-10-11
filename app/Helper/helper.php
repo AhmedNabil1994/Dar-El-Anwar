@@ -50,35 +50,49 @@ function get_notify()
 
 function get_goals_today()
 {
-    \App\Models\Goal::where('target_evaluation_date',\Carbon\Carbon::now()->toDateString())
+    $goals = \App\Models\Goal::where('target_evaluation_date',\Carbon\Carbon::now()->toDateString())
         ->get();
-    $notify = \App\Models\Notification::where('text','يوجد تقييم اليوم')
-        ->where('is_seen','no')->first();
-    if (!$notify)
-        \App\Models\Notification::create([
-            'user_id' => 1,
-            'sender_id' => 1,
-            'text' => 'يوجد تقييم اليوم',
-        ]);
+
+    if($goals->count() > 0 ){
+        $notify = \App\Models\Notification::where('type',2)
+            ->where('is_seen','no')->first();
+
+        if (!$notify)
+            \App\Models\Notification::create([
+                'user_id' => 1,
+                'sender_id' => 1,
+                'type' => 2,
+                'text' => 'يوجد تقييم اليوم',
+            ]);
+    }
+    return  \App\Models\Notification::where('type',2)->count();
+
 }
 
 function get_calenders_today()
 {
    $calender =  \App\Models\Calender::where('start',\Carbon\Carbon::now()->toDateString())
         ->get();
-    $notify = \App\Models\Notification::where('text','لديك مهام اليوم')
-        ->where('is_seen','no')->first();
-    if (!$notify)
-        \App\Models\Notification::create([
-            'user_id' => 1,
-            'sender_id' => 1,
-            'text' => 'لديك مهام اليوم',
-        ]);
+   if($calender->count() > 0)
+   {
+       $notify = \App\Models\Notification::where('type',4)
+           ->where('is_seen','no')->first();
+       if (!$notify)
+           \App\Models\Notification::create([
+               'user_id' => 1,
+               'sender_id' => 1,
+               'type' => 4,
+               'text' => 'لديك مهام اليوم',
+           ]);
+   }
+    return  \App\Models\Notification::where('type',4)->count();
+
 }
 
 
 function get_absence_notify()
 {
+
     $collect_student = collect([]);
     $students = \App\Models\Student::all();
     foreach($students as $student){
@@ -110,16 +124,17 @@ function get_absence_notify()
 
     if ($collect_student->count() > 0) {
             foreach ($collect_student as $student) {
-                $notify = \App\Models\Notification::where('text',get_setting('warning_abscent_text'))
-                    ->where('is_seen','no')->first();
+                $notify = \App\Models\Notification::where('type',1) ->first();
                 if (!$notify)
                     \App\Models\Notification::create([
                         'user_id' => 1,
                         'sender_id' => 1,
+                        'type' => 1,
                         'text' => get_setting('warning_abscent_text')??0,
                     ]);
             }
     }
+    return  \App\Models\Notification::where('type',1)->count();
 }
 
 function get_follow_up_rsponse($followup_id,$question)
@@ -132,24 +147,35 @@ function get_follow_up_rsponse($followup_id,$question)
 
 function get_subscription_notify()
 {
-    $students = \App\Models\Student::whereHas('students_subscriped',function ($q){
-        $q->where('payment_status' , 'unpaid');
-    })->get();
 
+    $students = collect([]);
+    $subps =  \App\Models\StudentSubscription::get();
+    foreach ($subps as $subp){
+        $paid_to = \Carbon\Carbon::parse($subp->created_at)->addMonth($subp->rec_time)
+            ->addDays(get_setting('warning_late_subscription_time'))->toDateString();
+
+        if($paid_to < Carbon\Carbon::today())
+        {
+            $students->push($subp->student);
+        }
+    }
 
     if ($students->count() > 0) {
         foreach ($students as $student) {
-            $notify = \App\Models\Notification::where('text',get_setting('warning_subscription_text'))
-                ->where('is_seen','no')->first();
+            $notify = \App\Models\Notification::where('type',3)
+               ->first();
             if (!$notify)
                 \App\Models\Notification::create([
                     'user_id' => 1,
                     'sender_id' => 1,
+                    'type' => 3,
                     'text' => get_setting('warning_subscription_text'),
 
                 ]);
         }
     }
+
+    return  \App\Models\Notification::where('type',3)->count();
 }
 
 function get_late_subscription_notify()
@@ -161,8 +187,7 @@ function get_late_subscription_notify()
 
     if ($students->count() > 0) {
         foreach ($students as $student) {
-            $notify = \App\Models\Notification::where('text',get_setting('warning_late_subscription_text'))
-                ->where('is_seen','no')->first();
+            $notify = \App\Models\Notification::where('text',get_setting('warning_late_subscription_text'))->first();
             if (!$notify)
                 \App\Models\Notification::create([
                     'user_id' => 1,
@@ -270,6 +295,12 @@ function get_option($option_key)
     } else {
         return null;
     }
+}
+
+function get_my_option($option_key)
+{
+    $setting = Auth::user()->my_settings->where('type',$option_key)->first();
+    return $setting?->value;
 }
 
 function zoom_status()

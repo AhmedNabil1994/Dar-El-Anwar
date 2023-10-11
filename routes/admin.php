@@ -283,6 +283,9 @@ Route::prefix('course')->group(function () {
 
     Route::prefix('student')->group(function () {
         Route::get('/', [StudentController::class, 'index'])->name('student.index');
+        Route::get('JoiningIndex', [StudentController::class, 'JoiningIndex'])->name('student.JoiningIndex');
+        Route::get('NewsIndex', [StudentController::class, 'NewsIndex'])->name('student.NewsIndex');
+        Route::get('ExecludedIndex', [StudentController::class, 'ExecludedIndex'])->name('student.ExecludedIndex');
         Route::get('create', [StudentController::class, 'create'])->name('student.create');
         Route::post('store', [StudentController::class, 'store'])->name('student.store');
         Route::get('view/{id}', [StudentController::class, 'view'])->name('student.view');
@@ -325,7 +328,7 @@ Route::prefix('course')->group(function () {
         Route::get('/payment/wallet/{subscription}', 'SubscriptionController@processPaymentWallet')->name('payment.process.wallet');
         Route::post('store', 'SubscriptionController@store')->name('subscriptions.store');
         Route::post('students_subscription_store', 'SubscriptionController@students_subscription_store')->name('subscriptions.students_subscription.store');
-        Route::delete('delete/{subscription}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
+        Route::get('delete/{subscription}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
         Route::post('update/{subscription}', 'SubscriptionController@update')->name('subscriptions.update');
     });
     Route::prefix('invoices')->group(function () {
@@ -391,6 +394,14 @@ Route::prefix('course')->group(function () {
         Route::get('store', [ProfitController::class, 'store'])->name('profit.store');
         Route::post('update/{id}', [ProfitController::class, 'update'])->name('profit.update');
     });
+Route::prefix('branches')->group(function () {
+        Route::get('/', [\App\Http\Controllers\BranchController::class, 'index'])->name('branches.index');
+        Route::get('create', [\App\Http\Controllers\BranchController::class, 'create'])->name('branches.create');
+        Route::get('edit/{branch}', [\App\Http\Controllers\BranchController::class, 'edit'])->name('branches.edit');
+        Route::post('store', [\App\Http\Controllers\BranchController::class, 'store'])->name('branches.store');
+        Route::post('update/{branch}', [\App\Http\Controllers\BranchController::class, 'update'])->name('branches.update');
+        Route::get('delete/{branch}', [\App\Http\Controllers\BranchController::class, 'delete'])->name('branches.delete');
+    });
 
     Route::prefix('stores')->group(function () {
         Route::get('/', [StoreController::class, 'index'])->name('stores.index');
@@ -404,8 +415,11 @@ Route::prefix('course')->group(function () {
             Route::post('store/', [StoreController::class, 'storeMovement'])->name('stores.movement.store');
         });
         Route::prefix('product')->group(function () {
-            Route::get('/', [StoreController::class, 'indexProducts'])->name('stores.product.index');
-            Route::prefix('invoice')->group(function () {
+                Route::get('/', [StoreController::class, 'indexProducts'])->name('stores.product.index');
+                Route::get('edit/{product}', [StoreController::class, 'edit'])->name('stores.product.edit');
+                Route::post('update/{product}', [StoreController::class, 'update'])->name('stores.product.update');
+                Route::get('delete/{product}', [StoreController::class, 'delete'])->name('stores.product.delete');
+                Route::prefix('invoice')->group(function () {
                 Route::get('purcahse', [StoreController::class, 'invoicePurchasedProduct'])->name('stores.product.invoice.purchases');
                 Route::get('sales', [StoreController::class, 'invoiceSalesProduct'])->name('stores.product.invoice.sales');
                 Route::post('store', [StoreController::class, 'storeInvoicePurchasedProduct'])->name('admin.product.invoices.store');
@@ -414,6 +428,13 @@ Route::prefix('course')->group(function () {
             });
          Route::post('update/{id}', [StoreController::class, 'update'])->name('stores.update');
     });
+    Route::prefix('settings')->as('settings.')->group(function () {
+        Route::get('', [SettingController::class, 'index'])->name('index');
+        Route::get('icons', [SettingController::class, 'icons_index'])->name('icons.index');
+        Route::post('icons_update', [SettingController::class, 'icons_update'])->name('icons.update');
+
+    });
+
 
     Route::get('/parent_infos', [ParentInfoController::class, 'index'])->name('parent_infos.index');
     Route::get('/parent_infos/add', [ParentInfoController::class, 'add'])->name('parent_infos.create');
@@ -865,5 +886,9 @@ Route::group(['prefix' => 'affiliate','as' => 'affiliate.'], function () {
     Route::get('affiliate-history-date', [AffiliateController::class, 'allAffiliates'])->name('affiliate-history-data');
 });
 
+//chats
+    Route::resource('chats', \App\Http\Controllers\Admin\ChatController::class);
+    Route::post('/refresh/chats', [\App\Http\Controllers\Admin\ChatController::class, 'refresh'])->name('chats.refresh');
+    Route::post('/chat-reply', [\App\Http\Controllers\Admin\ChatController::class, 'reply'])->name('chats.reply');
 
 });

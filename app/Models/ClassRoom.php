@@ -12,7 +12,7 @@ class ClassRoom extends Model
     protected $guarded = [];
     public function department()
     {
-        return $this->hasMany(Department::class);
+        return $this->belongsTo(Department::class);
     }
 
     public function students()
@@ -23,5 +23,10 @@ class ClassRoom extends Model
     public function level()
     {
         return $this->belongsTo(Level::class);
+    }
+
+    public function class_subjects()
+    {
+        return $this->belongsToMany(Subject::class,'class_subjects','class_room_id');
     }
 }

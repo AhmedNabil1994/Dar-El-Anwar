@@ -66,15 +66,20 @@
                         </div>
                         <div>
                             <div class="customers__area bg-style mb-30">
-                            <form method="get" action="{{ route('invoices.index') }}" class="row justify-content-start mb-3">
+                            <form method="get" action="{{ route('invoices.index') }}" class="row justify-content-start   mb-3">
                                 <div class="col-md-3">
                                     <label class="form-label">اسم الطفل</label>
                                     <select class="form-select" name="child_name">
-
-                                        <option value="">اختر اسم الطفل</option>
-
                                         @foreach($students as $student)
                                             <option value="{{$student->name}}" {{$student->name == request('child_name') ? "selected": ""}}>{{$student->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">الفصل</label>
+                                    <select class="form-select" name="class">
+                                        @foreach($classes as $class)
+                                            <option value="{{$class->id}}"  {{$class->id == request('class') ? "selected": ""}}>{{$class->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -88,16 +93,7 @@
 {{--                                    </select>--}}
 
 {{--                                </div>--}}
-                                <div class="col-md-3">
-                                    <label class="form-label">الفصل</label>
-                                    <select class="form-select" name="class">
 
-                                        <option value="">اختر الفصل</option>
-                                        @foreach($classes as $class)
-                                            <option value="{{$class->id}}"  {{$class->id == request('class') ? "selected": ""}}>{{$class->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 <div class="col-md-3 d-flex align-items-center" style = "height:90px">
                                     <button class="btn buttons-style" type="submit">تم</button>
                                 </div>
@@ -122,8 +118,8 @@
                                     <tr>
                                         <td>{{$paidInvoice->id}}</td>
                                         <td>{{\Carbon\Carbon::parse($paidInvoice->paid_at)->format('Y-m-d')}}</td>
-                                        <td>{{$paidInvoice->subscription->subscription->name}}</td>
-                                        <td> @lang('website.'.\Carbon\Carbon::parse($paidInvoice->subscription->created_at)->format('F'))</td>
+                                        <td>{{$paidInvoice->subscription?->subscription?->name}}</td>
+                                        <td> @lang('website.'.\Carbon\Carbon::create()->month($paidInvoice->month)->format('F'))</td>
                                         <td>
                                             {{ $paidInvoice->note}}
                                         </td>

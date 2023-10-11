@@ -27,7 +27,7 @@ class EmployeeController extends Controller
 
     public function index(Request $request)
     {
-        $employees = Employee::query()->orderBy('id','desc');
+        $employees = Employee::query()->whereStatus(1)->orderBy('id','desc');
         $query_search = $request->query_search;
         if($query_search)
             $employees->where('name','LIKE','%'.$query_search.'%');
@@ -47,7 +47,7 @@ class EmployeeController extends Controller
 
     public function archive(Request $request)
     {
-        $employees = Employee::query()->where('status',2);
+        $employees = Employee::query()->where('status',3);
         $query_search = $request->query_search;
         if($query_search)
             $employees->where('name','LIKE','%'.$query_search.'%');
@@ -189,7 +189,14 @@ class EmployeeController extends Controller
         }
 
         $employee->roles()->sync(Role::findOrFail($request->role));
+        if ($employee->salary)
         $employee->salary->update([
+            'salary' => $request->input('salary'),
+            'date' => now(), // You can adjust this based on your requirements
+        ]);
+        else
+        Salary::create([
+            'employee_id' => $employee->id,
             'salary' => $request->input('salary'),
             'date' => now(), // You can adjust this based on your requirements
         ]);

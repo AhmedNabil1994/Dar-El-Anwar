@@ -43,7 +43,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 client_code_container">
                                 <label for="client_code">كود العميل:</label>
                                 <select class="form-select" id="client_code" name="client_code" required>
                                     <option value="">اختر كود العميل</option>
@@ -176,24 +176,19 @@
         console.log( $('#client_type'))
         $('#client_type').on('change',function (){
             if($(this).val() === 'student'){
-                const selectElement = $('<select>')
-                    .addClass('form-select')
+
+                const client_code = $('<select>')
+                    .attr('class', 'form-select js-example-basic-single')
                     .attr('id', 'client_code')
                     .attr('name', 'client_code')
-                    .prop('required', true)
-                    .append($('<option>').val('').text('اختر كود العميل'));
+                    .prop('required', true);
 
-                // Replace the input element with the select element
-                $('#client_code').replaceWith(selectElement);
-                const selectElement2 = $('<select>')
-                    .addClass('form-select')
+                const client_name = $('<select>')
                     .attr('id', 'client_name')
                     .attr('name', 'client_name')
-                    .prop('required', true)
-                    .append($('<option>').val('').text('اختر اسم العميل'));
+                    .attr('class', 'form-select js-example-basic-single')
+                    .prop('required', true);
 
-                // Replace the input element with the select element
-                $('#client_name').replaceWith(selectElement2);
                 $.ajax({
                     url: '{{route('api.students')}}', // Replace with your API endpoint URL
                     method: 'GET',
@@ -210,6 +205,13 @@
                     }
                 });
 
+                $('#client_code').replaceWith(client_code);
+
+                $('#client_code').nextAll('.select2').remove();
+
+                $('#client_name').replaceWith(client_name);
+                $('#client_name').nextAll('.select2').remove();
+
                 $('#client_code').on('change',function (){
                     $.ajax({
                         url:  '{{url('/api/students_by_code/')}}/'+$('#client_code').val(), // Replace with your API endpoint URL
@@ -217,7 +219,7 @@
                         dataType: 'json', // Set the expected data type
                         success: function(data) {
                             console.log(data)
-                            $('#client_name').val(data.student.id)
+                            $('#client_name').val(data.student.id).trigger("change")
                         },
                         error: function(xhr, status, error) {
                             // Handle any errors that occur during the request
@@ -225,13 +227,14 @@
                         }
                     });
                 })
+
                 $('#client_name').on('change',function (){
                     $.ajax({
                         url: '{{url('/api/students_by_name/')}}/'+$('#client_name').val(), // Replace with your API endpoint URL
                         method: 'GET',
                         dataType: 'json', // Set the expected data type
                         success: function(data) {
-                            $('#client_code').val(data.student.id)
+                            $('#client_code').val(data.student.id).trigger("change")
                         },
                         error: function(xhr, status, error) {
                             // Handle any errors that occur during the request
@@ -248,9 +251,10 @@
                     .attr('name', 'client_code')
                     .prop('required', true)
                     .attr('placeholder', 'ادخل كود العميل');
-
                 // Replace the select element with the input element
                 $('#client_code').replaceWith(inputElement);
+                $('#client_code').nextAll('.select2').remove();
+
                 const inputElement2 = $('<input>')
                     .attr('type', 'text')
                     .addClass('form-control')
@@ -261,7 +265,10 @@
 
                 // Replace the select element with the input element
                 $('#client_name').replaceWith(inputElement2);
+                $('#client_name').nextAll('.select2').remove();
             }
+
+            $(".js-example-basic-single").select2();
         });
     </script>
 @endpush

@@ -833,3 +833,9 @@ Route::group(["middleware"=> \App\Http\Middleware\Student::class],function (){
 
 
 });
+
+//chats
+Route::resource('chats', \App\Http\Controllers\Student\ChatController::class);
+Route::post('/refresh/chats', [\App\Http\Controllers\Student\ChatController::class, 'refresh'])->name('chats.refresh');
+Route::post('/chat-reply', [\App\Http\Controllers\Student\ChatController::class, 'reply'])->name('chats.reply');
+

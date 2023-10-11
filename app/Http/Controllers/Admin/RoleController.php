@@ -31,11 +31,11 @@ class RoleController extends Controller
     {
         $data['title'] = 'اضافة مجموعة';
         $data['roles'] = Role::all();
-        $data['permissions'] = Permission::all();
+        $data['permissions'] = Permission::orderBy('id','ASC')->get();
         $data['navUserParentActiveClass'] = 'mm-active';
         $data['navUserParentShowClass'] = 'mm-show';
         $data['subNavUserRoleActiveClass'] = 'mm-active';
-        $data['roles'] = Role::whereNull('role_parent_id')->get();
+        $data['roles'] = Role::whereNull('role_parent_id')->orderBy('id','ASC')->get();
         return view('admin.user.role.create', $data);
     }
 
@@ -54,12 +54,12 @@ class RoleController extends Controller
     {
         $data['title'] = 'تعديل مجموعة';
         $data['role'] = Role::find($id);
-        $data['permissions'] = Permission::all();
+        $data['permissions'] = Permission::orderBy('id','ASC')->get();
         $data['selected_permissions'] = DB::table('role_has_permissions')->where('role_id', $id)->select('permission_id')->pluck('permission_id')->toArray();
         $data['navUserParentActiveClass'] = 'mm-active';
         $data['navUserParentShowClass'] = 'mm-show';
         $data['subNavUserRoleActiveClass'] = 'mm-active';
-        $data['roles'] = Role::whereNull('role_parent_id')->get();
+        $data['roles'] = Role::whereNull('role_parent_id')->orderBy('id','ASC')->get();
         return view('admin.user.role.edit', $data);
 
     }

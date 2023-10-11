@@ -87,7 +87,20 @@
                                                    autocomplete="address" required>
                                         </div>
                                     </div>
-
+                                    <div class="form-group col-md-3 mb-4">
+                                        <div class="input__group mb-25">
+                                            <label>{{trans('website.status')}} <span
+                                                    class="text-danger">*</span></label>
+                                            <select name="status" id="status" class="form-control"/>
+                                            <option value="" selected>{{trans('website.select_status')}}</option>
+                                            <option value="1">{{trans('website.approved')}}</option>
+                                            <option value="3">{{trans('website.excluded')}}</option>
+                                            </select>
+                                            @if ($errors->has('status'))
+                                                <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('status') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="form-group col-md-3 mb-4">
                                         <label for="qualification" class=" form-label text-md-right">{{ trans('website.qualifications') }} <span class="required-star">*</span></label>
                                         <div class="col-md-12">

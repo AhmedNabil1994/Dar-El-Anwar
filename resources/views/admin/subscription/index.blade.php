@@ -220,7 +220,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="department_id">القسم</label>
-                                <select name="department_id" id="department_id" class="form-select" required>
+                                <select name="department_id" id="department_id"  required>
                                     @foreach($departs as $depart)
                                         <option value="{{$depart->id}}">{{$depart->name}}</option>
                                     @endforeach
@@ -228,7 +228,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="subject_id">المادة</label>
-                                <select name="subject_id" id="subject_id" class="form-select" required>
+                                <select name="subject_id" id="subject_id" required>
                                     @foreach($subjects as $subject)
                                         <option value="{{$subject->id}}">{{$subject->name}}</option>
                                     @endforeach

@@ -9,14 +9,14 @@
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__content__left">
                             <div class="breadcrumb__title">
-                                <h2>{{trans('website.courses')}}</h2>
+                                <h2>{{trans('دوراتي')}}</h2>
                             </div>
                         </div>
                         <div class="breadcrumb__content__right">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('website.dashboard')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{trans('website.approvedInstructors')}}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('دوراتي')}}</li>
                                 </ul>
                             </nav>
                         </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
-                            <h2>{{ trans("website.allCourses") }}</h2>
+                            <h2>{{ trans("دوراتي") }}</h2>
                         </div>
 
                         @can('manage_course')
@@ -180,10 +180,9 @@
                                         <th>المحتوى</th>
                                         <th>الموعد</th>
                                         <th>قيمة الإشتراك</th>
-                                        <th>التاريخ من</th>
-                                        <th>التاريخ الى</th>
+{{--                                        <th>التاريخ من</th>--}}
+{{--                                        <th>التاريخ الى</th>--}}
                                         <th>عدد الطلبة</th>
-                                        <th>الحالة</th>
                                         @can('manage_course')
                                         <th>الإجراءات</th>
                                         @endcanany
@@ -195,27 +194,15 @@
                                             <td>{{$course->code}}</td>
                                             <td>{{$course->title}}</td>
                                             <td>{{$course->instructor?->employee?->name}}</td>
-                                            <td>{{$course->subject}}</td>
+                                            <td>{{$course->subject?->name}}</td>
                                             <td>{{$course->department?->name}}</td>
                                             <td>{{$course->content}}</td>
-                                            <td>{{$course->time}}</td>
+                                            <td>{{\Carbon\Carbon::parse($course->time)->format('h:i A')}}</td>
                                             <td>{{$course->price}}</td>
-                                            <td>{{$course->date_from}}</td>
-                                            <td>{{$course->date_to}}</td>
+{{--                                            <td>{{$course->date_from}}</td>--}}
+{{--                                            <td>{{$course->date_to}}</td>--}}
                                             <td>{{$course->students?->count()}}</td>
-                                            <td>
-                                                @if($course->status == 1)
-                                                    <span class="status active">{{ __('Published') }}</span>
-                                                @elseif($course->status == 2)
-                                                    <span class="status active">{{ __('Waiting for Review') }}</span>
-                                                @elseif($course->status == 3)
-                                                    <span class="status blocked">{{ __('Hold') }}</span>
-                                                @elseif($course->status == 4)
-                                                    <span class="status ">{{ __('Draft') }}</span>
-                                                @else
-                                                    <span class="status ">{{ __('Pending') }}</span>
-                                                @endif
-                                            </td>
+
 
                                             @can('manage_course')
                                             <td>

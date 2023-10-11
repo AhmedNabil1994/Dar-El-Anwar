@@ -29,4 +29,9 @@ class Subject extends Model
     {
         return $this->hasMany(Goal::class);
     }
+
+    public function class_subjects()
+    {
+        return $this->belongsToMany(ClassRoom::class,'class_subjects');
+    }
 }

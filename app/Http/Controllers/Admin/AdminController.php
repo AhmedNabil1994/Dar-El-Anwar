@@ -86,7 +86,7 @@ class AdminController extends Controller
 
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('id','ASC')->get();
         return view('admin.admins.create',compact('roles'));
     }
 

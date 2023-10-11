@@ -227,8 +227,8 @@
                     success: function (data) {
                         $('#name').val(data.name);
                         $('#value').val(data.value);
-                        $('#department_id').val(data.department_id);
-                        $('#subject_id').val(data.subject_id);
+                        $('#department_id').val(data.department_id).trigger("change");
+                        $('#subject_id').val(data.subject_id).trigger("change");
 
                         // Update the form's action attribute
                         $('#editForm').attr('action', 'subscriptions/update/' + subscription.id );

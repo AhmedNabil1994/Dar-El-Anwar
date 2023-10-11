@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Str;
 
 class FinancialAccountController extends Controller
 {
@@ -24,27 +25,28 @@ class FinancialAccountController extends Controller
     public function treasury(Request $request)
     {
         //
+        $currentDateTime = Carbon::now();
+        $startDate = $currentDateTime->startOfDay()->addHour();
+
         $data['transactions'] = Transaction::query()->orderBy('id','DESC');
+        $data['openingBalance'] = Transaction::where('date','<',$startDate)->sum('amount');
         $data['totalCredit'] =  Transaction::where('transaction_type', 'income')->sum('amount');
         $data['totalDebit'] = Transaction::where('transaction_type', 'expense')->sum('amount');
-        $data['closingBalance'] = Transaction::where('date', Carbon::today()->format('Y-m-d'))
-                                ->orderBy('id','DESC')->first()?->last_amount;
-        $data['openingBalance'] = Balance::where('date',Carbon::today()->format('Y-m-d'))
-                                ->first()?->opening_balance;
+        $data['closingBalance'] = $data['openingBalance'] + $data['totalCredit'] + $data['totalDebit'];
 
         $transactions = Transaction::orderBy('date','DESC')->get();
-        $data['totalBalanceSoFar'] = 0;
+        $data['totalBalanceSoFar'] = $data['totalCredit'] + $data['totalDebit'];
 
-        foreach ($transactions as $transaction) {
-            if ($transaction->transaction_type === 'income') {
-                $data['totalBalanceSoFar'] += $transaction->amount;
-            } elseif ($transaction->transaction_type === 'expense') {
-                $data['totalBalanceSoFar'] -= $transaction->amount;
-            }
-        }
+
         if($request->fiterByType){
             $data['transactions']->where('transaction_type',$request->fiterByType);
         }
+
+        if ($request->dateFrom)
+            $data['transactions']->where('date', '>',$request->dateFrom)->get();
+         if ($request->dateTo)
+                    $data['transactions']->where('date','<',  $request->dateTo)->get();
+
         $data['transactions'] = $data['transactions']->paginate(25);
         return view('admin.finance_accounts.treasury',$data);
 
@@ -78,7 +80,7 @@ class FinancialAccountController extends Controller
        else
            $last_amount = $last_amount - $request->amount;
         $data = [
-            'trans_no'=>rand(0000,9999),
+            'trans_no'=>Str::uuid(),
             'date' => $request->date ?? Carbon::now()->format('Y-m-d'),
             'name' => $request->name,
             'branch_id' => Auth::user()->branch_id,
