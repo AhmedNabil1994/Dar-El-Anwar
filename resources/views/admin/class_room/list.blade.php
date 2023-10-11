@@ -31,10 +31,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="customers__area bg-style mb-30">
-                        @can('add-class_room')
+                        @can('create-class_room')
                         <div class="item-title d-flex justify-content-between align-items-end">
                             <h2>{{ trans('قائمة الفصول') }}</h2>
-                            @can('add-class_room')
+                            @can('create-class_room')
                                 <a href="{{ route('class_room.create') }}" class="btn buttons-style btn-sm">
                                     <i class="fa fa-plus"></i> {{ trans('اضف فصل') }}
                                 </a>

@@ -79,8 +79,9 @@
                                                 name="subject_id[]" >
                                             @foreach($subjects as $subject)
                                                 <option value="{{$subject->id}}"
-                                                    {{in_array($subject->id,$class->class_subjects->pluck('id')->toArray()) ? "selected" : ""}}
-                                                 >   {{$subject->name}}</option>
+                                                        {{in_array($subject->id,$class->class_subjects->pluck('id')->toArray())?'selected':''}}
+                                                >{{$subject->subject->name}} - {{$subject->instructor->employee->name}}</option>
+
                                             @endforeach
                                         </select>
                                         @error('subject_id')

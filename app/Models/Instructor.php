@@ -54,9 +54,9 @@ class Instructor extends Authenticatable
         return $this->belongsTo(State::class, 'state_id');
     }
 
-    public function subject()
+    public function instructor()
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsToMany(Subject::class,'instructor_subjects');
     }
 
     public function certificates()

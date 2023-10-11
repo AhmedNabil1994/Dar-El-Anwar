@@ -113,9 +113,7 @@
 <script src="{{ asset('admin/js/select2.js') }}"></script>
 <script>
 
-    $('textarea').each(function(index) {
-        $(this).attr('id', 'tinymceExample')
-    });
+
     $('select').each(function(index) {
         if($(this).attr('multiple'))
             $(this).addClass('js-example-basic-multiple')
@@ -141,11 +139,6 @@
 <script src="{{ asset('admin/js/tinymce/tinymce.min.js') }}"></script>
 
 <script src="{{ asset('/admin/js/tinymce.js') }}"></script>
-<script>
 
-    $('textarea').each(function(index) {
-        $(this).attr('id', 'tinymceExample')
-    });
-</script>
 </body>
 </html>

@@ -19200,6 +19200,9 @@ h3 {
     .print-form button {
         display: none;
     }
+    footer {
+        display: none;
+    }
 }
 
 .print-button,

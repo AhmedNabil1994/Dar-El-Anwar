@@ -38,28 +38,13 @@
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="input__group text-black">
-                                        <label>{{ trans('website.department') }} <span class="text-danger">*</span></label>
-                                        <select type="text" name="department_id" class="form-select" required>
-                                            <option value="">__</option>
-                                            @foreach($departments as $department)
-                                                <option value="{{$department->id}}" {{$department->id == $subject->department?->id? 'selected' : ''}}>{{$department->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('department_id'))
-                                            <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('department_id') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <div class="input__group text-black">
                                         <label>{{ trans('website.teacher') }} <span class="text-danger">*</span></label>
-                                        <select type="text" name="instructor_id" class="form-select" required>
+                                        <select type="text" name="instructor_id[]"
+                                                multiple="multiple"
+                                                class="form-select" required>
                                             <option value="">__</option>
                                             @foreach($instructors as $intructor)
-                                                <option value="{{$intructor->id}}" {{$intructor->id == $subject->instructor?->id? 'selected' : ''}}>{{$intructor->employee->name}}</option>
+                                                <option value="{{$intructor->id}}" {{in_array($intructor->id,$subject->instructor->pluck('id')->toArray())? 'selected' : ''}}>{{$intructor->employee->name}}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('instructor_id'))

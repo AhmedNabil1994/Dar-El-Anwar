@@ -31,7 +31,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title btn-title-container">
                             <h2>{{ trans('website.admin_list') }}</h2>
-                           @can('add-admin')
+                           @can('create-admin')
                                 <a href="{{ route('admins.create') }}" class="btn buttons-style btn-sm">
                                     <i class="fa fa-plus"></i> {{ trans('website.add_admin') }}
                                 </a>

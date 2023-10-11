@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ClassRoom;
 use App\Models\Department;
+use App\Models\InstructorSubject;
 use App\Models\Level;
 use App\Models\Subject;
 use FontLib\Table\Type\name;
@@ -36,7 +37,7 @@ class ClassRoomController extends Controller
     {
         //
         $data['departs'] = Department::whereStatus(1)->get();
-        $data['subjects'] = Subject::all();
+        $data['subjects'] = InstructorSubject::all();
         return view('admin.class_room.create',$data);
     }
 
@@ -49,11 +50,13 @@ class ClassRoomController extends Controller
     public function store(Request $request)
     {
         //
-        ClassRoom::create([
+
+        $class = ClassRoom::create([
             'name'=>$request->name,
             'department_id'=>$request->dept_id,
             'status'=>1,
         ]);
+        $class->class_subjects()->sync($request->subject_id);
         return redirect()->route('class_room.index')->with('success','تم اضافة الفصل');
     }
 
@@ -78,7 +81,7 @@ class ClassRoomController extends Controller
     {
         //
         $data['departs'] = Department::whereStatus(1)->get();
-        $data['subjects'] = Subject::all();
+        $data['subjects'] = InstructorSubject::all();
         return view('admin.class_room.edit',compact('class'),$data);
     }
 
@@ -97,7 +100,7 @@ class ClassRoomController extends Controller
             'department_id'=>$request->dept_id,
             'status'=>$request->status?1:0,
         ]);
-        $class->class_subjects()->sync($request->subject_id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     );
+        $class->class_subjects()->sync($request->subject_id);
         return redirect()->route('class_room.index')->with('success','تم تعديل الفصل');
     }
 

@@ -30,7 +30,7 @@
                         <div class="customers__area bg-style mb-30">
                             <div class="item-title d-flex justify-content-between">
                                 <h2>{{trans('website.categories')}}</h2>
-                                @can('add-department')
+                                @can('create-department')
                                 <a href="{{route('category.create')}}" class="btn buttons-style btn-sm"> <i class="fa fa-plus"></i> {{trans('اضف قسم')}} </a>
                                 @endcan
                             </div>
