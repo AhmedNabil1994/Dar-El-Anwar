@@ -74,6 +74,14 @@
                                         </div>
 
                                         <div class="form-group col-6">
+                                            <label for="type">نوع المنتج:</label>
+                                            <select class="form-select" id="type" name="type" required>
+                                                <option value="1" {{1 == $product->type ? 'selected' : ''}}>كتب</option>
+                                                <option value="2" {{2 == $product->type ? 'selected' : ''}}>اخر</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-6">
                                             <label for="quantity">description :</label>
                                             <input type="text" class="form-control" value="{{$product->meta_description}}" id="meta_description" name="meta_description" required>
                                         </div>

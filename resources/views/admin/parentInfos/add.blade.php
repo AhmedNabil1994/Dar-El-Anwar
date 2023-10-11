@@ -260,7 +260,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="parents_marital_status" class="col-md-4 col-form-label text-md-right">{{ __('Parents Marital Status') }}</label>
+                                        <label for="parents_marital_status" class="col-md-4 col-form-label text-md-right">{{ __('website.parents_marital_status') }}</label>
                                         <div class="col-md-6">
                                             <select id="parents_marital_status" class="form-control @error('parents_marital_status') is-invalid @enderror" name="parents_marital_status"  autocomplete="parents_marital_status">
                                                 <option value="" disabled selected>{{ __('Select an option') }}</option>
