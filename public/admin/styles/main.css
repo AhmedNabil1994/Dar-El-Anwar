@@ -19191,8 +19191,10 @@ h3 {
     }
 
     .student-edit-form,
+    .student-add-form,
+    .last-field-form,
     .eval-page-print {
-        page-break-after: always;
+        page-break-after: always !important;
     }
     .print-form a,
     .print-form button {
@@ -19353,3 +19355,10 @@ h3 {
 
 
 
+.student-add-form {
+
+}
+
+.eval-page-print{
+    /* display: block; */
+}

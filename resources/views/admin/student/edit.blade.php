@@ -1090,7 +1090,6 @@
 
                     if ($(this).prop('checked')) {
 
-<<<<<<< HEAD
     <script>
         $(document).ready(function(){
             $("#print").on("click",function printDiv() {
@@ -1103,62 +1102,3 @@
     </script>
     
 @endpush
-=======
-                        $(this).parent().next('.parent_credintials').append(`
-                        <div class="row mb-3" id="credits">
-                            <div class="col-md-6">
-                                <label>البريد الالكتروني</label>
-                                <input type="email" name="guardian_email[]" class="form-control" value="${email}">
-                            </div>
-                            <div class="col-md-6">
-                                <label>كلمة السر</label>
-                                <input type="password" name="guardian_password[]" class="form-control">
-                            </div>
-                        </div>
-`)
-                    } else {
-                        $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
-                    }
-                })
-                $('.followup_officer').on('click', function () {
-                    if ($(this).prop('checked')) {
-                        $(this).parent().next('.parent_credintials').append(`
-                        <div class="row mb-3" id="credits">
-                            <div class="col-md-6">
-                                <label>البريد الالكتروني</label>
-                                <input type="email" name="guardian_email[]" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label>كلمة السر</label>
-                                <input type="password" name="guardian_password[]" class="form-control">
-                            </div>
-                        </div>
-`)
-                    } else {
-                        $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
-                    }
-                })
-
-
-            </script>
-            <script>
-
-                $('.guardian_relationship').on('change', function () {
-                    if ($(this).val() == 3) {
-                        console.log($(this).val())
-                        $(this).parent().parent().next('.col-md-6').css('display', 'block');
-                    } else {
-                        $(this).parent().parent().next('.col-md-6').css('display', 'none');
-                    }
-                });
-                $('.guardian_relationship').each(function () {
-                    if ($(this).val() == 3) {
-                        console.log($(this).val())
-                        $(this).parent().parent().next('.col-md-6').css('display', 'block');
-                    } else {
-                        $(this).parent().parent().next('.col-md-6').css('display', 'none');
-                    }
-                });
-            </script>
-    @endpush
->>>>>>> 6494593714017f30d07ec226e98325a0af6885f0

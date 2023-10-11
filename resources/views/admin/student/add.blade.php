@@ -30,11 +30,11 @@
             </div>
             <div class="row" id="print-form">
                 <div class="col-md-12 ">
-                    <div class="customers__area bg-style mb-30">
+                    <div class="customers__area bg-style mb-30"> 
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ trans('website.add_student') }}</h2>
                         </div>
-                        <form action="{{route('student.store')}}" method="post" class="form-horizontal"
+                        <form action="{{route('student.store')}}" method="post" class="form-horizontal student-add-form"
                               enctype="multipart/form-data">
                             @csrf
                             <div class="row">
@@ -527,7 +527,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 last-field-form">
                                         <div class="form-group mb-25">
                                             <label for="another_file">{{trans("website.another")}} <i class="fa fa-file"></i></label>
                                             <input type="file" name="parents_card_copy"
@@ -541,132 +541,156 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                {{-- </div> --}}
                                 <div class="row mb-3 ">
                                     <div class="col-md-12 text-right d-flex">
-                                        <button class="btn buttons-style"
+                                        <button style = "width:100px"class="btn buttons-style"
                                                 type="submit">{{ trans('website.save') }}</button>
-                                        <button id="print" class="btn btn-secondary me-3"
+                                        <button style = "width:100px"id="print" class="btn btn-secondary me-3"
                                                 type="button">{{ trans('طباعة') }}</button>
                                     </div>
                                 </div>
                         </form>
-
                         <!-- evaluation -->
 
                         <div class="row eval-page-print">
-                        <div class="item-title ">
-                            <h2>{{ trans('إضافة تقييم') }}</h2>
-                        </div>
-                        <form action="{{route('review.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
-                            @csrf
-                            <div class="d-flex justify-content-between align-items-end">
-                                <div class="">
-                                    <h3 class="h2 text-dark">اسم الطفل : <span class="text-danger"></span></h3>
-                                    <input type="hidden" name="student_id" value="">
-                                </div>
-                                <div class="">
-                                    <button type="submit" class="btn buttons-style">حفظ</button>
-                                    <a href="" class="btn btn-danger">الغاء</a>
-                                        <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
-                                </div>
+                            <div class="item-title ">
+                                <h2>{{ trans('إضافة تقييم') }}</h2>
                             </div>
-                            <div class="row m-5">
-                                <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
-                                    <h2 class="mb-3">اضطرابات النطق</h2>
-                                  <!-- </div> -->
-                                <div class="col-md-6" >
-                                    <input type="hidden" name="question[]" value="speech_disorders">
-                                    <textarea style="height: 50px" class="form-control" name="speech_disorders"></textarea>
-                                </div>
-                            </div>
-                            <div class="row m-5">
-                                <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
-                                    <h2>للملتحقين بقسم القرآن</h2>
-                                <!-- </div> -->
-
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">القرآن حفظاً</label>
-                                    <input type="hidden" name="question[]" value="quran_memorization">
-                                    <textarea style="height: 50px" class="form-control" name="quran_memorization"></textarea>
-                                </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">تلاوة معرفياً</label>
-                                    <textarea style="height: 50px" class="form-control" name="cognitive_recitation"></textarea>
-                                </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">تلاوة تطبيقياً</label>
-                                    <input type="hidden" name="question[]" value="practical_recitation">
-                                    <textarea style="height: 50px" class="form-control" name="practical_recitation"><</textarea>
-                                </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">علوم الشريعة</label>
-                                    <input type="hidden" name="question[]" value="sharia_sciences">
-                                    <textarea style="height: 50px" class="form-control" name="sharia_sciences"><</textarea>
-                                </div>
-                            </div>
-                            <div class="row m-5 align-items-end">
-                                <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
-                                        <h2>للملتحقين بمواد تعليمية أخرى</h2>
-                                <!-- </div> -->
-                                @foreach(\App\Models\Subject::all() as $subject)
-                                    <div class="col-md-6" >
-                                        <label class="form-label form-margin ">{{$subject->name}}</label>
-                                        <input type="hidden" name="question[]" value="{{str_replace(' ', '-', strtolower($subject->name))}}">
-                                        <textarea style="height: 50px" class="form-control" name="{{str_replace(' ', '-', strtolower($subject->name))}}"></textarea>
+                            <form action="{{route('review.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                                @csrf
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <div class="">
+                                        <h3 class="h2 text-dark">اسم الطفل : <span class="text-danger"></span></h3>
+                                        <input type="hidden" name="student_id" value="">
                                     </div>
-                                @endforeach
-                            </div>
-                            <div class="row m-5 align-items-center">
-                                    <h2>للملتحقين بقسم تعليم التلاوة</h2>
-                                <div class="col-md-6" >
-                                    <label class="form-label" >تمكين الحروف</label>
-                                    <input type="hidden" name="question[]" value="enable_letters">
-                                    <textarea style="height: 50px" class="form-control" name="enable_letters"></textarea>
+                                    <div class="">
+                                        <button type="submit" class="btn buttons-style">حفظ</button>
+                                        <a href="" class="btn btn-danger">الغاء</a>
+                                        <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">قراءة بنية الكلمات</label>
-                                    <input type="hidden" name="question[]" value="Reading_the_structure_of_words">
-                                    <textarea style="height: 50px" class="form-control" name="Reading_the_structure_of_words"></textarea>
+                                <div class="row m-5">
+                                    <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                        <h2 class="mb-3">اضطرابات النطق</h2>
+                                    <!-- </div> -->
+                                    <div class="col-md-6" >
+                                        <input type="hidden" name="question[]" value="speech_disorders">
+                                        <textarea style="height: 50px" class="form-control" name="speech_disorders"></textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">تجميع الجمل</label>
-                                    <input type="hidden" name="question[]" value="assembly_of_sentences">
-                                    <textarea style="height: 50px" class="form-control" name="assembly_of_sentences"></textarea>
+                                <div class="row m-5">
+                                    <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                        <h2>للملتحقين بقسم القرآن</h2>
+                                    <!-- </div> -->
+
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">القرآن حفظاً</label>
+                                        <input type="hidden" name="question[]" value="quran_memorization">
+                                        <textarea style="height: 50px" class="form-control" name="quran_memorization"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">تلاوة معرفياً</label>
+                                        <textarea style="height: 50px" class="form-control" name="cognitive_recitation"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">تلاوة تطبيقياً</label>
+                                        <input type="hidden" name="question[]" value="practical_recitation">
+                                        <textarea style="height: 50px" class="form-control" name="practical_recitation"><</textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">علوم الشريعة</label>
+                                        <input type="hidden" name="question[]" value="sharia_sciences">
+                                        <textarea style="height: 50px" class="form-control" name="sharia_sciences"><</textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">إملاء</label>
-                                    <input type="hidden" name="question[]" value="filling">
-                                    <textarea style="height: 50px" class="form-control" name="filling"></textarea>
+                                <div class="row m-5 align-items-end">
+                                    <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                            <h2>للملتحقين بمواد تعليمية أخرى</h2>
+                                    <!-- </div> -->
+                                    @foreach(\App\Models\Subject::all() as $subject)
+                                        <div class="col-md-6" >
+                                            <label class="form-label form-margin ">{{$subject->name}}</label>
+                                            <input type="hidden" name="question[]" value="{{str_replace(' ', '-', strtolower($subject->name))}}">
+                                            <textarea style="height: 50px" class="form-control" name="{{str_replace(' ', '-', strtolower($subject->name))}}"></textarea>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">القرآن بدون تشكيل</label>
-                                    <input type="hidden" name="question[]" value="quran_diacritics">
-                                    <textarea style="height: 50px" class="form-control" name="quran_diacritics"></textarea>
+                                <div class="row m-5 align-items-center">
+
+                                    <!-- <div class=" d-flex justify-content-center align-items-center p-5  col-md-1"> -->
+                                        <h2>للملتحقين بقسم تعليم التلاوة</h2>
+                                    <!-- </div> -->
+                                    <!-- <div class="row col-md-9"> -->
+
+                                    <div class="col-md-6" >
+                                        <label class="form-label" >تمكين الحروف</label>
+                                        <input type="hidden" name="question[]" value="enable_letters">
+                                        <textarea style="height: 50px" class="form-control" name="enable_letters"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">قراءة بنية الكلمات</label>
+                                        <input type="hidden" name="question[]" value="Reading_the_structure_of_words">
+                                        <textarea style="height: 50px" class="form-control" name="Reading_the_structure_of_words"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">تجميع الجمل</label>
+                                        <input type="hidden" name="question[]" value="assembly_of_sentences">
+                                        <textarea style="height: 50px" class="form-control" name="assembly_of_sentences"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">إملاء</label>
+                                        <input type="hidden" name="question[]" value="filling">
+                                        <textarea style="height: 50px" class="form-control" name="filling"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">القرآن بدون تشكيل</label>
+                                        <input type="hidden" name="question[]" value="quran_diacritics">
+                                        <textarea style="height: 50px" class="form-control" name="quran_diacritics"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">القرآن في المصحف</label>
+                                        <input type="hidden" name="question[]" value="quran_in_quran">
+                                        <textarea style="height: 50px" class="form-control" name="quran_in_quran"></textarea>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <label class="form-label form-margin ">آداب إسلامية</label>
+                                        <input type="hidden" name="question[]" value="islamic_etiquette">
+                                        <textarea style="height: 50px" class="form-control" name="islamic_etiquette"></textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">القرآن في المصحف</label>
-                                    <input type="hidden" name="question[]" value="quran_in_quran">
-                                    <textarea style="height: 50px" class="form-control" name="quran_in_quran"></textarea>
-                                </div>
-                                <div class="col-md-6" >
-                                    <label class="form-label form-margin ">آداب إسلامية</label>
-                                    <input type="hidden" name="question[]" value="islamic_etiquette">
-                                    <textarea style="height: 50px" class="form-control" name="islamic_etiquette"></textarea>
-                                </div>                   
-                            </div>
-                        </form>
+                            </form>
                         </div>
+                        {{-- instructions --}}
+                        <div class="container-fluid instructions instructions-page-print">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-md-4">
+                                    <h1 class="first" >استمارة التحاق بالدار</h1>
+                                </div>
+                                <div >
+                                    <h1 class=" second" >تعليمات عامة</h1>
+                                </div>
+                                <form action="{{route('settings.inq.update')}}" method="get" enctype="multipart/form-data">
 
+                                <textarea name="value" class="form-control" >{!! get_setting('inq') !!}</textarea>
 
-                        
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn buttons-style">
+                                                تم
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    {{-- </div> --}}
                     </div>
-                </div>
+                    {{-- </div>  --}}
             </div>
-
-
         </div>
     </div>
+    {{-- </div> --}}
     <!-- Page content area end -->
 @endsection
 
