@@ -14,7 +14,7 @@
                 </div>
                 <form action="{{route('settings.inq.update')}}" method="get" enctype="multipart/form-data">
 
-<textarea name="value" class="form-control" >{!! get_setting('inq') !!}</textarea>
+<textarea name="value" id="tinymceExample" class="form-control" >{!! get_setting('inq') !!}</textarea>
 
                     <div class="row justify-content-center">
                         <div class="col-md-3">

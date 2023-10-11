@@ -8,6 +8,7 @@ use App\Models\Course_lecture;
 use App\Models\Course_lesson;
 use App\Models\Department;
 use App\Models\Instructor;
+use App\Models\InstructorSubject;
 use App\Models\Subject;
 use App\Tools\Repositories\Crud;
 use App\Traits\General;
@@ -32,7 +33,7 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $subjects = Subject::query()->orderBy('id','DESC');
+        $subjects = InstructorSubject::query()->orderBy('id','DESC');
         if($request->search_key)
             $subjects->where('name','like','%'.$request->search_key.'%');
         $subjects = $subjects->paginate(25);
@@ -61,11 +62,13 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         //
-        Subject::create([
+        $subject = Subject::create([
             "name" => $request->subject_name,
             "department_id" => $request->department_id,
-            "instructor_id" => $request->instructor_id,
         ]);
+
+        $subject->instructor()->sync($request->instructor_id);
+
         return redirect()->route('admin.subject.index');
     }
 
@@ -109,8 +112,9 @@ class SubjectController extends Controller
         $subject->update([
             "name" => $request->subject_name,
             "department_id" => $request->department_id,
-            "instructor_id" => $request->instructor_id,
             ]);
+
+        $subject->instructor()->sync($request->instructor_id);
         return redirect()->route('admin.subject.index');
     }
 

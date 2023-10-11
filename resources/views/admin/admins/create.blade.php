@@ -37,7 +37,7 @@
                 <div class="customers__area bg-style mb-30">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        @can('add-admin')
+                        @can('create-admin')
                         <div class="ibox-title">
                             <h5>{{__('اضافة مسئول')}}</h5>
 

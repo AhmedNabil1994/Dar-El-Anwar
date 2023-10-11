@@ -30,7 +30,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between">
                             <h2>{{ __('website.subjectList') }}</h2>
-                            @can('add-subject')
+                            @can('create-subject')
                             <a href="{{route('admin.subject.create')}}" class="btn buttons-style btn-sm">
                                 <i class="fa fa-plus"></i> {{ trans('website.addSubject') }} </a>
                             @endcan
@@ -50,7 +50,8 @@
                                 <tr>
                                     <th>{{ trans('website.sl') }}</th>
                                     <th>{{ trans('website.subjectName') }}</th>
-                                    <th>{{ trans('website.department') }}</th>
+                                    <th>{{ trans('website.instructor') }}</th>
+                                    <th>{{ trans('website.class') }}</th>
                                     <th>{{ trans('website.action') }}</th>
                                 </tr>
                                 </thead>
@@ -58,19 +59,23 @@
                                 @foreach($subjects as $subject)
                                     <tr class="removable-item">
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$subject->name}}</td>
-                                        <td>{{$subject->department?->name}}</td>
+                                        <td>{{$subject->subject->name}}</td>
+                                        <td>{{$subject->instructor->employee->name}}</td>
+                                        <td>@foreach($subject->class_subjects as $class_subject)
+                                                {{$class_subject->name}} <br/>
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <div class="action__buttons">
 
                                                 @can('edit-subject')
-                                                <a href="{{route('admin.subject.edit', [$subject])}}" class="btn-action" title="Edit">
+                                                <a href="{{route('admin.subject.edit', [$subject->subject])}}" class="btn-action" title="Edit">
                                                     <img src="{{asset('admin/images/icons/edit-2.svg')}}" alt="edit">
                                                 </a>
                                                 @endcan
 
                                                     @can('delete-subject')
-                                                <a href="javascript:void(0);" data-url="{{route('admin.subject.delete', [$subject])}}" class="btn-action delete" title="Delete">
+                                                <a href="javascript:void(0);" data-url="{{route('admin.subject.delete', [$subject->subject])}}" class="btn-action delete" title="Delete">
                                                     <img src="{{asset('admin/images/icons/trash-2.svg')}}" alt="trash">
                                                 </a>
                                                     @endcan

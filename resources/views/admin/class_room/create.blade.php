@@ -75,7 +75,7 @@
                                                 name="subject_id[]" >
                                             @foreach($subjects as $subject)
                                                 <option value="{{$subject->id}}"
-                                                >{{$subject->name}}</option>
+                                                >{{$subject->subject->name}} - {{$subject->instructor->employee->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('subject_id')
