@@ -13,13 +13,7 @@
                     <h1 class=" second" >تعليمات عامة</h1>
                 </div>
                 <form action="{{route('settings.inq.update')}}" method="get" enctype="multipart/form-data">
-
-<<<<<<< HEAD
-                <textarea name="value" class="form-control" >{!! get_setting('inq') !!}</textarea>
-=======
-<textarea name="value" id="tinymceExample" class="form-control" >{!! get_setting('inq') !!}</textarea>
->>>>>>> 76c1ee7122bcfa3bb8f06b85cfb903c6b06e24b9
-
+                <textarea name="value" id="tinymceExample" class="form-control" >{!! get_setting('inq') !!}</textarea>
                     <div class="row justify-content-center">
                         <div class="col-md-3">
                             <button type="submit" class="btn buttons-style">

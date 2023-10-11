@@ -663,15 +663,17 @@
                         </div>
                         {{-- instructions --}}
                         <div class="container-fluid instructions instructions-page-print">
-                            <div class="row justify-content-center align-items-center">
+                            <div class="row justify-content-center align-items-center instructions">
                                 <div class="col-md-4">
                                     <h1 class="first" >استمارة التحاق بالدار</h1>
                                 </div>
                                 <div >
                                     <h1 class=" second" >تعليمات عامة</h1>
                                 </div>
+                                <div class=" instructions-container">
+                                    {!! get_setting('inq') !!}
+                                </div>
                                 <form action="{{route('settings.inq.update')}}" method="get" enctype="multipart/form-data">
-
                                 <textarea name="value" class="form-control" >{!! get_setting('inq') !!}</textarea>
 
                                     <div class="row justify-content-center">
@@ -684,6 +686,7 @@
                                 </form>
                             </div>
                         </div>
+                        
                     {{-- </div> --}}
                     </div>
                     {{-- </div>  --}}

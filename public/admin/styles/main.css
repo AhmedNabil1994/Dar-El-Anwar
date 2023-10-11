@@ -19173,12 +19173,14 @@ h3 {
 }
 
 .eval-page-print,
+.instructions-container,
 .instructions-page-print {
     display: none;
 }
 
 @media print {
     .eval-page-print,
+    .instructions-container,
     .instructions-page-print {
         display: block;
     }
@@ -19196,12 +19198,16 @@ h3 {
     .eval-page-print {
         page-break-after: always !important;
     }
+    .instructions-page-print form,
     .print-form a,
     .print-form button {
         display: none;
     }
     footer {
         display: none;
+    }
+    .instructions h1.second {
+        margin-bottom: 10px;
     }
 }
 
