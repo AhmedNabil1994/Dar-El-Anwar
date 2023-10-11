@@ -867,8 +867,7 @@
             $("#print").on("click",function printDiv() {
             console.log("clicked")
             $(".print-form").printThis({
-                importStyle: true, 
-                loadCSS: "./main.css",
+                importStyle: true, loadCSS: "./main.css",
             })
         })
     })   
