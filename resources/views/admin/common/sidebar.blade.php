@@ -268,7 +268,7 @@
                         </li>
                     @endcan
 
-                    @can('add-bus')
+                    @can('create-bus')
                         <li class="{{ active_if_full_match('admin/bus/assign') }}">
                             <a href="{{route('admin.bus.create')}}">
 {{--                                <i class="fa fa-circle"></i>--}}

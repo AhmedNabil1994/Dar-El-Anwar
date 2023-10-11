@@ -27,6 +27,7 @@ class ClassRoom extends Model
 
     public function class_subjects()
     {
-        return $this->belongsToMany(Subject::class,'class_subjects','class_room_id');
+        return $this->belongsToMany(InstructorSubject::class,'class_instructor_subjects',
+            'class_room_id','instructor_subjects_id');
     }
 }

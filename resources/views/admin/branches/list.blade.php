@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="all-students bg-style mb-30 table-title-container " style="overflow-x:auto;">
-                        @can('add-branch')
+                        @can('create-branch')
                             <div class="ibox-title">
                                 <a href="{{route('branches.create')}}" class="btn buttons-style">{{__('اضافة فرع')}}</a>
 

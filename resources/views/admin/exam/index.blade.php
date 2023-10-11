@@ -31,7 +31,7 @@
                     <div class="customers__area bg-style mb-30">
                         <div class="item-title d-flex justify-content-between align-items-end">
                             <h2>{{ trans('website.all_exams') }}</h2>
-                            @can('add-exam')
+                            @can('create-exam')
                             <a href="{{ route('admin.exam.create') }}" class="btn btn-sm buttons-style" style="background-color: #50bfa5;">
                                 <i class="fa fa-plus"></i> {{ trans('website.add_exam') }}
                             </a>
