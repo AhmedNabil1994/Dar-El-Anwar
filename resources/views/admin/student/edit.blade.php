@@ -974,7 +974,6 @@
 
                     if ($(this).prop('checked')) {
 
-<<<<<<< HEAD
     <script>
         $(document).ready(function(){
             $("#print").on("click",function printDiv() {
@@ -985,44 +984,5 @@
         })
     })   
     </script>
+    
 @endpush
-=======
-                        $(this).parent().next('.parent_credintials').append(`
-                        <div class="row mb-3" id="credits">
-                            <div class="col-md-6">
-                                <label>البريد الالكتروني</label>
-                                <input type="email" name="guardian_email[]" class="form-control" value="${email}">
-                            </div>
-                            <div class="col-md-6">
-                                <label>كلمة السر</label>
-                                <input type="password" name="guardian_password[]" class="form-control">
-                            </div>
-                        </div>
-`)
-                    } else {
-                        $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
-                    }
-                })
-                $('.followup_officer').on('click', function () {
-                    if ($(this).prop('checked')) {
-                        $(this).parent().next('.parent_credintials').append(`
-                        <div class="row mb-3" id="credits">
-                            <div class="col-md-6">
-                                <label>البريد الالكتروني</label>
-                                <input type="email" name="guardian_email[]" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label>كلمة السر</label>
-                                <input type="password" name="guardian_password[]" class="form-control">
-                            </div>
-                        </div>
-`)
-                    } else {
-                        $(this).parent().next('.parent_credintials').find('div[id=credits]').remove();
-                    }
-                })
-
-
-            </script>
-    @endpush
->>>>>>> e3c1bf6915dab8396b0812ba8fabe7375919604c

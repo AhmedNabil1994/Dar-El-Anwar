@@ -532,12 +532,12 @@
                             @csrf
                             <div class="d-flex justify-content-between align-items-end">
                                 <div class="">
-                                    <h3 class="h2 text-dark">اسم الطفل : <span class="text-danger">{{$student->name}}</span></h3>
-                                    <input type="hidden" name="student_id" value="{{$student->id}}">
+                                    <h3 class="h2 text-dark">اسم الطفل : <span class="text-danger"></span></h3>
+                                    <input type="hidden" name="student_id" value="">
                                 </div>
                                 <div class="">
                                     <button type="submit" class="btn buttons-style">حفظ</button>
-                                    <a href="{{route('student.edit',$student->id)}}" class="btn btn-danger">الغاء</a>
+                                    <a href="" class="btn btn-danger">الغاء</a>
                                         <button id = "print" class="btn btn-secondary me-3" type="button">{{ trans('طباعة') }}</button>
                                 </div>
                             </div>
@@ -547,7 +547,7 @@
                                   <!-- </div> -->
                                 <div class="col-md-6" >
                                     <input type="hidden" name="question[]" value="speech_disorders">
-                                    <textarea style="height: 50px" class="form-control" name="speech_disorders">{{get_review($student,'speech_disorders')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="speech_disorders"></textarea>
                                 </div>
                             </div>
                             <div class="row m-5">
@@ -558,21 +558,21 @@
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">القرآن حفظاً</label>
                                     <input type="hidden" name="question[]" value="quran_memorization">
-                                    <textarea style="height: 50px" class="form-control" name="quran_memorization">{{get_review($student,'quran_memorization')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="quran_memorization"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">تلاوة معرفياً</label>
-                                    <textarea style="height: 50px" class="form-control" name="cognitive_recitation">{{get_review($student,'cognitive_recitation')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="cognitive_recitation"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">تلاوة تطبيقياً</label>
                                     <input type="hidden" name="question[]" value="practical_recitation">
-                                    <textarea style="height: 50px" class="form-control" name="practical_recitation">{{get_review($student,'practical_recitation')}}<</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="practical_recitation"><</textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">علوم الشريعة</label>
                                     <input type="hidden" name="question[]" value="sharia_sciences">
-                                    <textarea style="height: 50px" class="form-control" name="sharia_sciences">{{get_review($student,'sharia_sciences')}}<</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="sharia_sciences"><</textarea>
                                 </div>
                             </div>
                             <div class="row m-5 align-items-end">
@@ -583,7 +583,7 @@
                                     <div class="col-md-6" >
                                         <label class="form-label form-margin ">{{$subject->name}}</label>
                                         <input type="hidden" name="question[]" value="{{str_replace(' ', '-', strtolower($subject->name))}}">
-                                        <textarea style="height: 50px" class="form-control" name="{{str_replace(' ', '-', strtolower($subject->name))}}">{{get_review($student,str_replace(' ', '-', strtolower($subject->name)))}}</textarea>
+                                        <textarea style="height: 50px" class="form-control" name="{{str_replace(' ', '-', strtolower($subject->name))}}"></textarea>
                                     </div>
                                 @endforeach
                             </div>
@@ -592,39 +592,38 @@
                                 <div class="col-md-6" >
                                     <label class="form-label" >تمكين الحروف</label>
                                     <input type="hidden" name="question[]" value="enable_letters">
-                                    <textarea style="height: 50px" class="form-control" name="enable_letters">{{get_review($student,'enable_letters')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="enable_letters"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">قراءة بنية الكلمات</label>
                                     <input type="hidden" name="question[]" value="Reading_the_structure_of_words">
-                                    <textarea style="height: 50px" class="form-control" name="Reading_the_structure_of_words">{{get_review($student,'Reading_the_structure_of_words')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="Reading_the_structure_of_words"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">تجميع الجمل</label>
                                     <input type="hidden" name="question[]" value="assembly_of_sentences">
-                                    <textarea style="height: 50px" class="form-control" name="assembly_of_sentences">{{get_review($student,'assembly_of_sentences')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="assembly_of_sentences"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">إملاء</label>
                                     <input type="hidden" name="question[]" value="filling">
-                                    <textarea style="height: 50px" class="form-control" name="filling">{{get_review($student,'filling')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="filling"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">القرآن بدون تشكيل</label>
                                     <input type="hidden" name="question[]" value="quran_diacritics">
-                                    <textarea style="height: 50px" class="form-control" name="quran_diacritics">{{get_review($student,'quran_diacritics')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="quran_diacritics"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">القرآن في المصحف</label>
                                     <input type="hidden" name="question[]" value="quran_in_quran">
-                                    <textarea style="height: 50px" class="form-control" name="quran_in_quran">{{get_review($student,'quran_in_quran')}}</textarea>
+                                    <textarea style="height: 50px" class="form-control" name="quran_in_quran"></textarea>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="form-label form-margin ">آداب إسلامية</label>
                                     <input type="hidden" name="question[]" value="islamic_etiquette">
-                                    <textarea style="height: 50px" class="form-control" name="islamic_etiquette">{{get_review($student,'islamic_etiquette')}}</textarea>
-                                </div>
-                                
+                                    <textarea style="height: 50px" class="form-control" name="islamic_etiquette"></textarea>
+                                </div>                   
                             </div>
                         </form>
                         </div>
